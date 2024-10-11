@@ -1,0 +1,495 @@
+
+---
+events:
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeDetermineSystem.cmake:228 (message)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      The target system is: Linux -  - cortexa53
+      The host system is: Windows - 6.2.9200 - AMD64
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+      Compiler: C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/aarch64-poky-linux-g++.exe 
+      Build flags: -DQT_QML_DEBUG
+      Id flags: -c;--target=aarch64-poky-linux 
+      
+      The output was:
+      1
+      aarch64-poky-linux-g++.exe: error: unrecognized command-line option '--target=aarch64-poky-linux'
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+      Compiler: C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/aarch64-poky-linux-g++.exe 
+      Build flags: -DQT_QML_DEBUG
+      Id flags:  
+      
+      The output was:
+      1
+      C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/ld.exe: cannot find Scrt1.o: No such file or directory
+      C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/ld.exe: cannot find crti.o: No such file or directory
+      C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/ld.exe: cannot find crtbeginS.o: No such file or directory
+      C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/ld.exe: cannot find -lstdc++: No such file or directory
+      C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/ld.exe: cannot find -lm: No such file or directory
+      C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/ld.exe: cannot find -lgcc_s: No such file or directory
+      C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/ld.exe: cannot find -lgcc: No such file or directory
+      C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/ld.exe: cannot find -lc: No such file or directory
+      C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/ld.exe: cannot find -lgcc_s: No such file or directory
+      C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/ld.exe: cannot find -lgcc: No such file or directory
+      C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/ld.exe: cannot find crtendS.o: No such file or directory
+      C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/ld.exe: cannot find crtn.o: No such file or directory
+      collect2.exe: error: ld returned 1 exit status
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:17 (message)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerId.cmake:64 (__determine_compiler_id_test)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeDetermineCXXCompiler.cmake:126 (CMAKE_DETERMINE_COMPILER_ID)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+      Compiler: C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/aarch64-poky-linux-g++.exe 
+      Build flags: -DQT_QML_DEBUG
+      Id flags: -c 
+      
+      The output was:
+      0
+      
+      
+      Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CMakeCXXCompilerId.o"
+      
+      The CXX compiler identification is GNU, found in:
+        C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/3.28.3/CompilerIdCXX/CMakeCXXCompilerId.o
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:57 (try_compile)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    checks:
+      - "Detecting CXX compiler ABI info"
+    directories:
+      source: "C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-p26p6c"
+      binary: "C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-p26p6c"
+    cmakeVariables:
+      CMAKE_CXX_COMPILER_TARGET: "aarch64-poky-linux"
+      CMAKE_CXX_FLAGS: "-mcpu=cortex-a53+crc -mbranch-protection=standard -fstack-protector-strong   -Wformat -Wformat-security --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_C_COMPILER_TARGET: "aarch64-poky-linux"
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  -Wl,-z,relro,-z,now"
+      CMAKE_MODULE_PATH: "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/cmake/Qt6/platforms;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/cmake/Qt6/platforms"
+      CMAKE_SYSROOT: "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux"
+      QT_ADDITIONAL_PACKAGES_PREFIX_PATH: ""
+      QT_CHAINLOAD_TOOLCHAIN_FILE: ""
+      QT_TOOLCHAIN_INCLUDE_FILE: ""
+      QT_TOOLCHAIN_RELOCATABLE_CMAKE_DIR: "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/cmake"
+      QT_TOOLCHAIN_RELOCATABLE_PREFIX: ""
+    buildResult:
+      variable: "CMAKE_CXX_ABI_COMPILED"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-p26p6c'
+        
+        Run Build Command(s): C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/ninja.exe -v cmTC_fca71
+        [1/2] C:\\Qt\\6.8.0\\Boot2Qt\\raspberrypi-armv8\\toolchain\\sysroots\\x86_64-w64-mingw32\\usr\\bin\\aarch64-poky-linux\\aarch64-poky-linux-g++.exe --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux   -mcpu=cortex-a53+crc -mbranch-protection=standard -fstack-protector-strong   -Wformat -Wformat-security --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux  -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_fca71.dir/CMakeCXXCompilerABI.cpp.o -c C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp
+        Using built-in specs.
+        COLLECT_GCC=C:\\Qt\\6.8.0\\Boot2Qt\\raspberrypi-armv8\\toolchain\\sysroots\\x86_64-w64-mingw32\\usr\\bin\\aarch64-poky-linux\\aarch64-poky-linux-g++.exe
+        Target: aarch64-poky-linux
+        Configured with: ../../../../../../work-shared/gcc-13.3.0-r0/gcc-13.3.0/configure --build=x86_64-linux --host=x86_64-w64-mingw32 --target=aarch64-poky-linux --prefix=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr --exec_prefix=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr --bindir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux --sbindir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux --libexecdir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/libexec/aarch64-poky-linux --datadir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/share --sysconfdir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/etc --sharedstatedir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/com --localstatedir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/var --libdir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/lib/aarch64-poky-linux --includedir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/include --oldincludedir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/include --infodir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/share/info --mandir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/share/man --disable-silent-rules --disable-dependency-tracking --with-libtool-sysroot=/home/qt/work/build/tmp/work/x86_64-nativesdk-mingw32-w64-mingw32/gcc-cross-canadian-aarch64/13.3.0/recipe-sysroot --enable-clocale=generic --with-gnu-ld --enable-shared --enable-languages=c,c++ --enable-threads=posix --enable-multilib --enable-default-pie --enable-c99 --enable-long-long --enable-symvers=gnu --enable-libstdcxx-pch --program-prefix=aarch64-poky-linux- --without-local-prefix --disable-install-libiberty --disable-libssp --enable-libitm --enable-lto --disable-bootstrap --with-system-zlib --with-linker-hash-style=gnu --enable-linker-build-id --with-ppl=no --with-cloog=no --enable-checking=release --enable-cheaders=c_global --without-isl --with-gxx-include-dir=/not/exist/usr/include/c++/13.3.0 --with-build-time-tools=/home/qt/work/build/tmp/work/x86_64-nativesdk-mingw32-w64-mingw32/gcc-cross-canadian-aarch64/13.3.0/recipe-sysroot-native/usr/aarch64-poky-linux/bin --with-sysroot=/not/exist --with-build-sysroot=/home/qt/work/build/tmp/work/x86_64-nativesdk-mingw32-w64-mingw32/gcc-cross-canadian-aarch64/13.3.0/recipe-sysroot --with-plugin-ld=ld --enable-poison-system-directories --disable-static --disable-nls --enable-initfini-array --enable-__cxa_atexit --disable-nls
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 13.3.0 (GCC) 
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '--sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux' '-mcpu=cortex-a53+crc' '-mbranch-protection=standard' '-fstack-protector-strong' '-Wformat=1' '-Wformat-security' '--sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux' '-v' '-o' 'CMakeFiles/cmTC_fca71.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_fca71.dir/'
+         C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/cc1plus.exe -quiet -v -iprefix C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/ -isysroot C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux -D_GNU_SOURCE C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_fca71.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mcpu=cortex-a53+crc -mbranch-protection=standard -mlittle-endian -mabi=lp64 -Wformat=1 -Wformat-security -version -fdiagnostics-color=always -fstack-protector-strong -o C:\\Users\\marcu\\AppData\\Local\\Temp\\ccOkMEiI.s
+        GNU C++17 (GCC) version 13.3.0 (aarch64-poky-linux)
+        	compiled by GNU C version 13.3.0, GMP version 6.3.0, MPFR version 4.2.1, MPC version 1.3.1, isl version none
+        GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+        ignoring nonexistent directory "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/../../../../../aarch64-poky-linux/include"
+        ignoring duplicate directory "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/aarch64-poky-linux/gcc/../../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/include"
+        ignoring nonexistent directory "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/../../../../include"
+        ignoring duplicate directory "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/aarch64-poky-linux/gcc/../../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/include-fixed"
+        ignoring nonexistent directory "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/aarch64-poky-linux/gcc/../../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/../../../../../aarch64-poky-linux/include"
+        #include "..." search starts here:
+        #include <...> search starts here:
+         C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/include
+         C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/include-fixed
+         C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include/c++/13.3.0
+         C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include/c++/13.3.0/aarch64-poky-linux
+         C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include/c++/13.3.0/backward
+         C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0/include
+         C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include
+        End of search list.
+        Compiler executable checksum: 953408c68e20324f040973051162cad8
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '--sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux' '-mcpu=cortex-a53+crc' '-mbranch-protection=standard' '-fstack-protector-strong' '-Wformat=1' '-Wformat-security' '--sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux' '-v' '-o' 'CMakeFiles/cmTC_fca71.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_fca71.dir/'
+         C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/as.exe -v -EL -march=armv8-a+crc -mabi=lp64 -o CMakeFiles/cmTC_fca71.dir/CMakeCXXCompilerABI.cpp.o C:\\Users\\marcu\\AppData\\Local\\Temp\\ccOkMEiI.s
+        GNU assembler version 2.42.0 (aarch64-poky-linux) using BFD version (GNU Binutils) 2.42.0.20240216
+        COMPILER_PATH=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/
+        LIBRARY_PATH=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/lib/;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0/;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/
+        COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '--sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux' '-mcpu=cortex-a53+crc' '-mbranch-protection=standard' '-fstack-protector-strong' '-Wformat=1' '-Wformat-security' '--sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux' '-v' '-o' 'CMakeFiles/cmTC_fca71.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_fca71.dir/CMakeCXXCompilerABI.cpp.'\x0d
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && C:\\Qt\\6.8.0\\Boot2Qt\\raspberrypi-armv8\\toolchain\\sysroots\\x86_64-w64-mingw32\\usr\\bin\\aarch64-poky-linux\\aarch64-poky-linux-g++.exe --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux -mcpu=cortex-a53+crc -mbranch-protection=standard -fstack-protector-strong   -Wformat -Wformat-security --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  -Wl,-z,relro,-z,now -v CMakeFiles/cmTC_fca71.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_fca71   && cd ."
+        Using built-in specs.
+        COLLECT_GCC=C:\\Qt\\6.8.0\\Boot2Qt\\raspberrypi-armv8\\toolchain\\sysroots\\x86_64-w64-mingw32\\usr\\bin\\aarch64-poky-linux\\aarch64-poky-linux-g++.exe
+        COLLECT_LTO_WRAPPER=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/lto-wrapper.exe
+        Target: aarch64-poky-linux
+        Configured with: ../../../../../../work-shared/gcc-13.3.0-r0/gcc-13.3.0/configure --build=x86_64-linux --host=x86_64-w64-mingw32 --target=aarch64-poky-linux --prefix=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr --exec_prefix=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr --bindir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux --sbindir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux --libexecdir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/libexec/aarch64-poky-linux --datadir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/share --sysconfdir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/etc --sharedstatedir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/com --localstatedir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/var --libdir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/lib/aarch64-poky-linux --includedir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/include --oldincludedir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/include --infodir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/share/info --mandir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/share/man --disable-silent-rules --disable-dependency-tracking --with-libtool-sysroot=/home/qt/work/build/tmp/work/x86_64-nativesdk-mingw32-w64-mingw32/gcc-cross-canadian-aarch64/13.3.0/recipe-sysroot --enable-clocale=generic --with-gnu-ld --enable-shared --enable-languages=c,c++ --enable-threads=posix --enable-multilib --enable-default-pie --enable-c99 --enable-long-long --enable-symvers=gnu --enable-libstdcxx-pch --program-prefix=aarch64-poky-linux- --without-local-prefix --disable-install-libiberty --disable-libssp --enable-libitm --enable-lto --disable-bootstrap --with-system-zlib --with-linker-hash-style=gnu --enable-linker-build-id --with-ppl=no --with-cloog=no --enable-checking=release --enable-cheaders=c_global --without-isl --with-gxx-include-dir=/not/exist/usr/include/c++/13.3.0 --with-build-time-tools=/home/qt/work/build/tmp/work/x86_64-nativesdk-mingw32-w64-mingw32/gcc-cross-canadian-aarch64/13.3.0/recipe-sysroot-native/usr/aarch64-poky-linux/bin --with-sysroot=/not/exist --with-build-sysroot=/home/qt/work/build/tmp/work/x86_64-nativesdk-mingw32-w64-mingw32/gcc-cross-canadian-aarch64/13.3.0/recipe-sysroot --with-plugin-ld=ld --enable-poison-system-directories --disable-static --disable-nls --enable-initfini-array --enable-__cxa_atexit --disable-nls
+        Thread model: posix
+        Supported LTO compression algorithms: zlib zstd
+        gcc version 13.3.0 (GCC) 
+        COMPILER_PATH=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/
+        LIBRARY_PATH=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/lib/;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0/;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/
+        COLLECT_GCC_OPTIONS='--sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux' '-mcpu=cortex-a53+crc' '-mbranch-protection=standard' '-fstack-protector-strong' '-Wformat=1' '-Wformat-security' '--sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux' '-v' '-o' 'cmTC_fca71' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'cmTC_fca71.'
+         C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/collect2.exe -plugin C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/liblto_plugin.dll -plugin-opt=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\marcu\\AppData\\Local\\Temp\\ccamIJ5Q.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux --build-id --eh-frame-hdr --hash-style=gnu -dynamic-linker /lib/ld-linux-aarch64.so.1 -X -EL -maarch64linux -pie -o cmTC_fca71 C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/Scrt1.o C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/crti.o C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0/crtbeginS.o -LC:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0 -LC:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc -LC:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/lib -LC:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0 -LC:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib -O1 --hash-style=gnu --as-needed -z relro -z now CMakeFiles/cmTC_fca71.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0/crtendS.o C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/crtn.o
+        COLLECT_GCC_OPTIONS='--sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux' '-mcpu=cortex-a53+crc' '-mbranch-protection=standard' '-fstack-protector-strong' '-Wformat=1' '-Wformat-security' '--sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux' '-v' '-o' 'cmTC_fca71' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'cmTC_fca71.'\x0d
+        
+      exitCode: 0
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:127 (message)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Parsed CXX implicit include dir info: rv=done
+        found start of include info
+        found start of implicit include info
+          add: [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/include]
+          add: [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/include-fixed]
+          add: [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include/c++/13.3.0]
+          add: [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include/c++/13.3.0/aarch64-poky-linux]
+          add: [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include/c++/13.3.0/backward]
+          add: [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0/include]
+          add: [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include]
+        end of search list found
+        collapse include dir [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/include] ==> [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/include]
+        collapse include dir [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/include-fixed] ==> [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/include-fixed]
+        collapse include dir [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include/c++/13.3.0] ==> [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include/c++/13.3.0]
+        collapse include dir [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include/c++/13.3.0/aarch64-poky-linux] ==> [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include/c++/13.3.0/aarch64-poky-linux]
+        collapse include dir [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include/c++/13.3.0/backward] ==> [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include/c++/13.3.0/backward]
+        collapse include dir [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0/include] ==> [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0/include]
+        collapse include dir [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include] ==> [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include]
+        implicit include dirs: [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/include;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/include-fixed;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include/c++/13.3.0;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include/c++/13.3.0/aarch64-poky-linux;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include/c++/13.3.0/backward;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0/include;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include]
+      
+      
+  -
+    kind: "message-v1"
+    backtrace:
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeDetermineCompilerABI.cmake:159 (message)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeTestCXXCompiler.cmake:26 (CMAKE_DETERMINE_COMPILER_ABI)"
+      - "CMakeLists.txt:3 (project)"
+    message: |
+      Parsed CXX implicit link information:
+        link line regex: [^( *|.*[/\\])(aarch64-poky-linux-ld\\.exe|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\\]+-)?ld|collect2)[^/\\]*( |$)]
+        ignore line: [Change Dir: 'C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-p26p6c']
+        ignore line: []
+        ignore line: [Run Build Command(s): C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/ninja.exe -v cmTC_fca71]
+        ignore line: [[1/2] C:\\Qt\\6.8.0\\Boot2Qt\\raspberrypi-armv8\\toolchain\\sysroots\\x86_64-w64-mingw32\\usr\\bin\\aarch64-poky-linux\\aarch64-poky-linux-g++.exe --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux   -mcpu=cortex-a53+crc -mbranch-protection=standard -fstack-protector-strong   -Wformat -Wformat-security --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux  -fdiagnostics-color=always   -v -o CMakeFiles/cmTC_fca71.dir/CMakeCXXCompilerABI.cpp.o -c C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=C:\\Qt\\6.8.0\\Boot2Qt\\raspberrypi-armv8\\toolchain\\sysroots\\x86_64-w64-mingw32\\usr\\bin\\aarch64-poky-linux\\aarch64-poky-linux-g++.exe]
+        ignore line: [Target: aarch64-poky-linux]
+        ignore line: [Configured with: ../../../../../../work-shared/gcc-13.3.0-r0/gcc-13.3.0/configure --build=x86_64-linux --host=x86_64-w64-mingw32 --target=aarch64-poky-linux --prefix=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr --exec_prefix=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr --bindir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux --sbindir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux --libexecdir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/libexec/aarch64-poky-linux --datadir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/share --sysconfdir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/etc --sharedstatedir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/com --localstatedir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/var --libdir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/lib/aarch64-poky-linux --includedir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/include --oldincludedir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/include --infodir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/share/info --mandir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/share/man --disable-silent-rules --disable-dependency-tracking --with-libtool-sysroot=/home/qt/work/build/tmp/work/x86_64-nativesdk-mingw32-w64-mingw32/gcc-cross-canadian-aarch64/13.3.0/recipe-sysroot --enable-clocale=generic --with-gnu-ld --enable-shared --enable-languages=c,c++ --enable-threads=posix --enable-multilib --enable-default-pie --enable-c99 --enable-long-long --enable-symvers=gnu --enable-libstdcxx-pch --program-prefix=aarch64-poky-linux- --without-local-prefix --disable-install-libiberty --disable-libssp --enable-libitm --enable-lto --disable-bootstrap --with-system-zlib --with-linker-hash-style=gnu --enable-linker-build-id --with-ppl=no --with-cloog=no --enable-checking=release --enable-cheaders=c_global --without-isl --with-gxx-include-dir=/not/exist/usr/include/c++/13.3.0 --with-build-time-tools=/home/qt/work/build/tmp/work/x86_64-nativesdk-mingw32-w64-mingw32/gcc-cross-canadian-aarch64/13.3.0/recipe-sysroot-native/usr/aarch64-poky-linux/bin --with-sysroot=/not/exist --with-build-sysroot=/home/qt/work/build/tmp/work/x86_64-nativesdk-mingw32-w64-mingw32/gcc-cross-canadian-aarch64/13.3.0/recipe-sysroot --with-plugin-ld=ld --enable-poison-system-directories --disable-static --disable-nls --enable-initfini-array --enable-__cxa_atexit --disable-nls]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 13.3.0 (GCC) ]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '--sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux' '-mcpu=cortex-a53+crc' '-mbranch-protection=standard' '-fstack-protector-strong' '-Wformat=1' '-Wformat-security' '--sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux' '-v' '-o' 'CMakeFiles/cmTC_fca71.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_fca71.dir/']
+        ignore line: [ C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/cc1plus.exe -quiet -v -iprefix C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/ -isysroot C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux -D_GNU_SOURCE C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp -quiet -dumpdir CMakeFiles/cmTC_fca71.dir/ -dumpbase CMakeCXXCompilerABI.cpp.cpp -dumpbase-ext .cpp -mcpu=cortex-a53+crc -mbranch-protection=standard -mlittle-endian -mabi=lp64 -Wformat=1 -Wformat-security -version -fdiagnostics-color=always -fstack-protector-strong -o C:\\Users\\marcu\\AppData\\Local\\Temp\\ccOkMEiI.s]
+        ignore line: [GNU C++17 (GCC) version 13.3.0 (aarch64-poky-linux)]
+        ignore line: [	compiled by GNU C version 13.3.0  GMP version 6.3.0  MPFR version 4.2.1  MPC version 1.3.1  isl version none]
+        ignore line: [GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072]
+        ignore line: [ignoring nonexistent directory "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/../../../../../aarch64-poky-linux/include"]
+        ignore line: [ignoring duplicate directory "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/aarch64-poky-linux/gcc/../../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/include"]
+        ignore line: [ignoring nonexistent directory "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/../../../../include"]
+        ignore line: [ignoring duplicate directory "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/aarch64-poky-linux/gcc/../../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/include-fixed"]
+        ignore line: [ignoring nonexistent directory "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/aarch64-poky-linux/gcc/../../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/../../../../../aarch64-poky-linux/include"]
+        ignore line: [#include "..." search starts here:]
+        ignore line: [#include <...> search starts here:]
+        ignore line: [ C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/include]
+        ignore line: [ C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/include-fixed]
+        ignore line: [ C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include/c++/13.3.0]
+        ignore line: [ C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include/c++/13.3.0/aarch64-poky-linux]
+        ignore line: [ C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include/c++/13.3.0/backward]
+        ignore line: [ C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0/include]
+        ignore line: [ C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/include]
+        ignore line: [End of search list.]
+        ignore line: [Compiler executable checksum: 953408c68e20324f040973051162cad8]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '--sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux' '-mcpu=cortex-a53+crc' '-mbranch-protection=standard' '-fstack-protector-strong' '-Wformat=1' '-Wformat-security' '--sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux' '-v' '-o' 'CMakeFiles/cmTC_fca71.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_fca71.dir/']
+        ignore line: [ C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/as.exe -v -EL -march=armv8-a+crc -mabi=lp64 -o CMakeFiles/cmTC_fca71.dir/CMakeCXXCompilerABI.cpp.o C:\\Users\\marcu\\AppData\\Local\\Temp\\ccOkMEiI.s]
+        ignore line: [GNU assembler version 2.42.0 (aarch64-poky-linux) using BFD version (GNU Binutils) 2.42.0.20240216]
+        ignore line: [COMPILER_PATH=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/]
+        ignore line: [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/]
+        ignore line: [LIBRARY_PATH=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/]
+        ignore line: [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/]
+        ignore line: [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/lib/]
+        ignore line: [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0/]
+        ignore line: [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='-fdiagnostics-color=always' '--sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux' '-mcpu=cortex-a53+crc' '-mbranch-protection=standard' '-fstack-protector-strong' '-Wformat=1' '-Wformat-security' '--sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux' '-v' '-o' 'CMakeFiles/cmTC_fca71.dir/CMakeCXXCompilerABI.cpp.o' '-c' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'CMakeFiles/cmTC_fca71.dir/CMakeCXXCompilerABI.cpp.'\x0d]
+        ignore line: [[2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && C:\\Qt\\6.8.0\\Boot2Qt\\raspberrypi-armv8\\toolchain\\sysroots\\x86_64-w64-mingw32\\usr\\bin\\aarch64-poky-linux\\aarch64-poky-linux-g++.exe --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux -mcpu=cortex-a53+crc -mbranch-protection=standard -fstack-protector-strong   -Wformat -Wformat-security --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux -Wl -O1 -Wl --hash-style=gnu -Wl --as-needed  -Wl -z relro -z now -v CMakeFiles/cmTC_fca71.dir/CMakeCXXCompilerABI.cpp.o -o cmTC_fca71   && cd ."]
+        ignore line: [Using built-in specs.]
+        ignore line: [COLLECT_GCC=C:\\Qt\\6.8.0\\Boot2Qt\\raspberrypi-armv8\\toolchain\\sysroots\\x86_64-w64-mingw32\\usr\\bin\\aarch64-poky-linux\\aarch64-poky-linux-g++.exe]
+        ignore line: [COLLECT_LTO_WRAPPER=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/lto-wrapper.exe]
+        ignore line: [Target: aarch64-poky-linux]
+        ignore line: [Configured with: ../../../../../../work-shared/gcc-13.3.0-r0/gcc-13.3.0/configure --build=x86_64-linux --host=x86_64-w64-mingw32 --target=aarch64-poky-linux --prefix=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr --exec_prefix=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr --bindir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux --sbindir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux --libexecdir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/libexec/aarch64-poky-linux --datadir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/share --sysconfdir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/etc --sharedstatedir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/com --localstatedir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/var --libdir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/lib/aarch64-poky-linux --includedir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/include --oldincludedir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/include --infodir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/share/info --mandir=/usr/local/oe-sdk-hardcoded-buildpath/sysroots/x86_64-w64-mingw32/usr/share/man --disable-silent-rules --disable-dependency-tracking --with-libtool-sysroot=/home/qt/work/build/tmp/work/x86_64-nativesdk-mingw32-w64-mingw32/gcc-cross-canadian-aarch64/13.3.0/recipe-sysroot --enable-clocale=generic --with-gnu-ld --enable-shared --enable-languages=c,c++ --enable-threads=posix --enable-multilib --enable-default-pie --enable-c99 --enable-long-long --enable-symvers=gnu --enable-libstdcxx-pch --program-prefix=aarch64-poky-linux- --without-local-prefix --disable-install-libiberty --disable-libssp --enable-libitm --enable-lto --disable-bootstrap --with-system-zlib --with-linker-hash-style=gnu --enable-linker-build-id --with-ppl=no --with-cloog=no --enable-checking=release --enable-cheaders=c_global --without-isl --with-gxx-include-dir=/not/exist/usr/include/c++/13.3.0 --with-build-time-tools=/home/qt/work/build/tmp/work/x86_64-nativesdk-mingw32-w64-mingw32/gcc-cross-canadian-aarch64/13.3.0/recipe-sysroot-native/usr/aarch64-poky-linux/bin --with-sysroot=/not/exist --with-build-sysroot=/home/qt/work/build/tmp/work/x86_64-nativesdk-mingw32-w64-mingw32/gcc-cross-canadian-aarch64/13.3.0/recipe-sysroot --with-plugin-ld=ld --enable-poison-system-directories --disable-static --disable-nls --enable-initfini-array --enable-__cxa_atexit --disable-nls]
+        ignore line: [Thread model: posix]
+        ignore line: [Supported LTO compression algorithms: zlib zstd]
+        ignore line: [gcc version 13.3.0 (GCC) ]
+        ignore line: [COMPILER_PATH=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/]
+        ignore line: [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/]
+        ignore line: [LIBRARY_PATH=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/]
+        ignore line: [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/]
+        ignore line: [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/lib/]
+        ignore line: [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0/]
+        ignore line: [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/]
+        ignore line: [COLLECT_GCC_OPTIONS='--sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux' '-mcpu=cortex-a53+crc' '-mbranch-protection=standard' '-fstack-protector-strong' '-Wformat=1' '-Wformat-security' '--sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux' '-v' '-o' 'cmTC_fca71' '-shared-libgcc' '-mlittle-endian' '-mabi=lp64' '-dumpdir' 'cmTC_fca71.']
+        link line: [ C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/collect2.exe -plugin C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/liblto_plugin.dll -plugin-opt=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/lto-wrapper.exe -plugin-opt=-fresolution=C:\\Users\\marcu\\AppData\\Local\\Temp\\ccamIJ5Q.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux --build-id --eh-frame-hdr --hash-style=gnu -dynamic-linker /lib/ld-linux-aarch64.so.1 -X -EL -maarch64linux -pie -o cmTC_fca71 C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/Scrt1.o C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/crti.o C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0/crtbeginS.o -LC:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0 -LC:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc -LC:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/lib -LC:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0 -LC:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib -O1 --hash-style=gnu --as-needed -z relro -z now CMakeFiles/cmTC_fca71.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0/crtendS.o C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/crtn.o]
+          arg [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/collect2.exe] ==> ignore
+          arg [-plugin] ==> ignore
+          arg [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/liblto_plugin.dll] ==> ignore
+          arg [-plugin-opt=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../libexec/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0/lto-wrapper.exe] ==> ignore
+          arg [-plugin-opt=-fresolution=C:\\Users\\marcu\\AppData\\Local\\Temp\\ccamIJ5Q.res] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lc] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+          arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+          arg [--sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux] ==> ignore
+          arg [--build-id] ==> ignore
+          arg [--eh-frame-hdr] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [-dynamic-linker] ==> ignore
+          arg [/lib/ld-linux-aarch64.so.1] ==> ignore
+          arg [-X] ==> ignore
+          arg [-EL] ==> ignore
+          arg [-maarch64linux] ==> ignore
+          arg [-pie] ==> ignore
+          arg [-o] ==> ignore
+          arg [cmTC_fca71] ==> ignore
+          arg [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/Scrt1.o] ==> obj [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/Scrt1.o]
+          arg [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/crti.o] ==> obj [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/crti.o]
+          arg [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0/crtbeginS.o] ==> obj [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0/crtbeginS.o]
+          arg [-LC:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0] ==> dir [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0]
+          arg [-LC:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc] ==> dir [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc]
+          arg [-LC:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/lib] ==> dir [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/lib]
+          arg [-LC:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0] ==> dir [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0]
+          arg [-LC:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib] ==> dir [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib]
+          arg [-O1] ==> ignore
+          arg [--hash-style=gnu] ==> ignore
+          arg [--as-needed] ==> ignore
+          arg [-zrelro] ==> ignore
+          arg [-znow] ==> ignore
+          arg [CMakeFiles/cmTC_fca71.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+          arg [-lstdc++] ==> lib [stdc++]
+          arg [-lm] ==> lib [m]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [-lc] ==> lib [c]
+          arg [-lgcc_s] ==> lib [gcc_s]
+          arg [-lgcc] ==> lib [gcc]
+          arg [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0/crtendS.o] ==> obj [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0/crtendS.o]
+          arg [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/crtn.o] ==> obj [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/crtn.o]
+        collapse library dir [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0] ==> [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0]
+        collapse library dir [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/aarch64-poky-linux/../../lib/aarch64-poky-linux/gcc] ==> [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/aarch64-poky-linux/gcc]
+        collapse library dir [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/lib] ==> [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/lib]
+        collapse library dir [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0] ==> [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0]
+        collapse library dir [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib] ==> [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib]
+        implicit libs: [stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
+        implicit objs: [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/Scrt1.o;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/crti.o;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0/crtbeginS.o;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0/crtendS.o;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/crtn.o]
+        implicit dirs: [C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/aarch64-poky-linux/gcc/aarch64-poky-linux/13.3.0;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/aarch64-poky-linux/gcc;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/lib;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/aarch64-poky-linux/13.3.0;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib]
+        implicit fwks: []
+      
+      
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CheckCXXSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/FindThreads.cmake:99 (CHECK_CXX_SOURCE_COMPILES)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/FindThreads.cmake:163 (_threads_check_libc)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/Qt6Dependencies.cmake:32 (_qt_internal_find_third_party_dependencies)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/Qt6Config.cmake:146 (include)"
+      - "CMakeLists.txt:12 (find_package)"
+    checks:
+      - "Performing Test CMAKE_HAVE_LIBC_PTHREAD"
+    directories:
+      source: "C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-fo4zk1"
+      binary: "C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-fo4zk1"
+    cmakeVariables:
+      CMAKE_CXX_COMPILER_TARGET: "aarch64-poky-linux"
+      CMAKE_CXX_FLAGS: "-mcpu=cortex-a53+crc -mbranch-protection=standard -fstack-protector-strong   -Wformat -Wformat-security -Werror=format-security --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_C_COMPILER_TARGET: "aarch64-poky-linux"
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  -Wl,-z,relro,-z,now"
+      CMAKE_MODULE_PATH: "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/cmake/Qt6/platforms;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/3rdparty/kwin"
+      CMAKE_SYSROOT: "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux"
+      QT_ADDITIONAL_PACKAGES_PREFIX_PATH: ""
+      QT_CHAINLOAD_TOOLCHAIN_FILE: ""
+      QT_TOOLCHAIN_INCLUDE_FILE: ""
+      QT_TOOLCHAIN_RELOCATABLE_CMAKE_DIR: "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/cmake"
+      QT_TOOLCHAIN_RELOCATABLE_PREFIX: ""
+    buildResult:
+      variable: "CMAKE_HAVE_LIBC_PTHREAD"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-fo4zk1'
+        
+        Run Build Command(s): C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/ninja.exe -v cmTC_56e58
+        [1/2] C:\\Qt\\6.8.0\\Boot2Qt\\raspberrypi-armv8\\toolchain\\sysroots\\x86_64-w64-mingw32\\usr\\bin\\aarch64-poky-linux\\aarch64-poky-linux-g++.exe --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux -DCMAKE_HAVE_LIBC_PTHREAD  -mcpu=cortex-a53+crc -mbranch-protection=standard -fstack-protector-strong   -Wformat -Wformat-security -Werror=format-security --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux  -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_56e58.dir/src.cxx.o -c C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-fo4zk1/src.cxx
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && C:\\Qt\\6.8.0\\Boot2Qt\\raspberrypi-armv8\\toolchain\\sysroots\\x86_64-w64-mingw32\\usr\\bin\\aarch64-poky-linux\\aarch64-poky-linux-g++.exe --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux -mcpu=cortex-a53+crc -mbranch-protection=standard -fstack-protector-strong   -Wformat -Wformat-security -Werror=format-security --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  -Wl,-z,relro,-z,now CMakeFiles/cmTC_56e58.dir/src.cxx.o -o cmTC_56e58   && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CheckCXXSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/FindWrapAtomic.cmake:36 (check_cxx_source_compiles)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6Core/Qt6CoreDependencies.cmake:35 (_qt_internal_find_third_party_dependencies)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6Core/Qt6CoreConfig.cmake:55 (include)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:143 (find_dependency)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:43 (_qt_internal_find_qt_dependencies)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:53 (include)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/Qt6Config.cmake:191 (find_package)"
+      - "CMakeLists.txt:13 (find_package)"
+    checks:
+      - "Performing Test HAVE_STDATOMIC"
+    directories:
+      source: "C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-5323ju"
+      binary: "C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-5323ju"
+    cmakeVariables:
+      CMAKE_CXX_COMPILER_TARGET: "aarch64-poky-linux"
+      CMAKE_CXX_FLAGS: "-mcpu=cortex-a53+crc -mbranch-protection=standard -fstack-protector-strong   -Wformat -Wformat-security -Werror=format-security --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_C_COMPILER_TARGET: "aarch64-poky-linux"
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  -Wl,-z,relro,-z,now"
+      CMAKE_MODULE_PATH: "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/cmake/Qt6/platforms;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/3rdparty/kwin;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/3rdparty/kwin"
+      CMAKE_SYSROOT: "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux"
+      QT_ADDITIONAL_PACKAGES_PREFIX_PATH: ""
+      QT_CHAINLOAD_TOOLCHAIN_FILE: ""
+      QT_TOOLCHAIN_INCLUDE_FILE: ""
+      QT_TOOLCHAIN_RELOCATABLE_CMAKE_DIR: "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/cmake"
+      QT_TOOLCHAIN_RELOCATABLE_PREFIX: ""
+    buildResult:
+      variable: "HAVE_STDATOMIC"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-5323ju'
+        
+        Run Build Command(s): C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/ninja.exe -v cmTC_fe96f
+        [1/2] C:\\Qt\\6.8.0\\Boot2Qt\\raspberrypi-armv8\\toolchain\\sysroots\\x86_64-w64-mingw32\\usr\\bin\\aarch64-poky-linux\\aarch64-poky-linux-g++.exe --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux -DHAVE_STDATOMIC  -mcpu=cortex-a53+crc -mbranch-protection=standard -fstack-protector-strong   -Wformat -Wformat-security -Werror=format-security --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux  -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_fe96f.dir/src.cxx.o -c C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-5323ju/src.cxx
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && C:\\Qt\\6.8.0\\Boot2Qt\\raspberrypi-armv8\\toolchain\\sysroots\\x86_64-w64-mingw32\\usr\\bin\\aarch64-poky-linux\\aarch64-poky-linux-g++.exe --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux -mcpu=cortex-a53+crc -mbranch-protection=standard -fstack-protector-strong   -Wformat -Wformat-security -Werror=format-security --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  -Wl,-z,relro,-z,now CMakeFiles/cmTC_fe96f.dir/src.cxx.o -o cmTC_fe96f   && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CheckCXXSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules/FindEGL.cmake:127 (check_cxx_source_compiles)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/FindGLESv2.cmake:13 (find_package)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6Gui/Qt6GuiDependencies.cmake:37 (_qt_internal_find_third_party_dependencies)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6Gui/Qt6GuiConfig.cmake:53 (include)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:143 (find_dependency)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:43 (_qt_internal_find_qt_dependencies)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:53 (include)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/Qt6Config.cmake:191 (find_package)"
+      - "CMakeLists.txt:13 (find_package)"
+    checks:
+      - "Performing Test HAVE_EGL"
+    directories:
+      source: "C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-5kth3m"
+      binary: "C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-5kth3m"
+    cmakeVariables:
+      CMAKE_CXX_COMPILER_TARGET: "aarch64-poky-linux"
+      CMAKE_CXX_FLAGS: "-mcpu=cortex-a53+crc -mbranch-protection=standard -fstack-protector-strong   -Wformat -Wformat-security -Werror=format-security --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_C_COMPILER_TARGET: "aarch64-poky-linux"
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  -Wl,-z,relro,-z,now"
+      CMAKE_MODULE_PATH: "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/cmake/Qt6/platforms;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/3rdparty/kwin;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/3rdparty/kwin"
+      CMAKE_SYSROOT: "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux"
+      QT_ADDITIONAL_PACKAGES_PREFIX_PATH: ""
+      QT_CHAINLOAD_TOOLCHAIN_FILE: ""
+      QT_TOOLCHAIN_INCLUDE_FILE: ""
+      QT_TOOLCHAIN_RELOCATABLE_CMAKE_DIR: "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/cmake"
+      QT_TOOLCHAIN_RELOCATABLE_PREFIX: ""
+    buildResult:
+      variable: "HAVE_EGL"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-5kth3m'
+        
+        Run Build Command(s): C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/ninja.exe -v cmTC_25020
+        [1/2] C:\\Qt\\6.8.0\\Boot2Qt\\raspberrypi-armv8\\toolchain\\sysroots\\x86_64-w64-mingw32\\usr\\bin\\aarch64-poky-linux\\aarch64-poky-linux-g++.exe --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux -DHAVE_EGL  -mcpu=cortex-a53+crc -mbranch-protection=standard -fstack-protector-strong   -Wformat -Wformat-security -Werror=format-security --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux  -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_25020.dir/src.cxx.o -c C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-5kth3m/src.cxx
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && C:\\Qt\\6.8.0\\Boot2Qt\\raspberrypi-armv8\\toolchain\\sysroots\\x86_64-w64-mingw32\\usr\\bin\\aarch64-poky-linux\\aarch64-poky-linux-g++.exe --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux -mcpu=cortex-a53+crc -mbranch-protection=standard -fstack-protector-strong   -Wformat -Wformat-security -Werror=format-security --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  -Wl,-z,relro,-z,now CMakeFiles/cmTC_25020.dir/src.cxx.o -o cmTC_25020  C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/libEGL.so && cd ."
+        
+      exitCode: 0
+  -
+    kind: "try_compile-v1"
+    backtrace:
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/Internal/CheckSourceCompiles.cmake:101 (try_compile)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CheckCXXSourceCompiles.cmake:52 (cmake_check_source_compiles)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/FindGLESv2.cmake:27 (check_cxx_source_compiles)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:36 (find_dependency)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6Gui/Qt6GuiDependencies.cmake:37 (_qt_internal_find_third_party_dependencies)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6Gui/Qt6GuiConfig.cmake:53 (include)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/share/cmake-3.28/Modules/CMakeFindDependencyMacro.cmake:76 (find_package)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/QtPublicDependencyHelpers.cmake:143 (find_dependency)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6Widgets/Qt6WidgetsDependencies.cmake:43 (_qt_internal_find_qt_dependencies)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6Widgets/Qt6WidgetsConfig.cmake:53 (include)"
+      - "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/Qt6Config.cmake:191 (find_package)"
+      - "CMakeLists.txt:13 (find_package)"
+    checks:
+      - "Performing Test HAVE_GLESv2"
+    directories:
+      source: "C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-0k1ozz"
+      binary: "C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-0k1ozz"
+    cmakeVariables:
+      CMAKE_CXX_COMPILER_TARGET: "aarch64-poky-linux"
+      CMAKE_CXX_FLAGS: "-mcpu=cortex-a53+crc -mbranch-protection=standard -fstack-protector-strong   -Wformat -Wformat-security -Werror=format-security --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux"
+      CMAKE_CXX_FLAGS_DEBUG: "-g"
+      CMAKE_C_COMPILER_TARGET: "aarch64-poky-linux"
+      CMAKE_EXE_LINKER_FLAGS: "-Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  -Wl,-z,relro,-z,now"
+      CMAKE_MODULE_PATH: "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/cmake/Qt6/platforms;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/3rdparty/kwin;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/3rdparty/extra-cmake-modules/find-modules;C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/cmake/Qt6/3rdparty/kwin"
+      CMAKE_SYSROOT: "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux"
+      QT_ADDITIONAL_PACKAGES_PREFIX_PATH: ""
+      QT_CHAINLOAD_TOOLCHAIN_FILE: ""
+      QT_TOOLCHAIN_INCLUDE_FILE: ""
+      QT_TOOLCHAIN_RELOCATABLE_CMAKE_DIR: "C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/lib/cmake"
+      QT_TOOLCHAIN_RELOCATABLE_PREFIX: ""
+    buildResult:
+      variable: "HAVE_GLESv2"
+      cached: true
+      stdout: |
+        Change Dir: 'C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-0k1ozz'
+        
+        Run Build Command(s): C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/x86_64-w64-mingw32/usr/bin/ninja.exe -v cmTC_aeb12
+        [1/2] C:\\Qt\\6.8.0\\Boot2Qt\\raspberrypi-armv8\\toolchain\\sysroots\\x86_64-w64-mingw32\\usr\\bin\\aarch64-poky-linux\\aarch64-poky-linux-g++.exe --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux -DHAVE_GLESv2  -mcpu=cortex-a53+crc -mbranch-protection=standard -fstack-protector-strong   -Wformat -Wformat-security -Werror=format-security --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux  -std=gnu++17 -fdiagnostics-color=always -o CMakeFiles/cmTC_aeb12.dir/src.cxx.o -c C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-0k1ozz/src.cxx
+        [2/2] C:\\Windows\\system32\\cmd.exe /C "cd . && C:\\Qt\\6.8.0\\Boot2Qt\\raspberrypi-armv8\\toolchain\\sysroots\\x86_64-w64-mingw32\\usr\\bin\\aarch64-poky-linux\\aarch64-poky-linux-g++.exe --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux -mcpu=cortex-a53+crc -mbranch-protection=standard -fstack-protector-strong   -Wformat -Wformat-security -Werror=format-security --sysroot=C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux -Wl,-O1 -Wl,--hash-style=gnu -Wl,--as-needed  -Wl,-z,relro,-z,now CMakeFiles/cmTC_aeb12.dir/src.cxx.o -o cmTC_aeb12  C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/libGLESv2.so  C:/Qt/6.8.0/Boot2Qt/raspberrypi-armv8/toolchain/sysroots/cortexa53-poky-linux/usr/lib/libEGL.so && cd ."
+        
+      exitCode: 0
+...
