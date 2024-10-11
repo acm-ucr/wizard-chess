@@ -5,6 +5,7 @@
 #include "WelcomeScreen.h"
 #include "MainScreen.h"
 #include "SecondScreen.h"
+#include "thirdscreen.h"
 
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
@@ -15,11 +16,14 @@ int main(int argc, char *argv[]) {
     WelcomeScreen *welcomeScreen = new WelcomeScreen();
     MainScreen *mainScreen = new MainScreen(&stackedWidget);
     SecondScreen *secondScreen = new SecondScreen(&stackedWidget);
+    ThirdScreen *thirdScreen = new ThirdScreen(&stackedWidget);
 
     // screen stack
     stackedWidget.addWidget(welcomeScreen);  // Index 0
     stackedWidget.addWidget(mainScreen);     // Index 1
     stackedWidget.addWidget(secondScreen);   // Index 2
+    stackedWidget.addWidget(thirdScreen);    // Index 3
+
 
     // set welcome screen
     stackedWidget.setCurrentIndex(0);

@@ -5,6 +5,9 @@
 WelcomeScreen::WelcomeScreen() {
     QVBoxLayout *layout = new QVBoxLayout(this);
     QLabel *welcomeLabel = new QLabel("Welcome screen...", this);
-    layout->addWidget(welcomeLabel);
+
+    welcomeLabel->setAlignment(Qt::AlignCenter);
+
+    layout->addWidget(welcomeLabel); // basically adding label to screen
     setLayout(layout);
 }

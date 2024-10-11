@@ -1,5 +1,4 @@
-#ifndef SECONDSCREEN_H
-#define SECONDSCREEN_H
+#pragma once
 
 #include <QWidget>
 #include <QStackedWidget>
@@ -10,4 +9,3 @@ public:
     SecondScreen(QStackedWidget *stackedWidget);
 };
 
-#endif // SECONDSCREEN_H

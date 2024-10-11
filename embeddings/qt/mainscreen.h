@@ -1,5 +1,4 @@
-#ifndef MAINSCREEN_H
-#define MAINSCREEN_H
+#pragma once
 
 #include <QWidget>
 #include <QStackedWidget>
@@ -10,4 +9,3 @@ public:
     MainScreen(QStackedWidget *stackedWidget);
 };
 
-#endif // MAINSCREEN_H
