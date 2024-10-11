@@ -1,0 +1,2 @@
+set(__QT_DEPLOY_TARGET_WizardChess_FILE C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/WizardChess)
+set(__QT_DEPLOY_TARGET_WizardChess_TYPE EXECUTABLE)
