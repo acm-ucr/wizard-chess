@@ -4,7 +4,7 @@
 
 WelcomeScreen::WelcomeScreen() {
     QVBoxLayout *layout = new QVBoxLayout(this);
-    QLabel *welcomeLabel = new QLabel("Welcome! This will disappear in 5 seconds.", this);
+    QLabel *welcomeLabel = new QLabel("Welcome screen...", this);
     layout->addWidget(welcomeLabel);
     setLayout(layout);
 }

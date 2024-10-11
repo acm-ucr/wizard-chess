@@ -12,7 +12,7 @@ MainScreen::MainScreen(QStackedWidget *stackedWidget) {
     layout->addWidget(goToSecondScreenBtn);
 
     connect(goToSecondScreenBtn, &QPushButton::clicked, [=]() {
-        stackedWidget->setCurrentIndex(2);  // Switch to second screen
+        stackedWidget->setCurrentIndex(2);  // switch screen to 2nd one
     });
 
     setLayout(layout);
