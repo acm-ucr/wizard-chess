@@ -14,18 +14,123 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>350</x>
-      <y>270</y>
-      <width>80</width>
-      <height>18</height>
+      <x>0</x>
+      <y>-20</y>
+      <width>800</width>
+      <height>480</height>
      </rect>
     </property>
-    <property name="text">
-     <string>PushButton</string>
+    <property name="styleSheet">
+     <string notr="true">QWidget #Application {
+rgb(0, 0, 0)
+}</string>
     </property>
+    <widget class="QWidget" name="page">
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>240</y>
+        <width>341</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QGroupBox{
+	text-align: center
+}</string>
+      </property>
+      <property name="text">
+       <string>Welcome To Wizard Chess!</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>710</x>
+        <y>450</y>
+        <width>80</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Next Page!</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="page_3"/>
+    <widget class="QWidget" name="page_2">
+     <widget class="QTableWidget" name="tableWidget">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>20</y>
+        <width>771</width>
+        <height>441</height>
+       </rect>
+      </property>
+      <row>
+       <property name="text">
+        <string/>
+       </property>
+      </row>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <column>
+       <property name="text">
+        <string>a</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>b</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>c</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>d</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>e</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>f</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>g</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>h</string>
+       </property>
+      </column>
+      <item row="0" column="0">
+       <property name="text">
+        <string>hi</string>
+       </property>
+      </item>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
