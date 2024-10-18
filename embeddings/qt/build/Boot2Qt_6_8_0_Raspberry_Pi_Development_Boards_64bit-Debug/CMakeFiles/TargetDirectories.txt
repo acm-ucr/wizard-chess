@@ -1,9 +1,0 @@
-C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/WizardChess.dir
-C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/edit_cache.dir
-C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/rebuild_cache.dir
-C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/list_install_components.dir
-C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/install.dir
-C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/install/local.dir
-C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/install/strip.dir
-C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/WizardChess_autogen_timestamp_deps.dir
-C:/Users/marcu/OneDrive/ACM/WizardChess/build/Boot2Qt_6_8_0_Raspberry_Pi_Development_Boards_64bit-Debug/CMakeFiles/WizardChess_autogen.dir
