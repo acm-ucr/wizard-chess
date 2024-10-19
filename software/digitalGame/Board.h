@@ -3,14 +3,14 @@
 //header guards
 
 #include <iostream>
-#include "header_pieces/Piece.h"
-#include "header_pieces/Piece.h"
-#include "header_pieces/Pawn.h"
-#include "header_pieces/Bishop.h"
-#include "header_pieces/Knight.h"
-#include "header_pieces/Queen.h"
-#include "header_pieces/King.h"
-#include "header_pieces/Castle.h"
+#include "Piece.hpp"
+#include "Piece.hpp"
+#include "Pawn.hpp"
+#include "Bishop.hpp"
+#include "Knight.hpp"
+#include "Queen.hpp"
+#include "King.hpp"
+#include "Castle.hpp"
 
 
 using namespace std;
