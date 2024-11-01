@@ -12,9 +12,11 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QGridLayout>
+#include <QtWidgets/QGroupBox>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QStackedWidget>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QWidget>
@@ -117,6 +119,15 @@ public:
     QLabel *label_17;
     QWidget *Settings;
     QLabel *label_21;
+    QPushButton *pushButton_18;
+    QGroupBox *groupBox;
+    QRadioButton *radioButton_6;
+    QRadioButton *radioButton_5;
+    QGroupBox *groupBox_2;
+    QRadioButton *radioButton;
+    QRadioButton *radioButton_2;
+    QRadioButton *radioButton_4;
+    QRadioButton *radioButton_3;
     QWidget *About;
     QLabel *label_18;
     QWidget *End;
@@ -137,7 +148,7 @@ public:
         centralwidget->setSizePolicy(sizePolicy);
         stackedWidget = new QStackedWidget(centralwidget);
         stackedWidget->setObjectName("stackedWidget");
-        stackedWidget->setGeometry(QRect(-10, 0, 800, 480));
+        stackedWidget->setGeometry(QRect(0, 20, 800, 541));
         QSizePolicy sizePolicy1(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Minimum);
         sizePolicy1.setHorizontalStretch(30);
         sizePolicy1.setVerticalStretch(30);
@@ -1119,7 +1130,64 @@ public:
         Settings->setObjectName("Settings");
         label_21 = new QLabel(Settings);
         label_21->setObjectName("label_21");
-        label_21->setGeometry(QRect(320, 200, 49, 16));
+        label_21->setGeometry(QRect(10, 10, 191, 81));
+        label_21->setStyleSheet(QString::fromUtf8("color: rgb(17, 255, 0);\n"
+"font: 20pt \"Sitka\";"));
+        pushButton_18 = new QPushButton(Settings);
+        pushButton_18->setObjectName("pushButton_18");
+        pushButton_18->setGeometry(QRect(690, 390, 83, 29));
+        pushButton_18->setStyleSheet(QString::fromUtf8("color: rgb(26, 255, 0);\n"
+"font: 900 12pt \"Segoe UI Black\";"));
+        groupBox = new QGroupBox(Settings);
+        groupBox->setObjectName("groupBox");
+        groupBox->setGeometry(QRect(460, 90, 311, 281));
+        groupBox->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 0);\n"
+"font: 15pt \"Snap ITC\";\n"
+""));
+        radioButton_6 = new QRadioButton(groupBox);
+        radioButton_6->setObjectName("radioButton_6");
+        radioButton_6->setGeometry(QRect(10, 90, 301, 26));
+        radioButton_6->setStyleSheet(QString::fromUtf8("color: rgb(0, 255, 225);\n"
+"font: 12pt \"Showcard Gothic\";\n"
+""));
+        radioButton_6->setChecked(true);
+        radioButton_5 = new QRadioButton(groupBox);
+        radioButton_5->setObjectName("radioButton_5");
+        radioButton_5->setGeometry(QRect(10, 180, 211, 26));
+        radioButton_5->setStyleSheet(QString::fromUtf8("color: rgb(0, 255, 225);\n"
+"font: 12pt \"Showcard Gothic\";\n"
+""));
+        groupBox_2 = new QGroupBox(Settings);
+        groupBox_2->setObjectName("groupBox_2");
+        groupBox_2->setGeometry(QRect(10, 90, 351, 331));
+        groupBox_2->setStyleSheet(QString::fromUtf8("color: rgb(255, 0, 0);\n"
+"font: 15pt \"Snap ITC\";\n"
+""));
+        radioButton = new QRadioButton(groupBox_2);
+        radioButton->setObjectName("radioButton");
+        radioButton->setGeometry(QRect(0, 40, 141, 26));
+        radioButton->setStyleSheet(QString::fromUtf8("color: rgb(0, 255, 225);\n"
+"font: 12pt \"Showcard Gothic\";\n"
+""));
+        radioButton_2 = new QRadioButton(groupBox_2);
+        radioButton_2->setObjectName("radioButton_2");
+        radioButton_2->setGeometry(QRect(0, 120, 341, 26));
+        radioButton_2->setStyleSheet(QString::fromUtf8("color: rgb(0, 255, 225);\n"
+"font: 12pt \"Showcard Gothic\";\n"
+""));
+        radioButton_2->setChecked(true);
+        radioButton_4 = new QRadioButton(groupBox_2);
+        radioButton_4->setObjectName("radioButton_4");
+        radioButton_4->setGeometry(QRect(0, 200, 151, 26));
+        radioButton_4->setStyleSheet(QString::fromUtf8("color: rgb(0, 255, 225);\n"
+"font: 12pt \"Showcard Gothic\";\n"
+""));
+        radioButton_3 = new QRadioButton(groupBox_2);
+        radioButton_3->setObjectName("radioButton_3");
+        radioButton_3->setGeometry(QRect(0, 280, 311, 26));
+        radioButton_3->setStyleSheet(QString::fromUtf8("color: rgb(0, 255, 225);\n"
+"font: 12pt \"Showcard Gothic\";\n"
+""));
         stackedWidget->addWidget(Settings);
         About = new QWidget();
         About->setObjectName("About");
@@ -1140,7 +1208,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(2);
+        stackedWidget->setCurrentIndex(4);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1150,7 +1218,7 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         label->setText(QCoreApplication::translate("MainWindow", "Welcome To Wizard Chess!", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "Next Page!", nullptr));
+        pushButton->setText(QCoreApplication::translate("MainWindow", "Settings", nullptr));
         label_20->setText(QCoreApplication::translate("MainWindow", "House", nullptr));
         label_22->setText(QCoreApplication::translate("MainWindow", "Tutorial", nullptr));
         pushButton_61->setText(QCoreApplication::translate("MainWindow", "F5", nullptr));
@@ -1233,7 +1301,16 @@ public:
         label_15->setText(QCoreApplication::translate("MainWindow", "6", nullptr));
         label_16->setText(QCoreApplication::translate("MainWindow", "7", nullptr));
         label_17->setText(QCoreApplication::translate("MainWindow", "8", nullptr));
-        label_21->setText(QCoreApplication::translate("MainWindow", "Settings", nullptr));
+        label_21->setText(QCoreApplication::translate("MainWindow", "SETTINGS", nullptr));
+        pushButton_18->setText(QCoreApplication::translate("MainWindow", "SAVE", nullptr));
+        groupBox->setTitle(QCoreApplication::translate("MainWindow", "Command Buttons", nullptr));
+        radioButton_6->setText(QCoreApplication::translate("MainWindow", "Voice Command (Default)", nullptr));
+        radioButton_5->setText(QCoreApplication::translate("MainWindow", "Touch Command", nullptr));
+        groupBox_2->setTitle(QCoreApplication::translate("MainWindow", "Wizard Game Difficulty", nullptr));
+        radioButton->setText(QCoreApplication::translate("MainWindow", "Easy Level", nullptr));
+        radioButton_2->setText(QCoreApplication::translate("MainWindow", "Intermediate Level (Default)", nullptr));
+        radioButton_4->setText(QCoreApplication::translate("MainWindow", "Hard Level", nullptr));
+        radioButton_3->setText(QCoreApplication::translate("MainWindow", "\"I Was Once A Knight\" Level", nullptr));
         label_18->setText(QCoreApplication::translate("MainWindow", "About", nullptr));
         label_19->setText(QCoreApplication::translate("MainWindow", "End", nullptr));
     } // retranslateUi
