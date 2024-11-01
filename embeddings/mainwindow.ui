@@ -23,7 +23,7 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>-10</x>
+      <x>0</x>
       <y>0</y>
       <width>800</width>
       <height>480</height>
@@ -47,23 +47,44 @@
       <height>0</height>
      </size>
     </property>
+    <property name="font">
+     <font>
+      <family>Garamond</family>
+      <pointsize>48</pointsize>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LayoutDirection::LeftToRight</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">QWidget #Application {
 rgb(0, 0, 0)
 }</string>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="Start">
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>210</y>
-        <width>341</width>
-        <height>20</height>
+        <x>160</x>
+        <y>110</y>
+        <width>601</width>
+        <height>121</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Garamond</family>
+        <pointsize>48</pointsize>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>ArrowCursor</cursorShape>
       </property>
       <property name="styleSheet">
        <string notr="true">QGroupBox{
@@ -71,20 +92,108 @@ rgb(0, 0, 0)
 }</string>
       </property>
       <property name="text">
-       <string>Welcome To Wizard Chess!</string>
+       <string>WIZARD CHESS</string>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton">
       <property name="geometry">
        <rect>
-        <x>350</x>
+        <x>330</x>
         <y>240</y>
-        <width>80</width>
-        <height>18</height>
+        <width>141</width>
+        <height>51</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Garamond</family>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>ArrowCursor</cursorShape>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LayoutDirection::LeftToRight</enum>
+      </property>
       <property name="text">
-       <string>Next Page!</string>
+       <string>Start Game</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_23">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>90</y>
+        <width>121</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Garamond</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>ArrowCursor</cursorShape>
+      </property>
+      <property name="text">
+       <string>Welcome To</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_18">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>330</y>
+        <width>141</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Garamond</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>Settings</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_19">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>330</y>
+        <width>141</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Garamond</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>Tutorial</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_20">
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>330</y>
+        <width>141</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Garamond</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>About</string>
       </property>
      </widget>
     </widget>
@@ -830,7 +939,7 @@ rgb(0, 0, 0)
         </property>
        </widget>
       </item>
-      <item row="22" column="0" alignment="">
+      <item row="22" column="0">
        <widget class="QLabel" name="label_2">
         <property name="text">
          <string>A</string>

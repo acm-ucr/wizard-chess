@@ -29,6 +29,10 @@ public:
     QWidget *Start;
     QLabel *label;
     QPushButton *pushButton;
+    QLabel *label_23;
+    QPushButton *pushButton_18;
+    QPushButton *pushButton_19;
+    QPushButton *pushButton_20;
     QWidget *House;
     QLabel *label_20;
     QWidget *Tutorial;
@@ -137,7 +141,7 @@ public:
         centralwidget->setSizePolicy(sizePolicy);
         stackedWidget = new QStackedWidget(centralwidget);
         stackedWidget->setObjectName("stackedWidget");
-        stackedWidget->setGeometry(QRect(-10, 0, 800, 480));
+        stackedWidget->setGeometry(QRect(0, 0, 800, 480));
         QSizePolicy sizePolicy1(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Minimum);
         sizePolicy1.setHorizontalStretch(30);
         sizePolicy1.setVerticalStretch(30);
@@ -145,20 +149,56 @@ public:
         stackedWidget->setSizePolicy(sizePolicy1);
         stackedWidget->setMinimumSize(QSize(50, 50));
         stackedWidget->setSizeIncrement(QSize(0, 0));
+        QFont font;
+        font.setFamilies({QString::fromUtf8("Garamond")});
+        font.setPointSize(48);
+        stackedWidget->setFont(font);
+        stackedWidget->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
         stackedWidget->setStyleSheet(QString::fromUtf8("QWidget #Application {\n"
 "rgb(0, 0, 0)\n"
 "}"));
         Start = new QWidget();
         Start->setObjectName("Start");
+        Start->setAutoFillBackground(false);
         label = new QLabel(Start);
         label->setObjectName("label");
-        label->setGeometry(QRect(230, 210, 341, 20));
+        label->setGeometry(QRect(160, 110, 601, 121));
+        label->setFont(font);
+        label->setCursor(QCursor(Qt::CursorShape::ArrowCursor));
         label->setStyleSheet(QString::fromUtf8("QGroupBox{\n"
 "	text-align: center\n"
 "}"));
         pushButton = new QPushButton(Start);
         pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(350, 240, 80, 18));
+        pushButton->setGeometry(QRect(330, 240, 141, 51));
+        QFont font1;
+        font1.setFamilies({QString::fromUtf8("Garamond")});
+        font1.setBold(false);
+        pushButton->setFont(font1);
+        pushButton->setCursor(QCursor(Qt::CursorShape::ArrowCursor));
+        pushButton->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
+        label_23 = new QLabel(Start);
+        label_23->setObjectName("label_23");
+        label_23->setGeometry(QRect(340, 90, 121, 20));
+        QFont font2;
+        font2.setFamilies({QString::fromUtf8("Garamond")});
+        font2.setPointSize(14);
+        label_23->setFont(font2);
+        label_23->setCursor(QCursor(Qt::CursorShape::ArrowCursor));
+        pushButton_18 = new QPushButton(Start);
+        pushButton_18->setObjectName("pushButton_18");
+        pushButton_18->setGeometry(QRect(70, 330, 141, 51));
+        QFont font3;
+        font3.setFamilies({QString::fromUtf8("Garamond")});
+        pushButton_18->setFont(font3);
+        pushButton_19 = new QPushButton(Start);
+        pushButton_19->setObjectName("pushButton_19");
+        pushButton_19->setGeometry(QRect(330, 330, 141, 51));
+        pushButton_19->setFont(font3);
+        pushButton_20 = new QPushButton(Start);
+        pushButton_20->setObjectName("pushButton_20");
+        pushButton_20->setGeometry(QRect(580, 330, 141, 51));
+        pushButton_20->setFont(font3);
         stackedWidget->addWidget(Start);
         House = new QWidget();
         House->setObjectName("House");
@@ -1140,7 +1180,7 @@ public:
 
         retranslateUi(MainWindow);
 
-        stackedWidget->setCurrentIndex(2);
+        stackedWidget->setCurrentIndex(0);
 
 
         QMetaObject::connectSlotsByName(MainWindow);
@@ -1149,8 +1189,12 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "Welcome To Wizard Chess!", nullptr));
-        pushButton->setText(QCoreApplication::translate("MainWindow", "Next Page!", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "WIZARD CHESS", nullptr));
+        pushButton->setText(QCoreApplication::translate("MainWindow", "Start Game", nullptr));
+        label_23->setText(QCoreApplication::translate("MainWindow", "Welcome To", nullptr));
+        pushButton_18->setText(QCoreApplication::translate("MainWindow", "Settings", nullptr));
+        pushButton_19->setText(QCoreApplication::translate("MainWindow", "Tutorial", nullptr));
+        pushButton_20->setText(QCoreApplication::translate("MainWindow", "About", nullptr));
         label_20->setText(QCoreApplication::translate("MainWindow", "House", nullptr));
         label_22->setText(QCoreApplication::translate("MainWindow", "Tutorial", nullptr));
         pushButton_61->setText(QCoreApplication::translate("MainWindow", "F5", nullptr));
