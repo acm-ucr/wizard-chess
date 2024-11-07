@@ -1,11 +1,11 @@
 #pragma once
 #include "Piece.h"
 
-class Bishop : public Piece {
+class Rook : public Piece {
         public: 
-            Bishop(int xPos, int yPos);
+            Rook(int xPos, int yPos);
             void movePiece(int x, int y);
             bool isValid(int xT, int yT);
-            string getID(){return "bishop";}
+            string getID(){return "rook";}
             bool isEmpty(){return false;}
 };
