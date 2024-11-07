@@ -1,0 +1,69 @@
+# Qt build artifacts
+*.o
+*.obj
+*.lo
+*.slo
+*.d
+*.moc
+*.qrc
+*.a
+*.lib
+*.dll
+*.so
+*.dylib
+*.prl
+
+# Qt Creator-specific files
+*.autosave
+*.pro.user
+*.pro.user.*
+*.qbs.user
+*.qbs.user.*
+*.qmlc
+*.jsc
+*.qmltypes
+*.tags
+.qmake.stash
+
+# Intermediate and temporary files
+*.tmp
+*.temp
+*.bak
+*.swp
+*.old
+*.pro~
+*.pro.user.*
+
+# CMake build artifacts (if using CMake)
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+build/
+build-*/
+
+# macOS specific files
+.DS_Store
+
+# Windows specific files
+Thumbs.db
+Desktop.ini
+
+# Generated translation files (if using lrelease)
+*.qm
+
+# Debug output files
+*.log
+*.stackdump
+
+# Coverage reports
+*.gcda
+*.gcno
+*.gcov
+
+# Documentation
+*.qhp
+*.qch
+
+# Temporary directories
+qt-generated/
