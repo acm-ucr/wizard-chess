@@ -29,10 +29,13 @@ public:
     QWidget *Start;
     QLabel *label;
     QPushButton *pushButton;
+<<<<<<< HEAD
     QLabel *label_23;
     QPushButton *pushButton_18;
     QPushButton *pushButton_19;
     QPushButton *pushButton_20;
+=======
+>>>>>>> parent of 6afc83b (temporary commit)
     QWidget *House;
     QLabel *label_20;
     QWidget *Tutorial;
@@ -141,7 +144,11 @@ public:
         centralwidget->setSizePolicy(sizePolicy);
         stackedWidget = new QStackedWidget(centralwidget);
         stackedWidget->setObjectName("stackedWidget");
+<<<<<<< HEAD
         stackedWidget->setGeometry(QRect(0, 0, 800, 480));
+=======
+        stackedWidget->setGeometry(QRect(-10, 0, 800, 480));
+>>>>>>> parent of 6afc83b (temporary commit)
         QSizePolicy sizePolicy1(QSizePolicy::Policy::Minimum, QSizePolicy::Policy::Minimum);
         sizePolicy1.setHorizontalStretch(30);
         sizePolicy1.setVerticalStretch(30);
@@ -170,6 +177,7 @@ public:
 "}"));
         pushButton = new QPushButton(Start);
         pushButton->setObjectName("pushButton");
+<<<<<<< HEAD
         pushButton->setGeometry(QRect(330, 240, 141, 51));
         QFont font1;
         font1.setFamilies({QString::fromUtf8("Garamond")});
@@ -199,6 +207,9 @@ public:
         pushButton_20->setObjectName("pushButton_20");
         pushButton_20->setGeometry(QRect(580, 330, 141, 51));
         pushButton_20->setFont(font3);
+=======
+        pushButton->setGeometry(QRect(350, 240, 80, 18));
+>>>>>>> parent of 6afc83b (temporary commit)
         stackedWidget->addWidget(Start);
         House = new QWidget();
         House->setObjectName("House");
@@ -1189,12 +1200,17 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
+<<<<<<< HEAD
         label->setText(QCoreApplication::translate("MainWindow", "WIZARD CHESS", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "Start Game", nullptr));
         label_23->setText(QCoreApplication::translate("MainWindow", "Welcome To", nullptr));
         pushButton_18->setText(QCoreApplication::translate("MainWindow", "Settings", nullptr));
         pushButton_19->setText(QCoreApplication::translate("MainWindow", "Tutorial", nullptr));
         pushButton_20->setText(QCoreApplication::translate("MainWindow", "About", nullptr));
+=======
+        label->setText(QCoreApplication::translate("MainWindow", "Welcome To Wizard Chess!", nullptr));
+        pushButton->setText(QCoreApplication::translate("MainWindow", "Next Page!", nullptr));
+>>>>>>> parent of 6afc83b (temporary commit)
         label_20->setText(QCoreApplication::translate("MainWindow", "House", nullptr));
         label_22->setText(QCoreApplication::translate("MainWindow", "Tutorial", nullptr));
         pushButton_61->setText(QCoreApplication::translate("MainWindow", "F5", nullptr));

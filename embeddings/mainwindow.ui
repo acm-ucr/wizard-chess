@@ -487,6 +487,7 @@ rgb(0, 0, 0)
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
+<<<<<<< HEAD
     background-color: #FFFFFF;
     color: black;
     border-radius: 5px;
@@ -508,6 +509,8 @@ rgb(0, 0, 0)
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
+=======
+>>>>>>> parent of 6afc83b (temporary commit)
     background-color: #FFFFFF;
     color: black;
     border-radius: 5px;
@@ -515,6 +518,30 @@ rgb(0, 0, 0)
 }</string>
         </property>
         <property name="text">
+<<<<<<< HEAD
+=======
+         <string>A8</string>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="5">
+       <widget class="QPushButton" name="pushButton_53">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>30</horstretch>
+          <verstretch>30</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #FFFFFF;
+    color: black;
+    border-radius: 5px;
+    padding: 5px;
+}</string>
+        </property>
+        <property name="text">
+>>>>>>> parent of 6afc83b (temporary commit)
          <string>F7</string>
         </property>
        </widget>
@@ -550,6 +577,7 @@ rgb(0, 0, 0)
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
+<<<<<<< HEAD
     background-color: #000000;
     color: white;
     border-radius: 5px;
@@ -613,6 +641,8 @@ rgb(0, 0, 0)
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
+=======
+>>>>>>> parent of 6afc83b (temporary commit)
     background-color: #000000;
     color: white;
     border-radius: 5px;
@@ -620,12 +650,21 @@ rgb(0, 0, 0)
 }</string>
         </property>
         <property name="text">
+<<<<<<< HEAD
          <string>E5</string>
         </property>
        </widget>
       </item>
       <item row="14" column="1">
        <widget class="QPushButton" name="pushButton_14">
+=======
+         <string>C7</string>
+        </property>
+       </widget>
+      </item>
+      <item row="15" column="0">
+       <widget class="QPushButton" name="pushButton_7">
+>>>>>>> parent of 6afc83b (temporary commit)
         <property name="sizePolicy">
          <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
           <horstretch>30</horstretch>
@@ -641,6 +680,107 @@ rgb(0, 0, 0)
 }</string>
         </property>
         <property name="text">
+<<<<<<< HEAD
+         <string>B5</string>
+        </property>
+       </widget>
+      </item>
+      <item row="15" column="2">
+       <widget class="QPushButton" name="pushButton_49">
+=======
+         <string>A4</string>
+        </property>
+       </widget>
+      </item>
+      <item row="16" column="3">
+       <widget class="QPushButton" name="pushButton_38">
+>>>>>>> parent of 6afc83b (temporary commit)
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>30</horstretch>
+          <verstretch>30</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #FFFFFF;
+    color: black;
+    border-radius: 5px;
+    padding: 5px;
+}</string>
+        </property>
+        <property name="text">
+<<<<<<< HEAD
+         <string>C4</string>
+        </property>
+       </widget>
+      </item>
+      <item row="16" column="4">
+       <widget class="QPushButton" name="pushButton_57">
+=======
+         <string>D3</string>
+        </property>
+       </widget>
+      </item>
+      <item row="14" column="4">
+       <widget class="QPushButton" name="pushButton_60">
+>>>>>>> parent of 6afc83b (temporary commit)
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>30</horstretch>
+          <verstretch>30</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #000000;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+}</string>
+        </property>
+        <property name="text">
+<<<<<<< HEAD
+         <string>E3</string>
+        </property>
+       </widget>
+      </item>
+      <item row="19" column="1">
+       <widget class="QPushButton" name="pushButton_17">
+=======
+         <string>E5</string>
+        </property>
+       </widget>
+      </item>
+      <item row="14" column="1">
+       <widget class="QPushButton" name="pushButton_14">
+>>>>>>> parent of 6afc83b (temporary commit)
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>30</horstretch>
+          <verstretch>30</verstretch>
+         </sizepolicy>
+        </property>
+<<<<<<< HEAD
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+=======
+>>>>>>> parent of 6afc83b (temporary commit)
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #FFFFFF;
+    color: black;
+    border-radius: 5px;
+    padding: 5px;
+}</string>
+        </property>
+        <property name="text">
+<<<<<<< HEAD
+=======
          <string>B5</string>
         </property>
        </widget>
@@ -710,6 +850,7 @@ rgb(0, 0, 0)
 }</string>
         </property>
         <property name="text">
+>>>>>>> parent of 6afc83b (temporary commit)
          <string>B1</string>
         </property>
        </widget>
@@ -766,11 +907,63 @@ rgb(0, 0, 0)
         </property>
         <property name="styleSheet">
          <string notr="true">QPushButton {
+<<<<<<< HEAD
+=======
     background-color: #FFFFFF;
     color: black;
     border-radius: 5px;
     padding: 5px;
 }</string>
+        </property>
+        <property name="text">
+         <string>D5</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="4">
+       <widget class="QPushButton" name="pushButton_56">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>30</horstretch>
+          <verstretch>30</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #FFFFFF;
+    color: black;
+    border-radius: 5px;
+    padding: 5px;
+}</string>
+        </property>
+        <property name="text">
+         <string>E8</string>
+        </property>
+       </widget>
+      </item>
+      <item row="17" column="6">
+       <widget class="QPushButton" name="pushButton_67">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>30</horstretch>
+          <verstretch>30</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+>>>>>>> parent of 6afc83b (temporary commit)
+    background-color: #FFFFFF;
+    color: black;
+    border-radius: 5px;
+    padding: 5px;
+}</string>
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
         </property>
@@ -885,6 +1078,8 @@ rgb(0, 0, 0)
     border-radius: 5px;
     padding: 5px;
 }</string>
+=======
+>>>>>>> parent of 6afc83b (temporary commit)
         </property>
         <property name="text">
          <string>G2</string>
