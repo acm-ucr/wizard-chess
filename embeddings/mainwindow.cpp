@@ -16,7 +16,29 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
+<<<<<<< HEAD
+    ui->stackedWidget->setCurrentIndex(1);
+=======
+    ui->stackedWidget->setCurrentIndex(2);
+>>>>>>> main
+}
+
+
+void MainWindow::on_pushButton_18_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(4);
+}
+
+void MainWindow::on_pushButton_19_clicked()
+{
     ui->stackedWidget->setCurrentIndex(2);
 }
+
+void MainWindow::on_pushButton_20_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(5);
+}
+
+
 
 
