@@ -16,15 +16,9 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_clicked()
 {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    ui->stackedWidget->setCurrentIndex(1);
-=======
+
     ui->stackedWidget->setCurrentIndex(2);
->>>>>>> main
-=======
-    ui->stackedWidget->setCurrentIndex(3);
->>>>>>> parent of 29f053e (Merge pull request #12 from acm-ucr/justin-h-im/dev)
+
 }
 
 
