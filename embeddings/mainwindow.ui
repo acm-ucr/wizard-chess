@@ -138,14 +138,14 @@ rgb(0, 0, 0)
         <widget class="QLabel" name="label_18">
          <property name="geometry">
           <rect>
-           <x>290</x>
+           <x>410</x>
            <y>20</y>
-           <width>431</width>
-           <height>61</height>
+           <width>351</width>
+           <height>101</height>
           </rect>
          </property>
          <property name="text">
-          <string>TextLabel</string>
+          <string>Move Output</string>
          </property>
         </widget>
         <widget class="QWidget" name="layoutWidget">
@@ -153,8 +153,8 @@ rgb(0, 0, 0)
           <rect>
            <x>0</x>
            <y>20</y>
-           <width>288</width>
-           <height>296</height>
+           <width>401</width>
+           <height>421</height>
           </rect>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
@@ -2251,6 +2251,19 @@ rgb(0, 0, 0)
            </widget>
           </item>
          </layout>
+        </widget>
+        <widget class="QLabel" name="label_19">
+         <property name="geometry">
+          <rect>
+           <x>410</x>
+           <y>120</y>
+           <width>341</width>
+           <height>131</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Alerts / Error Messages</string>
+         </property>
         </widget>
        </widget>
       </item>
