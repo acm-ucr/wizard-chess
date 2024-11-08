@@ -53,20 +53,44 @@
       <height>0</height>
      </size>
     </property>
+    <property name="font">
+     <font>
+      <family>Garamond</family>
+      <pointsize>48</pointsize>
+     </font>
+    </property>
+    <property name="layoutDirection">
+     <enum>Qt::LayoutDirection::LeftToRight</enum>
+    </property>
     <property name="styleSheet">
      <string notr="true">QWidget #Application {
 rgb(0, 0, 0)
 }</string>
     </property>
-    <widget class="QWidget" name="page">
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="Start">
+     <property name="autoFillBackground">
+      <bool>false</bool>
+     </property>
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>230</x>
-        <y>210</y>
-        <width>341</width>
-        <height>20</height>
+        <x>160</x>
+        <y>110</y>
+        <width>601</width>
+        <height>121</height>
        </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Garamond</family>
+        <pointsize>48</pointsize>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>ArrowCursor</cursorShape>
       </property>
       <property name="styleSheet">
        <string notr="true">QGroupBox{
@@ -74,25 +98,142 @@ rgb(0, 0, 0)
 }</string>
       </property>
       <property name="text">
-       <string>Welcome To Wizard Chess!</string>
+       <string>WIZARD CHESS</string>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton">
       <property name="geometry">
        <rect>
-        <x>350</x>
+        <x>330</x>
         <y>240</y>
-        <width>80</width>
-        <height>18</height>
+        <width>141</width>
+        <height>51</height>
        </rect>
       </property>
+      <property name="font">
+       <font>
+        <family>Garamond</family>
+        <bold>false</bold>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>ArrowCursor</cursorShape>
+      </property>
+      <property name="layoutDirection">
+       <enum>Qt::LayoutDirection::LeftToRight</enum>
+      </property>
       <property name="text">
-       <string>Next Page!</string>
+       <string>Start Game</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_23">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>90</y>
+        <width>121</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Garamond</family>
+        <pointsize>14</pointsize>
+       </font>
+      </property>
+      <property name="cursor">
+       <cursorShape>ArrowCursor</cursorShape>
+      </property>
+      <property name="text">
+       <string>Welcome To</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_18">
+      <property name="geometry">
+       <rect>
+        <x>70</x>
+        <y>330</y>
+        <width>141</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Garamond</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>Settings</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_19">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>330</y>
+        <width>141</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Garamond</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>Tutorial</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_20">
+      <property name="geometry">
+       <rect>
+        <x>580</x>
+        <y>330</y>
+        <width>141</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Garamond</family>
+       </font>
+      </property>
+      <property name="text">
+       <string>About</string>
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="page_3"/>
-    <widget class="QWidget" name="page_2">
+    <widget class="QWidget" name="House">
+     <widget class="QLabel" name="label_20">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>210</y>
+        <width>49</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>House</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="Tutorial">
+     <widget class="QLabel" name="label_22">
+      <property name="geometry">
+       <rect>
+        <x>350</x>
+        <y>220</y>
+        <width>49</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Tutorial</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="Game">
      <property name="enabled">
       <bool>true</bool>
      </property>
@@ -1030,6 +1171,7 @@ rgb(0, 0, 0)
     border-radius: 5px;
     padding: 5px;
 }</string>
+<<<<<<< HEAD
             </property>
             <property name="text">
              <string>F5</string>
@@ -1052,11 +1194,37 @@ rgb(0, 0, 0)
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
+=======
+        </property>
+        <property name="text">
+         <string>G2</string>
+        </property>
+       </widget>
+      </item>
+      <item row="22" column="2">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>C</string>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="4">
+       <widget class="QPushButton" name="pushButton_52">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>30</horstretch>
+          <verstretch>30</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+>>>>>>> emii331/screendev
     background-color: #000000;
     color: white;
     border-radius: 5px;
     padding: 5px;
 }</string>
+<<<<<<< HEAD
             </property>
             <property name="text">
              <string>G5</string>
@@ -1079,11 +1247,106 @@ rgb(0, 0, 0)
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
+=======
+        </property>
+        <property name="text">
+         <string>E7</string>
+        </property>
+       </widget>
+      </item>
+      <item row="22" column="3">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>D</string>
+        </property>
+       </widget>
+      </item>
+      <item row="17" column="3">
+       <widget class="QPushButton" name="pushButton_39">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>30</horstretch>
+          <verstretch>30</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #000000;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+}</string>
+        </property>
+        <property name="text">
+         <string>D2</string>
+        </property>
+       </widget>
+      </item>
+      <item row="14" column="0">
+       <widget class="QPushButton" name="pushButton_5">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>30</horstretch>
+          <verstretch>30</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #000000;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+}</string>
+        </property>
+        <property name="text">
+         <string>A5</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="5">
+       <widget class="QPushButton" name="pushButton_63">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>30</horstretch>
+          <verstretch>30</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #000000;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+}</string>
+        </property>
+        <property name="text">
+         <string>F8</string>
+        </property>
+       </widget>
+      </item>
+      <item row="16" column="7">
+       <widget class="QPushButton" name="pushButton_70">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>30</horstretch>
+          <verstretch>30</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+>>>>>>> emii331/screendev
     background-color: #FFFFFF;
     color: black;
     border-radius: 5px;
     padding: 5px;
 }</string>
+<<<<<<< HEAD
             </property>
             <property name="text">
              <string>H5</string>
@@ -1119,6 +1382,38 @@ rgb(0, 0, 0)
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
+=======
+        </property>
+        <property name="text">
+         <string>H3</string>
+        </property>
+       </widget>
+      </item>
+      <item row="22" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>A</string>
+        </property>
+       </widget>
+      </item>
+      <item row="22" column="1">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>B</string>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="1">
+       <widget class="QPushButton" name="pushButton_11">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>30</horstretch>
+          <verstretch>30</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+>>>>>>> emii331/screendev
     background-color: #FFFFFF;
     color: black;
     border-radius: 5px;
@@ -1184,6 +1479,7 @@ rgb(0, 0, 0)
     border-radius: 5px;
     padding: 5px;
 }</string>
+<<<<<<< HEAD
             </property>
             <property name="text">
              <string>C4</string>
@@ -1206,6 +1502,31 @@ rgb(0, 0, 0)
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
+=======
+        </property>
+        <property name="text">
+         <string>C8</string>
+        </property>
+       </widget>
+      </item>
+      <item row="22" column="4">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>E</string>
+        </property>
+       </widget>
+      </item>
+      <item row="15" column="5">
+       <widget class="QPushButton" name="pushButton_58">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>30</horstretch>
+          <verstretch>30</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+>>>>>>> emii331/screendev
     background-color: #000000;
     color: white;
     border-radius: 5px;
@@ -1265,6 +1586,7 @@ rgb(0, 0, 0)
     border-radius: 5px;
     padding: 5px;
 }</string>
+<<<<<<< HEAD
             </property>
             <property name="text">
              <string>F4</string>
@@ -1287,6 +1609,121 @@ rgb(0, 0, 0)
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
+=======
+        </property>
+        <property name="text">
+         <string>D4</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="1">
+       <widget class="QPushButton" name="pushButton_12">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>30</horstretch>
+          <verstretch>30</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #000000;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+}</string>
+        </property>
+        <property name="text">
+         <string>B8</string>
+        </property>
+       </widget>
+      </item>
+      <item row="16" column="2">
+       <widget class="QPushButton" name="pushButton_41">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>30</horstretch>
+          <verstretch>30</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #000000;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+}</string>
+        </property>
+        <property name="text">
+         <string>C3</string>
+        </property>
+       </widget>
+      </item>
+      <item row="17" column="5">
+       <widget class="QPushButton" name="pushButton_55">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>30</horstretch>
+          <verstretch>30</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>30</width>
+          <height>30</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #000000;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+}</string>
+        </property>
+        <property name="text">
+         <string>F2</string>
+        </property>
+       </widget>
+      </item>
+      <item row="6" column="3">
+       <widget class="QPushButton" name="pushButton_47">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>30</horstretch>
+          <verstretch>30</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #000000;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+}</string>
+        </property>
+        <property name="text">
+         <string>D8</string>
+        </property>
+       </widget>
+      </item>
+      <item row="22" column="6">
+       <widget class="QLabel" name="label_8">
+        <property name="text">
+         <string>G</string>
+        </property>
+       </widget>
+      </item>
+      <item row="13" column="4">
+       <widget class="QPushButton" name="pushButton_62">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>30</horstretch>
+          <verstretch>30</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+>>>>>>> emii331/screendev
     background-color: #FFFFFF;
     color: black;
     border-radius: 5px;
@@ -1506,6 +1943,7 @@ rgb(0, 0, 0)
     border-radius: 5px;
     padding: 5px;
 }</string>
+<<<<<<< HEAD
             </property>
             <property name="text">
              <string>F3</string>
@@ -1528,6 +1966,80 @@ rgb(0, 0, 0)
             </property>
             <property name="styleSheet">
              <string notr="true">QPushButton {
+=======
+        </property>
+        <property name="text">
+         <string>B3</string>
+        </property>
+       </widget>
+      </item>
+      <item row="13" column="6">
+       <widget class="QPushButton" name="pushButton_78">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>30</horstretch>
+          <verstretch>30</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #FFFFFF;
+    color: black;
+    border-radius: 5px;
+    padding: 5px;
+}</string>
+        </property>
+        <property name="text">
+         <string>G6</string>
+        </property>
+       </widget>
+      </item>
+      <item row="22" column="7">
+       <widget class="QLabel" name="label_9">
+        <property name="text">
+         <string>H</string>
+        </property>
+       </widget>
+      </item>
+      <item row="22" column="5">
+       <widget class="QLabel" name="label_7">
+        <property name="text">
+         <string>F</string>
+        </property>
+       </widget>
+      </item>
+      <item row="16" column="5">
+       <widget class="QPushButton" name="pushButton_54">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>30</horstretch>
+          <verstretch>30</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    background-color: #FFFFFF;
+    color: black;
+    border-radius: 5px;
+    padding: 5px;
+}</string>
+        </property>
+        <property name="text">
+         <string>F3</string>
+        </property>
+       </widget>
+      </item>
+      <item row="12" column="6">
+       <widget class="QPushButton" name="pushButton_68">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+          <horstretch>30</horstretch>
+          <verstretch>30</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+>>>>>>> emii331/screendev
     background-color: #000000;
     color: white;
     border-radius: 5px;
@@ -2267,6 +2779,51 @@ rgb(0, 0, 0)
        </widget>
       </item>
      </layout>
+    </widget>
+    <widget class="QWidget" name="Settings">
+     <widget class="QLabel" name="label_21">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>200</y>
+        <width>49</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Settings</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="About">
+     <widget class="QLabel" name="label_18">
+      <property name="geometry">
+       <rect>
+        <x>340</x>
+        <y>230</y>
+        <width>49</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>About</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="End">
+     <widget class="QLabel" name="label_19">
+      <property name="geometry">
+       <rect>
+        <x>330</x>
+        <y>280</y>
+        <width>49</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>End</string>
+      </property>
+     </widget>
     </widget>
    </widget>
   </widget>
