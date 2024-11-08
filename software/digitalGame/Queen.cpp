@@ -1,6 +1,20 @@
 #include <iostream>
 #include "Queen.h"
 
+Queen::Queen() : Piece(){}
+
+Queen::Queen(int xPos, int yPos, bool color) : Piece(xPos, yPos, color){
+
+}
+
+/*string Queen::getID(){
+    return "queen";
+}
+
+bool Queen::isEmpty(){
+    return false;
+}*/
+
 void Queen::movePiece(int xM, int yM){
     if(this->isValid(xM, yM)){
                 this->setPositionX(this->getPositionX() + xM);
@@ -32,4 +46,5 @@ bool Queen::isValid(int xT, int yT){
     return false;
 }
 
-bool Piece::isEmpty(){return false;}
+//string Queen::getID(){return "queen";}
+//bool Queen::isEmpty() override{return false;}

@@ -1,6 +1,20 @@
 #include <iostream>
 #include "Bishop.h"
 
+Bishop::Bishop() : Piece(){}
+
+Bishop::Bishop(int xPos, int yPos, bool color) : Piece(xPos, yPos, color){
+    
+}
+
+/*string Bishop::getID(){
+    return "bishop";
+}
+
+bool Bishop::isEmpty(){
+    return false;
+}*/
+
 void Bishop::movePiece(int xM, int yM){
     if(this->isValid(xM, yM)){
         this->setPositionX(this->getPositionX() + xM);
@@ -19,5 +33,3 @@ bool Bishop::isValid(int xT, int yT){
 
     return false;
 }
-
-bool Piece::isEmpty(){return false;}

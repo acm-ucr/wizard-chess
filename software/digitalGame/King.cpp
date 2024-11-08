@@ -1,6 +1,20 @@
 #include <iostream>
 #include "King.h"
 
+King::King() : Piece(){}
+
+King::King(int xPos, int yPos, bool color) : Piece(xPos, yPos, color){
+    
+}
+
+/*string King::getID(){
+    return "king";
+}
+
+bool King::isEmpty(){
+    return false;
+}*/
+
 void King::movePiece(int xM, int yM){
     if(this->isValid(xM, yM)){
         this->setPositionX(this->getPositionX() + xM);
@@ -17,7 +31,7 @@ bool King::isValid(int xT, int yT){
                     return true;
                 }
             }
-            else if(y == 0){
+            else if(yT == 0){
                 if(xT == 1 || xT == -1){
                     return true;
                 }
@@ -31,4 +45,3 @@ bool King::isValid(int xT, int yT){
     return false;
 }
 
-bool Piece::isEmpty(){return false;}

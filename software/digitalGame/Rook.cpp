@@ -2,11 +2,41 @@
 #include "Rook.h"
 
 
+Rook::Rook() : Piece(){}
+
+Rook::Rook(int xPos, int yPos, bool color) : Piece(xPos, yPos, color){
+    
+}
+
+/*string Rook::getID(){
+    return "rook";
+}
+
+bool Rook::isEmpty(){
+    return false;
+}*/
+
 void Rook::movePiece(int xM, int yM){
     if(this->isValid(xM, yM)){
         this->setPositionX(this->getPositionX() + xM);
         this->setPositionY(this->getPositionY() + yM);
     }
+}
+
+int rangeMinX(){
+    
+}
+
+int rangeMaxX(){
+
+}
+
+int rangeMinY(){
+
+}
+
+int rangeMaxY(){
+
 }
 
 bool Rook::isValid(int xT, int yT){
@@ -28,7 +58,3 @@ bool Rook::isValid(int xT, int yT){
 
     return false;
 }
-
-bool Piece::isEmpty(){return false;}
-
-int main(){}

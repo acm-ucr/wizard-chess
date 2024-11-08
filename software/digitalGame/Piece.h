@@ -1,4 +1,7 @@
 #pragma once
+#ifndef PIECE_H
+#define PIECE_H
+
 #include <stdexcept>
 
 using namespace std;
@@ -6,30 +9,29 @@ using namespace std;
 class Piece {
     public:
         Piece();
-        Piece(int xPos, int yPos);
+        Piece(int xPos, int yPos, bool color);
         int getPositionX(){return x;}
         int getPositionY(){return y;}
         void setPositionX(int numX){x = numX;}
         void setPositionY(int numY){y = numY;}   
-        bool isEmpty(){return true;}  
+        
+        virtual bool isEmpty() const {
+            return true;
+        }
+        virtual string getID() const {
+            return "hehehaw";
+        }
+        virtual void movePiece(int x, int y){
+            setPositionX(x);
+            setPositionY(y);
+        }
     
-    protected:
+    private:
         int x;
         int y;
-        //int counter;
+        bool isWhite;
+        //int counter;v
 
-    private:
-        string getID();
 };
 
-Piece :: Piece(){
-    x = 0;
-    y = 0;
-    //counter = 0;
-}
-
-Piece :: Piece(int xPos, int yPos){
-    x = xPos;
-    y = yPos;
-    //counter = 0;
-}
+#endif
