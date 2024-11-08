@@ -1,6 +1,20 @@
 #include <iostream>
 #include "Knight.h"
 
+Knight::Knight() : Piece(){}
+
+Knight::Knight(int xPos, int yPos, bool color) : Piece(xPos, yPos, color){
+    
+}
+
+/*string Knight::getID(){
+    return "knight";
+}
+
+bool Knight::isEmpty(){
+    return false;
+}*/
+
 void Knight::movePiece(int xM, int yM){
 
     if(this->isValid(xM, yM)){
@@ -39,4 +53,3 @@ bool Knight::isValid(int xT, int yT){
     return false;
 }
 
-bool Piece::isEmpty(){return false;}

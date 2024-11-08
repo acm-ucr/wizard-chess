@@ -3,9 +3,23 @@
 
 class Rook : public Piece {
         public: 
-            Rook(int xPos, int yPos);
-            void movePiece(int x, int y);
+            Rook();
+            Rook(int xPos, int yPos, bool isWhite);
             bool isValid(int xT, int yT);
-            string getID(){return "rook";}
-            bool isEmpty(){return false;}
+            int rangeMinX();
+            int rangeMaxX();
+            int rangeMinY();
+            int rangeMaxY();
+
+            void movePiece(int x, int y) override;
+
+
+            string getID() const override {
+                return "rook";
+            }
+
+
+            bool isEmpty() const override {
+                return false;
+            }
 };
