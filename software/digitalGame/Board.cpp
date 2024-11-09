@@ -383,11 +383,12 @@ int Board::rangeMaxY(Piece p){
 
 }*/
 
-int main(){
-    Board b;
-    Knight knight(4, 6, true);
-    Pawn pawn(0, 7, true);
-    Queen queen(0,0, true);
+/*int main(){
+    // Board b;
 
-    cout << b.getPiece(0, 0).getID() << endl;
-}
+    Rook rook;
+
+    cout << "Entering Main" << endl;
+
+    cout << rook.getID() << endl;
+}*/

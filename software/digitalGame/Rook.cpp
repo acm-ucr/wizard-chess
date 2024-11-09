@@ -2,10 +2,12 @@
 #include "Rook.h"
 
 
-Rook::Rook() : Piece(){}
+Rook::Rook() : Piece(){
+    cout << "HELLO WORLD" << endl;
+}
 
 Rook::Rook(int xPos, int yPos, bool color) : Piece(xPos, yPos, color){
-    
+    cout << "PARAMETERIZED CONSTRUCTOR" << endl;
 }
 
 /*string Rook::getID(){

@@ -3,7 +3,7 @@
 
 Empty::Empty() : Piece(){}
 
-Empty::Empty(int xPos, int yPos, bool color) : Piece(xPos, yPos, color){
+Empty::Empty(int xPos, int yPos) : Piece(xPos, yPos){
     
 }
 

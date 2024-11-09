@@ -9,6 +9,7 @@ using namespace std;
 class Piece {
     public:
         Piece();
+        Piece(int xPos, int yPos);
         Piece(int xPos, int yPos, bool color);
         int getPositionX(){return x;}
         int getPositionY(){return y;}

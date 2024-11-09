@@ -14,6 +14,11 @@ Piece :: Piece(int xPos, int yPos, bool color){
     //counter = 0;
 }
 
+Piece::Piece(int xPos, int yPos){
+    x = xPos;
+    y = yPos;
+}
+
 /*string Piece::getID(){
     return "hehehaw";
 }
