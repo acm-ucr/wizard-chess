@@ -24,7 +24,8 @@ using namespace std;
 class Board {
     private:
 
-        Piece *board[8][8];
+        vector<vector<Piece>> board;
+        
         
         //Pawn white
         Pawn pw0;
@@ -121,7 +122,7 @@ class Board {
         void printBoard();
         void playGame();
         bool checkmate();
-        void promote(Pawn *p, Piece *piece);
+        void promote(Pawn p, Piece piece);
 
 
 
