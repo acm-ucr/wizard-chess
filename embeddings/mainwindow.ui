@@ -23,10 +23,10 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>20</y>
+      <x>10</x>
+      <y>10</y>
       <width>800</width>
-      <height>541</height>
+      <height>480</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -68,7 +68,7 @@ rgb(0, 0, 0)
 }</string>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>6</number>
     </property>
     <widget class="QWidget" name="Start">
      <property name="autoFillBackground">
@@ -205,8 +205,8 @@ rgb(0, 0, 0)
           <rect>
            <x>10</x>
            <y>40</y>
-           <width>301</width>
-           <height>495</height>
+           <width>306</width>
+           <height>567</height>
           </rect>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
@@ -1220,36 +1220,36 @@ rgb(0, 0, 0)
     border-radius: 5px;
     padding: 5px;
 }</string>
-        </property>
-        <property name="text">
-         <string>H3</string>
-        </property>
-       </widget>
-      </item>
-      <item row="22" column="0">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>A</string>
-        </property>
-       </widget>
-      </item>
-      <item row="22" column="1">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>B</string>
-        </property>
-       </widget>
-      </item>
-      <item row="12" column="1">
-       <widget class="QPushButton" name="pushButton_11">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-          <horstretch>30</horstretch>
-          <verstretch>30</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">QPushButton {
+            </property>
+            <property name="text">
+             <string>H3</string>
+            </property>
+           </widget>
+          </item>
+          <item row="22" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>A</string>
+            </property>
+           </widget>
+          </item>
+          <item row="22" column="1">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>B</string>
+            </property>
+           </widget>
+          </item>
+          <item row="12" column="1">
+           <widget class="QPushButton" name="pushButton_11">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+              <horstretch>30</horstretch>
+              <verstretch>30</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QPushButton {
     background-color: #FFFFFF;
     color: black;
     border-radius: 5px;
@@ -2743,17 +2743,89 @@ font: 12pt &quot;Showcard Gothic&quot;;
      </widget>
     </widget>
     <widget class="QWidget" name="End">
-     <widget class="QLabel" name="label_19">
+     <widget class="QLabel" name="label_23">
       <property name="geometry">
        <rect>
-        <x>330</x>
-        <y>280</y>
-        <width>49</width>
-        <height>16</height>
+        <x>10</x>
+        <y>0</y>
+        <width>271</width>
+        <height>81</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(17, 255, 0);
+font: 20pt &quot;Sitka&quot;;</string>
+      </property>
       <property name="text">
-       <string>End</string>
+       <string>END OF GAME</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_19">
+      <property name="geometry">
+       <rect>
+        <x>260</x>
+        <y>340</y>
+        <width>281</width>
+        <height>111</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(26, 255, 0);
+font: 900 20pt &quot;Segoe UI Black&quot;;</string>
+      </property>
+      <property name="text">
+       <string>HOME</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_24">
+      <property name="geometry">
+       <rect>
+        <x>310</x>
+        <y>60</y>
+        <width>231</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 0, 0);
+font: 20pt &quot;Sitka&quot;;</string>
+      </property>
+      <property name="text">
+       <string>House 1 Wins!</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>150</y>
+        <width>201</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);
+font: 900 16pt &quot;Segoe UI Black&quot;;</string>
+      </property>
+      <property name="title">
+       <string>House 1 Time:</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_4">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>150</y>
+        <width>201</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 255, 255);
+font: 900 16pt &quot;Segoe UI Black&quot;;</string>
+      </property>
+      <property name="title">
+       <string>House 2 Time:</string>
       </property>
      </widget>
     </widget>
