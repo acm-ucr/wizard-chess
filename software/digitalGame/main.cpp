@@ -8,28 +8,24 @@ using namespace std;
 
 int main() {
     // Path to the Stockfish engine binary
-    const char* stockfishPath = "";  // Change this to your Stockfish binary
-    Stockfish engine(stockfishPath); 
+    const char* stockfishPath = "\"C:\\Users\\leaus\\OneDrive\\Important DOcs\\stockfish\\stockfish-windows-x86-64-avx2.exe\"";  // Change this to your Stockfish binary
+    Stockfish engine(stockfishPath);
+    engine.intialize(); 
 
-    cout << "STARTING" << endl;
+    //e7e5 f2f3 d8h4
 
-    // Send UCI command
-    //it will return uciok to confirm that sotckfish confirmed the uci command
-    cout << "Sending UCI command...\n";
-    cout << engine.sendCommand("uci") << endl;
-
-    // Send isready command
-    //it will return readyok to confirm that sotckfish confirmed the ready command
-    cout << "Sending isready command...\n";
-    cout << engine.sendCommand("isready") << endl;
-    // Set up the position
-    cout << "Sending position command...\n";
-    cout << engine.sendCommand("position startpos moves h2h4") << endl;
-
-
-    // Request the best move
-    cout << "Sending go command...\n";
-    cout << engine.sendCommand("go depth 25") << endl;
+    string move;
+    string position = "position startpos moves g2g4";
+    //engine.sendCommand(position);
+    //WORK IN PROGRESS MAIN
+    while(true) {
+        cin >> move;
+        position = position + " "  + move;
+        engine.sendCommand("go depth 35");
+        engine.sendCommand(position);
+        cout << "Current Moves: " << position << endl;
+    }
 
     return 0;
 }
+

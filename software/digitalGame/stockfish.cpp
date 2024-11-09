@@ -6,41 +6,43 @@
 using namespace std;
 
 Stockfish::Stockfish() {
-
 }
 
-string Stockfish::sendCommand(const std::string& command) {
-        // Send command to Stockfish
+void Stockfish::intialize() {
+    cout << "STARTING" << endl;
+
+    // Send UCI command
+    //it will return uciok to confirm that sotckfish confirmed the uci command
+    cout << "Sending UCI command...\n";
+    cout << sendCommand("uci") << endl;
+    //Sending ready command
+    cout << "Stockfish initialized in UCI mode." << endl;
+    cout << "Sending isready command...\n";
+    cout << sendCommand("isready") << endl;
+}
+
+string Stockfish::sendCommand(const string& command) {
+       // Send command to Stockfish
         fprintf(stockfish, "%s\n", command.c_str());
-        fflush(stockfish); // Ensure command is sent immediately
+        fflush(stockfish);
 
-        // Read response
-        array<char, 128> buffer;
-        string result;
+        // Ensure Stockfish is ready
+        fprintf(stockfish, "isready\n");
+        fflush(stockfish);
 
-        // This method reads the output of Stockfish
-        while (fgets(buffer.data(), buffer.size(), stockfish) != nullptr) {
-            result += buffer.data();
-            // if (result.find("bestmove") != std::string::npos) {
-            //     break; // Stop reading once we get the best move
-            // }
-        }
+        // cout << command << endl;
+        // // Read response
+        // array<char, 128> buffer;
+        string result = command;
 
+        // // This method reads the output of Stockfish
+        // while (fgets(buffer.data(), buffer.size(), stockfish) != nullptr) {
+        //     cout << "Stockfish Output: " << buffer.data() << endl;
+        //     result += buffer.data();
+        //     // if (result.find("bestmove") != string::npos) {
+        //     //     break; // Stop reading once we get the best move
+        //     // }
+        // }
+        cout << "Result: " << result << endl;
         return result;
-}
-
-string Stockfish::exec(const char* cmd){ 
-    array<char, 128> buffer;
-    string result;
-    unique_ptr<FILE, decltype(&_pclose)> pipe(_popen(cmd, "r"), _pclose);
-
-    if (!pipe) {
-        throw runtime_error("popen() failed!");
-    }
-
-    while (fgets(buffer.data(), buffer.size(), pipe.get()) != nullptr) {
-        result += buffer.data();
-    }
-    
-    return result;
 }

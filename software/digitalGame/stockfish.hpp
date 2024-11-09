@@ -37,8 +37,8 @@ public:
     }
 
     string sendCommand(const std::string& command);
-    string exec(const char* cmd);
+    void intialize();
 
-private:
-    FILE* stockfish;
+    private:
+        FILE* stockfish;
 };
