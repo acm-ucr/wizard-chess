@@ -24,7 +24,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>0</y>
+      <y>20</y>
       <width>800</width>
       <height>480</height>
      </rect>
@@ -123,83 +123,7 @@ rgb(0, 0, 0)
        <enum>Qt::LayoutDirection::LeftToRight</enum>
       </property>
       <property name="text">
-       <string>Start Game</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_23">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>90</y>
-        <width>121</width>
-        <height>20</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Garamond</family>
-        <pointsize>14</pointsize>
-       </font>
-      </property>
-      <property name="cursor">
-       <cursorShape>ArrowCursor</cursorShape>
-      </property>
-      <property name="text">
-       <string>Welcome To</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_18">
-      <property name="geometry">
-       <rect>
-        <x>70</x>
-        <y>330</y>
-        <width>141</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Garamond</family>
-       </font>
-      </property>
-      <property name="text">
        <string>Settings</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_19">
-      <property name="geometry">
-       <rect>
-        <x>330</x>
-        <y>330</y>
-        <width>141</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Garamond</family>
-       </font>
-      </property>
-      <property name="text">
-       <string>Tutorial</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_20">
-      <property name="geometry">
-       <rect>
-        <x>580</x>
-        <y>330</y>
-        <width>141</width>
-        <height>51</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <family>Garamond</family>
-       </font>
-      </property>
-      <property name="text">
-       <string>About</string>
       </property>
      </widget>
     </widget>
@@ -2621,15 +2545,186 @@ rgb(0, 0, 0)
      <widget class="QLabel" name="label_21">
       <property name="geometry">
        <rect>
-        <x>320</x>
-        <y>200</y>
-        <width>49</width>
-        <height>16</height>
+        <x>10</x>
+        <y>10</y>
+        <width>191</width>
+        <height>81</height>
        </rect>
       </property>
-      <property name="text">
-       <string>Settings</string>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(17, 255, 0);
+font: 20pt &quot;Sitka&quot;;</string>
       </property>
+      <property name="text">
+       <string>SETTINGS</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_18">
+      <property name="geometry">
+       <rect>
+        <x>690</x>
+        <y>390</y>
+        <width>83</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(26, 255, 0);
+font: 900 12pt &quot;Segoe UI Black&quot;;</string>
+      </property>
+      <property name="text">
+       <string>SAVE</string>
+      </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="geometry">
+       <rect>
+        <x>460</x>
+        <y>90</y>
+        <width>311</width>
+        <height>281</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 0, 0);
+font: 15pt &quot;Snap ITC&quot;;
+</string>
+      </property>
+      <property name="title">
+       <string>Command Buttons</string>
+      </property>
+      <widget class="QRadioButton" name="radioButton_6">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>90</y>
+         <width>301</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 255, 225);
+font: 12pt &quot;Showcard Gothic&quot;;
+</string>
+       </property>
+       <property name="text">
+        <string>Voice Command (Default)</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioButton_5">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>180</y>
+         <width>211</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 255, 225);
+font: 12pt &quot;Showcard Gothic&quot;;
+</string>
+       </property>
+       <property name="text">
+        <string>Touch Command</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>90</y>
+        <width>351</width>
+        <height>331</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 0, 0);
+font: 15pt &quot;Snap ITC&quot;;
+</string>
+      </property>
+      <property name="title">
+       <string>Wizard Game Difficulty</string>
+      </property>
+      <widget class="QRadioButton" name="radioButton">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>40</y>
+         <width>141</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 255, 225);
+font: 12pt &quot;Showcard Gothic&quot;;
+</string>
+       </property>
+       <property name="text">
+        <string>Easy Level</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioButton_2">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>120</y>
+         <width>341</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 255, 225);
+font: 12pt &quot;Showcard Gothic&quot;;
+</string>
+       </property>
+       <property name="text">
+        <string>Intermediate Level (Default)</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioButton_4">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>200</y>
+         <width>151</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 255, 225);
+font: 12pt &quot;Showcard Gothic&quot;;
+</string>
+       </property>
+       <property name="text">
+        <string>Hard Level</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="radioButton_3">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>280</y>
+         <width>311</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 255, 225);
+font: 12pt &quot;Showcard Gothic&quot;;
+</string>
+       </property>
+       <property name="text">
+        <string>&quot;I Was Once A Knight&quot; Level</string>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="About">
