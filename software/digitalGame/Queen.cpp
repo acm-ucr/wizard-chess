@@ -1,64 +1,50 @@
 #include <iostream>
-#include "Queen.hpp"
-using namespace std;
+#include "Queen.h"
 
-int counter = 0;
-int x = 0;
-int y = 0;
+Queen::Queen() : Piece(){}
 
-bool isValid(int xT, int yT);
-void movePiece(int xM, int yM);
+Queen::Queen(int xPos, int yPos, bool color) : Piece(xPos, yPos, color){
 
-/*int getPositionX(){return x;}
-int getPositionY(){return y;}
-void setPositionX(int numX){x = numX;}
-void setPositionY(int numY){y = numY;}
-*/
-
-Queen::Queen(int xPos, int yPos){
-    x = xPos;
-    y = yPos;
-    counter = 0;
 }
 
-Queen q(0,0);
+/*string Queen::getID(){
+    return "queen";
+}
 
-int main(){
-    int num1;
-    int num2;
+bool Queen::isEmpty(){
+    return false;
+}*/
 
-    cin >> num1;
-    cin >> num2;
-
-    cout << q.getPositionX() << " " << q.getPositionY() << endl;
-    movePiece(num1, num2);
-    cout << q.getPositionX() << " " << q.getPositionY() << endl;
-    
+void Queen::movePiece(int xM, int yM){
+    if(this->isValid(xM, yM)){
+                this->setPositionX(this->getPositionX() + xM);
+                this->setPositionY(this->getPositionY() + yM);
+    }    
 }
 
 
-void movePiece(int xM, int yM){
-    if(isValid(xM, yM)){
-        q.setPositionX(q.getPositionX() + xM);
-        q.setPositionY(q.getPositionY() + yM);
-        counter++;
-    }
-}
+bool Queen::isValid(int xT, int yT){
+    if(!(this->getPositionX() + xT < 0) && !(this->getPositionX() + xT > 8)){
+        if(!(this->getPositionY() + yT < 0) && !(this->getPositionY() + yT > 8)){
+            if(xT == 0){
+                if(yT < 8 || yT > -8){
+                    return true;
+                }
+            }
+            else if(yT == 0){
+                if(xT < 8 || xT > -8){
+                    return true;
+                }
+            }
+            else if((xT < 8 || xT > -8) && (yT == xT || yT == -xT)){
+                    return true;
+            }
 
-bool isValid(int xT, int yT){
-    if(xT == 0){
-        if(yT < 8 && yT > -8){
-            return true;
         }
-    }
-    else if(y == 0){
-        if(xT < 8 && xT > -8){
-            return true;
-        }
-    }
-    else if((xT < 8 && xT > -8) && (yT == xT || yT == -xT)){
-            return true;
-    }
+    }        
 
     return false;
 }
+
+//string Queen::getID(){return "queen";}
+//bool Queen::isEmpty() override{return false;}

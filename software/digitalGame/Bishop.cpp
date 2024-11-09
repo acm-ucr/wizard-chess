@@ -1,53 +1,34 @@
 #include <iostream>
-#include "Bishop.hpp"
-using namespace std;
+#include "Bishop.h"
 
-int counter = 0;
-int x = 0;
-int y = 0;
+Bishop::Bishop() : Piece(){}
 
-bool isValid(int xT, int yT);
-void movePiece(int xM, int yM);
-
-/*int getPositionX(){return x;}
-int getPositionY(){return y;}
-void setPositionX(int numX){x = numX;}
-void setPositionY(int numY){y = numY;}
-*/
-
-Bishop::Bishop(int xPos, int yPos){
-    x = xPos;
-    y = yPos;
-    counter = 0;
-}
-
-Bishop b(0,0);
-
-int main(){
-    int num1;
-    int num2;
-
-    cin >> num1;
-    cin >> num2;
-
-    cout << b.getPositionX() << " " << b.getPositionY() << endl;
-    movePiece(num1, num2);
-    cout << b.getPositionX() << " " << b.getPositionY() << endl;
+Bishop::Bishop(int xPos, int yPos, bool color) : Piece(xPos, yPos, color){
     
 }
 
+/*string Bishop::getID(){
+    return "bishop";
+}
 
-void movePiece(int xM, int yM){
-    if(isValid(xM, yM)){
-        b.setPositionX(b.getPositionX() + xM);
-        b.setPositionY(b.getPositionY() + yM);
-        counter++;
+bool Bishop::isEmpty(){
+    return false;
+}*/
+
+void Bishop::movePiece(int xM, int yM){
+    if(this->isValid(xM, yM)){
+        this->setPositionX(this->getPositionX() + xM);
+        this->setPositionY(this->getPositionY() + yM);
     }
 }
 
-bool isValid(int xT, int yT){
-    if((xT < 8 && xT > -8) && (yT == xT || yT == -xT)){
-            return true;
+bool Bishop::isValid(int xT, int yT){
+    if(!(this->getPositionX() + xT < 0) && !(this->getPositionX() + xT > 8)){
+        if(!(this->getPositionY() + yT < 0) && !(this->getPositionY() + yT > 8)){
+            if((xT < 8 && xT > -8) && (yT == xT || yT == -xT)){
+                    return true;
+            }
+        }
     }
 
     return false;

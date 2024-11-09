@@ -1,47 +1,60 @@
 #include <iostream>
-#include "King.h"
+#include "Rook.h"
 
-King::King() : Piece(){}
 
-King::King(int xPos, int yPos, bool color) : Piece(xPos, yPos, color){
+Rook::Rook() : Piece(){}
+
+Rook::Rook(int xPos, int yPos, bool color) : Piece(xPos, yPos, color){
     
 }
 
-/*string King::getID(){
-    return "king";
+/*string Rook::getID(){
+    return "rook";
 }
 
-bool King::isEmpty(){
+bool Rook::isEmpty(){
     return false;
 }*/
 
-void King::movePiece(int xM, int yM){
+void Rook::movePiece(int xM, int yM){
     if(this->isValid(xM, yM)){
         this->setPositionX(this->getPositionX() + xM);
         this->setPositionY(this->getPositionY() + yM);
     }
 }
 
-bool King::isValid(int xT, int yT){
+int rangeMinX(){
+    
+}
+
+int rangeMaxX(){
+
+}
+
+int rangeMinY(){
+
+}
+
+int rangeMaxY(){
+
+}
+
+bool Rook::isValid(int xT, int yT){
 
     if(!(this->getPositionX() + xT < 0) && !(this->getPositionX() + xT > 8)){
         if(!(this->getPositionY() + yT < 0) && !(this->getPositionY() + yT > 8)){
             if(xT == 0){
-                if(yT == 1 || yT == -1){
+                if(yT < 8 && yT > -8){
                     return true;
                 }
             }
             else if(yT == 0){
-                if(xT == 1 || xT == -1){
+                if(xT < 8 && xT > -8){
                     return true;
                 }
-            }
-            else if((xT == 1 || xT  == -1) && (yT == xT || yT == -xT)){
-                    return true;
             }
         }
     }
 
     return false;
 }
-
