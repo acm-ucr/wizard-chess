@@ -24,7 +24,7 @@ using namespace std;
 class Board {
     private:
 
-        vector<vector<Piece>> board;
+        vector<vector<Piece*>> board;
         
         
         // //Pawn white
@@ -115,14 +115,14 @@ class Board {
         //Possibly using XY coordinates to keep track of pieces with index
 
 
-        void updateBoard();
+        //void updateBoard();
         Board getUpdatedBoard();
         void swap(int oldX, int oldY, int newX, int newY);
         bool takePiece(int newX, int newY);
         void printBoard();
         void playGame();
         bool checkmate();
-        void promote(Pawn p, Piece piece);
+        void promote(Pawn *p, Piece *piece);
 
 
 

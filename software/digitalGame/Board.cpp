@@ -26,66 +26,66 @@ Board::Board(){
     //Initialize empty pieces
     for(int i = 0; i < 8; i++){
         for(int j = 2; j < 6; j++){
-            board[i][j] = Empty(i, j);
+            board[i][j] = new Empty(i, j);
         }
     }
    
     //Initialize White Pawns
     for(int i = 0; i < 8; i++){
-        board[1][i] = Pawn(1, i, true);
+        board[1][i] = new Pawn(1, i, true);
     }
 
 
     //Initialize Black Pawns
     for(int i = 0; i < 8; i++){
-        board[6][i] = Pawn(6, i, false);
+        board[6][i] = new Pawn(6, i, false);
     }
 
 
     //Initialize White Rooks
-    board[0][0] = Rook(0, 0, true);
-    board[7][0] = Rook(7, 0, true);
+    board[0][0] = new Rook(0, 0, true);
+    board[7][0] = new Rook(7, 0, true);
 
 
     //Initialize Black Rooks
-    board[0][7] = Rook(0, 7, false);
-    board[7][7] = Rook(7, 7, false);
+    board[0][7] = new Rook(0, 7, false);
+    board[7][7] = new Rook(7, 7, false);
 
 
     //Initialize White Knights
-    board[1][0] = Knight(1, 0, true);
-    board[6][0] = Knight(6, 0, true);
+    board[1][0] = new Knight(1, 0, true);
+    board[6][0] = new Knight(6, 0, true);
 
 
     //Initialize Black Knights
-    board[1][7] = Knight(1, 7, false);
-    board[6][7] = Knight(6, 7, false);
+    board[1][7] = new Knight(1, 7, false);
+    board[6][7] = new Knight(6, 7, false);
 
 
     //Initialize White Bishops
-    board[2][0] = Bishop(2, 0, true);
-    board[5][0] = Bishop(5, 0, true);
+    board[2][0] = new Bishop(2, 0, true);
+    board[5][0] = new Bishop(5, 0, true);
 
 
     //Initialize Black Bishops
-    board[2][7] = Bishop(2, 7, false);
-    board[5][7] = Bishop(5, 7, false);
+    board[2][7] = new Bishop(2, 7, false);
+    board[5][7] = new Bishop(5, 7, false);
 
 
     //Initialize White Queen
-    board[3][0] = Queen(3, 0, true);
+    board[3][0] = new Queen(3, 0, true);
 
 
     //Initialize Black Queen
-    board[3][7] = Queen(3, 7, false);
+    board[3][7] = new Queen(3, 7, false);
 
 
     //Initialize White King
-    board[4][0] = King(4, 0, true);
+    board[4][0] = new King(4, 0, true);
 
 
     //Initialize Black King
-    board[4][7] = King(4, 7, false);
+    board[4][7] = new King(4, 7, false);
 
 }
 
@@ -95,66 +95,66 @@ void Board::resetBoard() {
     //Initialize empty pieces
     for(int i = 0; i < 8; i++){
         for(int j = 2; j < 6; j++){
-            board[i][j] = Empty(i, j);
+            board[i][j] = new Empty(i, j);
         }
     }
    
     //Initialize White Pawns
     for(int i = 0; i < 8; i++){
-        board[1][i] = Pawn(1, i, true);
+        board[1][i] = new Pawn(1, i, true);
     }
 
 
     //Initialize Black Pawns
     for(int i = 0; i < 8; i++){
-        board[6][i] = Pawn(6, i, false);
+        board[6][i] = new Pawn(6, i, false);
     }
 
 
     //Initialize White Rooks
-    board[0][0] = Rook(0, 0, true);
-    board[7][0] = Rook(7, 0, true);
+    board[0][0] = new Rook(0, 0, true);
+    board[7][0] = new Rook(7, 0, true);
 
 
     //Initialize Black Rooks
-    board[0][7] = Rook(0, 7, false);
-    board[7][7] = Rook(7, 7, false);
+    board[0][7] = new Rook(0, 7, false);
+    board[7][7] = new Rook(7, 7, false);
 
 
     //Initialize White Knights
-    board[1][0] = Knight(1, 0, true);
-    board[6][0] = Knight(6, 0, true);
+    board[1][0] = new Knight(1, 0, true);
+    board[6][0] = new Knight(6, 0, true);
 
 
     //Initialize Black Knights
-    board[1][7] = Knight(1, 7, false);
-    board[6][7] = Knight(6, 7, false);
+    board[1][7] = new Knight(1, 7, false);
+    board[6][7] = new Knight(6, 7, false);
 
 
     //Initialize White Bishops
-    board[2][0] = Bishop(2, 0, true);
-    board[5][0] = Bishop(5, 0, true);
+    board[2][0] = new Bishop(2, 0, true);
+    board[5][0] = new Bishop(5, 0, true);
 
 
     //Initialize Black Bishops
-    board[2][7] = Bishop(2, 7, false);
-    board[5][7] = Bishop(5, 7, false);
+    board[2][7] = new Bishop(2, 7, false);
+    board[5][7] = new Bishop(5, 7, false);
 
 
     //Initialize White Queen
-    board[3][0] = Queen(3, 0, true);
+    board[3][0] = new Queen(3, 0, true);
 
 
     //Initialize Black Queen
-    board[3][7] = Queen(3, 7, false);
+    board[3][7] = new Queen(3, 7, false);
 
 
     //Initialize White King
-    board[4][0] = King(4, 0, true);
+    board[4][0] = new King(4, 0, true);
 
 
     //Initialize Black King
-    board[4][7] = King(4, 7, false);
+    board[4][7] = new King(4, 7, false);
 }
 
 
@@ -175,10 +175,10 @@ Board::~Board() {
 
 Piece Board::getPiece(int first, int second) {
     cout << "ENTERING" << endl;
-    cout << (board[first][second]).getID() <<endl;
+    cout << (*board[first][second]).getID() <<endl;
     cout << "EXITING" << endl;
 
-    return board[first][second];
+    return *board[first][second];
 }
 
 void Board::printBoard() {
@@ -186,7 +186,7 @@ void Board::printBoard() {
 }
 
 
-void Board::updateBoard(){
+/*void Board::updateBoard(){
     board[pw0.getPositionX()][pw0.getPositionY()] = pw0;
     board[pw1.getPositionX()][pw1.getPositionY()] = pw1;
     board[pw2.getPositionX()][pw2.getPositionY()] = pw2;
@@ -233,11 +233,11 @@ void Board::updateBoard(){
     //King
     board[kw.getPositionX()][kw.getPositionY()] = kw;
     board[kb.getPositionX()][kb.getPositionY()] = kb;
-}
+}*/
 
 
 bool Board::takePiece(int newX, int newY){
-    if(!(board[newX][newY].isEmpty())){
+    if(!(board[newX][newY]->isEmpty())){
         return true;
     }
     return false;
@@ -246,19 +246,19 @@ bool Board::takePiece(int newX, int newY){
 
 void Board::swap(int oldX, int oldY, int newX, int newY){
     if(!takePiece(newX, newY)){
-        Piece temp = board[oldX][oldY];
+        Piece temp = *board[oldX][oldY];
 
 
-        board[oldX][oldY].setPositionX(newX);
-        board[oldX][oldY].setPositionY(newY);
+        board[oldX][oldY]->setPositionX(newX);
+        board[oldX][oldY]->setPositionY(newY);
 
 
-        board[newX][newY].setPositionX(oldX);
-        board[newX][newY].setPositionY(oldY);
+        board[newX][newY]->setPositionX(oldX);
+        board[newX][newY]->setPositionY(oldY);
 
 
         board[oldX][oldY] = board[newX][newY];
-        board[newX][newY] = temp;
+        *board[newX][newY] = temp;
         //updateBoard();
     }
     else{
@@ -269,12 +269,12 @@ void Board::swap(int oldX, int oldY, int newX, int newY){
         //emptyPieces.push_back(spawnE);
 
 
-        board[oldX][oldY].setPositionX(newX);
-        board[oldX][oldY].setPositionY(newY);
+        board[oldX][oldY]->setPositionX(newX);
+        board[oldX][oldY]->setPositionY(newY);
 
 
         board[newX][newY] = board[oldX][oldY];
-        board[oldX][oldY] = Empty(oldX, oldY);
+        board[oldX][oldY] = new Empty(oldX, oldY);
        // updateBoard();
        // eCounter++;
     }
@@ -283,9 +283,9 @@ void Board::swap(int oldX, int oldY, int newX, int newY){
 }
 
 
-void Board::promote(Pawn p, Piece piece){
-    if(p.getPositionY() == 7 || p.getPositionY() == 0){
-        board[p.getPositionX()][p.getPositionY()] = piece;
+void Board::promote(Pawn *p, Piece *piece){
+    if(p->getPositionY() == 7 || p->getPositionY() == 0){
+        board[p->getPositionX()][p->getPositionY()] = piece;
     }
     /*return false;
 
@@ -297,7 +297,7 @@ void Board::promote(Pawn p, Piece piece){
 
 Board Board::getUpdatedBoard(){
     Piece newBoard[8][8];
-    updateBoard();
+    //updateBoard();
     
 
 
