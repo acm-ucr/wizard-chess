@@ -25,21 +25,21 @@ void Rook::movePiece(int xM, int yM){
     }
 }
 
-int rangeMinX(){
+// int rangeMinX(){
     
-}
+// }
 
-int rangeMaxX(){
+// int rangeMaxX(){
 
-}
+// }
 
-int rangeMinY(){
+// int rangeMinY(){
 
-}
+// }
 
-int rangeMaxY(){
+// int rangeMaxY(){
 
-}
+// }
 
 bool Rook::isValid(int xT, int yT){
 

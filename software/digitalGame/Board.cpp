@@ -234,9 +234,12 @@ Board::~Board() {
 
 
 Piece Board::getPiece(int first, int second) {
+    cout << "ENTERING" << endl;
+    cout << (*board[first][second]).getID() <<endl;
+    cout << "EXITING" << endl;
+
     return *board[first][second];
 }
-
 
 void Board::printBoard() {
     cout << "In print board" <<endl;

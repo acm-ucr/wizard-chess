@@ -3,6 +3,7 @@
 #define PIECE_H
 
 #include <stdexcept>
+#include <string>
 
 using namespace std;
 

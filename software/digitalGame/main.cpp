@@ -11,15 +11,15 @@
 using namespace std;
 
 int main() {
-    //cout << "Hello, World!" << endl;
-
-    // Board b;
-
     Rook rook;
 
     cout << "Entering Main" << endl;
+    cout << rook.getID() << endl; // prints rook
 
-    cout << rook.getID() << endl;
+    Board board;
+
+    cout << "Printing Board" << endl;
+    cout << board.getPiece(0, 0).getID() << endl;
 
     return 0;
 }
