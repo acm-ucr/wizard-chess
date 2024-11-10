@@ -19,9 +19,17 @@ public:
 
 private slots:
 
-    void on_pushButton_clicked();
+    //void on_pushButton_clicked();
 
     void on_pushButton_18_clicked();
+
+    void on_pushButton_start_clicked();
+
+    void on_pushButton_tutorial_clicked();
+
+    void on_pushButton_settings_clicked();
+
+    void on_pushButton_about_clicked();
 
 private:
     Ui::MainWindow *ui;
