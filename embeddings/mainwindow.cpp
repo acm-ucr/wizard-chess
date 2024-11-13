@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->stackedWidget->setCurrentIndex(0);
 }
 
 MainWindow::~MainWindow()
@@ -24,18 +25,27 @@ void MainWindow::on_pushButton_18_clicked()
 }
 
 
+
+void MainWindow::on_pushButton_19_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
 void MainWindow::on_pushButton_start_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
 }
 
-
-
 void MainWindow::on_pushButton_tutorial_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
 }
-
 
 void MainWindow::on_pushButton_settings_clicked()
 {
@@ -46,5 +56,6 @@ void MainWindow::on_pushButton_settings_clicked()
 void MainWindow::on_pushButton_about_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
+
 }
 
