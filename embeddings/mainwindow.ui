@@ -23,13 +23,8 @@
    <widget class="QStackedWidget" name="stackedWidget">
     <property name="geometry">
      <rect>
-<<<<<<< HEAD
-      <x>10</x>
-      <y>20</y>
-=======
       <x>0</x>
       <y>0</y>
->>>>>>> ec80273e3b344ef1a23e998207c077d80fe31758
       <width>800</width>
       <height>480</height>
      </rect>
@@ -73,11 +68,7 @@ rgb(0, 0, 0)
 }</string>
     </property>
     <property name="currentIndex">
-<<<<<<< HEAD
-     <number>5</number>
-=======
-     <number>0</number>
->>>>>>> ec80273e3b344ef1a23e998207c077d80fe31758
+     <number>4</number>
     </property>
     <widget class="QWidget" name="Start">
      <property name="autoFillBackground">

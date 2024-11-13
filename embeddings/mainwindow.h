@@ -23,11 +23,11 @@ private slots:
 
     void on_pushButton_18_clicked();
 
-<<<<<<< HEAD
+// <<<<<<< HEAD
     void on_pushButton_19_clicked();
 
     void on_pushButton_2_clicked();
-=======
+// =======
     void on_pushButton_start_clicked();
 
     void on_pushButton_tutorial_clicked();
@@ -35,7 +35,7 @@ private slots:
     void on_pushButton_settings_clicked();
 
     void on_pushButton_about_clicked();
->>>>>>> ec80273e3b344ef1a23e998207c077d80fe31758
+// >>>>>>> ec80273e3b344ef1a23e998207c077d80fe31758
 
 private:
     Ui::MainWindow *ui;
