@@ -68,7 +68,7 @@ rgb(0, 0, 0)
 }</string>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>6</number>
     </property>
     <widget class="QWidget" name="Start">
      <property name="autoFillBackground">
@@ -213,17 +213,188 @@ rgb(0, 0, 0)
      </widget>
     </widget>
     <widget class="QWidget" name="Tutorial">
-     <widget class="QLabel" name="label_22">
+     <widget class="QLabel" name="label_26">
       <property name="geometry">
        <rect>
-        <x>350</x>
-        <y>220</y>
-        <width>49</width>
-        <height>16</height>
+        <x>10</x>
+        <y>0</y>
+        <width>271</width>
+        <height>81</height>
        </rect>
       </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(17, 255, 0);
+font: 20pt &quot;Sitka&quot;;</string>
+      </property>
       <property name="text">
-       <string>Tutorial</string>
+       <string>TUTORIAL</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_9">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>70</y>
+        <width>751</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 0, 0);
+font: 900 9pt &quot;Segoe UI Black&quot;;</string>
+      </property>
+      <property name="text">
+       <string>Objective: The goal is to checkmate the opponent's king, where the king cannot escape.</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_11">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>110</y>
+        <width>771</width>
+        <height>281</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 0, 0);
+font: 900 15pt &quot;Segoe UI Black&quot;;</string>
+      </property>
+      <property name="text">
+       <string>Piece Movements:
+King: 1 square any direction
+Queen: Any direction, any distance
+Rook: Vertically/horizontally, any distance
+Bishop: Diagonally, any distance
+Knight: &quot;L&quot; shape, can jump over pieces
+Pawn: Forward 1 square (2 on first move), captures diagonally</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_continue_tutorial">
+      <property name="geometry">
+       <rect>
+        <x>650</x>
+        <y>400</y>
+        <width>131</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(34, 255, 0);
+font: 900 12pt &quot;Segoe UI Black&quot;;</string>
+      </property>
+      <property name="text">
+       <string>CONTINUE</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_home_tutorial">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>400</y>
+        <width>131</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(34, 255, 0);
+font: 900 12pt &quot;Segoe UI Black&quot;;</string>
+      </property>
+      <property name="text">
+       <string>HOME</string>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tutorial_continued">
+     <widget class="QLabel" name="label_10">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>40</y>
+        <width>781</width>
+        <height>181</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 0, 0);
+font: 900 12pt &quot;Segoe UI Black&quot;;</string>
+      </property>
+      <property name="text">
+       <string>Special Moves:
+Castling: King and rook move simultaneously for safety.
+En Passant: Special pawn capture.
+Promotion: Pawn reaching the opposite side can become a queen, rook,
+bishop, or knight.</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_27">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>0</y>
+        <width>381</width>
+        <height>81</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(17, 255, 0);
+font: 20pt &quot;Sitka&quot;;</string>
+      </property>
+      <property name="text">
+       <string>TUTORIAL (Continued)</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_home_tutorial_end">
+      <property name="geometry">
+       <rect>
+        <x>640</x>
+        <y>400</y>
+        <width>141</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(34, 255, 0);
+font: 900 12pt &quot;Segoe UI Black&quot;;</string>
+      </property>
+      <property name="text">
+       <string>HOME</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_12">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>210</y>
+        <width>781</width>
+        <height>151</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 0, 0);
+font: 900 12pt &quot;Segoe UI Black&quot;;</string>
+      </property>
+      <property name="text">
+       <string>Check: King is threatened.
+Checkmate: King is in check with no escape.
+Stalemate: No legal moves; results in a draw.</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_previous_tutorial">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>400</y>
+        <width>131</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(34, 255, 0);
+font: 900 12pt &quot;Segoe UI Black&quot;;</string>
+      </property>
+      <property name="text">
+       <string>PREVIOUS</string>
       </property>
      </widget>
     </widget>
@@ -2361,7 +2532,7 @@ font: 20pt &quot;Sitka&quot;;</string>
        <string>SETTINGS</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_18">
+     <widget class="QPushButton" name="pushButton_home_settings">
       <property name="geometry">
        <rect>
         <x>690</x>
@@ -2628,7 +2799,7 @@ color: rgb(255, 255, 255);</string>
        <string>the ability to move the pieces with voice/touch command.</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="pushButton_home_about">
       <property name="geometry">
        <rect>
         <x>330</x>
@@ -2664,7 +2835,7 @@ font: 20pt &quot;Sitka&quot;;</string>
        <string>END OF GAME</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="pushButton_19">
+     <widget class="QPushButton" name="pushButton_home_end">
       <property name="geometry">
        <rect>
         <x>260</x>
