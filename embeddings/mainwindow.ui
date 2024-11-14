@@ -68,7 +68,7 @@ rgb(0, 0, 0)
 }</string>
     </property>
     <property name="currentIndex">
-     <number>6</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="Start">
      <property name="autoFillBackground">
@@ -201,15 +201,71 @@ rgb(0, 0, 0)
      <widget class="QLabel" name="label_20">
       <property name="geometry">
        <rect>
-        <x>370</x>
-        <y>210</y>
-        <width>49</width>
-        <height>16</height>
+        <x>260</x>
+        <y>30</y>
+        <width>231</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 22pt &quot;Segoe UI&quot;;</string>
+      </property>
+      <property name="text">
+       <string>CHOOSE YOUR HOUSE!</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>710</x>
+        <y>430</y>
+        <width>80</width>
+        <height>18</height>
        </rect>
       </property>
       <property name="text">
-       <string>House</string>
+       <string>Next</string>
       </property>
+     </widget>
+     <widget class="QWidget" name="">
+      <property name="geometry">
+       <rect>
+        <x>100</x>
+        <y>110</y>
+        <width>551</width>
+        <height>251</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_3">
+       <item row="0" column="1">
+        <widget class="QPushButton" name="pushButton_Slytherin">
+         <property name="text">
+          <string>Slytherin</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="pushButton_Ravenclaw">
+         <property name="text">
+          <string>Ravenclaw</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="pushButton_Hufflepuff">
+         <property name="text">
+          <string>Hufflepuff</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="pushButton_Gryffindor">
+         <property name="text">
+          <string>Gryffindor</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
     </widget>
     <widget class="QWidget" name="Tutorial">
