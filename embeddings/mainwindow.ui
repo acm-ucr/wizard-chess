@@ -201,9 +201,9 @@ rgb(0, 0, 0)
      <widget class="QLabel" name="label_20">
       <property name="geometry">
        <rect>
-        <x>260</x>
+        <x>240</x>
         <y>30</y>
-        <width>231</width>
+        <width>261</width>
         <height>51</height>
        </rect>
       </property>
@@ -227,18 +227,27 @@ rgb(0, 0, 0)
        <string>Next</string>
       </property>
      </widget>
-     <widget class="QWidget" name="">
+     <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>100</x>
-        <y>110</y>
+        <x>70</x>
+        <y>80</y>
         <width>551</width>
-        <height>251</height>
+        <height>328</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="1">
         <widget class="QPushButton" name="pushButton_Slytherin">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(0, 85, 0);</string>
+         </property>
          <property name="text">
           <string>Slytherin</string>
          </property>
@@ -246,6 +255,21 @@ rgb(0, 0, 0)
        </item>
        <item row="1" column="1">
         <widget class="QPushButton" name="pushButton_Ravenclaw">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(0, 0, 127);</string>
+         </property>
          <property name="text">
           <string>Ravenclaw</string>
          </property>
@@ -253,6 +277,21 @@ rgb(0, 0, 0)
        </item>
        <item row="1" column="0">
         <widget class="QPushButton" name="pushButton_Hufflepuff">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 0);</string>
+         </property>
          <property name="text">
           <string>Hufflepuff</string>
          </property>
@@ -260,6 +299,21 @@ rgb(0, 0, 0)
        </item>
        <item row="0" column="0">
         <widget class="QPushButton" name="pushButton_Gryffindor">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 0, 0);</string>
+         </property>
          <property name="text">
           <string>Gryffindor</string>
          </property>
