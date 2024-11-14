@@ -82,3 +82,9 @@ void MainWindow::on_pushButton_previous_tutorial_clicked()
     ui->stackedWidget->setCurrentIndex(2);
 }
 
+
+void MainWindow::on_pushButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(4);
+}
+
