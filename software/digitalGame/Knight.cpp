@@ -17,10 +17,10 @@ bool Knight::isEmpty(){
 
 void Knight::movePiece(int xM, int yM){
 
-    if(this->isValid(xM, yM)){
+    //if(this->isValid(xM, yM)){
         this->setPositionX(this->getPositionX() + xM);
         this->setPositionY(this->getPositionY() + yM);
-    }
+    //}
 }
 
 bool Knight::isValid(int xT, int yT){

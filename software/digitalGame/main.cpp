@@ -11,15 +11,34 @@
 using namespace std;
 
 int main() {
-    Rook rook;
 
-    cout << "Entering Main" << endl;
-    cout << rook.getID() << endl; // prints rook
-
-    Board board;
+    Board b;
 
     cout << "Printing Board" << endl;
-    cout << board.getPiece(0, 0).getID() << endl;
+
+    b.printBoard();
+
+    cout << b.board[4][0]->getID() << endl;
+
+    cout << b.board[4][1]->getID() << ", " << b.board[4][3]->getID() << endl;
+
+    cout << b.rangeUp(b.board[4][1]) << endl;
+
+    b.swap(4, 1, 4, 3);
+
+    cout << b.board[4][1]->getID() << ", " << b.board[4][3]->getID() << ", " << b.board[5][0]->getID() << endl;
+
+    b.printBoard();
+
+
+    cout << b.rangeMinXDiag315(b.board[5][0]) << endl;
+
+    // if(b.isCheck(b.kw)){
+    //     cout << "check" << endl;
+    // }
+    // else{
+    //     cout << "not check" << endl;
+    // }
 
     return 0;
 }

@@ -11,7 +11,7 @@ class Rook : public Piece {
             int rangeMinY();
             int rangeMaxY();
 
-            void movePiece(int x, int y) override;
+            void movePiece(int xM, int yM) override;
 
 
             string getID() const  override{

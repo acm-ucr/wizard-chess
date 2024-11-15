@@ -27,6 +27,10 @@ class Piece {
             setPositionX(x);
             setPositionY(y);
         }
+        bool white(){
+            return isWhite;
+        }
+        int pawnCounter = 0;
     
     private:
         int x;
