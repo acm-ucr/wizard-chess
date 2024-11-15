@@ -14,29 +14,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-// void MainWindow::on_pushButton_clicked()
-// {
-//     ui->stackedWidget->setCurrentIndex(4);
-// }
-
-void MainWindow::on_pushButton_home_settings_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-}
-
-
-
+// About Page
 void MainWindow::on_pushButton_home_about_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
 }
 
-
-void MainWindow::on_pushButton_home_end_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-}
-
+// Start Page
 void MainWindow::on_pushButton_start_clicked()
 {
     ui->stackedWidget->setCurrentIndex(1);
@@ -52,51 +36,59 @@ void MainWindow::on_pushButton_settings_clicked()
     ui->stackedWidget->setCurrentIndex(6);
 }
 
-
 void MainWindow::on_pushButton_about_clicked()
 {
     ui->stackedWidget->setCurrentIndex(7);
 
 }
 
+// Settings
+void MainWindow::on_pushButton_home_settings_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
+// Game
+void MainWindow::on_pushButton_EndGame_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(8);
+}
+
+// End
+void MainWindow::on_pushButton_home_end_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
+// Tutorial
 void MainWindow::on_pushButton_continue_tutorial_clicked()
 {
     ui->stackedWidget->setCurrentIndex(4);
 }
-
 
 void MainWindow::on_pushButton_home_tutorial_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
 }
 
-
 void MainWindow::on_pushButton_home_tutorial_end_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
 }
-
 
 void MainWindow::on_pushButton_previous_tutorial_clicked()
 {
     ui->stackedWidget->setCurrentIndex(3);
 }
 
-
+// White House Selection
 void MainWindow::on_pushButton_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
 }
 
-
+// Black House Selection
 void MainWindow::on_pushButton_2_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
 }
-
-
-void MainWindow::on_pushButton_EndGame_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(8);
-}
-
