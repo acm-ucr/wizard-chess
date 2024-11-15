@@ -68,7 +68,7 @@ rgb(0, 0, 0)
 }</string>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>8</number>
     </property>
     <widget class="QWidget" name="Start">
      <property name="autoFillBackground">
@@ -197,13 +197,13 @@ rgb(0, 0, 0)
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="House">
+    <widget class="QWidget" name="WhiteHouseSelection">
      <widget class="QLabel" name="label_20">
       <property name="geometry">
        <rect>
-        <x>240</x>
+        <x>160</x>
         <y>30</y>
-        <width>261</width>
+        <width>391</width>
         <height>51</height>
        </rect>
       </property>
@@ -211,7 +211,7 @@ rgb(0, 0, 0)
        <string notr="true">font: 22pt &quot;Segoe UI&quot;;</string>
       </property>
       <property name="text">
-       <string>CHOOSE YOUR HOUSE!</string>
+       <string>WHITE: CHOOSE YOUR HOUSE!</string>
       </property>
      </widget>
      <widget class="QPushButton" name="pushButton">
@@ -320,6 +320,131 @@ rgb(0, 0, 0)
         </widget>
        </item>
       </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="BlackHouseSelection">
+     <widget class="QLabel" name="label_22">
+      <property name="geometry">
+       <rect>
+        <x>150</x>
+        <y>40</y>
+        <width>391</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 22pt &quot;Segoe UI&quot;;</string>
+      </property>
+      <property name="text">
+       <string>BLACK: CHOOSE YOUR HOUSE!</string>
+      </property>
+     </widget>
+     <widget class="QWidget" name="layoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>30</x>
+        <y>100</y>
+        <width>551</width>
+        <height>328</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_4">
+       <item row="0" column="1">
+        <widget class="QPushButton" name="pushButton_Slytherin_2">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(0, 85, 0);</string>
+         </property>
+         <property name="text">
+          <string>Slytherin</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="pushButton_Ravenclaw_2">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(0, 0, 127);</string>
+         </property>
+         <property name="text">
+          <string>Ravenclaw</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QPushButton" name="pushButton_Hufflepuff_2">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 0);</string>
+         </property>
+         <property name="text">
+          <string>Hufflepuff</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QPushButton" name="pushButton_Gryffindor_2">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 0, 0);</string>
+         </property>
+         <property name="text">
+          <string>Gryffindor</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QPushButton" name="pushButton_2">
+      <property name="geometry">
+       <rect>
+        <x>700</x>
+        <y>420</y>
+        <width>80</width>
+        <height>18</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Next</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="Tutorial">
@@ -2619,6 +2744,19 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
            <string>P2</string>
           </property>
          </column>
+        </widget>
+        <widget class="QPushButton" name="pushButton_EndGame">
+         <property name="geometry">
+          <rect>
+           <x>670</x>
+           <y>410</y>
+           <width>80</width>
+           <height>21</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>End Game</string>
+         </property>
         </widget>
        </widget>
       </item>

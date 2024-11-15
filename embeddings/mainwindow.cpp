@@ -44,24 +44,24 @@ void MainWindow::on_pushButton_start_clicked()
 
 void MainWindow::on_pushButton_tutorial_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(2);
+    ui->stackedWidget->setCurrentIndex(3);
 }
 
 void MainWindow::on_pushButton_settings_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(5);
+    ui->stackedWidget->setCurrentIndex(6);
 }
 
 
 void MainWindow::on_pushButton_about_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(6);
+    ui->stackedWidget->setCurrentIndex(7);
 
 }
 
 void MainWindow::on_pushButton_continue_tutorial_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(3);
+    ui->stackedWidget->setCurrentIndex(4);
 }
 
 
@@ -79,12 +79,24 @@ void MainWindow::on_pushButton_home_tutorial_end_clicked()
 
 void MainWindow::on_pushButton_previous_tutorial_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(2);
+    ui->stackedWidget->setCurrentIndex(3);
 }
 
 
 void MainWindow::on_pushButton_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(4);
+    ui->stackedWidget->setCurrentIndex(2);
+}
+
+
+void MainWindow::on_pushButton_2_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(5);
+}
+
+
+void MainWindow::on_pushButton_EndGame_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(8);
 }
 
