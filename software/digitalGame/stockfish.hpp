@@ -1,15 +1,3 @@
-// #include <string>
-// #include <iostream>
-
-// class Stockfish {
-//     const char* PATH = "C:\\Users\\leaus\\OneDrive\\Important DOcs\\stockfish\\stockfish-windows-x86-64-avx2.exe";
-
-//     public:
-//         Stockfish(); // need to start the engine
-//         std::string exec(const char* cmd);
-// };
-
-
 #include <iostream>
 #include <string>
 #include <array>
@@ -19,25 +7,36 @@
 using namespace std;
 
 class Stockfish {
+    
 public:
     Stockfish();
 
     Stockfish(const char* path) {
-        // Start the Stockfish engine
-        stockfish = _popen(path, "w");
+        cout << "STARTING STOCKFISH" << endl;
+        stockfish = _popen(path, "r+"); //or w+ 
         if (!stockfish) {
             throw std::runtime_error("Failed to start Stockfish!");
         }
+        // // Disable buffering
+        //setbuf(stockfish, nullptr);
+
+        // Initialize Stockfish in UCI mode
+        //Note:before every run of stockfish, make sure to run a isready command
+        fprintf(stockfish, "uci\n");
+        fflush(stockfish);
     }
 
     ~Stockfish() {
-        if (stockfish) {
+        // if (stockfish) {
             _pclose(stockfish);
-        }
+        //}
     }
 
-    string sendCommand(const std::string& command);
+    void sendCommand(const std::string& command);
+    string getBestMove();
     void intialize();
+    void sendIsReady();
+    void sendUciOk();
 
     private:
         FILE* stockfish;
