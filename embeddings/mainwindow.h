@@ -64,6 +64,8 @@ private slots:
 
     void on_touchCommand_clicked();
 
+    void on_pushButton_back_settings_clicked();
+
 private:
     Ui::MainWindow *ui;
     Settings *mwSettings;

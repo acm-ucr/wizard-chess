@@ -2947,6 +2947,23 @@ font: 12pt &quot;Showcard Gothic&quot;;
        </property>
       </widget>
      </widget>
+     <widget class="QPushButton" name="pushButton_back_settings">
+      <property name="geometry">
+       <rect>
+        <x>460</x>
+        <y>390</y>
+        <width>83</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(26, 255, 0);
+font: 900 12pt &quot;Segoe UI Black&quot;;</string>
+      </property>
+      <property name="text">
+       <string>BACK</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="About">
      <widget class="QLabel" name="label_25">

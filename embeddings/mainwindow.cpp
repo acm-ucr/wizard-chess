@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 #include "settings.h"
 
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -129,5 +130,11 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_pushButton_2_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
+}
+
+
+void MainWindow::on_pushButton_back_settings_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
 }
 
