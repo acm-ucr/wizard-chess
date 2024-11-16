@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "settings.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -51,7 +52,21 @@ private slots:
 
     void on_pushButton_EndGame_clicked();
 
+    void on_easyLevel_clicked();
+
+    void on_intermediateLevel_clicked();
+
+    void on_hardLevel_clicked();
+
+    void on_expertLevel_clicked();
+
+    void on_voiceCommand_clicked();
+
+    void on_touchCommand_clicked();
+
 private:
     Ui::MainWindow *ui;
+    Settings *mwSettings;
+
 };
 #endif // MAINWINDOW_H

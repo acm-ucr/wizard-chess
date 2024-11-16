@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "settings.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -7,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
+    mwSettings = new Settings();
 }
 
 MainWindow::~MainWindow()
@@ -46,6 +48,42 @@ void MainWindow::on_pushButton_about_clicked()
 void MainWindow::on_pushButton_home_settings_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
+}
+
+// {1000 = 8 in bits}
+void MainWindow::on_easyLevel_clicked()
+{
+    mwSettings->diffLevel = 8;
+}
+
+// {0100 = 4 in bits}
+void MainWindow::on_intermediateLevel_clicked()
+{
+    mwSettings->diffLevel = 4;
+}
+
+// {0010 = 2 in bits}
+void MainWindow::on_hardLevel_clicked()
+{
+    mwSettings->diffLevel = 2;
+}
+
+// {0001 = 1 in bits}
+void MainWindow::on_expertLevel_clicked()
+{
+    mwSettings->diffLevel = 1;
+}
+
+// {true = voice}
+void MainWindow::on_voiceCommand_clicked()
+{
+    mwSettings->commandType = true;
+}
+
+// {false = touch}
+void MainWindow::on_touchCommand_clicked()
+{
+    mwSettings->commandType = false;
 }
 
 // Game
@@ -92,3 +130,4 @@ void MainWindow::on_pushButton_2_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
 }
+
