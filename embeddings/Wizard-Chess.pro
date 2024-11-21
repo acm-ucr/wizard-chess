@@ -14,6 +14,7 @@ SOURCES += \
     settings.cpp
 
 HEADERS += \
+    inputs.h \
     mainwindow.h \
     settings.h
 
