@@ -38,8 +38,8 @@ class Board {
 
         vector<vector<Piece*>> board;
 
-        King *kw = new King(4, 0, true);
-        King *kb = new King(4, 7, false);
+        King *kw = new King(4, 7, true);
+        King *kb = new King(4, 0, false);
 
         //2D array to keep track of pieces and first index is for Letters and seoncd is for numbers
         //Possibly using XY coordinates to keep track of pieces with index
@@ -58,6 +58,9 @@ class Board {
         void updateBoard();
 
         bool isOppositeColor(Piece *p1, Piece *p2);
+
+
+        void undoMove(Piece *p, int x, int y);
 
 
         int simulateUp(Piece *p);

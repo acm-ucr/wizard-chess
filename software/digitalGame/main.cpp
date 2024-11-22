@@ -14,31 +14,39 @@ int main() {
 
     Board b;
 
-    cout << "Printing Board" << endl;
+    // cout << "Printing Board" << endl;
 
-    b.printBoard();
+    // b.printBoard();
 
-    cout << b.board[4][0]->getID() << endl;
+    // cout << b.board[0][4]->getID() << endl;
 
-    cout << b.board[4][1]->getID() << ", " << b.board[4][3]->getID() << endl;
+    // cout << b.board[1][4]->getID() << ", " << b.board[3][4]->getID() << endl;
 
-    cout << b.rangeUp(b.board[4][1]) << endl;
+    // cout << b.rangeUp(b.board[1][4]) << endl;
 
-    b.swap(4, 1, 4, 3);
+     b.swap(0,0,0,0);
 
-    cout << b.board[4][1]->getID() << ", " << b.board[4][3]->getID() << ", " << b.board[5][0]->getID() << endl;
+     b.swap(0,0,0,0);
 
-    b.printBoard();
+    // cout << b.board[6][4]->getID() << ", " << b.board[4][4]->getID() << ", " << b.board[0][5]->getID() << endl;
+
+     b.printBoard();
 
 
-    cout << b.rangeMinXDiag315(b.board[5][0]) << endl;
+    // cout << b.board[0][5]->getID() << ", " << b.simulate225Y(b.board[0][5]) << endl;
 
-    // if(b.isCheck(b.kw)){
-    //     cout << "check" << endl;
-    // }
-    // else{
-    //     cout << "not check" << endl;
-    // }
+    // cout << b.board[1][7]->getID() << ", " << b.board[1][7]->getPositionX() << ", " << b.board[1][7]->getPositionY() << ", " << b.simulateUp(b.board[1][7]) << endl;
+
+    //cout << "hello world" << endl;
+
+    if(b.isCheck(b.kw)){ 
+        cout << "check" << endl;
+    }
+    else{
+        cout << "not check" << endl;
+    }
+
+    cout << b.board[4][4]->getPosition() << endl;
 
     return 0;
 }

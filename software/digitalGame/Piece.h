@@ -12,10 +12,15 @@ class Piece {
         Piece();
         Piece(int xPos, int yPos);
         Piece(int xPos, int yPos, bool color);
+        string getCharPositionX();
         int getPositionX(){return x;}
         int getPositionY(){return y;}
         void setPositionX(int numX){x = numX;}
         void setPositionY(int numY){y = numY;}   
+
+        
+
+        string getPosition();
         
         virtual bool isEmpty() const {
             return true;

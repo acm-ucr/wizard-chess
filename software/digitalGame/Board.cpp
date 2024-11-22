@@ -11,8 +11,18 @@
 
 using namespace std;
 
+/*
+ - Make the x-values chars, so that instead of x,y being
+   1,2 (for example), i make it b,2 
+
+ - make a string function that returns getPosition, so that
+   it returns a string with both x and y position.
+
+ - 
+*/
+
+
 Board::Board(){
-    //cout << "constructor called" << endl;
     board.resize(8);
     for(int i = 0; i < 8; i++){
         board[i].resize(8);
@@ -25,64 +35,64 @@ Board::Board(){
         }
     }
    
-    //Initialize White Pawns
-    for(int i = 0; i < 8; i++){
-        board[1][i] = new Pawn(i, 1, true);
-    }
-
-
     //Initialize Black Pawns
     for(int i = 0; i < 8; i++){
-        board[6][i] = new Pawn(i, 6, false);
+        board[1][i] = new Pawn(i, 1, false);
     }
 
 
-    //Initialize White Rooks
-    board[0][0] = new Rook(0, 0, true);
-    board[0][7] = new Rook(7, 0, true);
+    //Initialize White Pawns
+    for(int i = 0; i < 8; i++){
+        board[6][i] = new Pawn(i, 6, true);
+    }
 
 
     //Initialize Black Rooks
-    board[7][0] = new Rook(0, 7, false);
-    board[7][7] = new Rook(7, 7, false);
+    board[0][0] = new Rook(0, 0, false);
+    board[0][7] = new Rook(7, 0, false);
 
 
-    //Initialize White Knights
-    board[0][1] = new Knight(1, 0, true);
-    board[0][6] = new Knight(6, 0, true);
+    //Initialize White Rooks
+    board[7][0] = new Rook(0, 7, true);
+    board[7][7] = new Rook(7, 7, true);
 
 
     //Initialize Black Knights
-    board[7][1] = new Knight(1, 7, false);
-    board[7][6] = new Knight(6, 7, false);
+    board[0][1] = new Knight(1, 0, false);
+    board[0][6] = new Knight(6, 0, false);
 
 
-    //Initialize White Bishops
-    board[0][2] = new Bishop(2, 0, true);
-    board[0][5] = new Bishop(5, 0, true);
+    //Initialize White Knights
+    board[7][1] = new Knight(1, 7, true);
+    board[7][6] = new Knight(6, 7, true);
 
 
     //Initialize Black Bishops
-    board[7][2] = new Bishop(2, 7, false);
-    board[7][5] = new Bishop(5, 7, false);
+    board[0][2] = new Bishop(2, 0, false);
+    board[0][5] = new Bishop(5, 0, false);
 
 
-    //Initialize White Queen
-    board[0][3] = new Queen(3, 0, true);
+    //Initialize White Bishops
+    board[7][2] = new Bishop(2, 7, true);
+    board[7][5] = new Bishop(5, 7, true);
 
 
     //Initialize Black Queen
-    board[7][3] = new Queen(3, 7, false);
+    board[0][3] = new Queen(3, 0, false);
+
+
+    //Initialize White Queen
+    board[7][3] = new Queen(3, 7, true);
+
+
+    //Initialize black King
+    //King *kw = new King(4, 0, true);
+    board[0][4] = kb;
 
 
     //Initialize White King
-    //King *kw = new King(4, 0, true);
-    board[0][4] = kw;
-
-
-    //Initialize Black King
     //King *kb = new King(4, 7, false);
-    board[7][4] = kb;
+    board[7][4] = kw;
 
 }
 
@@ -159,20 +169,17 @@ Board::~Board() {
             delete board[i][j]; // Delete the individual piece
         }  
     }
-    cout << "Destructor Called" << endl;   
 }
 
 void Board::printBoard() {
     for(int i = 0; i < 8; i++){
         cout << endl;
         for(int j = 0; j < 8; j++){
-            cout << board[i][j]->getID() << ", ";
+            cout << board[i][j]->getID() << '(' << board[i][j]->white() << ')' <<", ";
         }
     }
 
     cout << endl;
-
-    //cout << board[4][1]->getID() << ", " << board[4][3]->getID() << endl;
 }
 
 bool Board::takePiece(int oldX, int oldY, int newX, int newY){
@@ -199,7 +206,7 @@ void Board::swap(int oldX, int oldY, int newX, int newY){
         board[oldY][oldX]->setPositionX(newX);
         board[oldY][oldX]->setPositionY(newY);
 
-        board[newY][newX] = board[oldX][oldY];
+        board[newY][newX] = board[oldY][oldX];
         board[oldY][oldX] = new Empty(oldX, oldY);
     }
 
@@ -213,118 +220,68 @@ void Board::promote(Pawn *p, Piece *piece){
 }
 
 bool Board::isOppositeColor(Piece *p1, Piece *p2){
-    if((p1->white() && !p2->white()) || (!p1->white() && p2->white())){
+    if((p1->white() != p2->white())){
         return true;
     }
     return false;
 }
 
-int Board::simulateUp(Piece *p){
+int Board::simulateDown(Piece *p){
     int counterY = 0;
     
-    int currXPos = p->getPositionX();
-    int currYPos = p->getPositionY();
+    int currXPos = 9;
+    int currYPos = 9;
 
-    p->movePiece(0, 1);
-    while((board[p->getPositionY()][p->getPositionX()]->getID() == "empty") && 
-          (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
-        {
-            currXPos = p->getPositionX();
-            currYPos = p->getPositionY();
+    if(p->getPositionY() < 7){
+        while((board[p->getPositionY() + 1][p->getPositionX()]->getID() == "empty") && 
+              (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
+            {
 
-            p->movePiece(0, 1);
+                currXPos = p->getPositionX();
+                currYPos = p->getPositionY();
+
+                p->movePiece(0, 1);
+                counterY++;
+                if(p->getPositionY() == 7){
+                    break;
+                }
+            }
+    }
+
+    if(p->getPositionY() < 7){
+        if(isOppositeColor(board[p->getPositionY() + 1][p->getPositionX()], p)){
             counterY++;
         }
-    if(isOppositeColor(board[p->getPositionY()][p->getPositionX()], p)){
-        counterY++;
     }
+    
     return counterY;
-}
-
-int Board::simulate45X(Piece *p){
-    int counterX = 0;
-
-    int currXPos = p->getPositionX();
-    int currYPos = p->getPositionY();
-
-    p->movePiece(1, 1);
-    while((board[p->getPositionY()][p->getPositionX()]->getID() == "empty") && 
-          (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
-        {
-            currXPos = p->getPositionX();
-            currYPos = p->getPositionY();
-
-            p->movePiece(1, 1);
-            counterX++;
-        }
-    if(isOppositeColor(board[p->getPositionY()][p->getPositionX()], p)){
-        counterX++;
-    }
-    return counterX;
-}
-
-int Board::simulate45Y(Piece *p){
-    int counterY = 0;
-
-    int currXPos = p->getPositionX();
-    int currYPos = p->getPositionY();
-
-    p->movePiece(1, 1);
-     while((board[p->getPositionY()][p->getPositionX()]->getID() == "empty") && 
-          (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
-        {
-            currXPos = p->getPositionX();
-            currYPos = p->getPositionY();
-
-            p->movePiece(1, 1);
-            counterY++;
-        }
-    if(isOppositeColor(board[p->getPositionY()][p->getPositionX()], p)){
-        counterY++;
-    }
-    return counterY;
-}
-
-int Board::simulateRight(Piece *p){
-    int counterX = 0;
-
-    int currXPos = p->getPositionX();
-    int currYPos = p->getPositionY();
-
-    p->movePiece(1, 0);
-    while((board[p->getPositionY()][p->getPositionX()]->getID() == "empty") && 
-          (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
-        {
-            currXPos = p->getPositionX();
-            currYPos = p->getPositionY();
-
-            p->movePiece(1, 0);
-            counterX++;
-        }
-    if(isOppositeColor(board[p->getPositionY()][p->getPositionX()], p)){
-        counterX++;
-    }
-    return counterX;
 }
 
 int Board::simulate135X(Piece *p){
     int counterX = 0;
 
-    int currXPos = p->getPositionX();
-    int currYPos = p->getPositionY();
+    int currXPos = 9;
+    int currYPos = 9;
 
-    p->movePiece(1, -1);
-    while((board[p->getPositionY()][p->getPositionX()]->getID() == "empty") && 
-          (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
-        {
-            currXPos = p->getPositionX();
-            currYPos = p->getPositionY();
+    if(p->getPositionY() < 7 && p->getPositionX() < 7){
+        while((board[p->getPositionY() + 1][p->getPositionX() + 1]->getID() == "empty") && 
+              (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
+            {
+                currXPos = p->getPositionX();
+                currYPos = p->getPositionY();
 
-            p->movePiece(1, -1);
+                p->movePiece(1, 1);
+                counterX++;
+
+                if(p->getPositionY() == 7 || p->getPositionX() == 7){
+                    break;
+                }
+            }
+    }
+    if(p->getPositionY() < 7 && p->getPositionX() < 7){
+        if(isOppositeColor(board[p->getPositionY() + 1][p->getPositionX() + 1], p)){
             counterX++;
         }
-    if(isOppositeColor(board[p->getPositionY()][p->getPositionX()], p)){
-        counterX++;
     }
     return counterX;
 }
@@ -332,126 +289,171 @@ int Board::simulate135X(Piece *p){
 int Board::simulate135Y(Piece *p){
     int counterY = 0;
 
-    int currXPos = p->getPositionX();
-    int currYPos = p->getPositionY();
+    int currXPos = 9;
+    int currYPos = 9;
 
-    p->movePiece(1, -1);
-    while((board[p->getPositionY()][p->getPositionX()]->getID() == "empty") && 
-          (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
-        {
-            currXPos = p->getPositionX();
-            currYPos = p->getPositionY();
+    if(p->getPositionY() < 7 && p->getPositionX() < 7){
+        while((board[p->getPositionY() + 1][p->getPositionX() + 1]->getID() == "empty") && 
+              (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
+            {
+                currXPos = p->getPositionX();
+                currYPos = p->getPositionY();
 
-            p->movePiece(1, -1);
-            counterY--;
+                p->movePiece(1, 1);
+                counterY++;
+
+                if(p->getPositionY() == 7 || p->getPositionX() == 7){
+                    break;
+                }
+            }
+    }
+    if(p->getPositionY() < 7 && p->getPositionX() < 7){
+        if(isOppositeColor(board[p->getPositionY() + 1][p->getPositionX() + 1], p)){
+            counterY++;
         }
-    if(isOppositeColor(board[p->getPositionY()][p->getPositionX()], p)){
-        counterY--;
     }
     return counterY;
 }
 
-int Board::simulateDown(Piece *p){
-    int counterY;
-
-    int currXPos = p->getPositionX();
-    int currYPos = p->getPositionY();
-
-    p->movePiece(0, -1);
-    while((board[p->getPositionY()][p->getPositionX()]->getID() == "empty") && 
-          (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
-        {
-            currXPos = p->getPositionX();
-            currYPos = p->getPositionY();
-            p->movePiece(0, -1);
-            counterY--;
-        }
-    if(isOppositeColor(board[p->getPositionY()][p->getPositionX()], p)){
-        counterY--;
-    }
-    return counterY;
-}
-
-int Board::simulate225X(Piece *p){
+int Board::simulateRight(Piece *p){
     int counterX = 0;
 
-    int currXPos = p->getPositionX();
-    int currYPos = p->getPositionY();
+    int currXPos = 9;
+    int currYPos = 9;
 
-    p->movePiece(-1, -1);
-    while((board[p->getPositionY()][p->getPositionX()]->getID() == "empty") && 
-          (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
-        {
-            currXPos = p->getPositionX();
-            currYPos = p->getPositionY();
-            p->movePiece(-1, -1);
-            counterX--;
+    if(p->getPositionX() < 7){
+        while((board[p->getPositionY()][p->getPositionX() + 1]->getID() == "empty") && 
+              (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
+            {
+                currXPos = p->getPositionX();
+                currYPos = p->getPositionY();
+
+                p->movePiece(1, 0);
+                counterX++;
+
+                if(p->getPositionX() == 7){
+                    break;
+                }
+            }
+    }
+    if(p->getPositionX() < 7){
+        if(isOppositeColor(board[p->getPositionY()][p->getPositionX() + 1], p)){
+            counterX++;
         }
-    if(isOppositeColor(board[p->getPositionY()][p->getPositionX()], p)){
-        counterX--;
     }
     return counterX;
 }
 
-int Board::simulate225Y(Piece *p){
+int Board::simulate45X(Piece *p){
+    int counterX = 0;
+
+    int currXPos = 9;
+    int currYPos = 9;
+
+    if(p->getPositionY() > 0 && p->getPositionX() < 7){
+        while((board[p->getPositionY() - 1][p->getPositionX() + 1]->getID() == "empty") && 
+              (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
+            {
+
+                currXPos = p->getPositionX();
+                currYPos = p->getPositionY();
+
+                p->movePiece(1, -1);
+                counterX++;
+
+                if(p->getPositionY() == 0 || p->getPositionX() == 7){
+                    break;
+                }
+            }
+    }
+    if(p->getPositionY() > 0 && p->getPositionX() < 7){
+        if(isOppositeColor(board[p->getPositionY() - 1][p->getPositionX() + 1], p)){
+            counterX++;
+        }
+    }
+    return counterX;
+}
+
+int Board::simulate45Y(Piece *p){
     int counterY = 0;
 
-    int currXPos = p->getPositionX();
-    int currYPos = p->getPositionY();
+    int currXPos = 9;
+    int currYPos = 9;
 
-    p->movePiece(-1, -1);
-    while((board[p->getPositionY()][p->getPositionX()]->getID() == "empty") && 
-          (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
-        {
-            currXPos = p->getPositionX();
-            currYPos = p->getPositionY();
-            p->movePiece(-1, -1);
+    if(p->getPositionY() > 0 && p->getPositionX() < 7){
+        while((board[p->getPositionY() - 1][p->getPositionX() + 1]->getID() == "empty") && 
+              (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
+            {
+                currXPos = p->getPositionX();
+                currYPos = p->getPositionY();
+
+                p->movePiece(1, -1);
+                counterY--;
+
+                if(p->getPositionY() == 0 || p->getPositionX() == 7){
+                    break;
+                }
+            }
+    }
+    if(p->getPositionY() > 0 && p->getPositionX() < 7){
+        if(isOppositeColor(board[p->getPositionY() - 1][p->getPositionX() + 1], p)){
             counterY--;
         }
-    if(isOppositeColor(board[p->getPositionY()][p->getPositionX()], p)){
-        counterY--;
     }
     return counterY;
 }
 
-int Board::simulateLeft(Piece *p){
-    int counterX = 0;
+int Board::simulateUp(Piece *p){
+    int counterY = 0;
 
-    int currXPos = p->getPositionX();
-    int currYPos = p->getPositionY();
+    int currXPos = 9;
+    int currYPos = 9;
 
-    p->movePiece(-1, 0);
-    while((board[p->getPositionY()][p->getPositionX()]->getID() == "empty") && 
-          (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
-        {
-            currXPos = p->getPositionX();
-            currYPos = p->getPositionY();
-            p->movePiece(-1, 0);
-            counterX--;
-        }
-    if(isOppositeColor(board[p->getPositionY()][p->getPositionX()], p)){
-        counterX--;
+    if(p->getPositionY() > 0){
+        while((board[p->getPositionY() - 1][p->getPositionX()]->getID() == "empty") && 
+              (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
+            {
+                currXPos = p->getPositionX();
+                currYPos = p->getPositionY();
+                p->movePiece(0, -1);
+                counterY--;
+                if(p->getPositionY() == 0){
+                    break;
+                }
+            }
     }
-    return counterX;
+    if(p->getPositionY() > 0){
+        if(isOppositeColor(board[p->getPositionY() - 1][p->getPositionX()], p)){
+            counterY--;
+        }
+    }
+    return counterY;
 }
 
 int Board::simulate315X(Piece *p){
     int counterX = 0;
 
-    int currXPos = p->getPositionX();
-    int currYPos = p->getPositionY();
+    int currXPos = 9;
+    int currYPos = 9;
 
-    p->movePiece(-1, 1);
-    while((board[p->getPositionY()][p->getPositionX()]->getID() == "empty") && 
-          (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
-        {
-            currXPos = p->getPositionX();
-            currYPos = p->getPositionY();
-            p->movePiece(-1, 1);
+
+    if(p->getPositionY() > 0 && p->getPositionX() > 0){
+        while((board[p->getPositionY() - 1][p->getPositionX() - 1]->getID() == "empty") &&
+              (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
+            {   
+                currXPos = p->getPositionX();
+                currYPos = p->getPositionY();
+                p->movePiece(-1, -1);
+                counterX--;
+                if(p->getPositionY() == 0 || p->getPositionX() == 0){
+                    break;
+                }
+            }
+    }
+    if(p->getPositionY() != 0 && p->getPositionX() != 0){
+        if(isOppositeColor(board[p->getPositionY() - 1][p->getPositionX() - 1], p)){
             counterX--;
         }
-    if(isOppositeColor(board[p->getPositionY()][p->getPositionX()], p)){
-        counterX--;
     }
     return counterX;
 }
@@ -459,20 +461,111 @@ int Board::simulate315X(Piece *p){
 int Board::simulate315Y(Piece *p){
     int counterY = 0;
 
-    int currXPos = p->getPositionX();
-    int currYPos = p->getPositionY();
+    int currXPos = 9;
+    int currYPos = 9;
 
-    p->movePiece(-1, 1);
-    while((board[p->getPositionY()][p->getPositionX()]->getID() == "empty") && 
-          (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
-        {
-            currXPos = p->getPositionX();
-            currYPos = p->getPositionY();
-            p->movePiece(-1, 1);
+
+    if(p->getPositionY() > 0 && p->getPositionX() > 0){
+        while((board[p->getPositionY() - 1][p->getPositionX() - 1]->getID() == "empty") && 
+              (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
+            {
+                currXPos = p->getPositionX();
+                currYPos = p->getPositionY();
+                p->movePiece(-1, -1);
+                counterY--;
+                if(p->getPositionY() == 0 || p->getPositionX() == 0){
+                    break;
+                }
+            }
+    }
+    if(p->getPositionY() > 0 && p->getPositionX() > 0){
+        if(isOppositeColor(board[p->getPositionY() - 1][p->getPositionX() - 1], p)){
+            counterY--;
+        }
+    }
+    return counterY;
+}
+
+int Board::simulateLeft(Piece *p){
+    int counterX = 0;
+
+    int currXPos = 9;
+    int currYPos = 9;
+
+    if(p->getPositionX() > 0){
+        while((board[p->getPositionY()][p->getPositionX() - 1]->getID() == "empty") && 
+              (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
+            {
+                currXPos = p->getPositionX();
+                currYPos = p->getPositionY();
+                p->movePiece(-1, 0);
+                counterX--;
+
+                if(p->getPositionX() == 0){
+                    break;
+                }
+            }
+    }
+    if(p->getPositionX() > 0){
+        if(isOppositeColor(board[p->getPositionY()][p->getPositionX() - 1], p)){
+            counterX--;
+        }
+    }
+    return counterX;
+}
+
+int Board::simulate225X(Piece *p){
+    int counterX = 0;
+
+    int currXPos = 9;
+    int currYPos = 9;
+
+    if(p->getPositionY() < 7 && p->getPositionX() > 0){
+        while((board[p->getPositionY() + 1][p->getPositionX() - 1]->getID() == "empty") && 
+              (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
+            {
+
+                currXPos = p->getPositionX();
+                currYPos = p->getPositionY();
+                p->movePiece(-1, 1);
+                counterX--;
+                if(p->getPositionY() == 7 || p->getPositionX() == 0){
+                    break;
+                }
+            }
+    }
+    if(p->getPositionY() < 7 && p->getPositionX() > 0){
+        if(isOppositeColor(board[p->getPositionY() + 1][p->getPositionX() - 1], p)){
+            counterX--;
+        }
+    }
+    return counterX;
+}
+
+int Board::simulate225Y(Piece *p){
+    int counterY = 0;
+
+    int currXPos = 9;
+    int currYPos = 9;
+
+    if(p->getPositionY() < 7 && p->getPositionX() > 0){
+        while((board[p->getPositionY() + 1][p->getPositionX() - 1]->getID() == "empty") && 
+              (currXPos != p->getPositionX() && currYPos != p->getPositionY()))
+            {
+
+                currXPos = p->getPositionX();
+                currYPos = p->getPositionY();
+                p->movePiece(-1, 1);
+                counterY++;
+                if(p->getPositionY() == 7 || p->getPositionX() == 0){
+                    break;
+                }
+            }
+    }
+    if(p->getPositionY() < 7 && p->getPositionX() > 0){
+        if(isOppositeColor(board[p->getPositionY() + 1][p->getPositionX() - 1], p)){
             counterY++;
         }
-    if(isOppositeColor(board[p->getPositionY()][p->getPositionX()], p)){
-        counterY++;
     }
     return counterY;
 }
@@ -554,7 +647,7 @@ int Board::rangeRight(Piece *p){
     if(tempPiece->getID() == "king"){
 
         tempPiece->movePiece(1, 0);
-        if(board[tempPiece->getPositionY()][tempPiece->getPositionYX()]->getID() == "empty"){
+        if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
             counterX3++;
         }
         else if(isOppositeColor(board[tempPiece->getPositionY()][tempPiece->getPositionX()], tempPiece)){
@@ -591,38 +684,36 @@ int Board::rangeDown(Piece *p){
         counterY5 = simulateDown(tempPiece);
 
         resetSimulation(tempPiece, originalXPos, originalYPos);
-
     }
-    if(tempPiece->getID() == "rook"){
+    else if(tempPiece->getID() == "rook"){
 
         counterY5 = simulateDown(tempPiece);
 
         resetSimulation(tempPiece, originalXPos, originalYPos);
     }
-    if(tempPiece->getID() == "king"){
+    else if(tempPiece->getID() == "king"){
 
-        tempPiece->movePiece(0, -1);
+        tempPiece->movePiece(0, 1);
         if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
-            counterY5--;
+            counterY5++;
         }
         else if(isOppositeColor(board[tempPiece->getPositionY()][tempPiece->getPositionX()], tempPiece)){
-            counterY5--;
+            counterY5++;
         }
         resetSimulation(tempPiece, originalXPos, originalYPos);
 
     }
-    if(tempPiece->getID() == "knight"){
+    else if(tempPiece->getID() == "knight"){
         
-        tempPiece->movePiece(-1, -2);
+        tempPiece->movePiece(-1, 2);
         if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
-            counterY5 = counterY5 - 2;
+            counterY5 = counterY5 + 2;
         }
         else if(isOppositeColor(board[tempPiece->getPositionY()][tempPiece->getPositionX()], tempPiece)){
-            counterY5 = counterY5 - 2;
+            counterY5 = counterY5 + 2;
         }
         resetSimulation(tempPiece, originalXPos, originalYPos);
     }
-
     return counterY5;
 }
 
@@ -646,23 +737,23 @@ int Board::rangeUp(Piece *p){
     }
     if(tempPiece->getID() == "king"){
 
-        tempPiece->movePiece(0, 1);
+        tempPiece->movePiece(0, -1);
         if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
-            counterY1++;
+            counterY1--;
         }
         else if(isOppositeColor(board[tempPiece->getPositionY()][tempPiece->getPositionX()], tempPiece)){
-            counterY1++;
+            counterY1--;
         }
         resetSimulation(tempPiece, originalXPos, originalYPos);
 
     }
     if(tempPiece->getID() == "knight"){
-        tempPiece->movePiece(1, 2);
+        tempPiece->movePiece(1, -2);
         if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
-            counterY1 = counterY1 + 2;
+            counterY1 = counterY1 - 2;
         }
         else if(isOppositeColor(board[tempPiece->getPositionY()][tempPiece->getPositionX()], tempPiece)){
-            counterY1 = counterY1 + 2;
+            counterY1 = counterY1 - 2;
         }
         resetSimulation(tempPiece, originalXPos, originalYPos);
 
@@ -693,7 +784,7 @@ int Board::rangeMaxXDiag45(Piece *p){
     }
     if(tempPiece->getID() == "king"){
 
-        tempPiece->movePiece(1, 1);
+        tempPiece->movePiece(1, -1);
         if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
             counterX2++;
         }
@@ -705,7 +796,7 @@ int Board::rangeMaxXDiag45(Piece *p){
     }
     if(tempPiece->getID() == "knight"){
 
-        tempPiece->movePiece(2, 1);
+        tempPiece->movePiece(2, -1);
         if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
             counterX2 = counterX2 + 2;
         }
@@ -738,7 +829,7 @@ int Board::rangeMinXDiag135(Piece *p){
     }
     if(tempPiece->getID() == "king"){
 
-        tempPiece->movePiece(1, -1);
+        tempPiece->movePiece(1, 1);
         if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
             counterX4++;
         }
@@ -750,7 +841,7 @@ int Board::rangeMinXDiag135(Piece *p){
     }
     if(tempPiece->getID() == "knight"){
 
-        tempPiece->movePiece(1, -2);
+        tempPiece->movePiece(1, 2);
         if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
             counterX4++;
         }
@@ -787,7 +878,7 @@ int Board::rangeMaxXDiag225(Piece *p){
     }
     if(tempPiece->getID() == "king"){
 
-        tempPiece->movePiece(-1, -1);
+        tempPiece->movePiece(-1, 1);
         if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
             counterX6--;
         }
@@ -799,7 +890,7 @@ int Board::rangeMaxXDiag225(Piece *p){
     }
     if(tempPiece->getID() == "knight"){
         
-        tempPiece->movePiece(-2, -1);
+        tempPiece->movePiece(-2, 1);
         if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
             counterX6 = counterX6 - 2;
         }
@@ -834,7 +925,7 @@ int Board::rangeMinXDiag315(Piece *p){
     }
     if(tempPiece->getID() == "king"){
 
-        tempPiece->movePiece(-1, 1);
+        tempPiece->movePiece(-1, -1);
         if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
             counterX8--;
         }
@@ -845,7 +936,7 @@ int Board::rangeMinXDiag315(Piece *p){
     }
     if(tempPiece->getID() == "knight"){
         
-        tempPiece->movePiece(-1, 2);
+        tempPiece->movePiece(-1, -2);
         if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
             counterX8--;
         }
@@ -993,10 +1084,10 @@ bool Board::isKingMoveValid(Piece *p, int xT, int yT){
 
 bool Board::isPawnMoveValid(Piece *p, int xT, int yT){
     if(xT == 1 || xT == -1){
-        if(board[p->getPositionX() + 1][p->getPositionY() + 1]->getID() != "empty"){
+        if(board[p->getPositionY() + 1][p->getPositionX() + 1]->getID() != "empty"){
             return true;
         }
-        else if(board[p->getPositionX() - 1][p->getPositionY() + 1]->getID() != "empty"){
+        else if(board[p->getPositionY() - 1][p->getPositionX() + 1]->getID() != "empty"){
             return true;
         }
     }
@@ -1053,77 +1144,173 @@ bool Board::isCheck(King *k){
             q = new Queen(k->getPositionX(), k->getPositionY(), false);
         }
 
-        if(board[k->getPositionX() + 1][k->getPositionY() + 2]->getID() == "knight"){
-            return true;
+        if(k->getPositionX() < 6 && k->getPositionY() < 7){
+            if(board[k->getPositionY() + 1][k->getPositionX() + 2]->getID() == "knight"){
+                if(isOppositeColor(k, board[k->getPositionY() + 1][k->getPositionX() + 2])){
+                    return true;
+                }
+            }
         }
-        else if(board[k->getPositionX() + 2][k->getPositionY() + 1]->getID() == "knight"){
-            return true;
+        if(k->getPositionX() < 7 && k->getPositionY() < 6){
+            if(board[k->getPositionY() + 2][k->getPositionX() + 1]->getID() == "knight"){
+                if(isOppositeColor(k, board[k->getPositionY() + 2][k->getPositionX() + 1])){
+                    return true;
+                }
+            }
         }
-        else if(board[k->getPositionX() + 2][k->getPositionY() - 1]->getID() == "knight"){
-            return true;
+        if(k->getPositionX() > 0 && k->getPositionY() < 6){
+            if(board[k->getPositionY() + 2][k->getPositionX() - 1]->getID() == "knight"){
+                if(isOppositeColor(k, board[k->getPositionY() + 2][k->getPositionX() - 1])){
+                    return true;
+                }
+            }
         }
-        else if(board[k->getPositionX() + 1][k->getPositionY() - 2]->getID() == "knight"){
-            return true;
+        if(k->getPositionX() > 1 && k->getPositionY() < 7){
+            if(board[k->getPositionY() + 1][k->getPositionX() - 2]->getID() == "knight"){
+                if(isOppositeColor(k, board[k->getPositionY() + 1][k->getPositionX() - 2])){
+                    return true;
+                }
+            }
         }
-        else if(board[k->getPositionX() - 1][k->getPositionY() - 2]->getID() == "knight"){
-            return true;
+        if(k->getPositionX() > 1 && k->getPositionY() > 0){
+            if(board[k->getPositionY() - 1][k->getPositionX() - 2]->getID() == "knight"){
+                if(isOppositeColor(k, board[k->getPositionY() - 1][k->getPositionX() - 2])){
+                    return true;
+                }
+            }
         }
-        else if(board[k->getPositionX() - 2][k->getPositionY() - 1]->getID() == "knight"){
-            return true;
+        if(k->getPositionX() > 0 && k->getPositionY() > 1){
+            if(board[k->getPositionY() - 2][k->getPositionX() - 1]->getID() == "knight"){
+                if(isOppositeColor(k, board[k->getPositionY() - 2][k->getPositionX() - 1])){
+                    return true;
+                }
+            }
         }
-        else if(board[k->getPositionX() - 2][k->getPositionY() + 1]->getID() == "knight"){
-            return true;
+        if(k->getPositionX() < 7 && k->getPositionY() > 1){
+            if(board[k->getPositionY() - 2][k->getPositionX() + 1]->getID() == "knight"){
+                if(isOppositeColor(k, board[k->getPositionY() - 2][k->getPositionX() + 1])){
+                    return true;
+                }
+            }
         }
-        else if(board[k->getPositionX() - 1][k->getPositionY() + 2]->getID() == "knight"){
-            return true;
+        if(k->getPositionX() < 6 && k->getPositionY() > 0){
+            if(board[k->getPositionY() - 1][k->getPositionX() + 2]->getID() == "knight"){
+                if(isOppositeColor(k, board[k->getPositionY() - 1][k->getPositionX() + 2])){
+                    return true;
+                }
+            }
         }
-        else if(board[k->getPositionX() + 1][k->getPositionY() + 1]->getID() == "pawn"){
-            return true;
+        if(k->getPositionX() < 7 && k->getPositionY() < 7){
+            if(board[k->getPositionY() + 1][k->getPositionX() + 1]->getID() == "pawn"){
+                if(isOppositeColor(k, board[k->getPositionY() + 1][k->getPositionX() + 1])){
+                    return true;
+                }
+            }
         }
-        else if(board[k->getPositionX() - 1][k->getPositionY() + 1]->getID() == "pawn"){
-            return true;
+        if(k->getPositionX() > 0 && k->getPositionY() < 7){
+            if(board[k->getPositionY() + 1][k->getPositionX() - 1]->getID() == "pawn"){
+                if(isOppositeColor(k, board[k->getPositionY() + 1][k->getPositionX() - 1])){
+                    return true;
+                }
+            }
         }
-        else if(board[k->getPositionX()][k->getPositionY() + rangeUp(q)]->getID() == "queen" ||
-                board[k->getPositionX()][k->getPositionY() + rangeUp(q)]->getID() == "rook" ){
-            return true;
+        if(k->getPositionX() < 7 && k->getPositionY() > 0){
+            if(board[k->getPositionY() - 1][k->getPositionX() + 1]->getID() == "pawn"){
+                if(isOppositeColor(k, board[k->getPositionY() - 1][k->getPositionX() + 1])){
+                    return true;
+                }
+            }
         }
-        else if(board[k->getPositionX()][k->getPositionY() - rangeDown(q)]->getID() == "queen" ||
-                board[k->getPositionX()][k->getPositionY() - rangeDown(q)]->getID() == "rook" ){
-            return true;
+        if(k->getPositionX() > 0 && k->getPositionY() > 0){
+            if(board[k->getPositionY() - 1][k->getPositionX() - 1]->getID() == "pawn"){
+                if(isOppositeColor(k, board[k->getPositionY() - 1][k->getPositionX() - 1])){
+                    return true;
+                }
+            }
         }
-        else if(board[k->getPositionX() + rangeRight(q)][k->getPositionY()]->getID() == "queen" ||
-                board[k->getPositionX() + rangeRight(q)][k->getPositionY()]->getID() == "rook" ){
-            return true;
-        }
-        else if(board[k->getPositionX() - rangeLeft(q)][k->getPositionY()]->getID() == "queen" ||
-                board[k->getPositionX() - rangeLeft(q)][k->getPositionY()]->getID() == "rook" ){
-            return true;
-        }
-        else if(board[k->getPositionX() + rangeMaxXDiag45(q)][k->getPositionY() + rangeMaxXDiag45(q)]->getID() == "queen" ||
-                board[k->getPositionX() + rangeMaxXDiag45(q)][k->getPositionY() + rangeMaxXDiag45(q)]->getID() == "bishop"){
-            return true;
-        }
-        else if(board[k->getPositionX() + rangeMinXDiag135(q)][k->getPositionY() - rangeMinXDiag135(q)]->getID() == "queen" ||
-                board[k->getPositionX() + rangeMinXDiag135(q)][k->getPositionY() - rangeMinXDiag135(q)]->getID() == "bishop"){
-            return true;
-        }
-        else if(board[k->getPositionX() - rangeMaxXDiag225(q)][k->getPositionY() - rangeMaxXDiag225(q)]->getID() == "queen" ||
-                board[k->getPositionX() - rangeMaxXDiag225(q)][k->getPositionY() - rangeMaxXDiag225(q)]->getID() == "bishop" ){
-            return true;
-        }
-        else if(board[k->getPositionX() - rangeMinXDiag315(q)][k->getPositionY() + rangeMinXDiag315(q)]->getID() == "queen" ||
-                board[k->getPositionX() - rangeMinXDiag315(q)][k->getPositionY() + rangeMinXDiag315(q)]->getID() == "bishop" ){
-            return true;
-        }
-        else{
-            return false;
-        }
+        if(board[k->getPositionY() + rangeUp(q)][k->getPositionX()]->getID() == "queen" ||
+            board[k->getPositionY() + rangeUp(q)][k->getPositionX()]->getID() == "rook" ){
 
+            if(isOppositeColor(k, board[k->getPositionY() + rangeUp(q)][k->getPositionX()])){
+                return true;
+            }
+        }
+        if(board[k->getPositionY() + rangeDown(q)][k->getPositionX()]->getID() == "queen" ||
+            board[k->getPositionY() + rangeDown(q)][k->getPositionX()]->getID() == "rook" ){
+            if(isOppositeColor(k, board[k->getPositionY() + rangeDown(q)][k->getPositionX()])){
+                return true;
+            }
+        }
+        if(board[k->getPositionY()][k->getPositionX() + rangeRight(q)]->getID() == "queen" ||
+            board[k->getPositionY()][k->getPositionX() + rangeRight(q)]->getID() == "rook" ){
+
+            if(isOppositeColor(k, board[k->getPositionY()][k->getPositionX() + rangeRight(q)])){
+                return true;
+            }
+        }
+        if(board[k->getPositionY()][k->getPositionX() + rangeLeft(q)]->getID() == "queen" ||
+            board[k->getPositionY()][k->getPositionX() + rangeLeft(q)]->getID() == "rook" ){
+
+            if(isOppositeColor(k, board[k->getPositionY()][k->getPositionX() + rangeLeft(q)])){
+                return true;
+            }
+        }
+        if(board[k->getPositionY() + rangeMaxXDiag45(q)][k->getPositionX() + rangeMaxXDiag45(q)]->getID() == "queen" ||
+            board[k->getPositionY() + rangeMaxXDiag45(q)][k->getPositionX() + rangeMaxXDiag45(q)]->getID() == "bishop"){
+
+            if(isOppositeColor(k, board[k->getPositionY() + rangeMaxXDiag45(q)][k->getPositionX() + rangeMaxXDiag45(q)])){
+                return true;
+            }
+        }
+        if(board[k->getPositionY() + rangeMinXDiag135(q)][k->getPositionX() + rangeMinXDiag135(q)]->getID() == "queen" ||
+            board[k->getPositionY() + rangeMinXDiag135(q)][k->getPositionX() + rangeMinXDiag135(q)]->getID() == "bishop"){
+
+            if(isOppositeColor(k, board[k->getPositionY() + rangeMinXDiag135(q)][k->getPositionX() + rangeMinXDiag135(q)])){
+                return true;
+            }
+        }
+        if(board[k->getPositionY() + rangeMaxXDiag225(q)][k->getPositionX() + rangeMaxXDiag225(q)]->getID() == "queen" ||
+            board[k->getPositionY() + rangeMaxXDiag225(q)][k->getPositionX() + rangeMaxXDiag225(q)]->getID() == "bishop" ){
+
+            if(isOppositeColor(k, board[k->getPositionY() + rangeMaxXDiag225(q)][k->getPositionX() + rangeMaxXDiag225(q)])){
+                return true;
+            }
+        }
+        if(board[k->getPositionY() + rangeMinXDiag315(q)][k->getPositionX() + rangeMinXDiag315(q)]->getID() == "queen" ||
+            board[k->getPositionY() + rangeMinXDiag315(q)][k->getPositionX() + rangeMinXDiag315(q)]->getID() == "bishop" ){
+
+            if(isOppositeColor(k, board[k->getPositionY() + rangeMinXDiag315(q)][k->getPositionX() + rangeMinXDiag315(q)])){
+                return true;
+            }
+        }
+        
+        return false;
+}
+
+void Board::undoMove(Piece *p, int x, int y){
+    swap(p->getPositionX(), p->getPositionY(), x, y);
 }
 
 bool Board::checkmate(King *k){
     if(isCheck(k)){
-        return true;
+
+        // int resetX = k->getPositionX();
+        // int resetY = k->getPositionY();
+
+        // swap(k->getPositionX(), k->getPositionY(), k->getPositionX(), k->getPositionY() + rangeUp(k));
+        // if(k->getPositionX() != )
+        //     if(isCheck(k)){
+        //         undoMove(k, resetX, resetY);
+        //     }
+        //     else{
+        //         undoMove(k, resetX, resetY);
+        //         return false;
+        //     }
+
+
+        // if(stockfishstring == "none"){
+        //     return true;
+        // }
     }
 
     return false;
@@ -1149,8 +1336,8 @@ bool Board::checkmate(King *k){
                 cin >> newX;
                 cin >> newY;
 
-                if(board[oldX][oldY]->white()){
-                    if(isValidMove(board[oldX][oldY], newX, newY)){
+                if(board[oldY][oldX]->white()){
+                    if(isValidMove(board[oldY][oldX], newX, newY)){
                         swap(oldX, oldY, newX, newY);
                         whiteMoves++;
                     }
@@ -1162,8 +1349,8 @@ bool Board::checkmate(King *k){
                 cin >> newX;
                 cin >> newY;
 
-                if(!board[oldX][oldY]->white()){
-                    if(isValidMove(board[oldX][oldY], newX, newY)){
+                if(!board[oldY][oldX]->white()){
+                    if(isValidMove(board[oldY][oldX], newX, newY)){
                         swap(oldX, oldY, newX, newY);
                         blackMoves++;
                     }

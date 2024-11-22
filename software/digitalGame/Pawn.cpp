@@ -18,17 +18,17 @@ bool Pawn::isEmpty(){
 }*/
 
 void Pawn::movePiece(int xM, int yM){
-    //if(this->isValid(xM, yM)){
+    if(this->isValid(xM, yM)){
         this->setPositionX(this->getPositionX() + xM);
         this->setPositionY(this->getPositionX() + yM);
         counter++;
-    //}
+    }
 }
 
 bool Pawn::isValid(int xT, int yT){
 
-    if(!(this->getPositionX() + xT < 0) && !(this->getPositionX() + xT > 8)){
-        if(!(this->getPositionY() + yT < 0) && !(this->getPositionY() + yT > 8)){
+    if(!(this->getPositionX() + xT < 0) && !(this->getPositionX() + xT > 7)){
+        if(!(this->getPositionY() + yT < 0) && !(this->getPositionY() + yT > 7)){
             if(xT != 0){
                 return false;
             }
