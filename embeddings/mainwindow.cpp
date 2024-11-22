@@ -113,7 +113,7 @@ void MainWindow::placePieceOnTile(const QString& position, const QString& pieceT
 {
     QPushButton* button = boardMap[position];
     if (button) {
-        QString imagePath = "C:/Users/marcu/OneDrive/ACM/Wizard-Chess/embeddings/images/" + color + "_" + pieceType + ".png";
+        QString imagePath = ":/images/images/" + color + "_" + pieceType + ".png";
         qDebug() << "Attempting to open file at:" << imagePath;
 
         QFile file(imagePath);
