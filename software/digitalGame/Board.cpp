@@ -1315,15 +1315,42 @@ bool Board::checkmate(King *k){
 
     return false;
 }
-
+ 
+int Board::convertToInt(char x){
+    if(x == 'a'){
+        return 0;
+    }
+    else if(x == 'b'){
+        return 1;
+    }
+    else if(x == 'c'){
+        return 2;
+    }
+    else if(x == 'd'){
+        return 3;
+    }
+    else if(x == 'e'){
+        return 4;
+    }
+    else if(x == 'f'){
+        return 5;
+    }
+    else if(x == 'g'){
+        return 6;
+    }
+    else if(x == 'h'){
+        return 7;
+    }
+}
+ 
  void Board::playGame(){
     int whiteMoves = 0;
     int blackMoves = 0;
 
     while(!checkmate(kw) || !checkmate(kb)){
-        int oldX;
+        char oldX;
         int oldY;
-        int newX;
+        char newX;
         int newY;
 
         if(isCheck(kw) || isCheck(kb)){

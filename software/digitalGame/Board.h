@@ -6,7 +6,6 @@
 #include <vector>
 #include <iostream>
 #include "Piece.h"
-#include "Piece.h"
 #include "Pawn.h"
 #include "Bishop.h"
 #include "Knight.h"
@@ -14,8 +13,6 @@
 #include "King.h"
 #include "Rook.h"
 #include "EmptyPiece.h"
-
-
 
 
 using namespace std;
@@ -61,6 +58,8 @@ class Board {
 
 
         void undoMove(Piece *p, int x, int y);
+
+        int convertToInt(char x);
 
 
         int simulateUp(Piece *p);
