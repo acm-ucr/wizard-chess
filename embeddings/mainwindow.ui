@@ -68,7 +68,7 @@ rgb(0, 0, 0)
 }</string>
     </property>
     <property name="currentIndex">
-     <number>8</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="Start">
      <property name="autoFillBackground">
@@ -2814,7 +2814,7 @@ font: 15pt &quot;Snap ITC&quot;;
       <property name="title">
        <string>Command Buttons</string>
       </property>
-      <widget class="QRadioButton" name="radioButton_6">
+      <widget class="QRadioButton" name="voiceCommand">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -2835,7 +2835,7 @@ font: 12pt &quot;Showcard Gothic&quot;;
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QRadioButton" name="radioButton_5">
+      <widget class="QRadioButton" name="touchCommand">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -2871,7 +2871,7 @@ font: 15pt &quot;Snap ITC&quot;;
       <property name="title">
        <string>Wizard Game Difficulty</string>
       </property>
-      <widget class="QRadioButton" name="radioButton">
+      <widget class="QRadioButton" name="easyLevel">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -2889,7 +2889,7 @@ font: 12pt &quot;Showcard Gothic&quot;;
         <string>Easy Level</string>
        </property>
       </widget>
-      <widget class="QRadioButton" name="radioButton_2">
+      <widget class="QRadioButton" name="intermediateLevel">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -2910,7 +2910,7 @@ font: 12pt &quot;Showcard Gothic&quot;;
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QRadioButton" name="radioButton_4">
+      <widget class="QRadioButton" name="hardLevel">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -2928,7 +2928,7 @@ font: 12pt &quot;Showcard Gothic&quot;;
         <string>Hard Level</string>
        </property>
       </widget>
-      <widget class="QRadioButton" name="radioButton_3">
+      <widget class="QRadioButton" name="expertLevel">
        <property name="geometry">
         <rect>
          <x>0</x>
@@ -2946,6 +2946,23 @@ font: 12pt &quot;Showcard Gothic&quot;;
         <string>&quot;I Was Once A Knight&quot; Level</string>
        </property>
       </widget>
+     </widget>
+     <widget class="QPushButton" name="pushButton_back_settings">
+      <property name="geometry">
+       <rect>
+        <x>460</x>
+        <y>390</y>
+        <width>83</width>
+        <height>29</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(26, 255, 0);
+font: 900 12pt &quot;Segoe UI Black&quot;;</string>
+      </property>
+      <property name="text">
+       <string>BACK</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="About">

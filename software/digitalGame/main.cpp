@@ -1,52 +1,51 @@
 #include <iostream>
-#include "Rook.h"
-#include "Pawn.h"
-#include "Piece.h"
-#include "Knight.h"
-#include "King.h"
-#include "Queen.h"
-#include "Bishop.h"
-#include "Board.h"
-
+#include <string>
+#include <array>
+#include <cstdio>
+#include <memory>
+#include "stockfish.h"
+#include <fstream>
 using namespace std;
 
 int main() {
+    // // Path to the Stockfish engine binary
+    // //USED FOR TESTING: g2g4 e7e5 f2f3 d8h4
+    const char* stockfishPath = "STOCKFISH PATH HERE"; //This should be the stockfish path to your file
+    Stockfish engine(stockfishPath);
+    engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
 
-    Board b;
+    string bestMove;
+    string position = "position startpos moves";
+    bool playerTurn = true;
+    string playerMove = "";
 
-    // cout << "Printing Board" << endl;
+    while (bestMove != "(none)") {
+        if(playerTurn == true) { //Player's individual moves
+            //Input moves like g2g4
+            cout << "Input Your Move: ";
+            cin >> playerMove;
+            position += " " + playerMove;
+            cout << "Current Moves: " << position << endl;
+        }
+        else { //Stockfish move
+            // Send position and search commands
+            engine.sendCommand(position);
 
-    // b.printBoard();
+            //Set depth to tell stockfish how far to search(the lower the depth, the lower the difficulty)
+            engine.sendCommand("go depth 100");
 
-    // cout << b.board[0][4]->getID() << endl;
+            // Retrieve the best move
+            bestMove = engine.getBestMove();
+            cout << "Best Move: " << bestMove << endl;
 
-    // cout << b.board[1][4]->getID() << ", " << b.board[3][4]->getID() << endl;
-
-    // cout << b.rangeUp(b.board[1][4]) << endl;
-
-     b.swap(0,0,0,0);
-
-     b.swap(0,0,0,0);
-
-    // cout << b.board[6][4]->getID() << ", " << b.board[4][4]->getID() << ", " << b.board[0][5]->getID() << endl;
-
-     b.printBoard();
-
-
-    // cout << b.board[0][5]->getID() << ", " << b.simulate225Y(b.board[0][5]) << endl;
-
-    // cout << b.board[1][7]->getID() << ", " << b.board[1][7]->getPositionX() << ", " << b.board[1][7]->getPositionY() << ", " << b.simulateUp(b.board[1][7]) << endl;
-
-    //cout << "hello world" << endl;
-
-    if(b.isCheck(b.kw)){ 
-        cout << "check" << endl;
+            // Update position with the best move
+            position += " " + bestMove;
+            cout << "Current Moves: " << position << endl;
+            engine.clearFiles();
+        }
+        playerTurn = !playerTurn;
     }
-    else{
-        cout << "not check" << endl;
-    }
-
-    cout << b.board[4][4]->getPosition() << endl;
-
+    cout << "GAME ENDED (CHECKMATE)" << endl;
     return 0;
 }
+
