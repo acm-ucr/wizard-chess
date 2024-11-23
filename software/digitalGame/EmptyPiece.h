@@ -4,7 +4,7 @@
 class Empty : public Piece {
         public: 
             Empty();
-            Empty(int xPos, int yPos, bool color);
+            Empty(int xPos, int yPos);
             void movePiece(int x, int y) override;
             bool isValid(int xT, int yT);  
 
