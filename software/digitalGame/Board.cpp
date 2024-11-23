@@ -1327,7 +1327,17 @@ bool Board::checkmate(King *k){
         int newY;
 
         if(isCheck(kw) || isCheck(kb)){
+            cin >> oldX;
+            cin >> oldY;
+            cin >> newX;
+            cin >> newY;
 
+            if(board[oldY][oldX]->white()){
+                if(isValidMove(board[oldY][oldX], newX, newY)){
+                    swap(oldX, oldY, newX, newY);
+                    whiteMoves++;
+                }
+            }
         }
         else{
             if(whiteMoves == blackMoves){

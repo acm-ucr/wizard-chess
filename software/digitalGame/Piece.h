@@ -18,7 +18,7 @@ class Piece {
         void setPositionX(int numX){x = numX;}
         void setPositionY(int numY){y = numY;}   
 
-        
+        int convertToInt(char x);
 
         string getPosition();
         
