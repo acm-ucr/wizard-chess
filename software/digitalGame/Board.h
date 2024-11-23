@@ -6,7 +6,6 @@
 #include <vector>
 #include <iostream>
 #include "Piece.h"
-#include "Piece.h"
 #include "Pawn.h"
 #include "Bishop.h"
 #include "Knight.h"

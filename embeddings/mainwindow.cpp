@@ -10,6 +10,8 @@
 #include <ctime>
 #include <cstdlib>
 #include <vector>
+#include "mainwindow.h"
+// #include "../software/digitalGame/Board.h"
 
 
 // #include <QThread>
@@ -34,59 +36,87 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+int convertToInt(char x){
+    if(x == 'a'){
+        return 0;
+    }
+    else if(x == 'b'){
+        return 1;
+    }
+    else if(x == 'c'){
+        return 2;
+    }
+    else if(x == 'd'){
+        return 3;
+    }
+    else if(x == 'e'){
+        return 4;
+    }
+    else if(x == 'f'){
+        return 5;
+    }
+    else if(x == 'g'){
+        return 6;
+    }
+    else if(x == 'h'){
+        return 7;
+    }
+    return 9;
+}
+
 // Simulates the population of the table widget for the chess game
 // x1 and x2 could be a character like 'a', 'b' etc
-// void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt)
-// {
-//     vector<string> pieceName = {"K", "Q", "R", "B", "N",
-//                                 "Kx", "Qx", "Rx", "Bx", "Nx"};
+void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt)
+{
+    // vector<string> pieceName = {"K", "Q", "R", "B", "N",
+    //                             "Kx", "Qx", "Rx", "Bx", "Nx"};
 
-//     vector<string> positions = {"a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8",
-//                                 "b1", "b2", "b3", "b4", "b5", "b6", "b7", "b8",
-//                                 "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8",
-//                                 "d1", "d2", "d3", "d4", "d5", "d6", "d7", "d8",
-//                                 "e1", "e2", "e3", "e4", "e5", "e6", "e7", "e8",
-//                                 "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8",
-//                                 "g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8",
-//                                 "h1", "h2", "h3", "h4", "h5", "h6", "h7", "h8"};
-//     if (turnCnt % 20 == 0)
-//     {
-//         clearTableWidget();
-//     }
-//     if (i == 0) {return;}
-//     int row = (turnCnt % 20)/2;
-//     int col = turnCnt % 2;
-//     // gets the piece type character from game
-//     // out initializes to a piece first
-//     string out = game->getPosition(x1, y1);
-//     if (i == 1) {
-//         out += x2 + y2;
-//         if (col == 0) {
-//             if (bCheck == 1) {
-//                 out += "+";
-//             }
-//         }
-//         else if (col == 1) {
-//             if (wCheck == 1) {
-//                 out += "+";
-//             }
-//         }
-//     }
-//     else if (i == 2) {
-//         out += "x" + to_string(x2) + to_string(y2);
-//         if (col == 0) {
-//             if (bCheck == 1) {
-//                 out += "+";
-//             }
-//         }
-//         else if (col == 1) {
-//             if (wCheck == 1) {
-//                 out += "+";
-//             }
-//         }
-//     }
-//     tableWidget->setItem(row, col, new QTableWidgetItem(QString::fromStdString(out)));
-// }
+    // vector<string> positions = {"a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8",
+    //                             "b1", "b2", "b3", "b4", "b5", "b6", "b7", "b8",
+    //                             "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8",
+    //                             "d1", "d2", "d3", "d4", "d5", "d6", "d7", "d8",
+    //                             "e1", "e2", "e3", "e4", "e5", "e6", "e7", "e8",
+    //                             "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8",
+    //                             "g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8",
+    //                             "h1", "h2", "h3", "h4", "h5", "h6", "h7", "h8"};
+    if (turnCnt % 20 == 0)
+    {
+        clearTableWidget();
+    }
+    if (i == 0) {return;}
+    int row = (turnCnt % 20)/2;
+    int col = turnCnt % 2;
+    // gets the piece type character from game
+    // out initializes to a piece first
+    string out = game.board[convertToInt(x1)][y1]->getPosition();
+    if (i == 1) {
+        out += x2 + y2;
+        if (col == 0) {
+            if (bCheck == 1) {
+                out += "+";
+            }
+        }
+        else if (col == 1) {
+            if (wCheck == 1) {
+                out += "+";
+            }
+        }
+    }
+    else if (i == 2) {
+        out += "x" + to_string(x2) + to_string(y2);
+        if (col == 0) {
+            if (bCheck == 1) {
+                out += "+";
+            }
+        }
+        else if (col == 1) {
+            if (wCheck == 1) {
+                out += "+";
+            }
+        }
+    }
+    tableWidget->setItem(row, col, new QTableWidgetItem(QString::fromStdString(out)));
+}
 
 void MainWindow::clearTableWidget()
 {

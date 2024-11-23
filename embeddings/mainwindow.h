@@ -5,6 +5,7 @@
 #include "settings.h"
 #include <QTableWidget>
 #include <QTimer>
+#include "../software/digitalGame/Board.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -25,7 +26,7 @@ private slots:
     //void on_pushButton_clicked();
 
 // <<<<<<< HEAD
-    // void populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt);
+    void populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt);
 
     void clearTableWidget();
 
@@ -81,6 +82,7 @@ private:
     QTimer *timer;
     bool bCheck;
     bool wCheck;
+    Board game;
 
 };
 #endif // MAINWINDOW_H
