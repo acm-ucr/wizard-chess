@@ -24,6 +24,36 @@ string Piece::getPosition(){
     return coordinate;
 }
 
+int Piece::convertToInt(char x){
+    if(x == 'a'){
+        return 0;
+    }
+    else if(x == 'b'){
+        return 1;
+    }
+    else if(x == 'c'){
+        return 2;
+    }
+    else if(x == 'd'){
+        return 3;
+    }
+    else if(x == 'e'){
+        return 4;
+    }
+    else if(x == 'f'){
+        return 5;
+    }
+    else if(x == 'g'){
+        return 6;
+    }
+    else if(x == 'h'){
+        return 7;
+    }
+    else{
+        return this->x;
+    }
+}
+
 string Piece::getCharPositionX(){
     if(x == 0){
         return "a";
