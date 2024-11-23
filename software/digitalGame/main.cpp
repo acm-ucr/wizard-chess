@@ -3,41 +3,49 @@
 #include <array>
 #include <cstdio>
 #include <memory>
-#include "stockfish.hpp"
+#include "stockfish.h"
+#include <fstream>
 using namespace std;
 
-string conversionString(string move) {
-    string newMove = move.substr(9, 4);
-    return newMove;
-}
-
 int main() {
-    // Path to the Stockfish engine binary
-    const char* stockfishPath = "\"C:\\Users\\leaus\\OneDrive\\Important DOcs\\stockfish\\stockfish-windows-x86-64-avx2.exe\"";  // Change this to your Stockfish binary
+    // // Path to the Stockfish engine binary
+    // //USED FOR TESTING: g2g4 e7e5 f2f3 d8h4
+    const char* stockfishPath = "STOCKFISH PATH HERE"; //This should be the stockfish path to your file
     Stockfish engine(stockfishPath);
+    engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
 
+    string bestMove;
+    string position = "position startpos moves";
+    bool playerTurn = true;
+    string playerMove = "";
 
-    //USED FOR TESTING: g2g4 e7e5 f2f3 d8h4
+    while (bestMove != "(none)") {
+        // if(playerTurn == true) { //Player's individual moves
+        //     //Input moves like g2g4
+        //     cout << "Input Your Move: ";
+        //     cin >> playerMove;
+        //     position += " " + playerMove;
+        //     cout << "Current Moves: " << position << endl;
+        // }
+        // else { //Stockfish move
+            // Send position and search commands
+            engine.sendCommand(position);
 
-    //string move;
-    string best;
-    string position = "position startpos moves g2g4 e7e5";
-    int turns = 0;
-    // //engine.sendCommand(position);
-    // //WORK IN PROGRESS MAIN
-    while (best != "(none)") {
-        engine.sendIsReady();
-        engine.sendCommand(position); // Send position first
-        cout << "Sending 'go depth 25' command..." << endl;
-        engine.sendCommand("go depth 25");
-        engine.sendIsReady(); // Wait for Stockfish to be ready after sending the go command
-        cout << "Retrieving the best move..." << endl;
-        best = engine.getBestMove();
-        cout << "Best Move: " << best << endl; 
-        position += " " + best;
-        cout << "Current Moves: " << position << endl;
-        ++turns;
+            //Set depth to tell stockfish how far to search(the lower the depth, the lower the difficulty)
+            engine.sendCommand("go depth 100");
+
+            // Retrieve the best move
+            bestMove = engine.getBestMove();
+            cout << "Best Move: " << bestMove << endl;
+
+            // Update position with the best move
+            position += " " + bestMove;
+            cout << "Current Moves: " << position << endl;
+            engine.clearFiles();
+        //}
+        playerTurn = !playerTurn;
     }
+    cout << "GAME ENDED (CHECKMATE)" << endl;
     return 0;
 }
 

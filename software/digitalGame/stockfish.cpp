@@ -2,104 +2,85 @@
 #include <iostream>
 #include <array>
 #include <memory>
-#include "stockfish.hpp"
+#include "stockfish.h"
 #include <future>
+#include <fstream>
+
 using namespace std;
 
-Stockfish::Stockfish() {
-}
- 
+Stockfish::Stockfish() {}
 
-//Possibly won't ever use this function
-void Stockfish::intialize() {
-    cout << "STARTING" << endl; 
+void Stockfish::clearFiles() {
+    // Open sfcmds.txt in truncation mode to clear its contents
+    ofstream cmdFile("sfcmds.txt", ios::trunc);
+    if (!cmdFile.is_open()) {
+        throw runtime_error("Failed to open sfcmds.txt for clearing!");
+    }
+    cmdFile.close(); // File is cleared when closed
 
+    // Open sfoutput.txt in truncation mode to clear its contents
+    ofstream outputFile("sfoutput.txt", ios::trunc); //ios::trunc will auto delete any info inside file once opened
+    if (!outputFile.is_open()) {
+        throw runtime_error("Failed to open sfoutput.txt for clearing!");
+    }
+    outputFile.close(); // File is cleared when closed
 
-    // Send UCI command
-    //it will return uciok to confirm that sotckfish confirmed the uci command
-    sendUciOk();
-
-
-
-    //Sending ready command
-    //It will return readyok to confirm stockfish ready
-    sendIsReady();
-}
+    cout << "Files cleared successfully." << endl;
+} 
 
 
 //Sends commands for stockfish to process
 void Stockfish::sendCommand(const string& command) {
-        sendIsReady();
-        fprintf(stockfish, "%s\n", command.c_str()); //Prints command to stockfish file
-        fflush(stockfish);
+    ofstream cmdFile("sfcmds.txt", std::ios::app); // Open file in append mode
+    if (!cmdFile.is_open()) {
+        throw runtime_error("Failed to open command file!");
+    }
 
-        // fputs((command + "\n").c_str(), stockfish);
+    // Write the command to the file
+    cmdFile<< "isready" << "\n";
+    cmdFile << command << "\n";
+    cmdFile.close();
+    cout << "Command sent to Stockfish: " << command << endl;
 }
 
 
 //This function calcualtes the best moves
-//PROBLEM: It's now only reading up to a certain point and not the whole 
-//strings of data.
 string Stockfish::getBestMove() {
-      // Read and return the response
-        string result;
-        array<char, 512> buffer;
-        int moveStart;
-        int moveEnd; 
-        int bestMovePos = 0;
-        //PROBLEM THE BUFFER IS RETURNING NULLPTER
-        fgets(buffer.data(), buffer.size(), stockfish);
+    //Read and return the response
 
-        while (buffer.data() != nullptr) {
-            result += buffer.data();
+    int moveStart;
+    int moveEnd;
+    int bestMovePos;
 
-            // Print the current response chunk for debugging
-            cout << "Read from Stockfish: " << buffer.data() << endl;
-            // Print the full accumulated result so far
-            cout << "Accumulated result:\n" << result << endl;
-
-            // Check if we received "bestmove" in the response
-            bestMovePos = result.find("bestmove");
+    //Launch stockfish and uses files of sfcmds as input and sfoutput as output for stockfish commands and data
+    system("\"C:\\Users\\leaus\\OneDrive\\Important DOcs\\stockfish\\stockfish-windows-x86-64-avx2.exe\" < sfcmds.txt > sfoutput.txt");
 
 
-            cout << "\"bestmove\" found at position: " << bestMovePos << endl;
+    // Read the output file to find the best move
+    ifstream outputFile("sfoutput.txt");
+    if (!outputFile.is_open()) {
+        throw runtime_error("Failed to open output file!");
+    }
 
-            // Extract the best move from the response
-            moveStart = bestMovePos + 9; // "bestmove " is 9 characters long including the space after
-            moveEnd = result.find(' ', moveStart); //Start moveEnd from after movestart and go until space
-            string bestMove = result.substr(moveStart, moveEnd - moveStart);
-
-            cout << "Extracted best move: " << bestMove << endl;
-
-            return bestMove;
-        }
-
-
-        if (fgets(buffer.data(), buffer.size(), stockfish) == nullptr) {
-            if (feof(stockfish)) {
-                cerr << "End of file reached on Stockfish stream." << endl;
+    string moveLine; //acts as the line that extracts the while string starting at bestmove
+    string bestMove; //stores the actual best move
+    while (getline(outputFile, moveLine)) {
+        cout << "Read from Stockfish: " << moveLine << endl;
+        bestMovePos = moveLine.find("bestmove");
+        if (bestMovePos != string::npos) { //Checks is move is not found then just 
+            moveStart = bestMovePos + 9; // Skip "bestmove "
+            moveEnd = moveLine.find(' ', moveStart); //Start moveEnd from after movestart and go until space
+            if (moveEnd == string::npos) { //Checks if a move is not found, then just use the length
+                moveEnd = moveLine.length();
             }
-            if (ferror(stockfish)) {
-                cerr << "Error occurred while reading from Stockfish stream." << endl;
-            }
+            bestMove = moveLine.substr(moveStart, moveEnd - moveStart);
+            break;
         }
+    }
+    outputFile.close();
 
-        fflush(stockfish); //Flushes stream to accept new data for stockfish
-        return result;
-}
-
-
-
-void Stockfish::sendUciOk() {
-
-    cout << "Sending UCI command...\n";
-    fprintf(stockfish, "uci\n");
-    fflush(stockfish);
-}
-
-
-void Stockfish::sendIsReady() {
-    cout << "Send isReady command...\n";
-    fprintf(stockfish, "isready\n");
-    fflush(stockfish);
+    if (bestMove.empty()) {
+        cout << "Failed to find best move!" << endl;
+    }
+    return bestMove;
 }
