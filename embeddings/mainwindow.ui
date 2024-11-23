@@ -68,7 +68,7 @@ rgb(0, 0, 0)
 }</string>
     </property>
     <property name="currentIndex">
-     <number>6</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="Start">
      <property name="autoFillBackground">
@@ -2720,31 +2720,6 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
           </item>
          </layout>
         </widget>
-        <widget class="QTableWidget" name="tableWidget">
-         <property name="geometry">
-          <rect>
-           <x>380</x>
-           <y>40</y>
-           <width>251</width>
-           <height>311</height>
-          </rect>
-         </property>
-         <row>
-          <property name="text">
-           <string>Turn #</string>
-          </property>
-         </row>
-         <column>
-          <property name="text">
-           <string>P1</string>
-          </property>
-         </column>
-         <column>
-          <property name="text">
-           <string>P2</string>
-          </property>
-         </column>
-        </widget>
         <widget class="QPushButton" name="pushButton_EndGame">
          <property name="geometry">
           <rect>
@@ -2757,6 +2732,89 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
          <property name="text">
           <string>End Game</string>
          </property>
+        </widget>
+        <widget class="QPushButton" name="randomGeneratorButton">
+         <property name="geometry">
+          <rect>
+           <x>400</x>
+           <y>350</y>
+           <width>83</width>
+           <height>29</height>
+          </rect>
+         </property>
+         <property name="text">
+          <string>Random</string>
+         </property>
+        </widget>
+        <widget class="QTableWidget" name="RoundTurnTable">
+         <property name="geometry">
+          <rect>
+           <x>400</x>
+           <y>40</y>
+           <width>341</width>
+           <height>301</height>
+          </rect>
+         </property>
+         <row>
+          <property name="text">
+           <string>Round #1</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Round #2</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Round #3</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Round #4</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Round #5</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Round #6</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Round #7</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Round #8</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Round #9</string>
+          </property>
+         </row>
+         <row>
+          <property name="text">
+           <string>Round #10</string>
+          </property>
+         </row>
+         <column>
+          <property name="text">
+           <string>Black</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>White</string>
+          </property>
+         </column>
         </widget>
        </widget>
       </item>

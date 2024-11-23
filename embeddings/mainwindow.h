@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include "settings.h"
+#include <QTableWidget>
+#include <QTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -23,6 +25,10 @@ private slots:
     //void on_pushButton_clicked();
 
 // <<<<<<< HEAD
+    // void populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt);
+
+    void clearTableWidget();
+
     void on_pushButton_home_about_clicked();
 
     void on_pushButton_home_end_clicked();
@@ -66,9 +72,15 @@ private slots:
 
     void on_pushButton_back_settings_clicked();
 
+    void on_randomGeneratorButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     Settings *mwSettings;
+    QTableWidget *tableWidget;
+    QTimer *timer;
+    bool bCheck;
+    bool wCheck;
 
 };
 #endif // MAINWINDOW_H
