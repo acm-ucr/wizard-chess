@@ -16,6 +16,5 @@ class Pawn : public Piece {
                 return false;
             }
 
-
             bool isPromote(int y);
 };
