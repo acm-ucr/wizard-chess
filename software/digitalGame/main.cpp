@@ -20,14 +20,14 @@ int main() {
     string playerMove = "";
 
     while (bestMove != "(none)") {
-        // if(playerTurn == true) { //Player's individual moves
-        //     //Input moves like g2g4
-        //     cout << "Input Your Move: ";
-        //     cin >> playerMove;
-        //     position += " " + playerMove;
-        //     cout << "Current Moves: " << position << endl;
-        // }
-        // else { //Stockfish move
+        if(playerTurn == true) { //Player's individual moves
+            //Input moves like g2g4
+            cout << "Input Your Move: ";
+            cin >> playerMove;
+            position += " " + playerMove;
+            cout << "Current Moves: " << position << endl;
+        }
+        else { //Stockfish move
             // Send position and search commands
             engine.sendCommand(position);
 
@@ -42,7 +42,7 @@ int main() {
             position += " " + bestMove;
             cout << "Current Moves: " << position << endl;
             engine.clearFiles();
-        //}
+        }
         playerTurn = !playerTurn;
     }
     cout << "GAME ENDED (CHECKMATE)" << endl;
