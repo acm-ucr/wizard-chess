@@ -78,6 +78,11 @@ void MainWindow::setupBoard()
 // Add chess pieces to their starting positions
 void MainWindow::setupInitialPositions()
 {
+    // ui->stackedWidget->setCurrentIndex(5);
+    // QLabel *background = new QLabel(this);
+    // background->setAlignment(Qt::AlignTop | Qt:: AlignRight);
+    // background->setGeometry(QRect(15, 20, 300, 320));
+    // background->setStyleSheet("background-image:/images/images/chessBoardBackground");
     // Add white pieces
     pieces.append(ChessPiece("rook", "white", "A1"));
     pieces.append(ChessPiece("knight", "white", "B1"));
@@ -106,6 +111,7 @@ void MainWindow::setupInitialPositions()
     for (ChessPiece &piece : pieces) {
         placePieceOnTile(piece.position, piece.type, piece.color);
     }
+    // ui->stackedWidget->setCurrentIndex(0);
 }
 
 
@@ -132,8 +138,13 @@ void MainWindow::placePieceOnTile(const QString& position, const QString& pieceT
         }
 
         QPixmap pixmap = QPixmap::fromImage(img);
-        button->setIcon(QIcon(pixmap));
-        button->setIconSize(QSize(40, 40));
+        QIcon icon(pixmap);
+        icon.addPixmap(pixmap, QIcon::Normal, QIcon::Off);
+
+
+        button->setIcon(icon);
+        button->setIconSize(QSize(30, 30));
+        button->setStyleSheet("QPushButton { padding-left: 15px; }, setStyleSheet(QPushButton{background: transparent;});");
     }
 }
 
