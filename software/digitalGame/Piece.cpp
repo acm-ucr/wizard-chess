@@ -20,7 +20,7 @@ Piece::Piece(int xPos, int yPos){
 }
 
 string Piece::getPosition(){
-    string coordinate = getCharPositionX() + to_string(getPositionY());
+    string coordinate = getCharPositionX() + to_string(getPositionY() + 1);
     return coordinate;
 }
 

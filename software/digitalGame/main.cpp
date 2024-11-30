@@ -5,9 +5,11 @@
 #include <memory>
 #include "stockfish.h"
 #include <fstream>
+#include "Board.h"
 using namespace std;
 
 int main() {
+    
     // // Path to the Stockfish engine binary
     // //USED FOR TESTING: g2g4 e7e5 f2f3 d8h4
     const char* stockfishPath = "STOCKFISH PATH HERE"; //This should be the stockfish path to your file
@@ -47,5 +49,7 @@ int main() {
     }
     cout << "GAME ENDED (CHECKMATE)" << endl;
     return 0;
+
+
 }
 

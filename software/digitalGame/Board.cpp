@@ -1348,16 +1348,22 @@ int Board::convertToInt(char x){
     int blackMoves = 0;
 
     while(!checkmate(kw) || !checkmate(kb)){
-        char oldX;
+        char charOldX;
         int oldY;
-        char newX;
+        char charNewX;
         int newY;
 
+        int oldX;
+        int newX;
+
         if(isCheck(kw) || isCheck(kb)){
-            cin >> oldX;
+            cin >> charOldX;
             cin >> oldY;
-            cin >> newX;
+            cin >> charNewX;
             cin >> newY;
+
+            oldX = convertToInt(charOldX);
+            newX = convertToInt(charNewX);
 
             if(board[oldY][oldX]->white()){
                 if(isValidMove(board[oldY][oldX], newX, newY)){
@@ -1368,10 +1374,13 @@ int Board::convertToInt(char x){
         }
         else{
             if(whiteMoves == blackMoves){
-                cin >> oldX;
+                cin >> charOldX;
                 cin >> oldY;
-                cin >> newX;
+                cin >> charNewX;
                 cin >> newY;
+
+                oldX = convertToInt(charOldX);
+                newX = convertToInt(charNewX);
 
                 if(board[oldY][oldX]->white()){
                     if(isValidMove(board[oldY][oldX], newX, newY)){
@@ -1381,10 +1390,13 @@ int Board::convertToInt(char x){
                 }
             }
             else{
-                cin >> oldX;
+                cin >> charOldX;
                 cin >> oldY;
-                cin >> newX;
+                cin >> charNewX;
                 cin >> newY;
+
+                oldX = convertToInt(charOldX);
+                newX = convertToInt(charNewX);
 
                 if(!board[oldY][oldX]->white()){
                     if(isValidMove(board[oldY][oldX], newX, newY)){
