@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "settings.h"
+<<<<<<< HEAD
 #include <QApplication>
 #include <QTableWidget>
 #include <QTableWidgetItem>
@@ -12,6 +13,9 @@
 #include "mainwindow.h"
 #include "home.h"
 #include "../software/digitalGame/Board.h"
+=======
+#include "inputs.h"
+>>>>>>> fd90cec1b074ad39a6852e72387e43ea14ed085c
 
 using namespace std;
 

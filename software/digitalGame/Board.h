@@ -15,8 +15,6 @@
 #include "EmptyPiece.h"
 
 
-
-
 using namespace std;
 
 
@@ -57,6 +55,8 @@ class Board {
 
 
         void undoMove(Piece *p, int x, int y);
+
+        int convertToInt(char x);
 
 
         int simulateUp(Piece *p);

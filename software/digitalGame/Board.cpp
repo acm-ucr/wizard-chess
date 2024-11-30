@@ -1315,22 +1315,55 @@ bool Board::checkmate(King *k){
 
     return false;
 }
-
+ 
+int Board::convertToInt(char x){
+    if(x == 'a'){
+        return 0;
+    }
+    else if(x == 'b'){
+        return 1;
+    }
+    else if(x == 'c'){
+        return 2;
+    }
+    else if(x == 'd'){
+        return 3;
+    }
+    else if(x == 'e'){
+        return 4;
+    }
+    else if(x == 'f'){
+        return 5;
+    }
+    else if(x == 'g'){
+        return 6;
+    }
+    else if(x == 'h'){
+        return 7;
+    }
+}
+ 
  void Board::playGame(){
     int whiteMoves = 0;
     int blackMoves = 0;
 
     while(!checkmate(kw) || !checkmate(kb)){
-        int oldX;
+        char charOldX;
         int oldY;
-        int newX;
+        char charNewX;
         int newY;
 
+        int oldX;
+        int newX;
+
         if(isCheck(kw) || isCheck(kb)){
-            cin >> oldX;
+            cin >> charOldX;
             cin >> oldY;
-            cin >> newX;
+            cin >> charNewX;
             cin >> newY;
+
+            oldX = convertToInt(charOldX);
+            newX = convertToInt(charNewX);
 
             if(board[oldY][oldX]->white()){
                 if(isValidMove(board[oldY][oldX], newX, newY)){
@@ -1341,10 +1374,13 @@ bool Board::checkmate(King *k){
         }
         else{
             if(whiteMoves == blackMoves){
-                cin >> oldX;
+                cin >> charOldX;
                 cin >> oldY;
-                cin >> newX;
+                cin >> charNewX;
                 cin >> newY;
+
+                oldX = convertToInt(charOldX);
+                newX = convertToInt(charNewX);
 
                 if(board[oldY][oldX]->white()){
                     if(isValidMove(board[oldY][oldX], newX, newY)){
@@ -1354,10 +1390,13 @@ bool Board::checkmate(King *k){
                 }
             }
             else{
-                cin >> oldX;
+                cin >> charOldX;
                 cin >> oldY;
-                cin >> newX;
+                cin >> charNewX;
                 cin >> newY;
+
+                oldX = convertToInt(charOldX);
+                newX = convertToInt(charNewX);
 
                 if(!board[oldY][oldX]->white()){
                     if(isValidMove(board[oldY][oldX], newX, newY)){

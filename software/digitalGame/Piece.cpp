@@ -20,10 +20,11 @@ Piece::Piece(int xPos, int yPos){
 }
 
 string Piece::getPosition(){
-    string coordinate = getCharPositionX() + to_string(getPositionY());
+    string coordinate = getCharPositionX() + to_string(getPositionY() + 1);
     return coordinate;
 }
 
+<<<<<<< HEAD
 int Piece::convertToInt(char x){
     if(x == 'a'){
         return 0;
@@ -51,6 +52,37 @@ int Piece::convertToInt(char x){
     }
     return this->x;
 }
+=======
+// int Piece::convertToInt(char x){
+//     if(x == 'a'){
+//         return 0;
+//     }
+//     else if(x == 'b'){
+//         return 1;
+//     }
+//     else if(x == 'c'){
+//         return 2;
+//     }
+//     else if(x == 'd'){
+//         return 3;
+//     }
+//     else if(x == 'e'){
+//         return 4;
+//     }
+//     else if(x == 'f'){
+//         return 5;
+//     }
+//     else if(x == 'g'){
+//         return 6;
+//     }
+//     else if(x == 'h'){
+//         return 7;
+//     }
+//     else{
+//         return this->x;
+//     }
+// }
+>>>>>>> fd90cec1b074ad39a6852e72387e43ea14ed085c
 
 string Piece::getCharPositionX(){
     if(x == 0){

@@ -6,11 +6,7 @@ class Rook : public Piece {
             Rook();
             Rook(int xPos, int yPos, bool isWhite);
             bool isValid(int xT, int yT);
-            int rangeMinX();
-            int rangeMaxX();
-            int rangeMinY();
-            int rangeMaxY();
-
+            
             void movePiece(int xM, int yM) override;
 
 
