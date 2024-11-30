@@ -1,20 +1,15 @@
 #include <iostream>
 #include "Rook.h"
+#include "Board.h"
 
 
-Rook::Rook() : Piece(){}
+Rook::Rook() : Piece(){
+
+}
 
 Rook::Rook(int xPos, int yPos, bool color) : Piece(xPos, yPos, color){
-    
-}
 
-/*string Rook::getID(){
-    return "rook";
 }
-
-bool Rook::isEmpty(){
-    return false;
-}*/
 
 void Rook::movePiece(int xM, int yM){
     if(this->isValid(xM, yM)){
@@ -23,33 +18,17 @@ void Rook::movePiece(int xM, int yM){
     }
 }
 
-int rangeMinX(){
-    
-}
-
-int rangeMaxX(){
-
-}
-
-int rangeMinY(){
-
-}
-
-int rangeMaxY(){
-
-}
-
 bool Rook::isValid(int xT, int yT){
 
-    if(!(this->getPositionX() + xT < 0) && !(this->getPositionX() + xT > 8)){
-        if(!(this->getPositionY() + yT < 0) && !(this->getPositionY() + yT > 8)){
+    if(!(this->getPositionX() + xT < 0) && !(this->getPositionX() + xT > 7)){
+        if(!(this->getPositionY() + yT < 0) && !(this->getPositionY() + yT > 7)){
             if(xT == 0){
-                if(yT < 8 && yT > -8){
+                if(yT < 8 && yT > 8){
                     return true;
                 }
             }
             else if(yT == 0){
-                if(xT < 8 && xT > -8){
+                if(xT < 8 && xT > 8){
                     return true;
                 }
             }
