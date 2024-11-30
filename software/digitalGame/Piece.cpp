@@ -24,7 +24,6 @@ string Piece::getPosition(){
     return coordinate;
 }
 
-<<<<<<< HEAD
 int Piece::convertToInt(char x){
     if(x == 'a'){
         return 0;
@@ -52,7 +51,6 @@ int Piece::convertToInt(char x){
     }
     return this->x;
 }
-=======
 // int Piece::convertToInt(char x){
 //     if(x == 'a'){
 //         return 0;
@@ -82,7 +80,6 @@ int Piece::convertToInt(char x){
 //         return this->x;
 //     }
 // }
->>>>>>> fd90cec1b074ad39a6852e72387e43ea14ed085c
 
 string Piece::getCharPositionX(){
     if(x == 0){

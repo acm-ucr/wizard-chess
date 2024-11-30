@@ -24,11 +24,8 @@ SOURCES += \
     ../software/digitalGame/EmptyPiece.cpp
 
 HEADERS += \
-<<<<<<< HEAD
     home.h \
-=======
     inputs.h \
->>>>>>> fd90cec1b074ad39a6852e72387e43ea14ed085c
     mainwindow.h \
     settings.h
     ../software/digitalGame/Piece.h

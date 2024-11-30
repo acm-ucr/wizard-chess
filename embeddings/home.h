@@ -3,6 +3,7 @@
 
 class Home
 {
+    // Used this class to make sure that when the user clicks on the White/Black Home screen, there is a data saved
     public:
         Home();
         unsigned int userChoice = 0;
