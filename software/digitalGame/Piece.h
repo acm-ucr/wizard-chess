@@ -20,7 +20,7 @@ class Piece {
 
         int convertToInt(char x);
 
-        string getPosition();
+        // string getPosition();
         
         virtual bool isEmpty() const {
             return true;

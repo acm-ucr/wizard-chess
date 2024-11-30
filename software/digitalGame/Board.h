@@ -26,9 +26,6 @@ class Board {
     protected:
         vector<Piece> emptyPieces;
 
-
-
-
     public:
         Board(); //Default COnstructor
         ~Board();

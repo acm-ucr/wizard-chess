@@ -1,12 +1,12 @@
 #include "Piece.h"
 
-Piece :: Piece(){
+Piece::Piece(){
     x = 0;
     y = 0;
     //counter = 0;
 }
 
-Piece :: Piece(int xPos, int yPos, bool color){
+Piece::Piece(int xPos, int yPos, bool color){
     x = xPos;
     y = yPos;
     isWhite = color;
@@ -49,9 +49,7 @@ int Piece::convertToInt(char x){
     else if(x == 'h'){
         return 7;
     }
-    else{
-        return this->x;
-    }
+    return this->x;
 }
 
 string Piece::getCharPositionX(){

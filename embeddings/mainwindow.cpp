@@ -9,12 +9,10 @@
 #include <string>
 #include <ctime>
 #include <cstdlib>
-#include <vector>
 #include "mainwindow.h"
-// #include "../software/digitalGame/Board.h"
+#include "home.h"
+#include "../software/digitalGame/Board.h"
 
-
-// #include <QThread>
 using namespace std;
 
 MainWindow::MainWindow(QWidget *parent)
@@ -24,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
     mwSettings = new Settings();
+    whiteChoice = new Home();
+    blackChoice = new Home();
     tableWidget = ui->RoundTurnTable;
     timer = new QTimer(this);
     srand(time(0));
@@ -65,20 +65,9 @@ int convertToInt(char x){
 }
 
 // Simulates the population of the table widget for the chess game
-// x1 and x2 could be a character like 'a', 'b' etc
+// x1 and x2 could be a character like 'a', 'b' etc - therefore, {x1, y1} E {a, 3}
 void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt)
 {
-    // vector<string> pieceName = {"K", "Q", "R", "B", "N",
-    //                             "Kx", "Qx", "Rx", "Bx", "Nx"};
-
-    // vector<string> positions = {"a1", "a2", "a3", "a4", "a5", "a6", "a7", "a8",
-    //                             "b1", "b2", "b3", "b4", "b5", "b6", "b7", "b8",
-    //                             "c1", "c2", "c3", "c4", "c5", "c6", "c7", "c8",
-    //                             "d1", "d2", "d3", "d4", "d5", "d6", "d7", "d8",
-    //                             "e1", "e2", "e3", "e4", "e5", "e6", "e7", "e8",
-    //                             "f1", "f2", "f3", "f4", "f5", "f6", "f7", "f8",
-    //                             "g1", "g2", "g3", "g4", "g5", "g6", "g7", "g8",
-    //                             "h1", "h2", "h3", "h4", "h5", "h6", "h7", "h8"};
     if (turnCnt % 20 == 0)
     {
         clearTableWidget();
@@ -88,7 +77,7 @@ void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turn
     int col = turnCnt % 2;
     // gets the piece type character from game
     // out initializes to a piece first
-    string out = game.board[convertToInt(x1)][y1]->getPosition();
+    string out = game.board[y1][game.convertToInt(x1)]->getPosition();
     if (i == 1) {
         out += x2 + y2;
         if (col == 0) {
@@ -238,13 +227,13 @@ void MainWindow::on_pushButton_previous_tutorial_clicked()
 }
 
 // White House Selection
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_pushButton_home1_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
 }
 
 // Black House Selection
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::on_pushButton_home2_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
 }
@@ -254,4 +243,46 @@ void MainWindow::on_randomGeneratorButton_clicked()
 {
     // populateCells();
     clearTableWidget();
+}
+
+// Bits For White Home Click
+void MainWindow::on_pushButton_Gryffindor_clicked()
+{
+    whiteChoice->userChoice = 1;
+}
+
+void MainWindow::on_pushButton_Slytherin_clicked()
+{
+    whiteChoice->userChoice = 2;
+}
+
+void MainWindow::on_pushButton_Hufflepuff_clicked()
+{
+    whiteChoice->userChoice = 4;
+}
+
+void MainWindow::on_pushButton_Ravenclaw_clicked()
+{
+    whiteChoice->userChoice = 8;
+}
+
+// Bits For Black Home Click
+void MainWindow::on_pushButton_Gryffindor_2_clicked()
+{
+    blackChoice->userChoice = 1;
+}
+
+void MainWindow::on_pushButton_Slytherin_2_clicked()
+{
+    blackChoice->userChoice = 2;
+}
+
+void MainWindow::on_pushButton_Hufflepuff_2_clicked()
+{
+    blackChoice->userChoice = 4;
+}
+
+void MainWindow::on_pushButton_Ravenclaw_2_clicked()
+{
+    blackChoice->userChoice = 8;
 }
