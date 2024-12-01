@@ -11,7 +11,6 @@
 #include <cstdlib>
 #include "mainwindow.h"
 #include "home.h"
-#include "inputs.h"
 
 using namespace std;
 
@@ -36,37 +35,9 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-/*nt convertToInt(char x){
-    if(x == 'a'){
-        return 0;
-    }
-    else if(x == 'b'){
-        return 1;
-    }
-    else if(x == 'c'){
-        return 2;
-    }
-    else if(x == 'd'){
-        return 3;
-    }
-    else if(x == 'e'){
-        return 4;
-    }
-    else if(x == 'f'){
-        return 5;
-    }
-    else if(x == 'g'){
-        return 6;
-    }
-    else if(x == 'h'){
-        return 7;
-    }
-    return 9;
-}*/
-
 // Simulates the population of the table widget for the chess game
 // x1 and x2 could be a character like 'a', 'b' etc - therefore, {x1, y1} E {a, 3}
-void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt)
+void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt) // (a, 2, b, 4, 1, 0)
 {
     if (turnCnt % 20 == 0)
     {
@@ -75,11 +46,40 @@ void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turn
     if (i == 0) {return;}
     int row = (turnCnt % 20)/2;
     int col = turnCnt % 2;
-    // gets the piece type character from game
-    // out initializes to a piece first
-    string out = game.board[y1][game.convertToInt(x1)]->getPosition();
+    // Assuiming getID() returns the piece name at the position
+    string out;
+    if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "pawn")
+    {
+        out += "";
+    }
+    else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "bishop")
+    {
+        out += "B";
+    }
+    else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "king")
+    {
+        out += "K";
+    }
+    else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "knight")
+    {
+        out += "N";
+    }
+    else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "rook")
+    {
+        out += "R";
+    }
+    else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "queen")
+    {
+        out += "Q";
+    }
+    else
+    {
+        out += "Invalid";
+        tableWidget->setItem(row, col, new QTableWidgetItem(QString::fromStdString(out)));
+        return;
+    }
     if (i == 1) {
-        out += x2 + y2;
+        out += x2 + to_string(y2);
         if (col == 0) {
             if (bCheck == 1) {
                 out += "+";
@@ -92,7 +92,8 @@ void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turn
         }
     }
     else if (i == 2) {
-        out += "x" + to_string(x2) + to_string(y2);
+        out += "x";
+        out += x2 + to_string(y2);
         if (col == 0) {
             if (bCheck == 1) {
                 out += "+";
@@ -241,8 +242,7 @@ void MainWindow::on_pushButton_home2_clicked()
 // Random Button Simulates Cell Population
 void MainWindow::on_randomGeneratorButton_clicked()
 {
-    // populateCells();
-    clearTableWidget();
+    populateCells('a', 2, 'b', 5, 2, 0);
 }
 
 // Bits For White Home Click

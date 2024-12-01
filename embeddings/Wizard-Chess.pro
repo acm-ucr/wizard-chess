@@ -12,31 +12,31 @@ SOURCES += \
     home.cpp \
     main.cpp \
     mainwindow.cpp \
-    settings.cpp
-    ../software/digitalGame/Piece.cpp
-    ../software/digitalGame/Pawn.cpp
-    ../software/digitalGame/Bishop.cpp
-    ../software/digitalGame/Knight.cpp
-    ../software/digitalGame/Queen.cpp
-    ../software/digitalGame/King.cpp
-    ../software/digitalGame/Rook.cpp
-    ../software/digitalGame/Board.cpp
-    ../software/digitalGame/EmptyPiece.cpp
+    settings.cpp \
+    Piece.cpp \
+    Pawn.cpp \
+    Bishop.cpp \
+    Knight.cpp \
+    Queen.cpp \
+    King.cpp \
+    Rook.cpp \
+    Board.cpp \
+    EmptyPiece.cpp
 
 HEADERS += \
     home.h \
     inputs.h \
     mainwindow.h \
-    settings.h
-    ../software/digitalGame/Piece.h
-    ../software/digitalGame/Pawn.h
-    ../software/digitalGame/Bishop.h
-    ../software/digitalGame/Knight.h
-    ../software/digitalGame/Queen.h
-    ../software/digitalGame/King.h
-    ../software/digitalGame/Rook.h
-    ../software/digitalGame/EmptyPiece.h
-    ../software/digitalGame/Board.h
+    settings.h \
+    Piece.h \
+    Pawn.h \
+    Bishop.h \
+    Knight.h \
+    Queen.h \
+    King.h \
+    Rook.h \
+    EmptyPiece.h \
+    Board.h
 
 FORMS += \
     mainwindow.ui

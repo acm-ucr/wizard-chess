@@ -10,10 +10,7 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    inputs input;
-
-
-
+    // inputs input;
 
     return a.exec();
 }

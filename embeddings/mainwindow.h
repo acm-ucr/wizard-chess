@@ -6,7 +6,8 @@
 #include "home.h"
 #include <QTableWidget>
 #include <QTimer>
-#include "../software/digitalGame/Board.h"
+#include "inputs.h"
+#include "Board.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
