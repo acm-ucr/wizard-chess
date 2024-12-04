@@ -1287,11 +1287,15 @@ bool Board::isCheck(King *k){
         return false;
 }
 
-bool Board::isCheck(){
-    if(isCheck(kw)){
+bool Board::isBCheck(){
+    if(isCheck(kb)){
         return true;
     }
-    if(isCheck(kb)){
+    return false;
+}
+
+bool Board::isWCheck(){
+    if (isCheck(kw)){
         return true;
     }
     return false;

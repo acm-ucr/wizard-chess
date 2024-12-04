@@ -48,7 +48,9 @@ class Board {
         bool checkmate(King *k);
         bool isCheck(King *k);
 
-        bool isCheck();
+        bool isBCheck();
+
+        bool isWCheck();
 
         void promote(Pawn *p, Piece *piece);
 

@@ -37,8 +37,10 @@ MainWindow::~MainWindow()
 
 // Simulates the population of the table widget for the chess game
 // x1 and x2 could be a character like 'a', 'b' etc - therefore, {x1, y1} E {a, 3}
-void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt) // (a, 2, b, 4, 1, 0)
+// the i = 0 means no move, i = 1 means just move and possible check, and i = 2 means move, kill and possible check
+void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt)
 {
+    // performs action similar to a virtual list ~ after the table is full, the table resets
     if (turnCnt % 20 == 0)
     {
         clearTableWidget();
@@ -46,7 +48,6 @@ void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turn
     if (i == 0) {return;}
     int row = (turnCnt % 20)/2;
     int col = turnCnt % 2;
-    // Assuiming getID() returns the piece name at the position
     string out;
     if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "pawn")
     {
@@ -81,11 +82,13 @@ void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turn
     if (i == 1) {
         out += x2 + to_string(y2);
         if (col == 0) {
+            bCheck = game.isBCheck();
             if (bCheck == 1) {
                 out += "+";
             }
         }
         else if (col == 1) {
+            wCheck = game.isWCheck();
             if (wCheck == 1) {
                 out += "+";
             }
@@ -95,11 +98,13 @@ void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turn
         out += "x";
         out += x2 + to_string(y2);
         if (col == 0) {
+            bCheck = game.isBCheck();
             if (bCheck == 1) {
                 out += "+";
             }
         }
         else if (col == 1) {
+            wCheck = game.isWCheck();
             if (wCheck == 1) {
                 out += "+";
             }
@@ -239,7 +244,7 @@ void MainWindow::on_pushButton_home2_clicked()
     ui->stackedWidget->setCurrentIndex(5);
 }
 
-// Random Button Simulates Cell Population
+// Random Button Simulates Cell Population [FOR TESTING PURPOSES ONLY]
 void MainWindow::on_randomGeneratorButton_clicked()
 {
     populateCells('a', 2, 'b', 5, 2, 0);

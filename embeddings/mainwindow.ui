@@ -68,7 +68,7 @@ rgb(0, 0, 0)
 }</string>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>8</number>
     </property>
     <widget class="QWidget" name="Start">
      <property name="autoFillBackground">
@@ -201,7 +201,7 @@ rgb(0, 0, 0)
      <widget class="QLabel" name="label_20">
       <property name="geometry">
        <rect>
-        <x>160</x>
+        <x>140</x>
         <y>20</y>
         <width>531</width>
         <height>50</height>
@@ -230,13 +230,58 @@ rgb(0, 0, 0)
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>70</x>
-        <y>30</y>
-        <width>551</width>
-        <height>466</height>
+        <x>140</x>
+        <y>80</y>
+        <width>511</width>
+        <height>341</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_3">
+       <item row="1" column="0">
+        <widget class="QPushButton" name="pushButton_Hufflepuff">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(255, 255, 0);</string>
+         </property>
+         <property name="text">
+          <string>Hufflepuff</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QPushButton" name="pushButton_Ravenclaw">
+         <property name="minimumSize">
+          <size>
+           <width>150</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>150</width>
+           <height>150</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(0, 0, 127);
+color: rgb(255, 255, 255);</string>
+         </property>
+         <property name="text">
+          <string>Ravenclaw</string>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="1">
         <widget class="QPushButton" name="pushButton_Slytherin">
          <property name="minimumSize">
@@ -246,7 +291,8 @@ rgb(0, 0, 0)
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(0, 85, 0);</string>
+          <string notr="true">background-color: rgb(0, 85, 0);
+color: rgb(255, 255, 255);</string>
          </property>
          <property name="text">
           <string>Slytherin</string>
@@ -275,50 +321,6 @@ rgb(0, 0, 0)
          </property>
         </widget>
        </item>
-       <item row="1" column="1">
-        <widget class="QPushButton" name="pushButton_Ravenclaw">
-         <property name="minimumSize">
-          <size>
-           <width>150</width>
-           <height>150</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>150</width>
-           <height>150</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(0, 0, 127);</string>
-         </property>
-         <property name="text">
-          <string>Ravenclaw</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QPushButton" name="pushButton_Hufflepuff">
-         <property name="minimumSize">
-          <size>
-           <width>150</width>
-           <height>150</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>150</width>
-           <height>150</height>
-          </size>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">background-color: rgb(255, 255, 0);</string>
-         </property>
-         <property name="text">
-          <string>Hufflepuff</string>
-         </property>
-        </widget>
-       </item>
       </layout>
      </widget>
     </widget>
@@ -327,7 +329,7 @@ rgb(0, 0, 0)
       <property name="geometry">
        <rect>
         <x>150</x>
-        <y>40</y>
+        <y>20</y>
         <width>511</width>
         <height>51</height>
        </rect>
@@ -342,10 +344,10 @@ rgb(0, 0, 0)
      <widget class="QWidget" name="layoutWidget_2">
       <property name="geometry">
        <rect>
-        <x>30</x>
-        <y>100</y>
-        <width>551</width>
-        <height>328</height>
+        <x>140</x>
+        <y>90</y>
+        <width>521</width>
+        <height>321</height>
        </rect>
       </property>
       <layout class="QGridLayout" name="gridLayout_4">
@@ -358,7 +360,8 @@ rgb(0, 0, 0)
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(0, 85, 0);</string>
+          <string notr="true">background-color: rgb(0, 85, 0);
+color: rgb(255, 255, 255);</string>
          </property>
          <property name="text">
           <string>Slytherin</string>
@@ -380,7 +383,8 @@ rgb(0, 0, 0)
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(0, 0, 127);</string>
+          <string notr="true">background-color: rgb(0, 0, 127);
+color: rgb(255, 255, 255);</string>
          </property>
          <property name="text">
           <string>Ravenclaw</string>
@@ -470,16 +474,17 @@ font: 20pt &quot;Sitka&quot;;</string>
        <rect>
         <x>10</x>
         <y>70</y>
-        <width>751</width>
+        <width>741</width>
         <height>51</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">color: rgb(255, 0, 0);
-font: 900 9pt &quot;Segoe UI Black&quot;;</string>
+       <string notr="true">color: rgb(0, 0, 255);
+font: 900 13pt &quot;Segoe UI Black&quot;;</string>
       </property>
       <property name="text">
-       <string>Objective: The goal is to checkmate the opponent's king, where the king cannot escape.</string>
+       <string>Objective: The goal is to checkmate the opponent's 
+king and not make it escape</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_11">
@@ -3044,7 +3049,7 @@ font: 20pt &quot;Sitka&quot;;</string>
      <widget class="QLabel" name="label_4">
       <property name="geometry">
        <rect>
-        <x>130</x>
+        <x>70</x>
         <y>70</y>
         <width>681</width>
         <height>111</height>
@@ -3061,9 +3066,9 @@ font: 900 18pt &quot;Segoe UI Black&quot;;</string>
      <widget class="QLabel" name="label_5">
       <property name="geometry">
        <rect>
-        <x>350</x>
+        <x>340</x>
         <y>170</y>
-        <width>231</width>
+        <width>111</width>
         <height>61</height>
        </rect>
       </property>
@@ -3086,7 +3091,7 @@ font: 900 18pt &quot;Segoe UI Black&quot;;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">font: 9pt &quot;8514oem&quot;;
-color: rgb(255, 255, 255);</string>
+color: rgb(0, 0, 255);</string>
       </property>
       <property name="text">
        <string>The Wizard Chess, inspired by Harry Potter, is a chess game with</string>
@@ -3116,7 +3121,7 @@ color: rgb(255, 255, 255);</string>
       </property>
       <property name="styleSheet">
        <string notr="true">font: 9pt &quot;8514oem&quot;;
-color: rgb(255, 255, 255);</string>
+color: rgb(0, 0, 255);</string>
       </property>
       <property name="text">
        <string>the ability to move the pieces with voice/touch command.</string>
@@ -3178,7 +3183,7 @@ font: 900 20pt &quot;Segoe UI Black&quot;;</string>
      <widget class="QLabel" name="label_24">
       <property name="geometry">
        <rect>
-        <x>310</x>
+        <x>280</x>
         <y>60</y>
         <width>231</width>
         <height>81</height>
@@ -3202,7 +3207,7 @@ font: 20pt &quot;Sitka&quot;;</string>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">color: rgb(255, 255, 255);
+       <string notr="true">color: rgb(0, 0, 0);
 font: 900 16pt &quot;Segoe UI Black&quot;;</string>
       </property>
       <property name="title">
@@ -3225,14 +3230,14 @@ font: 900 16pt &quot;Segoe UI Black&quot;;</string>
      <widget class="QGroupBox" name="groupBox_4">
       <property name="geometry">
        <rect>
-        <x>590</x>
+        <x>580</x>
         <y>150</y>
         <width>201</width>
         <height>151</height>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">color: rgb(255, 255, 255);
+       <string notr="true">color: rgb(0, 0, 0);
 font: 900 16pt &quot;Segoe UI Black&quot;;</string>
       </property>
       <property name="title">
