@@ -47,17 +47,18 @@ class Board {
         void playGame();
         bool checkmate(King *k);
         bool isCheck(King *k);
+
+        bool isCheck();
+
         void promote(Pawn *p, Piece *piece);
 
         void updateBoard();
 
         bool isOppositeColor(Piece *p1, Piece *p2);
 
-
         void undoMove(Piece *p, int x, int y);
 
         int convertToInt(char x);
-
 
         int simulateUp(Piece *p);
         int simulate45X(Piece *p);

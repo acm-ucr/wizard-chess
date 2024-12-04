@@ -9,11 +9,9 @@ class Rook : public Piece {
             
             void movePiece(int xM, int yM) override;
 
-
             string getID() const  override{
                 return "rook";
             }
-
 
             bool isEmpty() const override {
                 return false;
