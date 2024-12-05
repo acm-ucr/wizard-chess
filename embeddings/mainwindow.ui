@@ -68,7 +68,7 @@ rgb(0, 0, 0)
 }</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>8</number>
     </property>
     <widget class="QWidget" name="Start">
      <property name="autoFillBackground">
@@ -3180,7 +3180,7 @@ font: 900 20pt &quot;Segoe UI Black&quot;;</string>
        <string>HOME</string>
       </property>
      </widget>
-     <widget class="QLabel" name="label_24">
+     <widget class="QLabel" name="winner_label">
       <property name="geometry">
        <rect>
         <x>280</x>
@@ -3197,7 +3197,7 @@ font: 20pt &quot;Sitka&quot;;</string>
        <string>House 1 Wins!</string>
       </property>
      </widget>
-     <widget class="QGroupBox" name="groupBox_3">
+     <widget class="QGroupBox" name="house_1_group">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -3213,7 +3213,7 @@ font: 900 16pt &quot;Segoe UI Black&quot;;</string>
       <property name="title">
        <string>House 1 Time:</string>
       </property>
-      <widget class="QLabel" name="label_2">
+      <widget class="QLabel" name="house_1_time">
        <property name="geometry">
         <rect>
          <x>70</x>
@@ -3227,7 +3227,7 @@ font: 900 16pt &quot;Segoe UI Black&quot;;</string>
        </property>
       </widget>
      </widget>
-     <widget class="QGroupBox" name="groupBox_4">
+     <widget class="QGroupBox" name="house_2_group">
       <property name="geometry">
        <rect>
         <x>580</x>
@@ -3243,12 +3243,12 @@ font: 900 16pt &quot;Segoe UI Black&quot;;</string>
       <property name="title">
        <string>House 2 Time:</string>
       </property>
-      <widget class="QLabel" name="label_3">
+      <widget class="QLabel" name="house_2_time">
        <property name="geometry">
         <rect>
          <x>70</x>
          <y>60</y>
-         <width>91</width>
+         <width>71</width>
          <height>61</height>
         </rect>
        </property>

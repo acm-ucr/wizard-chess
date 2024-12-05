@@ -28,6 +28,8 @@ MainWindow::MainWindow(QWidget *parent)
     srand(time(0));
     wCheck = false;
     bCheck = false;
+    co = 0;
+    end_status = 2;
 }
 
 MainWindow::~MainWindow()
@@ -37,7 +39,7 @@ MainWindow::~MainWindow()
 
 // Simulates the population of the table widget for the chess game
 // x1 and x2 could be a character like 'a', 'b' etc - therefore, {x1, y1} E {a, 3}
-// the i = 0 means no move, i = 1 means just move and possible check, and i = 2 means move, kill and possible check
+// i = 0 means no move, i = 1 means just move and possible check, and i = 2 means move, kill and possible check
 void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt)
 {
     // performs action similar to a virtual list ~ after the table is full, the table resets
@@ -202,6 +204,7 @@ void MainWindow::on_pushButton_back_settings_clicked()
 // Game
 void MainWindow::on_pushButton_EndGame_clicked()
 {
+    change_endgame_status();
     ui->stackedWidget->setCurrentIndex(8);
 }
 
@@ -247,7 +250,8 @@ void MainWindow::on_pushButton_home2_clicked()
 // Random Button Simulates Cell Population [FOR TESTING PURPOSES ONLY]
 void MainWindow::on_randomGeneratorButton_clicked()
 {
-    populateCells('a', 2, 'b', 5, 2, 0);
+    populateCells('a', 2, 'b', 5, 2, co);
+    co++;
 }
 
 // Bits For White Home Click
@@ -290,4 +294,21 @@ void MainWindow::on_pushButton_Hufflepuff_2_clicked()
 void MainWindow::on_pushButton_Ravenclaw_2_clicked()
 {
     blackChoice->userChoice = 8;
+}
+
+void MainWindow::change_endgame_status()
+{
+    // once software implements a function to check who won, end_status would be altered accordingly
+    if (end_status == 0)
+    {
+        ui->winner_label->setText("House 1 Wins!");
+    }
+    else if (end_status == 1)
+    {
+        ui->winner_label->setText("House 2 Wins!");
+    }
+    else if (end_status == 2)
+    {
+        ui->winner_label->setText("Game is Draw!");
+    }
 }

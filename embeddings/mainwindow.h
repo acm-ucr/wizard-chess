@@ -88,6 +88,8 @@ private slots:
 
     void on_pushButton_Ravenclaw_2_clicked();
 
+    void change_endgame_status();
+
 private:
     Ui::MainWindow *ui;
     Settings *mwSettings;
@@ -98,6 +100,7 @@ private:
     bool bCheck;
     bool wCheck;
     Board game;
-
+    int co;
+    int end_status; // 0 = white winner, 1 = black winner, 2 = tie
 };
 #endif // MAINWINDOW_H
