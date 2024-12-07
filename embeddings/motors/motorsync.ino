@@ -86,6 +86,15 @@ void move_piece(int start_x_pos, int start_y_pos, int end_x_pos, int end_y_pos) 
   else if (x_steps > 0 && y_steps > 0) {
     diagonal_mvmt(x_steps, y_steps, x_dir, y_dir);
   }
+
+  // Serial.print("Piece moved from ");
+  // Serial.print(start_x_pos);
+  // Serial.print(",");
+  // Serial.print(start_y_pos);
+  // Serial.print(" to ");
+  // Serial.print(end_x_pos);
+  // Serial.print(",");
+  // Serial.println(end_y_pos);
 }
 
 void setup(){
@@ -106,30 +115,50 @@ void setup(){
   }
 }
 
+int curr_x_pos = 50;
+int curr_y_pos = 50;
+
 void loop(){
   // currently assuming 800 x 800 tick board
   // each square is 100 x 100
   // input format: "x1 y1 x2 y2\n"
 
-  String input_coords = Serial.readStringUntil('\n');
+  String input_coords;
 
   int start_x_pos;
   int start_y_pos;
   int end_x_pos;
   int end_y_pos;
+  
+  int space1;
+  int space2;
+  int space3;
 
-  int space1 = input_coords.indexOf(' ');
-  int space2 = input_coords.indexOf(' ', space1 + 1);
-  int space3 = input_coords.indexOf(' ', space2 + 1);
 
-  start_x_pos = input_coords.substring(0, space1).toInt();
-  start_y_pos = input_coords.substring(space1 + 1, space2).toInt();
-  end_x_pos = input_coords.substring(space2 + 1, space3).toInt();
-  end_y_pos = input_coords.substring(space3 + 1).toInt();
+  if (Serial.available() > 0) {
+    input_coords = Serial.readStringUntil('\n');
 
-  move_piece(start_x_pos, start_y_pos, end_x_pos, end_y_pos);
-   
+    space1 = input_coords.indexOf(' ');
+    space2 = input_coords.indexOf(' ', space1 + 1);
+    space3 = input_coords.indexOf(' ', space2 + 1);
 
+    start_x_pos = input_coords.substring(0, space1).toInt();
+    start_y_pos = input_coords.substring(space1 + 1, space2).toInt();
+    end_x_pos = input_coords.substring(space2 + 1, space3).toInt();
+    end_y_pos = input_coords.substring(space3 + 1).toInt();
+
+    // move to magnet to start position, magnet off
+    move_piece(curr_x_pos, curr_y_pos, start_x_pos, start_y_pos);
+
+    // move chess piece, magnet on
+    move_piece(start_x_pos, start_y_pos, end_x_pos, end_y_pos);
+    
+    // update current position 
+    curr_x_pos = end_x_pos;
+    curr_y_pos = end_y_pos;
+
+    //Serial.println("Movement done");
+  }
 
   ///// TESTING MVMT FUNCTIONS ///// 
 
