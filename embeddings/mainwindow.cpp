@@ -64,10 +64,18 @@ void MainWindow::setupBoard()
             QString position = QString(col) + QString::number(row);
             QString buttonName = "pushButton_" + position;
 
-            // Find the button in the UI and connect its signal
+            // Find the button in the UI
             QPushButton* button = findChild<QPushButton*>(buttonName);
             if (button) {
                 boardMap[position] = button;
+
+                // Assign colors
+                bool isWhiteTile = ((col - 'A') + row) % 2 == 0;
+                QString backgroundColor = isWhiteTile ? "#ffffff" : "#4560AB"; // White and blue
+                button->setStyleSheet(QString(
+                    "QPushButton { background-color: %1; border: none; }"
+                ).arg(backgroundColor));
+
                 connect(button, &QPushButton::clicked, this, &MainWindow::onTileClicked);
             }
         }
@@ -119,34 +127,23 @@ void MainWindow::placePieceOnTile(const QString& position, const QString& pieceT
 {
     QPushButton* button = boardMap[position];
     if (button) {
+        // Set the piece icon
         QString imagePath = ":/images/images/" + color + "_" + pieceType + ".png";
-        qDebug() << "Attempting to open file at:" << imagePath;
-
-        QFile file(imagePath);
-        if (!file.open(QIODevice::ReadOnly)) {
-            qDebug() << "Failed to open file at:" << imagePath;
-            return;
-        }
-
-        QByteArray byteArray = file.readAll();
-        qDebug() << "File read successfully. Bytes length:" << byteArray.length();
-
-        QImage img = QImage::fromData(byteArray);
-        if (img.isNull()) {
-            qDebug() << "Failed to load QImage instance for:" << imagePath;
-            return;
-        }
-
-        QPixmap pixmap = QPixmap::fromImage(img);
+        QPixmap pixmap(imagePath);
         QIcon icon(pixmap);
-        icon.addPixmap(pixmap, QIcon::Normal, QIcon::Off);
-
-
         button->setIcon(icon);
         button->setIconSize(QSize(30, 30));
-        button->setStyleSheet("QPushButton { padding-left: 15px; }, setStyleSheet(QPushButton{background: transparent;});");
+
+        // Keep tile's background color
+        bool isWhiteTile = ((position[0].toLatin1() - 'A') + position.mid(1).toInt()) % 2 == 0;
+        QString backgroundColor = isWhiteTile ? "#ffffff" : "#4560AB"; // White and blue
+        button->setStyleSheet(QString(
+            "QPushButton { background-color: %1; border: none; }"
+            "QPushButton::icon { margin: 0; padding: 0; }"
+        ).arg(backgroundColor));
     }
 }
+
 
 
 
@@ -168,9 +165,23 @@ void MainWindow::onTileClicked()
     if (selectedPiece) {
         // Moving the selected piece
         if (isValidMove(selectedPiece->type, selectedPiece->position, clickedPosition)) {
-            // Update the piece's position
+            // Reset the previous tile and retain its background color
+            QPushButton* previousButton = boardMap[selectedPiece->position];
+            if (previousButton) {
+                previousButton->setIcon(QIcon()); // Clear the icon
+
+                // Calculate the background color based on tile position
+                QString previousPosition = selectedPiece->position;
+                bool isWhiteTile = ((previousPosition[0].toLatin1() - 'A') +
+                                    previousPosition.mid(1).toInt()) % 2 == 0;
+                QString backgroundColor = isWhiteTile ? "#ffffff" : "#4560AB"; // White or  blue
+                previousButton->setStyleSheet(QString(
+                    "QPushButton { background-color: %1; border: none; }"
+                ).arg(backgroundColor));
+            }
+
+            // Update the piece's position and place it on the new tile
             placePieceOnTile(clickedPosition, selectedPiece->type, selectedPiece->color);
-            boardMap[selectedPiece->position]->setIcon(QIcon()); // Clear the old tile
             selectedPiece->position = clickedPosition;
 
             // Deselect the piece
@@ -188,6 +199,8 @@ void MainWindow::onTileClicked()
         }
     }
 }
+
+
 
 
 bool MainWindow::isValidMove(const QString& pieceType, const QString& from, const QString& to)

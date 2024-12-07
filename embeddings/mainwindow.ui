@@ -740,7 +740,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>G4</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -773,7 +773,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>G6</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -825,7 +825,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>B7</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -858,7 +858,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>D4</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -891,7 +891,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>F5</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -943,7 +943,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>F4</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1014,7 +1014,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>E6</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1047,7 +1047,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>B4</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1080,7 +1080,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>C6</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1113,7 +1113,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>D8</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1146,7 +1146,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>D1</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1179,7 +1179,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>F2</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1212,7 +1212,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>B8</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1245,7 +1245,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>H1</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1278,7 +1278,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>D3</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1330,7 +1330,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>F3</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1382,7 +1382,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>G1</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1415,7 +1415,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>C7</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1448,7 +1448,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>H8</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1481,7 +1481,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>A3</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1514,7 +1514,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>D6</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1547,7 +1547,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>F1</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1580,7 +1580,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>E2</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1613,7 +1613,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>E8</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1646,7 +1646,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>A2</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1679,7 +1679,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>B1</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1712,7 +1712,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>F7</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1745,7 +1745,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>C1</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1778,7 +1778,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>H3</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1811,7 +1811,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>E3</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1844,7 +1844,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>G7</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1877,7 +1877,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>H4</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1948,7 +1948,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>G5</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -1981,7 +1981,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>E4</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2014,7 +2014,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>C8</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2047,7 +2047,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>G2</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2099,7 +2099,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>A6</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2132,7 +2132,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>B5</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2184,7 +2184,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>B2</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2217,7 +2217,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>A7</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2250,7 +2250,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>C2</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2283,7 +2283,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>C5</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2316,7 +2316,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>D5</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2368,7 +2368,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>C3</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2420,7 +2420,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>E1</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2453,7 +2453,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>F8</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2486,7 +2486,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>E7</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2538,7 +2538,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>H6</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2571,7 +2571,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>D2</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2604,7 +2604,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>C4</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2637,7 +2637,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>H2</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2670,7 +2670,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>H5</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2703,7 +2703,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>H7</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2736,7 +2736,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>G3</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2769,7 +2769,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>A1</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2802,7 +2802,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>B3</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2835,7 +2835,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>A5</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2868,7 +2868,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>G8</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2901,7 +2901,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>A4</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2934,7 +2934,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>D7</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -2967,7 +2967,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>F6</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -3019,7 +3019,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>E5</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -3052,7 +3052,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>A8</string>
+             <string/>
             </property>
            </widget>
           </item>
@@ -3085,7 +3085,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 }</string>
             </property>
             <property name="text">
-             <string>B6</string>
+             <string/>
             </property>
            </widget>
           </item>
