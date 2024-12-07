@@ -68,7 +68,7 @@ rgb(0, 0, 0)
 }</string>
     </property>
     <property name="currentIndex">
-     <number>8</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="Start">
      <property name="autoFillBackground">
@@ -230,9 +230,9 @@ rgb(0, 0, 0)
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>140</x>
+        <x>130</x>
         <y>80</y>
-        <width>511</width>
+        <width>521</width>
         <height>341</height>
        </rect>
       </property>
