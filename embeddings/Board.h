@@ -24,9 +24,6 @@ class Board {
     protected:
         vector<Piece> emptyPieces;
 
-
-
-
     public:
         Board(); //Default COnstructor
         ~Board();
@@ -50,17 +47,20 @@ class Board {
         void playGame();
         bool checkmate(King *k);
         bool isCheck(King *k);
+
+        bool isBCheck();
+
+        bool isWCheck();
+
         void promote(Pawn *p, Piece *piece);
 
         void updateBoard();
 
         bool isOppositeColor(Piece *p1, Piece *p2);
 
-
         void undoMove(Piece *p, int x, int y);
 
         int convertToInt(char x);
-
 
         int simulateUp(Piece *p);
         int simulate45X(Piece *p);

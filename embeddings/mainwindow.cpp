@@ -1,8 +1,18 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "settings.h"
-#include "inputs.h"
+#include <QApplication>
+#include <QTableWidget>
+#include <QTableWidgetItem>
+#include <QRandomGenerator>
+#include <QTimer>
+#include <string>
+#include <ctime>
+#include <cstdlib>
+#include "mainwindow.h"
+#include "home.h"
 
+using namespace std;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -11,11 +21,109 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->stackedWidget->setCurrentIndex(0);
     mwSettings = new Settings();
+    whiteChoice = new Home();
+    blackChoice = new Home();
+    tableWidget = ui->RoundTurnTable;
+    timer = new QTimer(this);
+    srand(time(0));
+    wCheck = false;
+    bCheck = false;
+    co = 0;
+    end_status = 2;
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+// Simulates the population of the table widget for the chess game
+// x1 and x2 could be a character like 'a', 'b' etc - therefore, {x1, y1} E {a, 3}
+// i = 0 means no move, i = 1 means just move and possible check, and i = 2 means move, kill and possible check
+void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt)
+{
+    // performs action similar to a virtual list ~ after the table is full, the table resets
+    if (turnCnt % 20 == 0)
+    {
+        clearTableWidget();
+    }
+    if (i == 0) {return;}
+    int row = (turnCnt % 20)/2;
+    int col = turnCnt % 2;
+    string out;
+    if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "pawn")
+    {
+        out += "";
+    }
+    else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "bishop")
+    {
+        out += "B";
+    }
+    else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "king")
+    {
+        out += "K";
+    }
+    else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "knight")
+    {
+        out += "N";
+    }
+    else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "rook")
+    {
+        out += "R";
+    }
+    else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "queen")
+    {
+        out += "Q";
+    }
+    else
+    {
+        out += "Invalid";
+        tableWidget->setItem(row, col, new QTableWidgetItem(QString::fromStdString(out)));
+        return;
+    }
+    if (i == 1) {
+        out += x2 + to_string(y2);
+        if (col == 0) {
+            bCheck = game.isBCheck();
+            if (bCheck == 1) {
+                out += "+";
+            }
+        }
+        else if (col == 1) {
+            wCheck = game.isWCheck();
+            if (wCheck == 1) {
+                out += "+";
+            }
+        }
+    }
+    else if (i == 2) {
+        out += "x";
+        out += x2 + to_string(y2);
+        if (col == 0) {
+            bCheck = game.isBCheck();
+            if (bCheck == 1) {
+                out += "+";
+            }
+        }
+        else if (col == 1) {
+            wCheck = game.isWCheck();
+            if (wCheck == 1) {
+                out += "+";
+            }
+        }
+    }
+    tableWidget->setItem(row, col, new QTableWidgetItem(QString::fromStdString(out)));
+}
+
+void MainWindow::clearTableWidget()
+{
+    for (int r = 0; r < tableWidget->rowCount(); r++)
+    {
+        for (int c = 0; c < tableWidget->columnCount(); c++)
+        {
+            tableWidget->setItem(r, c, new QTableWidgetItem(""));
+        }
+    }
 }
 
 // About Page
@@ -43,7 +151,6 @@ void MainWindow::on_pushButton_settings_clicked()
 void MainWindow::on_pushButton_about_clicked()
 {
     ui->stackedWidget->setCurrentIndex(7);
-
 }
 
 // Settings
@@ -88,9 +195,16 @@ void MainWindow::on_touchCommand_clicked()
     mwSettings->commandType = false;
 }
 
+// Goes Back to Home from Settings
+void MainWindow::on_pushButton_back_settings_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(0);
+}
+
 // Game
 void MainWindow::on_pushButton_EndGame_clicked()
 {
+    change_endgame_status();
     ui->stackedWidget->setCurrentIndex(8);
 }
 
@@ -122,20 +236,79 @@ void MainWindow::on_pushButton_previous_tutorial_clicked()
 }
 
 // White House Selection
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_pushButton_home1_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
 }
 
 // Black House Selection
-void MainWindow::on_pushButton_2_clicked()
+void MainWindow::on_pushButton_home2_clicked()
 {
     ui->stackedWidget->setCurrentIndex(5);
 }
 
-
-void MainWindow::on_pushButton_back_settings_clicked()
+// Random Button Simulates Cell Population [FOR TESTING PURPOSES ONLY]
+void MainWindow::on_randomGeneratorButton_clicked()
 {
-    ui->stackedWidget->setCurrentIndex(0);
+    populateCells('a', 2, 'b', 5, 2, co);
+    co++;
 }
 
+// Bits For White Home Click
+void MainWindow::on_pushButton_Gryffindor_clicked()
+{
+    whiteChoice->userChoice = 1;
+}
+
+void MainWindow::on_pushButton_Slytherin_clicked()
+{
+    whiteChoice->userChoice = 2;
+}
+
+void MainWindow::on_pushButton_Hufflepuff_clicked()
+{
+    whiteChoice->userChoice = 4;
+}
+
+void MainWindow::on_pushButton_Ravenclaw_clicked()
+{
+    whiteChoice->userChoice = 8;
+}
+
+// Bits For Black Home Click
+void MainWindow::on_pushButton_Gryffindor_2_clicked()
+{
+    blackChoice->userChoice = 1;
+}
+
+void MainWindow::on_pushButton_Slytherin_2_clicked()
+{
+    blackChoice->userChoice = 2;
+}
+
+void MainWindow::on_pushButton_Hufflepuff_2_clicked()
+{
+    blackChoice->userChoice = 4;
+}
+
+void MainWindow::on_pushButton_Ravenclaw_2_clicked()
+{
+    blackChoice->userChoice = 8;
+}
+
+void MainWindow::change_endgame_status()
+{
+    // once software implements a function to check who won, end_status would be altered accordingly
+    if (end_status == 0)
+    {
+        ui->winner_label->setText("House 1 Wins!");
+    }
+    else if (end_status == 1)
+    {
+        ui->winner_label->setText("House 2 Wins!");
+    }
+    else if (end_status == 2)
+    {
+        ui->winner_label->setText("Game is Draw!");
+    }
+}

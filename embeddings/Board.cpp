@@ -1287,6 +1287,20 @@ bool Board::isCheck(King *k){
         return false;
 }
 
+bool Board::isBCheck(){
+    if(isCheck(kb)){
+        return true;
+    }
+    return false;
+}
+
+bool Board::isWCheck(){
+    if (isCheck(kw)){
+        return true;
+    }
+    return false;
+}
+
 void Board::undoMove(Piece *p, int x, int y){
     swap(p->getPositionX(), p->getPositionY(), x, y);
 }
@@ -1348,49 +1362,75 @@ int Board::convertToInt(char x){
     int blackMoves = 0;
 
     while(!checkmate(kw) || !checkmate(kb)){
-        char oldX;
+        char charOldX;
         int oldY;
-        char newX;
+        char charNewX;
         int newY;
 
-        if(isCheck(kw) || isCheck(kb)){
-            cin >> oldX;
-            cin >> oldY;
-            cin >> newX;
-            cin >> newY;
+        int oldX;
+        int newX;
 
-            if(board[oldY][oldX]->white()){
-                if(isValidMove(board[oldY][oldX], newX, newY)){
-                    swap(oldX, oldY, newX, newY);
-                    whiteMoves++;
-                }
-            }
-        }
-        else{
-            if(whiteMoves == blackMoves){
-                cin >> oldX;
+        bool madeMove = false;
+
+        if(whiteMoves == blackMoves){
+            while(!madeMove){
+                cin >> charOldX;
                 cin >> oldY;
-                cin >> newX;
+                cin >> charNewX;
                 cin >> newY;
+
+                oldX = convertToInt(charOldX);
+                newX = convertToInt(charNewX);
 
                 if(board[oldY][oldX]->white()){
                     if(isValidMove(board[oldY][oldX], newX, newY)){
                         swap(oldX, oldY, newX, newY);
-                        whiteMoves++;
+                        if(isCheck(kw)){
+                            swap(oldX, oldY, newX, newY);
+                            cout << "King is still in check, try again" << endl;
+                        }
+                        else{
+                            madeMove = true;
+                            whiteMoves++;
+                        }
+                    }
+                    else{
+                        cout << "Invalid move, try again" << endl;
                     }
                 }
+                else{
+                    cout << "Invalid move, try again" << endl;
+                }
             }
-            else{
-                cin >> oldX;
+        }
+        else{
+            while(!madeMove){
+                cin >> charOldX;
                 cin >> oldY;
-                cin >> newX;
+                cin >> charNewX;
                 cin >> newY;
+
+                oldX = convertToInt(charOldX);
+                newX = convertToInt(charNewX);
 
                 if(!board[oldY][oldX]->white()){
                     if(isValidMove(board[oldY][oldX], newX, newY)){
                         swap(oldX, oldY, newX, newY);
-                        blackMoves++;
+                        if(isCheck(kb)){
+                            swap(oldX, oldY, newX, newY);
+                            cout << "King is in check, try again" << endl;
+                        }
+                        else{
+                            madeMove = true;
+                            blackMoves++;
+                        }
                     }
+                    else{
+                        cout << "Invalid move, try again" << endl;
+                    }
+                }
+                else{
+                    cout << "Invalid move, try again" << endl;
                 }
             }
         }

@@ -3,6 +3,11 @@
 
 #include <QMainWindow>
 #include "settings.h"
+#include "home.h"
+#include <QTableWidget>
+#include <QTimer>
+#include "inputs.h"
+#include "Board.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -20,13 +25,13 @@ public:
 
 private slots:
 
-    //void on_pushButton_clicked();
+    void populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt);
 
-// <<<<<<< HEAD
+    void clearTableWidget();
+
     void on_pushButton_home_about_clicked();
 
     void on_pushButton_home_end_clicked();
-// =======
     void on_pushButton_start_clicked();
 
     void on_pushButton_tutorial_clicked();
@@ -34,7 +39,6 @@ private slots:
     void on_pushButton_settings_clicked();
 
     void on_pushButton_about_clicked();
-// >>>>>>> ec80273e3b344ef1a23e998207c077d80fe31758
 
     void on_pushButton_home_settings_clicked();
 
@@ -46,9 +50,9 @@ private slots:
 
     void on_pushButton_previous_tutorial_clicked();
 
-    void on_pushButton_clicked();
+    void on_pushButton_home1_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_pushButton_home2_clicked();
 
     void on_pushButton_EndGame_clicked();
 
@@ -66,9 +70,37 @@ private slots:
 
     void on_pushButton_back_settings_clicked();
 
+    void on_randomGeneratorButton_clicked();
+
+    void on_pushButton_Gryffindor_clicked();
+
+    void on_pushButton_Slytherin_clicked();
+
+    void on_pushButton_Hufflepuff_clicked();
+
+    void on_pushButton_Ravenclaw_clicked();
+
+    void on_pushButton_Gryffindor_2_clicked();
+
+    void on_pushButton_Slytherin_2_clicked();
+
+    void on_pushButton_Hufflepuff_2_clicked();
+
+    void on_pushButton_Ravenclaw_2_clicked();
+
+    void change_endgame_status();
+
 private:
     Ui::MainWindow *ui;
     Settings *mwSettings;
-
+    Home *whiteChoice;
+    Home *blackChoice;
+    QTableWidget *tableWidget;
+    QTimer *timer;
+    bool bCheck;
+    bool wCheck;
+    Board game;
+    int co;
+    int end_status; // 0 = white winner, 1 = black winner, 2 = tie
 };
 #endif // MAINWINDOW_H
