@@ -13,7 +13,7 @@
 #include "King.h"
 #include "Rook.h"
 #include "EmptyPiece.h"
-
+#include "stockfish.h"
 
 using namespace std;
 
@@ -28,9 +28,14 @@ class Board {
         Board(); //Default COnstructor
         ~Board();
         void resetBoard();
+
+        int whiteMoves = 0;
+        int blackMoves = 0;
        
 
         vector<vector<Piece*>> board;
+        string playerMove = ""; 
+        string bestMove = " ";
 
         King *kw = new King(4, 7, true);
         King *kb = new King(4, 0, false);
@@ -46,6 +51,7 @@ class Board {
         void printBoard();
         void playGame();
         bool checkmate(King *k);
+        bool convertBestMove(string bestMove);
         bool isCheck(King *k);
 
         bool isCheck();
@@ -59,6 +65,8 @@ class Board {
         void undoMove(Piece *p, int x, int y);
 
         int convertToInt(char x);
+
+        void castle(King *k);
 
         int simulateUp(Piece *p);
         int simulate45X(Piece *p);

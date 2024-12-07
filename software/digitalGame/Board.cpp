@@ -21,7 +21,6 @@ using namespace std;
  - 
 */
 
-
 Board::Board(){
     board.resize(8);
     for(int i = 0; i < 8; i++){
@@ -190,6 +189,16 @@ bool Board::takePiece(int oldX, int oldY, int newX, int newY){
 }
 
 void Board::swap(int oldX, int oldY, int newX, int newY){
+    const char* stockfishPath = "STOCKFISH PATH HERE"; //This should be the stockfish path to your file
+    Stockfish engine(stockfishPath);
+    engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
+
+    
+    string position = "position startpos moves";
+    Piece p;
+    //bool playerTurn = true;
+    
+
     if(!takePiece(oldX, oldY, newX, newY)){
         Piece *temp = board[oldY][oldX];
 
@@ -210,8 +219,31 @@ void Board::swap(int oldX, int oldY, int newX, int newY){
         board[oldY][oldX] = new Empty(oldX, oldY);
     }
 
+    cout << "Your Move: ";
+    playerMove = board[oldY][oldX]->getPosition() + board[newY][newX]->getPosition();
+    position += " " + playerMove;
+    cout << "Current Moves: " << position << endl;
+    //Stockfish move
+    // Send position and search commands
+    engine.sendCommand(position);
 
+    //Set depth to tell stockfish how far to search(the lower the depth, the lower the difficulty)
+    engine.sendCommand("go depth 100");
+
+    // Retrieve the best move
+    bestMove = engine.getBestMove();
+    cout << "Best Move: " << bestMove << endl;
+
+
+
+    // Update position with the best move
+    position += " " + bestMove;
+    //a function to conver best move to be updated on your board
+    engine.clearFiles();
 }
+
+
+ 
 
 void Board::promote(Pawn *p, Piece *piece){
     if(p->getPositionY() == 7 || p->getPositionY() == 0){
@@ -1133,6 +1165,10 @@ bool Board::isValidMove(Piece *p, int xT, int yT){
     }
 }
 
+void Board::castle(King *k){
+
+}
+
 bool Board::isCheck(King *k){
 
         Queen *q;
@@ -1302,81 +1338,49 @@ void Board::undoMove(Piece *p, int x, int y){
 }
 
 bool Board::checkmate(King *k){
-    if(isCheck(k)){
-
-        // int resetX = k->getPositionX();
-        // int resetY = k->getPositionY();
-
-        // swap(k->getPositionX(), k->getPositionY(), k->getPositionX(), k->getPositionY() + rangeUp(k));
-        // if(k->getPositionX() != )
-        //     if(isCheck(k)){
-        //         undoMove(k, resetX, resetY);
-        //     }
-        //     else{
-        //         undoMove(k, resetX, resetY);
-        //         return false;
-        //     }
-
-
-        // if(stockfishstring == "none"){
-        //     return true;
-        // }
+    if(bestMove == "none"){
+        return true;
     }
-
     return false;
 }
  
 int Board::convertToInt(char x){
-    if(x == 'a'){
-        return 0;
+    if(int(x) > 96){
+        return int(x) - 97;
     }
-    else if(x == 'b'){
-        return 1;
-    }
-    else if(x == 'c'){
-        return 2;
-    }
-    else if(x == 'd'){
-        return 3;
-    }
-    else if(x == 'e'){
-        return 4;
-    }
-    else if(x == 'f'){
-        return 5;
-    }
-    else if(x == 'g'){
-        return 6;
-    }
-    else if(x == 'h'){
-        return 7;
+    else{
+        return int(x) - 49;
     }
 }
  
  void Board::playGame(){
-    int whiteMoves = 0;
-    int blackMoves = 0;
 
     while(!checkmate(kw) || !checkmate(kb)){
         char charOldX;
-        int oldY;
+        char charOldY;
         char charNewX;
-        int newY;
+        char charNewY;
 
         int oldX;
         int newX;
+        int oldY;
+        int newY;
+
 
         bool madeMove = false;
 
         if(whiteMoves == blackMoves){
             while(!madeMove){
-                cin >> charOldX;
-                cin >> oldY;
-                cin >> charNewX;
-                cin >> newY;
+                charOldX = bestMove[0];
+                charOldY = bestMove[1];
+                charNewX = bestMove[2];
+                charNewY = bestMove[3];
+
 
                 oldX = convertToInt(charOldX);
                 newX = convertToInt(charNewX);
+                oldY = convertToInt(charOldY);
+                newY = convertToInt(charNewY);
 
                 if(board[oldY][oldX]->white()){
                     if(isValidMove(board[oldY][oldX], newX, newY)){
@@ -1401,13 +1405,15 @@ int Board::convertToInt(char x){
         }
         else{
             while(!madeMove){
-                cin >> charOldX;
-                cin >> oldY;
-                cin >> charNewX;
-                cin >> newY;
+                charOldX = bestMove[0];
+                charOldY = bestMove[1];
+                charNewX = bestMove[2];
+                charNewY = bestMove[3];
 
                 oldX = convertToInt(charOldX);
                 newX = convertToInt(charNewX);
+                oldY = convertToInt(charOldY);
+                newY = convertToInt(charNewY);
 
                 if(!board[oldY][oldX]->white()){
                     if(isValidMove(board[oldY][oldX], newX, newY)){

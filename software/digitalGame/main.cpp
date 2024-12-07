@@ -60,7 +60,7 @@ int main() {
     Board b;
     b.printBoard();
 
-    b.swap(4, 0, 4, 5);
+    b.swap(4, 6, 4, 4);
 
     b.printBoard();
 
