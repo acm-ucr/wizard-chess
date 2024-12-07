@@ -25,8 +25,8 @@ void Knight::movePiece(int xM, int yM){
 
 bool Knight::isValid(int xT, int yT){
 
-    if(!(this->getPositionX() + xT < 0) && !(this->getPositionX() + xT > 8)){
-        if(!(this->getPositionY() + yT < 0) && !(this->getPositionY() + yT > 8)){
+    if(!(this->getPositionX() + xT < 0) && !(this->getPositionX() + xT > 7)){
+        if(!(this->getPositionY() + yT < 0) && !(this->getPositionY() + yT > 7)){
             if(xT == 1){
                 if(yT == 2 || yT == -2){
                     return true;
