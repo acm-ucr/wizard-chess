@@ -6,6 +6,7 @@
 #include <QTableWidgetItem>
 #include <QRandomGenerator>
 #include <QTimer>
+#include <QDebug>
 #include <string>
 #include <ctime>
 #include <cstdlib>
@@ -39,8 +40,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-// Simulates the population of the table widget for the chess game
-// x1 and x2 could be a character like 'a', 'b' etc - therefore, {x1, y1} E {a, 3}
+// x1 and x2 are characters like 'a', 'b' etc - therefore, {x1, y1} E {a, 3} && {x2, y2} E {b, 6} (as an example)
 // i = 0 means no move, i = 1 means just move and possible check, and i = 2 means move, kill and possible check
 void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt)
 {
@@ -299,9 +299,6 @@ void MainWindow::placePieceOnTile(const QString& position, const QString& pieceT
 }
 
 
-
-
-
 // Handle tile clicks
 void MainWindow::onTileClicked()
 {
@@ -332,6 +329,15 @@ void MainWindow::onTileClicked()
                 previousButton->setStyleSheet(QString(
                     "QPushButton { background-color: %1; border: none; }"
                 ).arg(backgroundColor));
+                // [IMPLEMENTED POPULATECELL() FUNCTION HERE]
+                bool ok;
+                QString extracted_x1 = previousPosition.left(1).toLower();
+                int extracted_y1 = previousPosition.right(1).toInt(&ok);
+                QString extracted_x2 = clickedPosition.left(1).toLower();
+                int extracted_y2 = clickedPosition.right(1).toInt(&ok);
+                populateCells(extracted_x1.toLatin1().at(0), extracted_y1, extracted_x2.toLatin1().at(0), extracted_y2, 2, co);
+                co++;
+                // [END OF IMPLEMENTATION]
             }
 
             // Update the piece's position and place it on the new tile
@@ -407,8 +413,8 @@ void MainWindow::on_pushButton_home2_clicked()
 // Random Button Simulates Cell Population [FOR TESTING PURPOSES ONLY]
 void MainWindow::on_randomGeneratorButton_clicked()
 {
-    populateCells('a', 2, 'b', 5, 2, co);
-    co++;
+    // populateCells('a', 2, 'b', 5, 2, co);
+    // co++;
 }
 
 // Bits For White Home Click
