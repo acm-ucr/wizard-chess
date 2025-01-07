@@ -230,9 +230,9 @@ rgb(0, 0, 0)
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>140</x>
+        <x>130</x>
         <y>80</y>
-        <width>511</width>
+        <width>521</width>
         <height>341</height>
        </rect>
       </property>
@@ -692,7 +692,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
           <property name="sizeConstraint">
-           <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
+           <enum>QLayout::SetDefaultConstraint</enum>
           </property>
           <property name="spacing">
            <number>5</number>
@@ -3202,12 +3202,12 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
          </row>
          <column>
           <property name="text">
-           <string>Black</string>
+           <string>White</string>
           </property>
          </column>
          <column>
           <property name="text">
-           <string>White</string>
+           <string>Black</string>
           </property>
          </column>
         </widget>
