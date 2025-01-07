@@ -13,6 +13,7 @@
 #include "home.h"
 #include "inputs.h"
 #include "Board.h"
+#include <QTimer>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -121,7 +122,10 @@ private:
     Board game;
     int co;
     int end_status; // 0 = white winner, 1 = black winner, 2 = tie
-    
+    int timer_black;
+    int timer_white;
+    QTimer tBlack;
+    QTimer tWhite;
     QMap<QString, QPushButton*> boardMap; // Map positions (A1, B2) to QPushButtons
     QList<ChessPiece> pieces;            // List of chess pieces
     QString selectedPiecePosition;       // Position of selected piece

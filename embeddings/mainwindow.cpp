@@ -33,6 +33,8 @@ MainWindow::MainWindow(QWidget *parent)
     bCheck = false;
     co = 0;
     end_status = 2;
+    timer_white = 0;
+    timer_black = 0;
 }
 
 MainWindow::~MainWindow()
