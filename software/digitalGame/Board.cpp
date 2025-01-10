@@ -21,7 +21,6 @@ using namespace std;
  - 
 */
 
-
 Board::Board(){
     board.resize(8);
     for(int i = 0; i < 8; i++){
@@ -50,7 +49,7 @@ Board::Board(){
     //Initialize Black Rooks
     board[0][0] = new Rook(0, 0, false);
     board[0][7] = new Rook(7, 0, false);
-
+    
 
     //Initialize White Rooks
     board[7][0] = new Rook(0, 7, true);
@@ -190,6 +189,16 @@ bool Board::takePiece(int oldX, int oldY, int newX, int newY){
 }
 
 void Board::swap(int oldX, int oldY, int newX, int newY){
+    // const char* stockfishPath = "\"C:\\Users\\leaus\\OneDrive\\Important DOcs\\stockfish\\stockfish-windows-x86-64-avx2.exe\""; //This should be the stockfish path to your file
+    // Stockfish engine(stockfishPath);
+    // engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
+
+    
+    //string position = moveList;
+    Piece p;
+    //bool playerTurn = true;
+    
+
     if(!takePiece(oldX, oldY, newX, newY)){
         Piece *temp = board[oldY][oldX];
 
@@ -210,7 +219,31 @@ void Board::swap(int oldX, int oldY, int newX, int newY){
         board[oldY][oldX] = new Empty(oldX, oldY);
     }
 
+    cout << "Your Move: ";
+    playerMove = board[oldY][oldX]->getPosition() + board[newY][newX]->getPosition();
+    moveList += " " + playerMove;
+    cout << "Current Moves: " << moveList << endl;
+   
+   
+   
+    // //Stockfish move
+    // // Send position and search commands 
+    // engine.sendCommand(moveList);
 
+    // //Set depth to tell stockfish how far to search(the lower the depth, the lower the difficulty)
+    // engine.sendCommand("go depth 100");
+
+    // // Retrieve the best move
+    // bestMove = engine.getBestMove();
+    // cout << "Best Move: " << bestMove << endl;
+
+
+
+    // Update position with the best move
+    // moveList += " " + bestMove;
+    // //a function to conver best move to be updated on your board
+    // cout << "UPDATED MOVES: " << moveList <<endl;
+    // engine.clearFiles();
 }
 
 void Board::promote(Pawn *p, Piece *piece){
@@ -1131,6 +1164,11 @@ bool Board::isValidMove(Piece *p, int xT, int yT){
     else if(p->getID() == "pawn"){
         return isPawnMoveValid(p, xT, yT);
     }
+    return false;
+}
+
+void Board::castle(King *k){
+
 }
 
 bool Board::isCheck(King *k){
@@ -1143,6 +1181,10 @@ bool Board::isCheck(King *k){
         else{
             q = new Queen(k->getPositionX(), k->getPositionY(), false);
         }
+
+
+        //This method of checking is more prone to risk, we need one where we use all the pieces of opposite color on the board and use each piece
+        //and have it check if its a valid move to move to the king's square 
 
         if(k->getPositionX() < 6 && k->getPositionY() < 7){
             if(board[k->getPositionY() + 1][k->getPositionX() + 2]->getID() == "knight"){
@@ -1283,8 +1325,21 @@ bool Board::isCheck(King *k){
                 return true;
             }
         }
+
+
         
+
         return false;
+}
+
+bool Board::isCheckMate(){
+    if(isCheck(kw)){
+        return true;
+    }
+    if(isCheck(kb)){
+        return true;
+    }
+    return false;
 }
 
 void Board::undoMove(Piece *p, int x, int y){
@@ -1292,105 +1347,102 @@ void Board::undoMove(Piece *p, int x, int y){
 }
 
 bool Board::checkmate(King *k){
-    if(isCheck(k)){
-
-        // int resetX = k->getPositionX();
-        // int resetY = k->getPositionY();
-
-        // swap(k->getPositionX(), k->getPositionY(), k->getPositionX(), k->getPositionY() + rangeUp(k));
-        // if(k->getPositionX() != )
-        //     if(isCheck(k)){
-        //         undoMove(k, resetX, resetY);
-        //     }
-        //     else{
-        //         undoMove(k, resetX, resetY);
-        //         return false;
-        //     }
-
-
-        // if(stockfishstring == "none"){
-        //     return true;
-        // }
+    if(bestMove == "none"){
+        return true;
     }
-
     return false;
 }
  
 int Board::convertToInt(char x){
-    if(x == 'a'){
-        return 0;
+    if(int(x) > 96){
+        return int(x) - 97;
     }
-    else if(x == 'b'){
-        return 1;
-    }
-    else if(x == 'c'){
-        return 2;
-    }
-    else if(x == 'd'){
-        return 3;
-    }
-    else if(x == 'e'){
-        return 4;
-    }
-    else if(x == 'f'){
-        return 5;
-    }
-    else if(x == 'g'){
-        return 6;
-    }
-    else if(x == 'h'){
-        return 7;
+    else {
+        return int(x) - 49;
     }
 }
  
  void Board::playGame(){
-    int whiteMoves = 0;
-    int blackMoves = 0;
-
     while(!checkmate(kw) || !checkmate(kb)){
-        char oldX;
+        char charOldX;
+        char charOldY;
+        char charNewX;
+        char charNewY;
+
+        int oldX;
+        int newX;
         int oldY;
-        char newX;
         int newY;
 
-        if(isCheck(kw) || isCheck(kb)){
-            cin >> oldX;
-            cin >> oldY;
-            cin >> newX;
-            cin >> newY;
 
-            if(board[oldY][oldX]->white()){
-                if(isValidMove(board[oldY][oldX], newX, newY)){
-                    swap(oldX, oldY, newX, newY);
-                    whiteMoves++;
+        bool madeMove = false;
+
+        if(whiteMoves == blackMoves){
+            while(!madeMove){
+                charOldX = bestMove[0];
+                charOldY = bestMove[1];
+                charNewX = bestMove[2];
+                charNewY = bestMove[3];
+
+                oldX = convertToInt(charOldX);
+                newX = convertToInt(charNewX);
+                oldY = convertToInt(charOldY);
+                newY = convertToInt(charNewY);
+
+                if(board[oldY][oldX]->white()){
+                    if(isValidMove(board[oldY][oldX], newX, newY)){
+
+                        cout <<"hey" << endl;
+                        swap(oldX, oldY, newX, newY);
+                        cout << "here"<< endl;
+                        if(isCheck(kw)){
+                            swap(oldX, oldY, newX, newY);
+                            cout << "King is still in check, try again" << endl;
+                        }
+                        else{
+                            madeMove = true;
+                            whiteMoves++;
+                        }
+                    }
+                    else{
+                        cout << "Invalid move, try again" << endl;
+                    }
+                }
+                else{
+                    cout << "Invalid move, try again" << endl;
                 }
             }
         }
         else{
-            if(whiteMoves == blackMoves){
-                cin >> oldX;
-                cin >> oldY;
-                cin >> newX;
-                cin >> newY;
+            while(!madeMove){
+                charOldX = bestMove[0];
+                charOldY = bestMove[1];
+                charNewX = bestMove[2];
+                charNewY = bestMove[3];
 
-                if(board[oldY][oldX]->white()){
-                    if(isValidMove(board[oldY][oldX], newX, newY)){
-                        swap(oldX, oldY, newX, newY);
-                        whiteMoves++;
-                    }
-                }
-            }
-            else{
-                cin >> oldX;
-                cin >> oldY;
-                cin >> newX;
-                cin >> newY;
+                oldX = convertToInt(charOldX);
+                newX = convertToInt(charNewX);
+                oldY = convertToInt(charOldY);
+                newY = convertToInt(charNewY);
 
                 if(!board[oldY][oldX]->white()){
                     if(isValidMove(board[oldY][oldX], newX, newY)){
                         swap(oldX, oldY, newX, newY);
-                        blackMoves++;
+                        if(isCheck(kb)){
+                            swap(oldX, oldY, newX, newY);
+                            cout << "King is in check, try again" << endl;
+                        }
+                        else{
+                            madeMove = true;
+                            blackMoves++;
+                        }
                     }
+                    else{
+                        cout << "Invalid move, try again" << endl;
+                    }
+                }
+                else{
+                    cout << "Invalid move, try again" << endl;
                 }
             }
         }

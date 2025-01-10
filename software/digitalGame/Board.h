@@ -13,7 +13,7 @@
 #include "King.h"
 #include "Rook.h"
 #include "EmptyPiece.h"
-
+#include "stockfish.h"
 
 using namespace std;
 
@@ -24,16 +24,19 @@ class Board {
     protected:
         vector<Piece> emptyPieces;
 
-
-
-
     public:
         Board(); //Default COnstructor
         ~Board();
         void resetBoard();
+
+        int whiteMoves = 0;
+        int blackMoves = 0;
        
 
         vector<vector<Piece*>> board;
+        string playerMove = ""; 
+        string bestMove = " ";
+        string moveList = "position startpos moves";
 
         King *kw = new King(4, 7, true);
         King *kb = new King(4, 0, false);
@@ -49,18 +52,22 @@ class Board {
         void printBoard();
         void playGame();
         bool checkmate(King *k);
+        bool convertBestMove(string bestMove);
         bool isCheck(King *k);
+
+        bool isCheckMate();
+
         void promote(Pawn *p, Piece *piece);
 
         void updateBoard();
 
         bool isOppositeColor(Piece *p1, Piece *p2);
 
-
         void undoMove(Piece *p, int x, int y);
 
         int convertToInt(char x);
 
+        void castle(King *k);
 
         int simulateUp(Piece *p);
         int simulate45X(Piece *p);
@@ -99,7 +106,6 @@ class Board {
         bool isMoving();
 
         int legalMoves();
-
 };
 
 
