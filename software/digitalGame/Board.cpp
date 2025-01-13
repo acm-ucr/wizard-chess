@@ -1089,7 +1089,7 @@ bool Board::isKingMoveValid(Piece *p, int xT, int yT){
         if(yT < rangeUp(p) || yT > rangeDown(p)){
             return true;
         }
-    }
+    } 
     else if(yT == 0){
         if(xT < rangeRight(p) || xT > rangeLeft(p)){
             return true;
