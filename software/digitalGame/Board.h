@@ -32,11 +32,13 @@ class Board {
         int whiteMoves = 0;
         int blackMoves = 0;
        
+        int justinLim(char charOldX, int oldY, char charNewX, int newY);
 
         vector<vector<Piece*>> board;
+
+        //STOCKFISH STUFF --------------------------------------------------------------
         string playerMove = ""; 
         string bestMove = " ";
-        string moveList = "position startpos moves";
 
         King *kw = new King(4, 7, true);
         King *kb = new King(4, 0, false);
@@ -55,7 +57,7 @@ class Board {
         bool convertBestMove(string bestMove);
         bool isCheck(King *k);
 
-        bool isCheckMate();
+        bool isCheck();
 
         void promote(Pawn *p, Piece *piece);
 
@@ -90,8 +92,10 @@ class Board {
         int rangeRight(Piece *p);
 
         int rangeMaxXDiag45(Piece *p);
+        int rangeYDiag45(Piece *p);
         int rangeMinXDiag135(Piece *p);
         int rangeMaxXDiag225(Piece *p);
+        int rangeYDiag225(Piece *p);
         int rangeMinXDiag315(Piece *p);
 
         bool isQueenMoveValid(Piece *p, int xT, int yT);
@@ -106,6 +110,7 @@ class Board {
         bool isMoving();
 
         int legalMoves();
+
 };
 
 

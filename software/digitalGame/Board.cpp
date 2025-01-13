@@ -49,7 +49,7 @@ Board::Board(){
     //Initialize Black Rooks
     board[0][0] = new Rook(0, 0, false);
     board[0][7] = new Rook(7, 0, false);
-    
+
 
     //Initialize White Rooks
     board[7][0] = new Rook(0, 7, true);
@@ -180,7 +180,7 @@ void Board::printBoard() {
 
     cout << endl;
 }
-
+ 
 bool Board::takePiece(int oldX, int oldY, int newX, int newY){
     if(!(board[newY][newX]->isEmpty()) && isOppositeColor(board[oldY][oldX], board[newY][newX])){
         return true;
@@ -189,12 +189,12 @@ bool Board::takePiece(int oldX, int oldY, int newX, int newY){
 }
 
 void Board::swap(int oldX, int oldY, int newX, int newY){
-    // const char* stockfishPath = "\"C:\\Users\\leaus\\OneDrive\\Important DOcs\\stockfish\\stockfish-windows-x86-64-avx2.exe\""; //This should be the stockfish path to your file
-    // Stockfish engine(stockfishPath);
-    // engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
+    const char* stockfishPath = "STOCKFISH PATH HERE"; //This should be the stockfish path to your file
+    Stockfish engine(stockfishPath);
+    engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
 
     
-    //string position = moveList;
+    string position = "position startpos moves";
     Piece p;
     //bool playerTurn = true;
     
@@ -221,29 +221,23 @@ void Board::swap(int oldX, int oldY, int newX, int newY){
 
     cout << "Your Move: ";
     playerMove = board[oldY][oldX]->getPosition() + board[newY][newX]->getPosition();
-    moveList += " " + playerMove;
-    cout << "Current Moves: " << moveList << endl;
-   
-   
-   
-    // //Stockfish move
-    // // Send position and search commands 
-    // engine.sendCommand(moveList);
+    position += " " + playerMove;
+    cout << "Current Moves: " << position << endl;
+    //Stockfish move
+    // Send position and search commands
+    engine.sendCommand(position);
 
-    // //Set depth to tell stockfish how far to search(the lower the depth, the lower the difficulty)
-    // engine.sendCommand("go depth 100");
+    //Set depth to tell stockfish how far to search(the lower the depth, the lower the difficulty)
+    engine.sendCommand("go depth 100");
 
-    // // Retrieve the best move
-    // bestMove = engine.getBestMove();
-    // cout << "Best Move: " << bestMove << endl;
-
-
+    // Retrieve the best move
+    bestMove = engine.getBestMove();
+    cout << "Best Move: " << bestMove << endl;
 
     // Update position with the best move
-    // moveList += " " + bestMove;
-    // //a function to conver best move to be updated on your board
-    // cout << "UPDATED MOVES: " << moveList <<endl;
-    // engine.clearFiles();
+    position += " " + bestMove;
+    //a function to conver best move to be updated on your board
+    engine.clearFiles();
 }
 
 void Board::promote(Pawn *p, Piece *piece){
@@ -812,7 +806,6 @@ int Board::rangeMaxXDiag45(Piece *p){
     if(tempPiece->getID() == "queen"){
 
         counterX2 = simulate45X(tempPiece);
-
         resetSimulation(tempPiece, originalXPos, originalYPos);
     }
     if(tempPiece->getID() == "king"){
@@ -954,6 +947,8 @@ int Board::rangeMinXDiag315(Piece *p){
     if(tempPiece->getID() == "queen"){
 
         counterX8 = simulate315X(tempPiece);
+        cout << counterX8 << endl;
+        resetSimulation(tempPiece, originalXPos, originalYPos);
 
     }
     if(tempPiece->getID() == "king"){
@@ -965,7 +960,7 @@ int Board::rangeMinXDiag315(Piece *p){
         else if(isOppositeColor(board[tempPiece->getPositionY()][tempPiece->getPositionX()], tempPiece)){
             counterX8--;
         }
-
+        resetSimulation(tempPiece, originalXPos, originalYPos);
     }
     if(tempPiece->getID() == "knight"){
         
@@ -976,12 +971,12 @@ int Board::rangeMinXDiag315(Piece *p){
         else if(isOppositeColor(board[tempPiece->getPositionY()][tempPiece->getPositionX()], tempPiece)){
             counterX8--;
         }
-
+        resetSimulation(tempPiece, originalXPos, originalYPos);
     }
     if(tempPiece->getID() == "bishop"){
 
         counterX8 = simulate315X(tempPiece);
-
+        resetSimulation(tempPiece, originalXPos, originalYPos);
     }
 
     return counterX8;
@@ -998,16 +993,16 @@ bool Board::isQueenMoveValid(Piece *p, int xT, int yT){
             return true;
         }
     }
-    else if(xT < rangeMaxXDiag45(p) && yT == xT){
+    else if(xT <= rangeMaxXDiag45(p) && yT == -xT){
             return true;
     }
-    else if(xT < rangeMinXDiag135(p) && yT == -xT){
+    else if(xT <= rangeMinXDiag135(p) && yT == xT){
             return true;
     }
-    else if(xT < rangeMaxXDiag225(p) && yT == xT){
+    else if(xT >= rangeMaxXDiag225(p) && yT == -xT){
             return true;
     }
-    else if(xT < rangeMinXDiag315(p) && yT == -xT){
+    else if(xT >= rangeMinXDiag315(p) && yT == xT){
             return true;
     }
     return false;
@@ -1015,12 +1010,12 @@ bool Board::isQueenMoveValid(Piece *p, int xT, int yT){
 
 bool Board::isRookMoveValid(Piece *p, int xT, int yT){
     if(xT == 0){
-        if(yT < rangeUp(p) || yT > rangeDown(p)){
+        if(yT <= rangeUp(p) || yT >= rangeDown(p)){
             return true;
         }
     }
     else if(yT == 0){
-        if(xT < rangeRight(p) || xT > rangeLeft(p)){
+        if(xT <= rangeRight(p) || xT >= rangeLeft(p)){
             return true;
         }
     }
@@ -1029,16 +1024,16 @@ bool Board::isRookMoveValid(Piece *p, int xT, int yT){
 }
 
 bool Board::isBishopMoveValid(Piece *p, int xT, int yT){
-    if(xT < rangeMaxXDiag45(p) && yT == xT){
+    if(xT <= rangeMaxXDiag45(p) && yT == -xT){
             return true;
     }
-    else if(xT < rangeMinXDiag135(p) && yT == -xT){
+    else if(xT <= rangeMinXDiag135(p) && yT == xT){
             return true;
     }
-    else if(xT < rangeMaxXDiag225(p) && yT == xT){
+    else if(xT >= rangeMaxXDiag225(p) && yT == -xT){
             return true;
     }
-    else if(xT < rangeMinXDiag315(p) && yT == -xT){
+    else if(xT >= rangeMinXDiag315(p) && yT == xT){
             return true;
     }
     return false;
@@ -1164,7 +1159,6 @@ bool Board::isValidMove(Piece *p, int xT, int yT){
     else if(p->getID() == "pawn"){
         return isPawnMoveValid(p, xT, yT);
     }
-    return false;
 }
 
 void Board::castle(King *k){
@@ -1172,7 +1166,6 @@ void Board::castle(King *k){
 }
 
 bool Board::isCheck(King *k){
-
         Queen *q;
         
         if(k->white()){
@@ -1181,10 +1174,6 @@ bool Board::isCheck(King *k){
         else{
             q = new Queen(k->getPositionX(), k->getPositionY(), false);
         }
-
-
-        //This method of checking is more prone to risk, we need one where we use all the pieces of opposite color on the board and use each piece
-        //and have it check if its a valid move to move to the king's square 
 
         if(k->getPositionX() < 6 && k->getPositionY() < 7){
             if(board[k->getPositionY() + 1][k->getPositionX() + 2]->getID() == "knight"){
@@ -1297,10 +1286,9 @@ bool Board::isCheck(King *k){
                 return true;
             }
         }
-        if(board[k->getPositionY() + rangeMaxXDiag45(q)][k->getPositionX() + rangeMaxXDiag45(q)]->getID() == "queen" ||
-            board[k->getPositionY() + rangeMaxXDiag45(q)][k->getPositionX() + rangeMaxXDiag45(q)]->getID() == "bishop"){
-
-            if(isOppositeColor(k, board[k->getPositionY() + rangeMaxXDiag45(q)][k->getPositionX() + rangeMaxXDiag45(q)])){
+        if(board[k->getPositionY() - rangeMaxXDiag45(q)][k->getPositionX() + rangeMaxXDiag45(q)]->getID() == "queen" ||
+           board[k->getPositionY() - rangeMaxXDiag45(q)][k->getPositionX() + rangeMaxXDiag45(q)]->getID() == "bishop"){
+            if(isOppositeColor(k, board[k->getPositionY() - rangeMaxXDiag45(q)][k->getPositionX() + rangeMaxXDiag45(q)])){
                 return true;
             }
         }
@@ -1311,10 +1299,10 @@ bool Board::isCheck(King *k){
                 return true;
             }
         }
-        if(board[k->getPositionY() + rangeMaxXDiag225(q)][k->getPositionX() + rangeMaxXDiag225(q)]->getID() == "queen" ||
-            board[k->getPositionY() + rangeMaxXDiag225(q)][k->getPositionX() + rangeMaxXDiag225(q)]->getID() == "bishop" ){
+        if(board[k->getPositionY() - rangeMaxXDiag225(q)][k->getPositionX() + rangeMaxXDiag225(q)]->getID() == "queen" ||
+            board[k->getPositionY() - rangeMaxXDiag225(q)][k->getPositionX() + rangeMaxXDiag225(q)]->getID() == "bishop" ){
 
-            if(isOppositeColor(k, board[k->getPositionY() + rangeMaxXDiag225(q)][k->getPositionX() + rangeMaxXDiag225(q)])){
+            if(isOppositeColor(k, board[k->getPositionY() - rangeMaxXDiag225(q)][k->getPositionX() + rangeMaxXDiag225(q)])){
                 return true;
             }
         }
@@ -1325,14 +1313,11 @@ bool Board::isCheck(King *k){
                 return true;
             }
         }
-
-
         
-
         return false;
 }
 
-bool Board::isCheckMate(){
+bool Board::isCheck(){
     if(isCheck(kw)){
         return true;
     }
@@ -1357,12 +1342,37 @@ int Board::convertToInt(char x){
     if(int(x) > 96){
         return int(x) - 97;
     }
-    else {
+    else{
         return int(x) - 49;
     }
+
+    return -1;
+}
+
+int Board::justinLim(char charOldX, int oldY, char charNewX, int newY){
+
+    int oldX = convertToInt(charOldX);
+    int newX = convertToInt(charNewX);
+    
+    if(isValidMove(board[oldY][oldX], newX, newY)){
+        if(takePiece(oldX, oldY, newX, newY)){
+            return 2;
+        }  
+        swap(oldX, oldY, newX, newY);
+        if(isCheck()){
+            swap(oldX, oldY, newX, newY);
+            return 3;
+        }
+        swap(oldX, oldY, newX, newY);
+        return 1;
+    }
+
+    return 0;
+
 }
  
  void Board::playGame(){
+
     while(!checkmate(kw) || !checkmate(kb)){
         char charOldX;
         char charOldY;
@@ -1373,7 +1383,6 @@ int Board::convertToInt(char x){
         int newX;
         int oldY;
         int newY;
-
 
         bool madeMove = false;
 
@@ -1391,10 +1400,7 @@ int Board::convertToInt(char x){
 
                 if(board[oldY][oldX]->white()){
                     if(isValidMove(board[oldY][oldX], newX, newY)){
-
-                        cout <<"hey" << endl;
                         swap(oldX, oldY, newX, newY);
-                        cout << "here"<< endl;
                         if(isCheck(kw)){
                             swap(oldX, oldY, newX, newY);
                             cout << "King is still in check, try again" << endl;
