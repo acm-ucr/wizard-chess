@@ -39,6 +39,7 @@ class Board {
         //STOCKFISH STUFF --------------------------------------------------------------
         string playerMove = ""; 
         string bestMove = " ";
+        string listMove = " ";
 
         King *kw = new King(4, 7, true);
         King *kb = new King(4, 0, false);

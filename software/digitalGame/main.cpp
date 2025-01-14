@@ -3,37 +3,19 @@
 #include <array>
 #include <cstdio>
 #include <memory>
-#include "board.h"
 #include <fstream>
+//#include "stockfish.h"
 #include "Board.h"
 using namespace std;
 
-void populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt);
+//void populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt);
 
-Board game;
+//Board game;
 
 int main() {
-    //FOR TESTING
-    Board b; 
-
-    b.swap(6, 6, 6, 4); //g2g4
-    b.swap(4, 1, 4, 3); //e7e5
-    b.swap(5, 6, 5, 4); //f2f4
-    b.swap(3, 0, 7, 4); //d8h4
-    b.printBoard();
-    
-    //cout << b.isCheckMate() << endl;
-    // if(b.isCheck()) {
-    //     cout << "succ" << endl;
-    // }
-    // else {
-    //     cout << "hell no" << endl;
-    // }
-
-    //b.printBoard();
     // // Path to the Stockfish engine binary
     // //USED FOR TESTING: g2g4 e7e5 f2f3 d8h4
-    // const char* stockfishPath = "\"C:\\Users\\leaus\\OneDrive\\Important DOcs\\stockfish\\stockfish-windows-x86-64-avx2.exe\"";//This should be the stockfish path to your file
+    // const char* stockfishPath = "\"C:\\Users\\Alton\\stockfish\\stockfish-windows-x86-64-avx2.exe\""; //This should be the stockfish path to your file
     // Stockfish engine(stockfishPath);
     // engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
 
@@ -43,14 +25,15 @@ int main() {
     // string playerMove = "";
 
     // while (bestMove != "(none)") {
-    //     if(playerTurn == true) { //Player's individual moves
-    //         //Input moves like g2g4
-    //         cout << "Input Your Move: ";
-    //         cin >> playerMove;
-    //         position += " " + playerMove;
-    //         cout << "Current Moves: " << position << endl;
-    //     }
-    //     else { //Stockfish move
+    //     // if(playerTurn == true) { //Player's individual moves
+    //     //     //Input moves like g2g4
+    //     //     cout << "Input Your Move: ";
+    //     //     cin >> playerMove;
+    //     //     position += " " + playerMove;
+    //     //     cout << "Current Moves: " << position << endl;
+    //     // }
+    //     // else { //Stockfish move
+
     //         // Send position and search commands
     //         engine.sendCommand(position);
 
@@ -65,14 +48,32 @@ int main() {
     //         position += " " + bestMove;
     //         cout << "Current Moves: " << position << endl;
     //         engine.clearFiles();
-    //     }
-    //     playerTurn = !playerTurn;
+    //     // }
+    //     // playerTurn = !playerTurn;
     // }
     // cout << "GAME ENDED (CHECKMATE)" << endl;
-    return 0;
+    //return 0;
+    
 
     //populateCells('e', 2, 'e', 4, 3, 5);
+    Board b;
 
+    b.swap(6, 6, 6, 4); //g2g4
+    b.printBoard();
+    b.swap(4, 1, 4, 3); //e7e5
+    b.printBoard();
+    b.swap(5, 6, 5, 4); //f2f4
+    b.printBoard();
+    b.swap(3, 0, 7, 4); //d8h4
+    //b.swap(3, 6, 3, 5);
+    b.printBoard();
+
+    if(b.isCheck()){
+        cout << "success" << endl;
+    }
+    else {
+        cout << "failure" << endl;
+    }
 }
 
 // void populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt)

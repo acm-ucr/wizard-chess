@@ -189,12 +189,13 @@ bool Board::takePiece(int oldX, int oldY, int newX, int newY){
 }
 
 void Board::swap(int oldX, int oldY, int newX, int newY){
-    const char* stockfishPath = "STOCKFISH PATH HERE"; //This should be the stockfish path to your file
-    Stockfish engine(stockfishPath);
-    engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
+    // const char* stockfishPath = "STOCKFISH PATH HERE"; //This should be the stockfish path to your file
+    // Stockfish engine(stockfishPath);
+    // engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
 
     
     string position = "position startpos moves";
+    position += listMove;
     Piece p;
     //bool playerTurn = true;
     
@@ -222,22 +223,26 @@ void Board::swap(int oldX, int oldY, int newX, int newY){
     cout << "Your Move: ";
     playerMove = board[oldY][oldX]->getPosition() + board[newY][newX]->getPosition();
     position += " " + playerMove;
-    cout << "Current Moves: " << position << endl;
-    //Stockfish move
-    // Send position and search commands
-    engine.sendCommand(position);
+    listMove += " " + playerMove;
 
-    //Set depth to tell stockfish how far to search(the lower the depth, the lower the difficulty)
-    engine.sendCommand("go depth 100");
+    cout << "List of current moves: " << listMove << endl; 
+    // cout << "Current Moves: " << position << endl;
 
-    // Retrieve the best move
-    bestMove = engine.getBestMove();
-    cout << "Best Move: " << bestMove << endl;
+    // //Stockfish move
+    // // Send position and search commands
+    // engine.sendCommand(position);
 
-    // Update position with the best move
-    position += " " + bestMove;
-    //a function to conver best move to be updated on your board
-    engine.clearFiles();
+    // //Set depth to tell stockfish how far to search(the lower the depth, the lower the difficulty)
+    // engine.sendCommand("go depth 100");
+
+    // // Retrieve the best move
+    // bestMove = engine.getBestMove();
+    // cout << "Best Move: " << bestMove << endl;
+
+    // // Update position with the best move
+    // position += " " + bestMove;
+    // //a function to conver best move to be updated on your board
+    // engine.clearFiles();
 }
 
 void Board::promote(Pawn *p, Piece *piece){
@@ -1089,7 +1094,7 @@ bool Board::isKingMoveValid(Piece *p, int xT, int yT){
         if(yT < rangeUp(p) || yT > rangeDown(p)){
             return true;
         }
-    }
+    } 
     else if(yT == 0){
         if(xT < rangeRight(p) || xT > rangeLeft(p)){
             return true;
@@ -1164,7 +1169,6 @@ bool Board::isValidMove(Piece *p, int xT, int yT){
 void Board::castle(King *k){
 
 }
-
 bool Board::isCheck(King *k){
         Queen *q;
         
