@@ -1,12 +1,12 @@
 #include "Piece.h"
 
-Piece :: Piece(){
+Piece::Piece(){
     x = 0;
     y = 0;
     //counter = 0;
 }
 
-Piece :: Piece(int xPos, int yPos, bool color){
+Piece::Piece(int xPos, int yPos, bool color){
     x = xPos;
     y = yPos;
     isWhite = color;
@@ -24,6 +24,33 @@ string Piece::getPosition(){
     return coordinate;
 }
 
+int Piece::convertToInt(char x){
+    if(x == 'a'){
+        return 0;
+    }
+    else if(x == 'b'){
+        return 1;
+    }
+    else if(x == 'c'){
+        return 2;
+    }
+    else if(x == 'd'){
+        return 3;
+    }
+    else if(x == 'e'){
+        return 4;
+    }
+    else if(x == 'f'){
+        return 5;
+    }
+    else if(x == 'g'){
+        return 6;
+    }
+    else if(x == 'h'){
+        return 7;
+    }
+    return this->x;
+}
 // int Piece::convertToInt(char x){
 //     if(x == 'a'){
 //         return 0;

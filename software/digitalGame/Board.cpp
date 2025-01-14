@@ -1169,7 +1169,6 @@ bool Board::isValidMove(Piece *p, int xT, int yT){
 void Board::castle(King *k){
 
 }
-
 bool Board::isCheck(King *k){
         Queen *q;
         

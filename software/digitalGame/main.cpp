@@ -33,6 +33,7 @@ int main() {
     //     //     cout << "Current Moves: " << position << endl;
     //     // }
     //     // else { //Stockfish move
+
     //         // Send position and search commands
     //         engine.sendCommand(position);
 

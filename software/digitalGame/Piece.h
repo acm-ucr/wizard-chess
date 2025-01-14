@@ -16,9 +16,9 @@ class Piece {
         int getPositionX(){return x;}
         int getPositionY(){return y;}
         void setPositionX(int numX){x = numX;}
-        void setPositionY(int numY){y = numY;}   
+        void setPositionY(int numY){y = numY;}
 
-        //int convertToInt(char x);
+        int convertToInt(char x);
 
         string getPosition();
         
@@ -41,7 +41,7 @@ class Piece {
         int x;
         int y;
         bool isWhite;
-        //int counter;v
+        //int counter;
 
 };
 

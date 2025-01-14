@@ -10,4 +10,4 @@ class Settings
         ~Settings();
 };
 
-#endif // DIFFICULTY_H
+#endif
