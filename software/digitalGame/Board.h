@@ -13,7 +13,7 @@
 #include "King.h"
 #include "Rook.h"
 #include "EmptyPiece.h"
-
+#include "stockfish.h"
 
 using namespace std;
 
@@ -28,9 +28,18 @@ class Board {
         Board(); //Default COnstructor
         ~Board();
         void resetBoard();
+
+        int whiteMoves = 0;
+        int blackMoves = 0;
        
+        int justinLim(char charOldX, int oldY, char charNewX, int newY);
 
         vector<vector<Piece*>> board;
+
+        //STOCKFISH STUFF --------------------------------------------------------------
+        string playerMove = ""; 
+        string bestMove = " ";
+        string listMove = " ";
 
         King *kw = new King(4, 7, true);
         King *kb = new King(4, 0, false);
@@ -46,11 +55,10 @@ class Board {
         void printBoard();
         void playGame();
         bool checkmate(King *k);
+        bool convertBestMove(string bestMove);
         bool isCheck(King *k);
 
-        bool isBCheck();
-
-        bool isWCheck();
+        bool isCheck();
 
         void promote(Pawn *p, Piece *piece);
 
@@ -61,6 +69,8 @@ class Board {
         void undoMove(Piece *p, int x, int y);
 
         int convertToInt(char x);
+
+        void castle(King *k);
 
         int simulateUp(Piece *p);
         int simulate45X(Piece *p);
@@ -83,8 +93,10 @@ class Board {
         int rangeRight(Piece *p);
 
         int rangeMaxXDiag45(Piece *p);
+        int rangeYDiag45(Piece *p);
         int rangeMinXDiag135(Piece *p);
         int rangeMaxXDiag225(Piece *p);
+        int rangeYDiag225(Piece *p);
         int rangeMinXDiag315(Piece *p);
 
         bool isQueenMoveValid(Piece *p, int xT, int yT);
