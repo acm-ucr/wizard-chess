@@ -36,62 +36,62 @@ Board::Board(){
    
     //Initialize Black Pawns
     for(int i = 0; i < 8; i++){
-        board[1][i] = new Pawn(i, 1, false);
+        board[6][i] = new Pawn(i, 6, false);
     }
 
 
     //Initialize White Pawns
     for(int i = 0; i < 8; i++){
-        board[6][i] = new Pawn(i, 6, true);
+        board[1][i] = new Pawn(i, 1, true);
     }
 
 
     //Initialize Black Rooks
-    board[0][0] = new Rook(0, 0, false);
-    board[0][7] = new Rook(7, 0, false);
+    board[7][0] = new Rook(0, 7, false);
+    board[7][7] = new Rook(7, 7, false);
 
 
     //Initialize White Rooks
-    board[7][0] = new Rook(0, 7, true);
-    board[7][7] = new Rook(7, 7, true);
+    board[0][0] = new Rook(0, 0, true);
+    board[0][7] = new Rook(7, 0, true);
 
 
     //Initialize Black Knights
-    board[0][1] = new Knight(1, 0, false);
-    board[0][6] = new Knight(6, 0, false);
+    board[7][1] = new Knight(1, 7, false);
+    board[7][6] = new Knight(6, 7, false);
 
 
     //Initialize White Knights
-    board[7][1] = new Knight(1, 7, true);
-    board[7][6] = new Knight(6, 7, true);
+    board[0][1] = new Knight(1, 0, true);
+    board[0][6] = new Knight(6, 0, true);
 
 
     //Initialize Black Bishops
-    board[0][2] = new Bishop(2, 0, false);
-    board[0][5] = new Bishop(5, 0, false);
+    board[7][2] = new Bishop(2, 7, false);
+    board[7][5] = new Bishop(5, 7, false);
 
 
     //Initialize White Bishops
-    board[7][2] = new Bishop(2, 7, true);
-    board[7][5] = new Bishop(5, 7, true);
+    board[0][2] = new Bishop(2, 0, true);
+    board[0][5] = new Bishop(5, 0, true);
 
 
     //Initialize Black Queen
-    board[0][3] = new Queen(3, 0, false);
+    board[7][3] = new Queen(3, 7, false);
 
 
     //Initialize White Queen
-    board[7][3] = new Queen(3, 7, true);
+    board[0][3] = new Queen(3, 0, true);
 
 
     //Initialize black King
     //King *kw = new King(4, 0, true);
-    board[0][4] = kb;
+    board[7][4] = kb;
 
 
     //Initialize White King
     //King *kb = new King(4, 7, false);
-    board[7][4] = kw;
+    board[0][4] = kw;
 
 }
 

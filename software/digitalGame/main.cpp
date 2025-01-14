@@ -58,14 +58,14 @@ int main() {
     //populateCells('e', 2, 'e', 4, 3, 5);
     Board b;
 
-    b.swap(6, 6, 6, 4); //g2g4
-    b.printBoard();
-    b.swap(4, 1, 4, 3); //e7e5
-    b.printBoard();
-    b.swap(5, 6, 5, 4); //f2f4
-    b.printBoard();
-    b.swap(3, 0, 7, 4); //d8h4
-    //b.swap(3, 6, 3, 5);
+    // b.swap(6, 6, 6, 4); //g2g4
+    // b.printBoard();
+    // b.swap(4, 1, 4, 3); //e7e5
+    // b.printBoard();
+    // b.swap(5, 6, 5, 4); //f2f4
+    // b.printBoard();
+    // b.swap(3, 0, 7, 4); //d8h4
+    // //b.swap(3, 6, 3, 5);
     b.printBoard();
 
     if(b.isCheck()){
@@ -74,6 +74,7 @@ int main() {
     else {
         cout << "failure" << endl;
     }
+    return 0;
 }
 
 // void populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt)
