@@ -1,6 +1,5 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
 #include <QMainWindow>
 #include <QPushButton>
 #include <QMap>
@@ -90,8 +89,6 @@ private slots:
 
     void on_pushButton_back_settings_clicked();
 
-    void on_randomGeneratorButton_clicked();
-
     void on_pushButton_Gryffindor_clicked();
 
     void on_pushButton_Slytherin_clicked();
@@ -110,6 +107,10 @@ private slots:
 
     void change_endgame_status();
 
+    void resize();
+
+    void updateTime();
+
 private:
     Ui::MainWindow *ui;
     Settings *mwSettings;
@@ -119,6 +120,7 @@ private:
     QTimer *timer;
     bool bCheck;
     bool wCheck;
+    clock_t totalClock;
     Board game;
     int co;
     int end_status; // 0 = white winner, 1 = black winner, 2 = tie
@@ -130,11 +132,15 @@ private:
     QList<ChessPiece> pieces;            // List of chess pieces
     QString selectedPiecePosition;       // Position of selected piece
     ChessPiece* selectedPiece = nullptr; // Currently selected piece
+    int capacity = 10;
+    int size = 0;
+    int turn;
 
     void setupBoard();
     void setupInitialPositions();
     void placePieceOnTile(const QString& position, const QString& pieceType, const QString& color);
     bool isValidMove(const QString& pieceType, const QString& from, const QString& to);
+
 
 };
 

@@ -3150,56 +3150,16 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
            <height>301</height>
           </rect>
          </property>
-         <row>
-          <property name="text">
-           <string>Round #1</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Round #2</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Round #3</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Round #4</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Round #5</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Round #6</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Round #7</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Round #8</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Round #9</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Round #10</string>
-          </property>
-         </row>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
          <column>
           <property name="text">
            <string>White</string>
