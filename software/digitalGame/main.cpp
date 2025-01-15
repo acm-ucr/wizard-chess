@@ -66,14 +66,16 @@ int main() {
     // b.printBoard();
     // b.swap(3, 0, 7, 4); //d8h4
     // //b.swap(3, 6, 3, 5);
-    b.printBoard();
+    // b.printBoard();
 
-    if(b.isCheck()){
-        cout << "success" << endl;
-    }
-    else {
-        cout << "failure" << endl;
-    }
+    // if(b.isCheck()){
+    //     cout << "success" << endl;
+    // }
+    // else {
+    //     cout << "failure" << endl;
+    // }
+
+    b.playGame();
     return 0;
 }
 

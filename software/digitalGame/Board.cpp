@@ -77,22 +77,21 @@ Board::Board(){
 
 
     //Initialize Black Queen
-    board[7][3] = new Queen(3, 7, false);
+    board[7][4] = new Queen(4, 7, false);
 
 
     //Initialize White Queen
-    board[0][3] = new Queen(3, 0, true);
+    board[0][4] = new Queen(4, 0, true);
 
 
     //Initialize black King
     //King *kw = new King(4, 0, true);
-    board[7][4] = kb;
+    board[7][3] = kb;
 
 
     //Initialize White King
     //King *kb = new King(4, 7, false);
-    board[0][4] = kw;
-
+    board[0][3] = kw;
 }
 
 void Board::resetBoard() {
@@ -174,7 +173,28 @@ void Board::printBoard() {
     for(int i = 0; i < 8; i++){
         cout << endl;
         for(int j = 0; j < 8; j++){
-            cout << board[i][j]->getID() << '(' << board[i][j]->white() << ')' <<", ";
+            if(board[i][j]->getID() == "empty"){
+                cout << board[i][j]->getID() << "   ";
+            }
+            else if(board[i][j]->getID() == "pawn"){
+                cout << board[i][j]->getID() << "    ";
+            }
+            else if(board[i][j]->getID() == "rook"){
+                cout << board[i][j]->getID() << "    ";
+            }
+            else if(board[i][j]->getID() == "bishop"){
+                cout << board[i][j]->getID() << "  ";
+            }
+            else if(board[i][j]->getID() == "knight"){
+                cout << board[i][j]->getID() << "  ";
+            }
+            else if(board[i][j]->getID() == "queen"){
+                cout << board[i][j]->getID() << "   ";
+            }
+            else if(board[i][j]->getID() == "king"){
+                cout << board[i][j]->getID() << "    ";
+            }
+            //cout << board[i][j]->getID();
         }
     }
 
@@ -252,8 +272,10 @@ void Board::promote(Pawn *p, Piece *piece){
 }
 
 bool Board::isOppositeColor(Piece *p1, Piece *p2){
-    if((p1->white() != p2->white())){
-        return true;
+    if(p2->getID() != "empty"){
+        if((p1->white() != p2->white())){
+            return true;
+        }
     }
     return false;
 }
@@ -746,6 +768,18 @@ int Board::rangeDown(Piece *p){
         }
         resetSimulation(tempPiece, originalXPos, originalYPos);
     }
+    else if(tempPiece->getID() == "pawn"){
+        tempPiece->movePiece(0, 1);
+        if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
+            counterY5++;
+        }
+        if(tempPiece->getMoveCounter() == 0){
+            tempPiece->movePiece(0, 1);
+            if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
+                counterY5++;
+            }
+        }
+    }
     return counterY5;
 }
 
@@ -792,10 +826,16 @@ int Board::rangeUp(Piece *p){
     }
 
     if(tempPiece->getID() == "pawn"){
-        tempPiece->movePiece(0, 1);
+        tempPiece->movePiece(0, -1);
         if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
-            counterY1++;
-        }     
+            counterY1--;
+        } 
+        if(tempPiece->getMoveCounter() == 0){
+            tempPiece->movePiece(0, -1);
+            if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
+                counterY1--;
+            }
+        }    
     }
 
     return counterY1;
@@ -952,7 +992,6 @@ int Board::rangeMinXDiag315(Piece *p){
     if(tempPiece->getID() == "queen"){
 
         counterX8 = simulate315X(tempPiece);
-        cout << counterX8 << endl;
         resetSimulation(tempPiece, originalXPos, originalYPos);
 
     }
@@ -1046,42 +1085,42 @@ bool Board::isBishopMoveValid(Piece *p, int xT, int yT){
 
 bool Board::isKnightMoveValid(Piece *p, int xT, int yT){
     if(xT == 1 && rangeUp(p) == 1){
-        if(yT == 2){
-            return true;
-        }
-    }
-    else if(xT == 2 && rangeMaxXDiag45(p) == 2){
-        if(yT == 1){
-            return true;
-        }
-    }
-    else if(xT == 2 && rangeRight(p) == 2){
-        if(yT == -1){
-            return true;
-        }
-    }
-    else if(xT == 1 && rangeMinXDiag135(p) == 1){
         if(yT == -2){
             return true;
         }
     }
-    else if(xT == -1 && rangeDown(p) == -1){
-        if(yT == -2){
-            return true;
-        }
-    }
-    else if(xT == -2 && rangeMaxXDiag225(p) == -2){
+    if(xT == 2 && rangeMaxXDiag45(p) == 2){
         if(yT == -1){
             return true;
         }
     }
-    else if(xT == -2 && rangeLeft(p) == -2){
+    if(xT == 2 && rangeRight(p) == 2){
         if(yT == 1){
             return true;
         }
     }
-    else if(xT == -1 && rangeMinXDiag315(p) == -1){
+    if(xT == 1 && rangeMinXDiag135(p) == 1){
         if(yT == 2){
+            return true;
+        }
+    }
+    if(xT == -1 && rangeDown(p) == -1){
+        if(yT == 2){
+            return true;
+        }
+    }
+    if(xT == -2 && rangeMaxXDiag225(p) == -2){
+        if(yT == 1){
+            return true;
+        }
+    }
+    if(xT == -2 && rangeLeft(p) == -2){
+        if(yT == -1){
+            return true;
+        }
+    }
+    if(xT == -1 && rangeMinXDiag315(p) == -1){
+        if(yT == -2){
             return true;
         }
     }
@@ -1116,22 +1155,49 @@ bool Board::isKingMoveValid(Piece *p, int xT, int yT){
 }
 
 bool Board::isPawnMoveValid(Piece *p, int xT, int yT){
+
     if(xT == 1 || xT == -1){
-        if(board[p->getPositionY() + 1][p->getPositionX() + 1]->getID() != "empty"){
+        if(takePiece(p->getPositionX(), p->getPositionY(), p->getPositionY() + 1, p->getPositionX() + 1)){
+            p->setMoveCounter(1);
             return true;
         }
-        else if(board[p->getPositionY() - 1][p->getPositionX() + 1]->getID() != "empty"){
+        else if(takePiece(p->getPositionX(), p->getPositionY(), p->getPositionY() - 1, p->getPositionX() + 1)){
+            p->setMoveCounter(1);
             return true;
         }
-    }
-    if(p->pawnCounter == 0){
-        if((yT == 1 && rangeUp(p) == 1)|| (yT == 2 && rangeUp(p) == 2)){
-            p->pawnCounter++;
+        else if(takePiece(p->getPositionX(), p->getPositionY(), p->getPositionY() + 1, p->getPositionX() - 1)){
+            p->setMoveCounter(1);
+            return true;
+        }
+        else if(takePiece(p->getPositionX(), p->getPositionY(), p->getPositionY() - 1, p->getPositionX() - 1)){
+            p->setMoveCounter(1);
             return true;
         }
         else{
             return false;
+        }
+    }
+    if(p->getMoveCounter() == 0){
+        if(!p->white()){
+            if((yT == -1 && rangeUp(p) >= -2)|| (yT == -2 && rangeUp(p) == -2)){
+                p->setMoveCounter(1);
+                return true;
+            }
+            else{
+                cout << "nig" << endl;
+                cout << yT << ", " << rangeUp(p) << endl;
+                return false;
+            }
         } 
+        else{
+            if((yT == 1 && rangeDown(p) <= 2)|| (yT == 2 && rangeDown(p) == 2)){
+                p->setMoveCounter(1);
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
     }
     else{
         if(yT == 1 && rangeUp(p) == 1){
@@ -1156,7 +1222,7 @@ bool Board::isValidMove(Piece *p, int xT, int yT){
         return isKingMoveValid(p, xT, yT);
     }
     else if(p->getID() == "knight"){
-        return isKingMoveValid(p, xT, yT);
+        return isKnightMoveValid(p, xT, yT);
     }
     else if(p->getID() == "bishop"){
         return isBishopMoveValid(p, xT, yT);
@@ -1169,6 +1235,7 @@ bool Board::isValidMove(Piece *p, int xT, int yT){
 void Board::castle(King *k){
 
 }
+
 bool Board::isCheck(King *k){
         Queen *q;
         
@@ -1182,6 +1249,7 @@ bool Board::isCheck(King *k){
         if(k->getPositionX() < 6 && k->getPositionY() < 7){
             if(board[k->getPositionY() + 1][k->getPositionX() + 2]->getID() == "knight"){
                 if(isOppositeColor(k, board[k->getPositionY() + 1][k->getPositionX() + 2])){
+                    //cout << "a" << endl;
                     return true;
                 }
             }
@@ -1189,6 +1257,7 @@ bool Board::isCheck(King *k){
         if(k->getPositionX() < 7 && k->getPositionY() < 6){
             if(board[k->getPositionY() + 2][k->getPositionX() + 1]->getID() == "knight"){
                 if(isOppositeColor(k, board[k->getPositionY() + 2][k->getPositionX() + 1])){
+                    //cout << "b" << endl;
                     return true;
                 }
             }
@@ -1196,6 +1265,7 @@ bool Board::isCheck(King *k){
         if(k->getPositionX() > 0 && k->getPositionY() < 6){
             if(board[k->getPositionY() + 2][k->getPositionX() - 1]->getID() == "knight"){
                 if(isOppositeColor(k, board[k->getPositionY() + 2][k->getPositionX() - 1])){
+                    //cout << 'c' << endl;
                     return true;
                 }
             }
@@ -1203,6 +1273,7 @@ bool Board::isCheck(King *k){
         if(k->getPositionX() > 1 && k->getPositionY() < 7){
             if(board[k->getPositionY() + 1][k->getPositionX() - 2]->getID() == "knight"){
                 if(isOppositeColor(k, board[k->getPositionY() + 1][k->getPositionX() - 2])){
+                    //cout << 'd' << endl;
                     return true;
                 }
             }
@@ -1210,6 +1281,7 @@ bool Board::isCheck(King *k){
         if(k->getPositionX() > 1 && k->getPositionY() > 0){
             if(board[k->getPositionY() - 1][k->getPositionX() - 2]->getID() == "knight"){
                 if(isOppositeColor(k, board[k->getPositionY() - 1][k->getPositionX() - 2])){
+                    //cout << 'e' << endl;
                     return true;
                 }
             }
@@ -1217,6 +1289,7 @@ bool Board::isCheck(King *k){
         if(k->getPositionX() > 0 && k->getPositionY() > 1){
             if(board[k->getPositionY() - 2][k->getPositionX() - 1]->getID() == "knight"){
                 if(isOppositeColor(k, board[k->getPositionY() - 2][k->getPositionX() - 1])){
+                    //cout << 'f' << endl;
                     return true;
                 }
             }
@@ -1224,6 +1297,7 @@ bool Board::isCheck(King *k){
         if(k->getPositionX() < 7 && k->getPositionY() > 1){
             if(board[k->getPositionY() - 2][k->getPositionX() + 1]->getID() == "knight"){
                 if(isOppositeColor(k, board[k->getPositionY() - 2][k->getPositionX() + 1])){
+                    //cout << 'g' << endl;
                     return true;
                 }
             }
@@ -1231,6 +1305,7 @@ bool Board::isCheck(King *k){
         if(k->getPositionX() < 6 && k->getPositionY() > 0){
             if(board[k->getPositionY() - 1][k->getPositionX() + 2]->getID() == "knight"){
                 if(isOppositeColor(k, board[k->getPositionY() - 1][k->getPositionX() + 2])){
+                    //cout << 'h' << endl;
                     return true;
                 }
             }
@@ -1238,6 +1313,7 @@ bool Board::isCheck(King *k){
         if(k->getPositionX() < 7 && k->getPositionY() < 7){
             if(board[k->getPositionY() + 1][k->getPositionX() + 1]->getID() == "pawn"){
                 if(isOppositeColor(k, board[k->getPositionY() + 1][k->getPositionX() + 1])){
+                    //cout << 'i' << endl;
                     return true;
                 }
             }
@@ -1245,6 +1321,7 @@ bool Board::isCheck(King *k){
         if(k->getPositionX() > 0 && k->getPositionY() < 7){
             if(board[k->getPositionY() + 1][k->getPositionX() - 1]->getID() == "pawn"){
                 if(isOppositeColor(k, board[k->getPositionY() + 1][k->getPositionX() - 1])){
+                    //cout << 'j' << endl;
                     return true;
                 }
             }
@@ -1252,6 +1329,10 @@ bool Board::isCheck(King *k){
         if(k->getPositionX() < 7 && k->getPositionY() > 0){
             if(board[k->getPositionY() - 1][k->getPositionX() + 1]->getID() == "pawn"){
                 if(isOppositeColor(k, board[k->getPositionY() - 1][k->getPositionX() + 1])){
+                    // cout << 'k' << endl;
+                    // cout << k->white() << ", " << board[k->getPositionY() - 1][k->getPositionX() + 1]->white() << endl;
+                    // cout << k->getPositionX() << ", " << k->getPositionY() << endl;
+                    // cout << board[k->getPositionY() - 1][k->getPositionX() + 1]->getID() << endl;
                     return true;
                 }
             }
@@ -1259,6 +1340,7 @@ bool Board::isCheck(King *k){
         if(k->getPositionX() > 0 && k->getPositionY() > 0){
             if(board[k->getPositionY() - 1][k->getPositionX() - 1]->getID() == "pawn"){
                 if(isOppositeColor(k, board[k->getPositionY() - 1][k->getPositionX() - 1])){
+                    //cout << 'l' << endl;
                     return true;
                 }
             }
@@ -1267,12 +1349,14 @@ bool Board::isCheck(King *k){
             board[k->getPositionY() + rangeUp(q)][k->getPositionX()]->getID() == "rook" ){
 
             if(isOppositeColor(k, board[k->getPositionY() + rangeUp(q)][k->getPositionX()])){
+                //cout << 'm' << endl;
                 return true;
             }
         }
         if(board[k->getPositionY() + rangeDown(q)][k->getPositionX()]->getID() == "queen" ||
             board[k->getPositionY() + rangeDown(q)][k->getPositionX()]->getID() == "rook" ){
             if(isOppositeColor(k, board[k->getPositionY() + rangeDown(q)][k->getPositionX()])){
+                //cout << 'n' << endl;
                 return true;
             }
         }
@@ -1280,6 +1364,7 @@ bool Board::isCheck(King *k){
             board[k->getPositionY()][k->getPositionX() + rangeRight(q)]->getID() == "rook" ){
 
             if(isOppositeColor(k, board[k->getPositionY()][k->getPositionX() + rangeRight(q)])){
+                //cout << 'o' << endl;
                 return true;
             }
         }
@@ -1287,12 +1372,14 @@ bool Board::isCheck(King *k){
             board[k->getPositionY()][k->getPositionX() + rangeLeft(q)]->getID() == "rook" ){
 
             if(isOppositeColor(k, board[k->getPositionY()][k->getPositionX() + rangeLeft(q)])){
+                //cout << 'p' << endl;
                 return true;
             }
         }
         if(board[k->getPositionY() - rangeMaxXDiag45(q)][k->getPositionX() + rangeMaxXDiag45(q)]->getID() == "queen" ||
            board[k->getPositionY() - rangeMaxXDiag45(q)][k->getPositionX() + rangeMaxXDiag45(q)]->getID() == "bishop"){
             if(isOppositeColor(k, board[k->getPositionY() - rangeMaxXDiag45(q)][k->getPositionX() + rangeMaxXDiag45(q)])){
+                //cout << 'q' << endl;
                 return true;
             }
         }
@@ -1300,6 +1387,7 @@ bool Board::isCheck(King *k){
             board[k->getPositionY() + rangeMinXDiag135(q)][k->getPositionX() + rangeMinXDiag135(q)]->getID() == "bishop"){
 
             if(isOppositeColor(k, board[k->getPositionY() + rangeMinXDiag135(q)][k->getPositionX() + rangeMinXDiag135(q)])){
+                //cout << 'r' << endl;
                 return true;
             }
         }
@@ -1307,6 +1395,7 @@ bool Board::isCheck(King *k){
             board[k->getPositionY() - rangeMaxXDiag225(q)][k->getPositionX() + rangeMaxXDiag225(q)]->getID() == "bishop" ){
 
             if(isOppositeColor(k, board[k->getPositionY() - rangeMaxXDiag225(q)][k->getPositionX() + rangeMaxXDiag225(q)])){
+                //cout << 's' << endl;
                 return true;
             }
         }
@@ -1314,6 +1403,7 @@ bool Board::isCheck(King *k){
             board[k->getPositionY() + rangeMinXDiag315(q)][k->getPositionX() + rangeMinXDiag315(q)]->getID() == "bishop" ){
 
             if(isOppositeColor(k, board[k->getPositionY() + rangeMinXDiag315(q)][k->getPositionX() + rangeMinXDiag315(q)])){
+                //cout << 't' << endl;
                 return true;
             }
         }
@@ -1336,7 +1426,7 @@ void Board::undoMove(Piece *p, int x, int y){
 }
 
 bool Board::checkmate(King *k){
-    if(bestMove == "none"){
+    if(/*bestMove == "none"*/ isCheck()){
         return true;
     }
     return false;
@@ -1344,7 +1434,7 @@ bool Board::checkmate(King *k){
  
 int Board::convertToInt(char x){
     if(int(x) > 96){
-        return int(x) - 97;
+        return 104 - int(x);
     }
     else{
         return int(x) - 49;
@@ -1378,6 +1468,8 @@ int Board::justinLim(char charOldX, int oldY, char charNewX, int newY){
  void Board::playGame(){
 
     while(!checkmate(kw) || !checkmate(kb)){
+        string move;
+
         char charOldX;
         char charOldY;
         char charNewX;
@@ -1391,22 +1483,29 @@ int Board::justinLim(char charOldX, int oldY, char charNewX, int newY){
         bool madeMove = false;
 
         if(whiteMoves == blackMoves){
+            cout << "White move: " << endl;
             while(!madeMove){
-                charOldX = bestMove[0];
-                charOldY = bestMove[1];
-                charNewX = bestMove[2];
-                charNewY = bestMove[3];
+                cin >> move;
+                // charOldX = bestMove[0];
+                // charOldY = bestMove[1];
+                // charNewX = bestMove[2];
+                // charNewY = bestMove[3];
+                
+                charOldX = move[0];
+                charOldY = move[1];
+                charNewX = move[2];
+                charNewY = move[3];
 
                 oldX = convertToInt(charOldX);
                 newX = convertToInt(charNewX);
                 oldY = convertToInt(charOldY);
                 newY = convertToInt(charNewY);
 
-                if(board[oldY][oldX]->white()){
-                    if(isValidMove(board[oldY][oldX], newX, newY)){
+                if((board[oldY][oldX]->getID() != "empty") && (board[oldY][oldX]->white())){
+                    if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
                         swap(oldX, oldY, newX, newY);
                         if(isCheck(kw)){
-                            swap(oldX, oldY, newX, newY);
+                            swap(newX, newY, oldX, oldY);
                             cout << "King is still in check, try again" << endl;
                         }
                         else{
@@ -1424,22 +1523,29 @@ int Board::justinLim(char charOldX, int oldY, char charNewX, int newY){
             }
         }
         else{
+            cout << "Black move: " << endl;
             while(!madeMove){
-                charOldX = bestMove[0];
-                charOldY = bestMove[1];
-                charNewX = bestMove[2];
-                charNewY = bestMove[3];
+                cin >> move;
+                // charOldX = bestMove[0];
+                // charOldY = bestMove[1];
+                // charNewX = bestMove[2];
+                // charNewY = bestMove[3];
+
+                charOldX = move[0];
+                charOldY = move[1];
+                charNewX = move[2];
+                charNewY = move[3];
 
                 oldX = convertToInt(charOldX);
                 newX = convertToInt(charNewX);
                 oldY = convertToInt(charOldY);
                 newY = convertToInt(charNewY);
 
-                if(!board[oldY][oldX]->white()){
-                    if(isValidMove(board[oldY][oldX], newX, newY)){
+                if((board[oldY][oldX]->getID() != "empty") && (!board[oldY][oldX]->white())){
+                    if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
                         swap(oldX, oldY, newX, newY);
                         if(isCheck(kb)){
-                            swap(oldX, oldY, newX, newY);
+                            swap(newX, newY, oldX, oldY);
                             cout << "King is in check, try again" << endl;
                         }
                         else{
@@ -1448,13 +1554,15 @@ int Board::justinLim(char charOldX, int oldY, char charNewX, int newY){
                         }
                     }
                     else{
-                        cout << "Invalid move, try again" << endl;
+                        cout << "Invalid move, try again bruh" << endl;
                     }
                 }
                 else{
-                    cout << "Invalid move, try again" << endl;
+                    cout << "Invalid move, try again wtf" << endl;
                 }
             }
         }
+
+        printBoard();
     }
  }

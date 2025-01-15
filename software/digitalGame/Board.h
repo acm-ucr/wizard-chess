@@ -41,8 +41,8 @@ class Board {
         string bestMove = " ";
         string listMove = " ";
 
-        King *kw = new King(4, 7, true);
-        King *kb = new King(4, 0, false);
+        King *kw = new King(3, 0, true);
+        King *kb = new King(3, 7, false);
 
         //2D array to keep track of pieces and first index is for Letters and seoncd is for numbers
         //Possibly using XY coordinates to keep track of pieces with index
