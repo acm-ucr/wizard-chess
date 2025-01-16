@@ -265,9 +265,25 @@ void Board::swap(int oldX, int oldY, int newX, int newY){
     // engine.clearFiles();
 }
 
-void Board::promote(Pawn *p, Piece *piece){
+void Board::promote(Pawn *p){
+    string piece;
+    Piece* newPiece;
     if(p->getPositionY() == 7 || p->getPositionY() == 0){
-        board[p->getPositionY()][p->getPositionX()] = piece;
+        cout << "What piece would you like to promote to?" << endl;
+        cin >> piece;
+        if(piece == "queen"){
+            newPiece = new Queen(p->getPositionX(), p->getPositionY(), false);
+        }
+        else if(piece == "rook"){
+
+        }
+        else if(piece == "bishop"){
+
+        }
+        else if(piece == "knight"){
+
+        }
+        board[p->getPositionY()][p->getPositionX()] = newPiece;
     }
 }
 
@@ -1258,7 +1274,7 @@ bool Board::isValidMove(Piece *p, int xT, int yT){
 }
 
 void Board::castle(King *k){
-
+    
 }
 
 bool Board::isCheck(King *k){

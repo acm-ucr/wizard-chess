@@ -60,7 +60,7 @@ class Board {
 
         bool isCheck();
 
-        void promote(Pawn *p, Piece *piece);
+        void promote(Pawn *p);
 
         void updateBoard();
 
