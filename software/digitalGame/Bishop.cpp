@@ -8,10 +8,10 @@ Bishop::Bishop(int xPos, int yPos, bool color) : Piece(xPos, yPos, color){
 }
 
 void Bishop::movePiece(int xM, int yM){
-    if(this->isValid(xM, yM)){
+    //if(this->isValid(xM, yM)){
         this->setPositionX(this->getPositionX() + xM);
         this->setPositionY(this->getPositionY() + yM);
-    }
+    //}
 }
 
 bool Bishop::isValid(int xT, int yT){
