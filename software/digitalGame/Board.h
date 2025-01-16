@@ -38,8 +38,9 @@ class Board {
 
         //STOCKFISH STUFF --------------------------------------------------------------
         string playerMove = ""; 
-        string bestMove = " ";
-        string listMove = " ";
+        string bestMove = "";
+        string listMove = "";
+        const char* stockfishPath = "\"C:\\Users\\leaus\\OneDrive\\Important DOcs\\stockfish\\stockfish-windows-x86-64-avx2.exe\""; //This should be the stockfish path to your file
 
         King *kw = new King(4, 7, true);
         King *kb = new King(4, 0, false);
