@@ -38,11 +38,12 @@ class Board {
 
         //STOCKFISH STUFF --------------------------------------------------------------
         string playerMove = ""; 
-        string bestMove = " ";
-        string listMove = " ";
+        string bestMove = "";
+        string listMove = "";
+        const char* stockfishPath = "\"C:\\Users\\leaus\\OneDrive\\Important DOcs\\stockfish\\stockfish-windows-x86-64-avx2.exe\""; //This should be the stockfish path to your file
 
-        King *kw = new King(4, 7, true);
-        King *kb = new King(4, 0, false);
+        King *kw = new King(3, 0, true);
+        King *kb = new King(3, 7, false);
 
         //2D array to keep track of pieces and first index is for Letters and seoncd is for numbers
         //Possibly using XY coordinates to keep track of pieces with index
@@ -60,7 +61,7 @@ class Board {
 
         bool isCheck();
 
-        void promote(Pawn *p, Piece *piece);
+        void promote(Pawn *p);
 
         void updateBoard();
 

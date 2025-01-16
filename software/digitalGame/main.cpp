@@ -8,9 +8,6 @@
 #include "Board.h"
 using namespace std;
 
-//void populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt);
-
-//Board game;
 
 int main() {
     // // Path to the Stockfish engine binary
@@ -54,19 +51,19 @@ int main() {
     // cout << "GAME ENDED (CHECKMATE)" << endl;
     //return 0;
     
-
-    //populateCells('e', 2, 'e', 4, 3, 5);
     Board b;
+    b.printBoard();
+    b.playGame();
 
-    b.swap(6, 6, 6, 4); //g2g4
-    b.printBoard();
-    b.swap(4, 1, 4, 3); //e7e5
-    b.printBoard();
-    b.swap(5, 6, 5, 4); //f2f4
-    b.printBoard();
-    b.swap(3, 0, 7, 4); //d8h4
+    // b.swap(6, 1, 6, 3); //g2g4
+    // b.printBoard();
+    // b.swap(4, 6, 4, 4); //e7e5
+    // b.printBoard();
+    // b.swap(5, 1, 5, 3); //f2f4
+    // b.printBoard();
+    // b.swap(3, 7, 7, 3); //d8h4
     //b.swap(3, 6, 3, 5);
-    b.printBoard();
+    //b.printBoard();
 
     if(b.isCheck()){
         cout << "success" << endl;
@@ -74,55 +71,5 @@ int main() {
     else {
         cout << "failure" << endl;
     }
+    return 0;
 }
-
-// void populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt)
-// {
-//     // if (turnCnt % 20 == 0)
-//     // {
-//     //     clearTableWidget();
-//     // }
-//     bool bCheck = false;
-//     bool wCheck = false;
-//     if (i == 0) {return;}
-//     int row = (turnCnt % 20)/2;
-//     int col = turnCnt % 2;
-//     // gets the piece type character from game
-//     // out initializes to a piece first
-//     string out = game.board[y1][game.convertToInt(x1)]->getPosition();
-
-//     cout << out << endl;
-
-//     if (i == 1) {
-//         out += x2 + y2;
-//         if (col == 0) {
-//             if (bCheck == 1) {
-//                 out += "+";
-//             }
-//         }
-//         else if (col == 1) {
-//             if (wCheck == 1) {
-//                 out += "+";
-//             }
-//         }
-//     }
-//     else if (i == 2) {
-//         out += "x" + to_string(x2) + to_string(y2);
-//         if (col == 0) {
-//             if (bCheck == 1) {
-//                 out += "+";
-//             }
-//         }
-//         else if (col == 1) {
-//             if (wCheck == 1) {
-//                 out += "+";
-//             }
-//         }
-//     }
-//     //tableWidget->setItem(row, col, new QTableWidgetItem(QString::fromStdString(out)));
-
-//     cout << out << endl;
-// }
-
-
-

@@ -35,13 +35,14 @@ class Piece {
         bool white(){
             return isWhite;
         }
-        int pawnCounter = 0;
+        virtual int getMoveCounter();
+        virtual void setMoveCounter(int num);
     
     private:
         int x;
         int y;
         bool isWhite;
-        //int counter;
+        int counter;
 
 };
 
