@@ -12,10 +12,10 @@ Rook::Rook(int xPos, int yPos, bool color) : Piece(xPos, yPos, color){
 }
 
 void Rook::movePiece(int xM, int yM){
-    if(this->isValid(xM, yM)){
+    //if(this->isValid(xM, yM)){
         this->setPositionX(this->getPositionX() + xM);
         this->setPositionY(this->getPositionY() + yM);
-    }
+    //}
 }
 
 bool Rook::isValid(int xT, int yT){
