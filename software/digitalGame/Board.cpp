@@ -275,7 +275,7 @@ void Board::promote(Pawn *p){
             newPiece = new Queen(p->getPositionX(), p->getPositionY(), false);
         }
         else if(piece == "rook"){
-
+            newPiece = new Rook();
         }
         else if(piece == "bishop"){
 
@@ -1188,28 +1188,28 @@ bool Board::isKingMoveValid(Piece *p, int xT, int yT){
 }
 
 bool Board::isPawnMoveValid(Piece *p, int xT, int yT){
-
     if(xT == 1){
         if(p->getPositionX() < 7){
-            if(takePiece(p->getPositionX(), p->getPositionY(), p->getPositionY() + 1, p->getPositionX() + 1)){
+            
+            if(takePiece(p->getPositionX(), p->getPositionY(), p->getPositionX() + 1, p->getPositionY() + 1)){
+                p->setMoveCounter(1);
+                return true;
+            }     
+            else if(takePiece(p->getPositionX(), p->getPositionY(), p->getPositionX() + 1, p->getPositionY() - 1)){
                 p->setMoveCounter(1);
                 return true;
             }
-            else if(takePiece(p->getPositionX(), p->getPositionY(), p->getPositionY() - 1, p->getPositionX() + 1)){
-                p->setMoveCounter(1);
-                return true;
-            }
+            cout << p->getPositionX() << p->getPositionY() << p->getPositionY() - 1 << p->getPositionX() + 1 << endl;
         }
-        
         return false;
     }
     else if(xT == -1){
         if(p->getPositionX() > 0){
-            if(takePiece(p->getPositionX(), p->getPositionY(), p->getPositionY() + 1, p->getPositionX() - 1)){
+            if(takePiece(p->getPositionX(), p->getPositionY(), p->getPositionX() - 1, p->getPositionY() + 1)){
                 p->setMoveCounter(1);
                 return true;
             }
-            else if(takePiece(p->getPositionX(), p->getPositionY(), p->getPositionY() - 1, p->getPositionX() - 1)){
+            else if(takePiece(p->getPositionX(), p->getPositionY(), p->getPositionX() - 1, p->getPositionY() - 1)){
                 p->setMoveCounter(1);
                 return true;
             }
@@ -1248,7 +1248,7 @@ bool Board::isPawnMoveValid(Piece *p, int xT, int yT){
             return false;
         }
     }
-
+    cout << "huh" << endl;
     return false;
 }
 
