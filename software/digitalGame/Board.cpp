@@ -8,6 +8,7 @@
 #include "Queen.h"
 #include "King.h"
 #include "Rook.h"
+#include <cstdlib>
 
 using namespace std;
 
@@ -208,17 +209,13 @@ bool Board::takePiece(int oldX, int oldY, int newX, int newY){
 }
 
 void Board::swap(int oldX, int oldY, int newX, int newY){
-    // const char* stockfishPath = "STOCKFISH PATH HERE"; //This should be the stockfish path to your file
     // Stockfish engine(stockfishPath);
     // engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
-
     
-    string position = "position startpos moves";
-    position += listMove;
+    // string position = "position startpos moves";
+    // position += listMove;
     Piece p;
-    //bool playerTurn = true;
     
-
     if(!takePiece(oldX, oldY, newX, newY)){
         Piece *temp = board[oldY][oldX];
 
@@ -239,14 +236,14 @@ void Board::swap(int oldX, int oldY, int newX, int newY){
         board[oldY][oldX] = new Empty(oldX, oldY);
     }
 
-    cout << "Your Move: ";
+    // cout << "Your Move: ";
+    // playerMove = board[oldY][oldX]->getPosition() + board[newY][newX]->getPosition();
+    // cout << playerMove << endl;
+    // position += " " + playerMove;
+    // listMove += " " + playerMove;
 
-    playerMove = board[oldY][oldX]->getPosition() + board[newY][newX]->getPosition();
-    position += " " + playerMove;
-    listMove += " " + playerMove;
-
-    cout << "List of current moves: " << listMove << endl; 
-    // cout << "Current Moves: " << position << endl;
+    // cout << "List of current moves: " << listMove << endl; 
+    // cout << position << endl;
 
     // //Stockfish move
     // // Send position and search commands
@@ -259,8 +256,8 @@ void Board::swap(int oldX, int oldY, int newX, int newY){
     // bestMove = engine.getBestMove();
     // cout << "Best Move: " << bestMove << endl;
 
-    // // Update position with the best move
-    // position += " " + bestMove;
+    // // Update list of moves with the best move
+    // listMove += " " + bestMove;
     // //a function to conver best move to be updated on your board
     // engine.clearFiles();
 }
@@ -1507,9 +1504,13 @@ int Board::justinLim(char charOldX, int oldY, char charNewX, int newY){
 }
  
  void Board::playGame(){
+    Stockfish engine(stockfishPath);
 
     while(!checkmate(kw) || !checkmate(kb)){
-        string move;
+        engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
+        
+        string position = "position startpos moves";
+        position += listMove;
 
         char charOldX;
         char charOldY;
@@ -1526,16 +1527,13 @@ int Board::justinLim(char charOldX, int oldY, char charNewX, int newY){
         if(whiteMoves == blackMoves){
             cout << "White move: " << endl;
             while(!madeMove){
-                cin >> move;
-                // charOldX = bestMove[0];
-                // charOldY = bestMove[1];
-                // charNewX = bestMove[2];
-                // charNewY = bestMove[3];
-                
-                charOldX = move[0];
-                charOldY = move[1];
-                charNewX = move[2];
-                charNewY = move[3];
+                cout << "Input Move(White): ";
+                cin >> playerMove;
+
+                charOldX = playerMove[0];
+                charOldY = playerMove[1];
+                charNewX = playerMove[2];
+                charNewY = playerMove[3];
 
                 oldX = convertToInt(charOldX);
                 newX = convertToInt(charNewX);
@@ -1550,10 +1548,11 @@ int Board::justinLim(char charOldX, int oldY, char charNewX, int newY){
                             cout << "King is still in check, try again" << endl;
                         }
                         else{
+                            cout << isCheck(kw) << endl;
                             madeMove = true;
                             whiteMoves++;
                         }
-                    }
+               cd      }
                     else{
                         cout << "Invalid move, try again" << endl;
                     }
@@ -1566,16 +1565,13 @@ int Board::justinLim(char charOldX, int oldY, char charNewX, int newY){
         else{
             cout << "Black move: " << endl;
             while(!madeMove){
-                cin >> move;
-                // charOldX = bestMove[0];
-                // charOldY = bestMove[1];
-                // charNewX = bestMove[2];
-                // charNewY = bestMove[3];
+                cout << "Input Move(Black): ";
+                cin >> playerMove;
 
-                charOldX = move[0];
-                charOldY = move[1];
-                charNewX = move[2];
-                charNewY = move[3];
+                charOldX = playerMove[0];
+                charOldY = playerMove[1];
+                charNewX = playerMove[2];
+                charNewY = playerMove[3];
 
                 oldX = convertToInt(charOldX);
                 newX = convertToInt(charNewX);
@@ -1604,6 +1600,44 @@ int Board::justinLim(char charOldX, int oldY, char charNewX, int newY){
             }
         }
 
+        cout << "Your Move: ";
+        cout << playerMove << endl;
+
+        position += " " + playerMove;
+        listMove += " " + playerMove;
+
+        cout << "List of current moves: " << listMove << endl; 
+
+        //Stockfish move
+        // Send position and search commands
+        engine.sendCommand(position);
+
+        //Set depth to tell stockfish how far to search(the lower the depth, the lower the difficulty)
+        engine.sendCommand("go depth 100");
+
+        // Retrieve the best move
+        bestMove = engine.getBestMove();
+        cout << "Best Move: " << bestMove << endl;
+
+        // Update list of moves with the best move
+        listMove += " " + bestMove;
+        //a function to conver best move to be updated on your board
+        engine.clearFiles();
+
+
+        //Now update the board with stockfish move
+        charOldX = bestMove[0];
+        charOldY = bestMove[1];
+        charNewX = bestMove[2];
+        charNewY = bestMove[3];
+
+        oldX = convertToInt(charOldX);
+        newX = convertToInt(charNewX);
+        oldY = convertToInt(charOldY);
+        newY = convertToInt(charNewY);
+        swap(oldX, oldY, newX, newY);
+        ++blackMoves;
+      
         printBoard();
     }
  }
