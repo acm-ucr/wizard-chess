@@ -9,30 +9,30 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     settings.cpp \
-    Piece.cpp \
-    Pawn.cpp \
-    Bishop.cpp \
-    Knight.cpp \
-    Queen.cpp \
-    King.cpp \
-    Rook.cpp \
-    Board.cpp \
-    EmptyPiece.cpp
+    # Piece.cpp \
+    # Pawn.cpp \
+    # Bishop.cpp \
+    # Knight.cpp \
+    # Queen.cpp \
+    # King.cpp \
+    # Rook.cpp \
+    # Board.cpp \
+    # EmptyPiece.cpp
 
 HEADERS += \
     home.h \
     inputs.h \
     mainwindow.h \
     settings.h \
-    Piece.h \
-    Pawn.h \
-    Bishop.h \
-    Knight.h \
-    Queen.h \
-    King.h \
-    Rook.h \
-    EmptyPiece.h \
-    Board.h
+    # Piece.h \
+    # Pawn.h \
+    # Bishop.h \
+    # Knight.h \
+    # Queen.h \
+    # King.h \
+    # Rook.h \
+    # EmptyPiece.h \
+    # Board.h
 
 FORMS += \
     mainwindow.ui

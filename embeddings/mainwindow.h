@@ -11,7 +11,9 @@
 #include "settings.h"
 #include "home.h"
 #include "inputs.h"
-#include "Board.h"
+#include <iostream>
+#include <QElapsedTimer>
+// #include "Board.h"
 #include <QTimer>
 
 QT_BEGIN_NAMESPACE
@@ -43,7 +45,7 @@ private slots:
 
     void onTileClicked();
 
-    void populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt);
+    // void populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt);
 
     void clearTableWidget();
 
@@ -109,7 +111,11 @@ private slots:
 
     void resize();
 
-    void updateTime();
+    void updateTime(int diff);
+
+    void finalWhiteTime(int timer_white);
+
+    void finalBlackTime(int timer_black);
 
 private:
     Ui::MainWindow *ui;
@@ -117,11 +123,15 @@ private:
     Home *whiteChoice;
     Home *blackChoice;
     QTableWidget *tableWidget;
-    QTimer *timer;
+
+    QElapsedTimer timer;
+    int previousTime;
+    int currTime;
+
     bool bCheck;
     bool wCheck;
     clock_t totalClock;
-    Board game;
+    // Board game;
     int co;
     int end_status; // 0 = white winner, 1 = black winner, 2 = tie
     int timer_black;
