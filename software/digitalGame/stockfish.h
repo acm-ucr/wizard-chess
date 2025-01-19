@@ -21,6 +21,7 @@ public:
         cmdFile << stockfish << "\n";
         cmdFile << "uci" << "\n";
         cmdFile.close();
+        stockfishPath = path;
     }
 
     void sendCommand(const std::string& command);
@@ -28,4 +29,5 @@ public:
     void clearFiles();
     private:
         FILE* stockfish;
+        const char* stockfishPath; // Path to Stockfish executable
 };

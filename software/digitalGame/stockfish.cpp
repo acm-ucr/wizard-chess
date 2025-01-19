@@ -53,7 +53,7 @@ string Stockfish::getBestMove() {
     int bestMovePos;
 
     //Launch stockfish and uses files of sfcmds as input and sfoutput as output for stockfish commands and data
-    system("\"C:\\Users\\leaus\\OneDrive\\Important DOcs\\stockfish\\stockfish-windows-x86-64-avx2.exe\" < sfcmds.txt > sfoutput.txt");
+    system((string("\"") + stockfishPath + "\" < sfcmds.txt > sfoutput.txt").c_str());
 
 
 
