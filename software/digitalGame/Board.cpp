@@ -262,23 +262,42 @@ void Board::swap(int oldX, int oldY, int newX, int newY){
     // engine.clearFiles();
 }
 
-void Board::promote(Pawn *p){
+void Board::promote(Piece *p){
     string piece;
     Piece* newPiece;
-    if(p->getPositionY() == 7 || p->getPositionY() == 0){
+    if(p->getPositionY() == 7){
         cout << "What piece would you like to promote to?" << endl;
         cin >> piece;
+
+        if(piece == "queen"){
+            newPiece = new Queen(p->getPositionX(), p->getPositionY(), true);
+        }
+        else if(piece == "rook"){
+            newPiece = new Rook(p->getPositionX(), p->getPositionY(), true);
+        }
+        else if(piece == "bishop"){
+            newPiece = new Bishop(p->getPositionX(), p->getPositionY(), true);
+        }
+        else if(piece == "knight"){
+            newPiece = new Knight(p->getPositionX(), p->getPositionY(), true);
+        }
+        board[p->getPositionY()][p->getPositionX()] = newPiece;
+    }
+    else if(p->getPositionY() == 0){
+        cout << "What piece would you like to promote to?" << endl;
+        cin >> piece;
+
         if(piece == "queen"){
             newPiece = new Queen(p->getPositionX(), p->getPositionY(), false);
         }
         else if(piece == "rook"){
-
+            newPiece = new Rook(p->getPositionX(), p->getPositionY(), false);
         }
         else if(piece == "bishop"){
-
+            newPiece = new Bishop(p->getPositionX(), p->getPositionY(), false);
         }
         else if(piece == "knight"){
-
+            newPiece = new Knight(p->getPositionX(), p->getPositionY(), false);
         }
         board[p->getPositionY()][p->getPositionX()] = newPiece;
     }
@@ -750,19 +769,14 @@ int Board::rangeDown(Piece *p){
     int originalYPos = tempPiece->getPositionY();
 
     if(tempPiece->getID() == "queen"){
-
         counterY5 = simulateDown(tempPiece);
-
         resetSimulation(tempPiece, originalXPos, originalYPos);
     }
     else if(tempPiece->getID() == "rook"){
-
         counterY5 = simulateDown(tempPiece);
-
         resetSimulation(tempPiece, originalXPos, originalYPos);
     }
     else if(tempPiece->getID() == "king"){
-
         tempPiece->movePiece(0, 1);
         if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
             counterY5++;
@@ -771,10 +785,8 @@ int Board::rangeDown(Piece *p){
             counterY5++;
         }
         resetSimulation(tempPiece, originalXPos, originalYPos);
-
     }
-    else if(tempPiece->getID() == "knight"){
-        
+    else if(tempPiece->getID() == "knight"){ 
         tempPiece->movePiece(-1, 2);
         if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
             counterY5--;
@@ -786,15 +798,21 @@ int Board::rangeDown(Piece *p){
     }
     else if(tempPiece->getID() == "pawn"){
         tempPiece->movePiece(0, 1);
-        if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
-            counterY5++;
-        }
         if(tempPiece->getMoveCounter() == 0){
-            tempPiece->movePiece(0, 1);
+            if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
+                counterY5++;
+                tempPiece->movePiece(0, 1);
+                if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
+                    counterY5++;
+                }
+            }
+        }
+        else{
             if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
                 counterY5++;
             }
         }
+        resetSimulation(tempPiece, originalXPos, originalYPos);
     }
     return counterY5;
 }
@@ -808,17 +826,13 @@ int Board::rangeUp(Piece *p){
 
     if(tempPiece->getID() == "queen"){
         counterY1 = simulateUp(tempPiece);
-
         resetSimulation(tempPiece, originalXPos, originalYPos);
     }
-    if(tempPiece->getID() == "rook"){
-
+    else if(tempPiece->getID() == "rook"){
         counterY1 = simulateUp(tempPiece);
-
         resetSimulation(tempPiece, originalXPos, originalYPos);
     }
-    if(tempPiece->getID() == "king"){
-
+    else if(tempPiece->getID() == "king"){
         tempPiece->movePiece(0, -1);
         if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
             counterY1--;
@@ -827,9 +841,8 @@ int Board::rangeUp(Piece *p){
             counterY1--;
         }
         resetSimulation(tempPiece, originalXPos, originalYPos);
-
     }
-    if(tempPiece->getID() == "knight"){
+    else if(tempPiece->getID() == "knight"){
         tempPiece->movePiece(1, -2);
         if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
             counterY1++;
@@ -838,22 +851,25 @@ int Board::rangeUp(Piece *p){
             counterY1++;
         }
         resetSimulation(tempPiece, originalXPos, originalYPos);
-
     }
-
-    if(tempPiece->getID() == "pawn"){
+    else if(tempPiece->getID() == "pawn"){
         tempPiece->movePiece(0, -1);
-        if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
-            counterY1--;
-        } 
         if(tempPiece->getMoveCounter() == 0){
-            tempPiece->movePiece(0, -1);
+            if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
+                counterY1--;
+                tempPiece->movePiece(0, -1);
+                if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
+                    counterY1--;
+                }
+            }
+        }
+        else{
             if(board[tempPiece->getPositionY()][tempPiece->getPositionX()]->getID() == "empty"){
                 counterY1--;
             }
-        }    
+        }
+        resetSimulation(tempPiece, originalXPos, originalYPos);
     }
-
     return counterY1;
 }
 
@@ -1076,15 +1092,16 @@ bool Board::isQueenMoveValid(Piece *p, int xT, int yT){
 bool Board::isRookMoveValid(Piece *p, int xT, int yT){
     if(xT == 0){
         if(yT >= rangeUp(p) && yT <= rangeDown(p)){
+            p->setMoveCounter(1);
             return true;
         }
     }
     else if(yT == 0){
         if(xT <= rangeRight(p) && xT >= rangeLeft(p)){
+            p->setMoveCounter(1);
             return true;
         }
     }
-
     return false;
 }
 
@@ -1154,30 +1171,43 @@ bool Board::isKnightMoveValid(Piece *p, int xT, int yT){
 }
 
 bool Board::isKingMoveValid(Piece *p, int xT, int yT){
-   if(xT == 0){
+    if(xT == -2){
+        return castleKingSide(p);
+    }
+    else if(xT == 2){
+        return castleQueenSide(p);
+    }
+
+    if(xT == 0){
         if(yT >= rangeUp(p) && yT <= rangeDown(p)){
+            p->setMoveCounter(1);
             return true;
         }
     }
     else if(yT == 0){
         if(xT <= rangeRight(p) && xT >= rangeLeft(p)){
+            p->setMoveCounter(1);
             return true;
         }
     }
     else if(xT > 0){
         if(xT <= rangeMaxXDiag45(p) && yT == -xT){
-                return true;
+            p->setMoveCounter(1);
+            return true;
         }
         else if(xT <= rangeMinXDiag135(p) && yT == xT){
-                return true;
+            p->setMoveCounter(1);
+            return true;
         }
     }
     else{
         if(xT >= rangeMaxXDiag225(p) && yT == -xT){
-                return true;
+            p->setMoveCounter(1);
+            return true;
         }
         else if(xT >= rangeMinXDiag315(p) && yT == xT){
-                return true;
+            p->setMoveCounter(1);
+            return true;
         }
         return false;
     }
@@ -1185,28 +1215,28 @@ bool Board::isKingMoveValid(Piece *p, int xT, int yT){
 }
 
 bool Board::isPawnMoveValid(Piece *p, int xT, int yT){
-
     if(xT == 1){
         if(p->getPositionX() < 7){
-            if(takePiece(p->getPositionX(), p->getPositionY(), p->getPositionY() + 1, p->getPositionX() + 1)){
+            
+            if(takePiece(p->getPositionX(), p->getPositionY(), p->getPositionX() + 1, p->getPositionY() + 1)){
+                p->setMoveCounter(1);
+                return true;
+            }     
+            else if(takePiece(p->getPositionX(), p->getPositionY(), p->getPositionX() + 1, p->getPositionY() - 1)){
                 p->setMoveCounter(1);
                 return true;
             }
-            else if(takePiece(p->getPositionX(), p->getPositionY(), p->getPositionY() - 1, p->getPositionX() + 1)){
-                p->setMoveCounter(1);
-                return true;
-            }
+            cout << p->getPositionX() << p->getPositionY() << p->getPositionY() - 1 << p->getPositionX() + 1 << endl;
         }
-        
         return false;
     }
     else if(xT == -1){
         if(p->getPositionX() > 0){
-            if(takePiece(p->getPositionX(), p->getPositionY(), p->getPositionY() + 1, p->getPositionX() - 1)){
+            if(takePiece(p->getPositionX(), p->getPositionY(), p->getPositionX() - 1, p->getPositionY() + 1)){
                 p->setMoveCounter(1);
                 return true;
             }
-            else if(takePiece(p->getPositionX(), p->getPositionY(), p->getPositionY() - 1, p->getPositionX() - 1)){
+            else if(takePiece(p->getPositionX(), p->getPositionY(), p->getPositionX() - 1, p->getPositionY() - 1)){
                 p->setMoveCounter(1);
                 return true;
             }
@@ -1215,7 +1245,7 @@ bool Board::isPawnMoveValid(Piece *p, int xT, int yT){
     }
     if(p->getMoveCounter() == 0){
         if(!p->white()){
-            if((yT == -1 && rangeUp(p) >= -2)|| (yT == -2 && rangeUp(p) == -2)){
+            if((yT >= rangeUp(p))){
                 p->setMoveCounter(1);
                 return true;
             }
@@ -1224,7 +1254,9 @@ bool Board::isPawnMoveValid(Piece *p, int xT, int yT){
             }
         } 
         else{
-            if((yT == 1 && rangeDown(p) <= 2)|| (yT == 2 && rangeDown(p) == 2)){
+            if((yT <= rangeDown(p))){
+                cout << "wtf" << endl;
+                cout << rangeDown(p) << endl;
                 p->setMoveCounter(1);
                 return true;
             }
@@ -1245,7 +1277,7 @@ bool Board::isPawnMoveValid(Piece *p, int xT, int yT){
             return false;
         }
     }
-
+    cout << "huh" << endl;
     return false;
 }
 
@@ -1268,10 +1300,80 @@ bool Board::isValidMove(Piece *p, int xT, int yT){
     else if(p->getID() == "pawn"){
         return isPawnMoveValid(p, xT, yT);
     }
+    return false;
 }
 
-void Board::castle(King *k){
-    
+bool Board::castleKingSide(Piece *p){
+    if(p->getMoveCounter() == 0){
+        Queen *tempQueen;
+        if(p->white()){
+            tempQueen = new Queen(p->getPositionX(), p->getPositionY(), true);  
+        }
+        else{
+            tempQueen = new Queen(p->getPositionX(), p->getPositionY(), false);
+        }
+
+        if(board[p->getPositionY()][p->getPositionX() + rangeLeft(tempQueen) - 1]->getID() == "rook"){
+            if(board[p->getPositionY()][p->getPositionX() + rangeLeft(tempQueen) - 1]->getMoveCounter() == 0){
+                swap(p->getPositionX(), p->getPositionY(), p->getPositionX() - 1, p->getPositionY());
+                if(isCheck(kw)){
+                    swap(p->getPositionX(), p->getPositionY(), p->getPositionX() + 1, p->getPositionY());
+                    cout << "King is in check, can't castle" << endl;
+                    return false;
+                }
+                else{
+                    swap(p->getPositionX(), p->getPositionY(), p->getPositionX() - 1, p->getPositionY());
+                    if(isCheck(kw)){
+                        swap(p->getPositionX(), p->getPositionY(), p->getPositionX() + 2, p->getPositionY());
+                        cout << "King is in check, can't castle" << endl;
+                        return false;
+                    }
+                    else{
+                        swap(p->getPositionX() - 1, p->getPositionY(), p->getPositionX() + 1, p->getPositionY());
+                        printBoard();
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    return false;
+}
+
+bool Board::castleQueenSide(Piece *p){
+    if(p->getMoveCounter() == 0){
+        Queen *tempQueen;
+        if(p->white()){
+            tempQueen = new Queen(p->getPositionX(), p->getPositionY(), true);  
+        }
+        else{
+            tempQueen = new Queen(p->getPositionX(), p->getPositionY(), false);
+        }
+
+        if(board[p->getPositionY()][p->getPositionX() + rangeRight(tempQueen) + 1]->getID() == "rook"){
+            if(board[p->getPositionY()][p->getPositionX() + rangeRight(tempQueen) + 1]->getMoveCounter() == 0){
+                swap(p->getPositionX(), p->getPositionY(), p->getPositionX() + 1, p->getPositionY());
+                if(isCheck(kw)){
+                    swap(p->getPositionX(), p->getPositionY(), p->getPositionX() - 1, p->getPositionY());
+                    cout << "King is in check, can't castle" << endl;
+                    return false;
+                }
+                else{
+                    swap(p->getPositionX(), p->getPositionY(), p->getPositionX() + 1, p->getPositionY());
+                    if(isCheck(kw)){
+                        swap(p->getPositionX(), p->getPositionY(), p->getPositionX() - 2, p->getPositionY());
+                        cout << "King is in check, can't castle" << endl;
+                        return false;
+                    }
+                    else{
+                        swap(p->getPositionX() + 2, p->getPositionY(), p->getPositionX() - 1, p->getPositionY());
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    return false;
 }
 
 bool Board::isCheck(King *k){
@@ -1503,8 +1605,8 @@ int Board::justinLim(char charOldX, int oldY, char charNewX, int newY){
 
 }
  
- void Board::playGame(){
-    Stockfish engine(stockfishPath);
+
+void Board::playGame(){
 
     while(!checkmate(kw) || !checkmate(kb)){
         engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
@@ -1542,17 +1644,26 @@ int Board::justinLim(char charOldX, int oldY, char charNewX, int newY){
 
                 if((board[oldY][oldX]->getID() != "empty") && (board[oldY][oldX]->white())){
                     if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
-                        swap(oldX, oldY, newX, newY);
-                        if(isCheck(kw)){
-                            swap(newX, newY, oldX, oldY);
-                            cout << "King is still in check, try again" << endl;
-                        }
-                        else{
-                            cout << isCheck(kw) << endl;
+                        if(board[oldY][oldX]->getID() == "empty"){
                             madeMove = true;
                             whiteMoves++;
                         }
-               cd      }
+                        else{
+                            swap(oldX, oldY, newX, newY);
+                            if(isCheck(kw)){
+                                swap(newX, newY, oldX, oldY);
+                                cout << "King is still in check, try again" << endl;
+                            }
+                            else{
+                                if(board[newY][newX]->getID() == "pawn" && newY == 8){
+                                    promote(board[newY][newX]);
+                                }
+                                madeMove = true;
+                                whiteMoves++;
+                            }
+                        }
+                    }
+
                     else{
                         cout << "Invalid move, try again" << endl;
                     }
@@ -1580,14 +1691,23 @@ int Board::justinLim(char charOldX, int oldY, char charNewX, int newY){
 
                 if((board[oldY][oldX]->getID() != "empty") && (!board[oldY][oldX]->white())){
                     if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
-                        swap(oldX, oldY, newX, newY);
-                        if(isCheck(kb)){
-                            swap(newX, newY, oldX, oldY);
-                            cout << "King is in check, try again" << endl;
+                        if(board[oldY][oldX]->getID() == "empty"){
+                            madeMove = true;
+                            whiteMoves++;
                         }
                         else{
-                            madeMove = true;
-                            blackMoves++;
+                            swap(oldX, oldY, newX, newY);
+                            if(isCheck(kb)){
+                                swap(newX, newY, oldX, oldY);
+                                cout << "King is in check, try again" << endl;
+                            }
+                            else{
+                                if(board[newY][newX]->getID() == "pawn" && newY == 1){
+                                    promote(board[newY][newX]);
+                                }
+                                madeMove = true;
+                                blackMoves++;
+                            }
                         }
                     }
                     else{
