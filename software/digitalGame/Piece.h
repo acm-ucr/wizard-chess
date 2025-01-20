@@ -35,8 +35,8 @@ class Piece {
         bool white(){
             return isWhite;
         }
-        virtual int getMoveCounter();
-        virtual void setMoveCounter(int num);
+        int getMoveCounter();
+        void setMoveCounter(int num);
     
     private:
         int x;

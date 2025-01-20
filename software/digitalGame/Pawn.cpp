@@ -18,13 +18,6 @@ Pawn::Pawn(int xPos, int yPos, bool color) : Piece(xPos, yPos, color){
 bool Pawn::isEmpty(){
     return false;
 }*/
-int Pawn::getMoveCounter(){
-    return pawnCounter;
-}
-
-void Pawn::setMoveCounter(int num){
-    pawnCounter += num;
-}
 
 void Pawn::movePiece(int xM, int yM){
     //if(this->isValid(xM, yM)){

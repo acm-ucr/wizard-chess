@@ -60,7 +60,7 @@ class Board {
 
         bool isCheck();
 
-        void promote(Pawn *p);
+        void promote(Piece *p);
 
         void updateBoard();
 
@@ -70,7 +70,8 @@ class Board {
 
         int convertToInt(char x);
 
-        void castle(King *k);
+        bool castleKingSide(Piece *p);
+        bool castleQueenSide(Piece *p);
 
         int simulateUp(Piece *p);
         int simulate45X(Piece *p);

@@ -8,9 +8,6 @@ class Pawn : public Piece {
             void movePiece(int x, int y) override;
             bool isValid(int xT, int yT);
 
-            int getMoveCounter() override;
-            void setMoveCounter(int num) override;
-
             string getID() const override {
                 return "pawn";
             }
