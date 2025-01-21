@@ -195,7 +195,6 @@ void Board::printBoard() {
             else if(board[i][j]->getID() == "king"){
                 cout << board[i][j]->getID() << "    ";
             }
-            //cout << board[i][j]->getID();
         }
     }
     cout << endl << endl;
@@ -209,11 +208,6 @@ bool Board::takePiece(int oldX, int oldY, int newX, int newY){
 }
 
 void Board::swap(int oldX, int oldY, int newX, int newY){
-    // Stockfish engine(stockfishPath);
-    // engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
-    
-    // string position = "position startpos moves";
-    // position += listMove;
     Piece p;
     
     if(!takePiece(oldX, oldY, newX, newY)){
@@ -235,31 +229,6 @@ void Board::swap(int oldX, int oldY, int newX, int newY){
         board[newY][newX] = board[oldY][oldX];
         board[oldY][oldX] = new Empty(oldX, oldY);
     }
-
-    // cout << "Your Move: ";
-    // playerMove = board[oldY][oldX]->getPosition() + board[newY][newX]->getPosition();
-    // cout << playerMove << endl;
-    // position += " " + playerMove;
-    // listMove += " " + playerMove;
-
-    // cout << "List of current moves: " << listMove << endl; 
-    // cout << position << endl;
-
-    // //Stockfish move
-    // // Send position and search commands
-    // engine.sendCommand(position);
-
-    // //Set depth to tell stockfish how far to search(the lower the depth, the lower the difficulty)
-    // engine.sendCommand("go depth 100");
-
-    // // Retrieve the best move
-    // bestMove = engine.getBestMove();
-    // cout << "Best Move: " << bestMove << endl;
-
-    // // Update list of moves with the best move
-    // listMove += " " + bestMove;
-    // //a function to conver best move to be updated on your board
-    // engine.clearFiles();
 }
 
 void Board::promote(Piece *p){
@@ -1123,6 +1092,7 @@ bool Board::isBishopMoveValid(Piece *p, int xT, int yT){
         }
         return false;
     }
+    return false;
 }
 
 bool Board::isKnightMoveValid(Piece *p, int xT, int yT){
@@ -1255,8 +1225,6 @@ bool Board::isPawnMoveValid(Piece *p, int xT, int yT){
         } 
         else{
             if((yT <= rangeDown(p))){
-                cout << "wtf" << endl;
-                cout << rangeDown(p) << endl;
                 p->setMoveCounter(1);
                 return true;
             }
@@ -1277,7 +1245,6 @@ bool Board::isPawnMoveValid(Piece *p, int xT, int yT){
             return false;
         }
     }
-    cout << "huh" << endl;
     return false;
 }
 
@@ -1607,7 +1574,7 @@ int Board::justinLim(char charOldX, int oldY, char charNewX, int newY){
  
 
 void Board::playGame(){
-
+    Stockfish engine(stockfishPath);
     while(!checkmate(kw) || !checkmate(kb)){
         engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
         
@@ -1732,8 +1699,9 @@ void Board::playGame(){
         // Send position and search commands
         engine.sendCommand(position);
 
-        //Set depth to tell stockfish how far to search(the lower the depth, the lower the difficulty)
-        engine.sendCommand("go depth 100");
+        //Set depth to tell stockfish how far to search(the lower the depth, the lower the difficulty) and/or give a certain time limit for it to search each depth
+        engine.sendCommand("go depth 30");
+        engine.sendCommand("go movetime 10000");
 
         // Retrieve the best move
         bestMove = engine.getBestMove();
@@ -1755,9 +1723,15 @@ void Board::playGame(){
         newX = convertToInt(charNewX);
         oldY = convertToInt(charOldY);
         newY = convertToInt(charNewY);
-        swap(oldX, oldY, newX, newY);
+        if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
+            swap(oldX, oldY, newX, newY);
+        }
+        else { //Should never really output this, more for safe measure
+            cout << "Stockfish gave an invalid move????" << endl;
+        }
         ++blackMoves;
       
         printBoard();
+        cout << "Updated moves after stockfish: " << listMove << endl;
     }
  }

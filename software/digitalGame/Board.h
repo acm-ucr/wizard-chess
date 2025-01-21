@@ -37,6 +37,12 @@ class Board {
         vector<vector<Piece*>> board;
 
         //STOCKFISH STUFF --------------------------------------------------------------
+        //FOR STOCKFISH 
+        //To use it, every person has a specific path they must input into the stockfishPath variable
+        //Ex: \"C:\\Users\\leaus\\OneDrive\\Important DOcs\\Wizard-Chess\\Wizard-Chess\\software\\stockfish\\stockfish-windows-x86-64-avx2.exe\"
+        //All of them have the same end of \\stockfish\\stockfish-windows-x86-64-avx2.exe\ , but each person has a different beginnign of the path
+        //If you look at your terminal, the beginning of the path is listed as with C: and the everything after is listed under which files path you are in for the project
+        //Its called hardcoded absolute path and I'm sorry if its a litte confusing :(
         string playerMove = ""; 
         string bestMove = "";
         string listMove = "";
