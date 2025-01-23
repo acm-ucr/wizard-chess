@@ -1592,7 +1592,6 @@ int Board::convertToInt(char x){
 }
 
 int Board::justinIm(char charOldX, int oldY, char charNewX, int newY){
-
     int oldX = convertToInt(charOldX);
     int newX = convertToInt(charNewX);
     
@@ -1610,26 +1609,25 @@ int Board::justinIm(char charOldX, int oldY, char charNewX, int newY){
     }
 
     return 0;
-
 }
  
 void Board::playGame(){
-    string move;
-
-    char charOldX;
-    char charOldY;
-    char charNewX;
-    char charNewY;
-    char newPiece;
-
-    int oldX;
-    int newX;
-    int oldY;
-    int newY;
-
-    bool madeMove = false;
 
     while(!checkmate(kw) || !checkmate(kb)){
+        string move;
+
+        char charOldX;
+        char charOldY;
+        char charNewX;
+        char charNewY;
+        char newPiece;
+
+        int oldX;
+        int newX;
+        int oldY;
+        int newY;
+
+        bool madeMove = false;
 
         if(whiteMoves == blackMoves){
             cout << "White move: " << endl;
@@ -1670,12 +1668,14 @@ void Board::playGame(){
                             swap(oldX, oldY, newX, newY);
                             if(isCheck(kw)){
                                 undoMove(oldX, oldY, newX, newY, takenPiece);
+                                listMove = listMove.substr(0, listMove.size() - 10);
                                 cout << "King is still in check, try again" << endl;
                             }
                             else{
                                 if(board[newY][newX]->getID() == "pawn" && newY == 7){
                                     if(!promote(board[newY][newX], newPiece)){
                                         undoMove(oldX, oldY, newX, newY, takenPiece);
+                                        listMove = listMove.substr(0, listMove.size() - 10);
                                     }
                                     else{
                                         madeMove = true;
@@ -1738,12 +1738,14 @@ void Board::playGame(){
                             swap(oldX, oldY, newX, newY);
                             if(isCheck(kb)){
                                 undoMove(oldX, oldY, newX, newY, takenPiece);
+                                listMove = listMove.substr(0, listMove.size() - 10);
                                 cout << "King is in check, try again" << endl;
                             }
                             else{
                                 if(board[newY][newX]->getID() == "pawn" && newY == 1){
                                     if(!promote(board[newY][newX], newPiece)){
                                         undoMove(oldX, oldY, newX, newY, takenPiece);
+                                        listMove = listMove.substr(0, listMove.size() - 10);
                                     }
                                     else{
                                         madeMove = true;
@@ -1766,7 +1768,6 @@ void Board::playGame(){
                 }
             }
         }
-
         printBoard();
     }
  }
