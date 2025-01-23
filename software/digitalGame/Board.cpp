@@ -1623,6 +1623,7 @@ void Board::playGamePVP() {
         char charOldY;
         char charNewX;
         char charNewY;
+        char newPiece;
 
         int oldX;
         int newX;
@@ -1637,10 +1638,20 @@ void Board::playGamePVP() {
                 cout << "Input Move(White): ";
                 cin >> playerMove;
 
-                charOldX = playerMove[0];
-                charOldY = playerMove[1];
-                charNewX = playerMove[2];
-                charNewY = playerMove[3];
+                if(playerMove.size() == 4){
+                    charOldX = playerMove[0];
+                    charOldY = playerMove[1];
+                    charNewX = playerMove[2];
+                    charNewY = playerMove[3];
+                    newPiece = ' ';
+                }
+                else if(playerMove.size() == 5){
+                    charOldX = playerMove[0];
+                    charOldY = playerMove[1];
+                    charNewX = playerMove[2];
+                    charNewY = playerMove[3];
+                    newPiece = playerMove[4];
+                }
 
                 oldX = convertToInt(charOldX);
                 newX = convertToInt(charNewX);
@@ -1661,7 +1672,7 @@ void Board::playGamePVP() {
                             }
                             else{
                                 if(board[newY][newX]->getID() == "pawn" && newY == 8){
-                                    promote(board[newY][newX]);
+                                    promote(board[newY][newX], newPiece);
                                 }
                                 madeMove = true;
                                 whiteMoves++;
@@ -1684,10 +1695,20 @@ void Board::playGamePVP() {
                 cout << "Input Move(Black): ";
                 cin >> playerMove;
 
-                charOldX = playerMove[0];
-                charOldY = playerMove[1];
-                charNewX = playerMove[2];
-                charNewY = playerMove[3];
+                if(playerMove.size() == 4){
+                    charOldX = playerMove[0];
+                    charOldY = playerMove[1];
+                    charNewX = playerMove[2];
+                    charNewY = playerMove[3];
+                    newPiece = ' ';
+                }
+                else if(playerMove.size() == 5){
+                    charOldX = playerMove[0];
+                    charOldY = playerMove[1];
+                    charNewX = playerMove[2];
+                    charNewY = playerMove[3];
+                    newPiece = playerMove[4];
+                }
 
                 oldX = convertToInt(charOldX);
                 newX = convertToInt(charNewX);
@@ -1708,7 +1729,7 @@ void Board::playGamePVP() {
                             }
                             else{
                                 if(board[newY][newX]->getID() == "pawn" && newY == 1){
-                                    promote(board[newY][newX]);
+                                    promote(board[newY][newX], newPiece);
                                 }
                                 madeMove = true;
                                 blackMoves++;
@@ -1841,14 +1862,14 @@ void Board::playGamePVAIWhitePlayer(){
                 cout << "Input Move(Black): ";
                 cin >> playerMove;
 
-                if(move.size() == 4){
+                if(playerMove.size() == 4){
                     charOldX = playerMove[0];
                     charOldY = playerMove[1];
                     charNewX = playerMove[2];
                     charNewY = playerMove[3];
                     newPiece = ' ';
                 }
-                else if(move.size() == 5){
+                else if(playerMove.size() == 5){
                     charOldX = playerMove[0];
                     charOldY = playerMove[1];
                     charNewX = playerMove[2];
@@ -1975,6 +1996,7 @@ void Board::playGamePVAIBlackPlayer() {
         char charOldY;
         char charNewX;
         char charNewY;
+        char newPiece;
 
         int oldX;
         int newX;
@@ -2011,10 +2033,20 @@ void Board::playGamePVAIBlackPlayer() {
 
 
         //Now update the board with stockfish move
-        charOldX = bestMove[0];
-        charOldY = bestMove[1];
-        charNewX = bestMove[2];
-        charNewY = bestMove[3];
+        if(playerMove.size() == 4){
+            charOldX = playerMove[0];
+            charOldY = playerMove[1];
+            charNewX = playerMove[2];
+            charNewY = playerMove[3];
+            newPiece = ' ';
+        }
+        else if(playerMove.size() == 5){
+            charOldX = playerMove[0];
+            charOldY = playerMove[1];
+            charNewX = playerMove[2];
+            charNewY = playerMove[3];
+            newPiece = playerMove[4];
+        }
 
         oldX = convertToInt(charOldX);
         newX = convertToInt(charNewX);
@@ -2060,7 +2092,7 @@ void Board::playGamePVAIBlackPlayer() {
                             }
                             else{
                                 if(board[newY][newX]->getID() == "pawn" && newY == 8){
-                                    promote(board[newY][newX]);
+                                    promote(board[newY][newX], newPiece);
                                 }
                                 madeMove = true;
                                 whiteMoves++;
@@ -2083,10 +2115,20 @@ void Board::playGamePVAIBlackPlayer() {
                 cout << "Input Move(Black): ";
                 cin >> playerMove;
 
-                charOldX = playerMove[0];
-                charOldY = playerMove[1];
-                charNewX = playerMove[2];
-                charNewY = playerMove[3];
+                if(playerMove.size() == 4){
+                    charOldX = playerMove[0];
+                    charOldY = playerMove[1];
+                    charNewX = playerMove[2];
+                    charNewY = playerMove[3];
+                    newPiece = ' ';
+                }
+                else if(playerMove.size() == 5){
+                    charOldX = playerMove[0];
+                    charOldY = playerMove[1];
+                    charNewX = playerMove[2];
+                    charNewY = playerMove[3];
+                    newPiece = playerMove[4];
+                }
 
                 oldX = convertToInt(charOldX);
                 newX = convertToInt(charNewX);
@@ -2107,7 +2149,7 @@ void Board::playGamePVAIBlackPlayer() {
                             }
                             else{
                                 if(board[newY][newX]->getID() == "pawn" && newY == 1){
-                                    promote(board[newY][newX]);
+                                    promote(board[newY][newX], newPiece);
                                 }
                                 madeMove = true;
                                 blackMoves++;
@@ -2141,6 +2183,7 @@ void Board::playGameAIVAI() {
     char charOldY;
     char charNewX;
     char charNewY;
+    char newPiece;
 
     int oldX;
     int newX;
@@ -2167,10 +2210,20 @@ void Board::playGameAIVAI() {
         engine.clearFiles();
         
         //Now update the board with stockfish move
-        charOldX = bestMove[0];
-        charOldY = bestMove[1];
-        charNewX = bestMove[2];
-        charNewY = bestMove[3];
+        if(playerMove.size() == 4){
+            charOldX = playerMove[0];
+            charOldY = playerMove[1];
+            charNewX = playerMove[2];
+            charNewY = playerMove[3];
+            newPiece = ' ';
+        }
+        else if(playerMove.size() == 5){
+            charOldX = playerMove[0];
+            charOldY = playerMove[1];
+            charNewX = playerMove[2];
+            charNewY = playerMove[3];
+            newPiece = playerMove[4];
+        }
 
         oldX = convertToInt(charOldX);
         newX = convertToInt(charNewX);
