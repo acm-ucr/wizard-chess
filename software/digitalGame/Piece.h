@@ -12,7 +12,10 @@ class Piece {
         Piece();
         Piece(int xPos, int yPos);
         Piece(int xPos, int yPos, bool color);
+        Piece(Piece& cpyPiece);
         string getCharPositionX();
+        Piece getPiece(){return *this;}
+        bool getIsWhite(){return isWhite;}
         int getPositionX(){return x;}
         int getPositionY(){return y;}
         void setPositionX(int numX){x = numX;}

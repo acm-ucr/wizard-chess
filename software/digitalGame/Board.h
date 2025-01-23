@@ -32,7 +32,7 @@ class Board {
         int whiteMoves = 0;
         int blackMoves = 0;
        
-        int justinLim(char charOldX, int oldY, char charNewX, int newY);
+        int justinIm(char charOldX, int oldY, char charNewX, int newY);
 
         vector<vector<Piece*>> board;
 
@@ -60,13 +60,13 @@ class Board {
 
         bool isCheck();
 
-        void promote(Piece *p);
+        bool promote(Piece *p, char promoPiece);
 
         void updateBoard();
 
         bool isOppositeColor(Piece *p1, Piece *p2);
 
-        void undoMove(Piece *p, int x, int y);
+        void undoMove(int oldX, int oldY, int newX, int newY, Piece *oldPiece);
 
         int convertToInt(char x);
 
