@@ -1,8 +1,6 @@
 #ifndef BOARD_H
 #define BOARD_H
 //header guards
-
-
 #include <vector>
 #include <iostream>
 #include "Piece.h"
@@ -48,7 +46,7 @@ class Board {
         string playerMove = ""; 
         string bestMove = "";
         string listMove = "";
-        const char* stockfishPath = "\"C:\\Users\\leaus\\OneDrive\\Important DOcs\\stockfish\\stockfish-windows-x86-64-avx2.exe\""; //This should be the stockfish path to your file
+        const char* stockfishPath = "\"C:\\Users\\vigne\\.vscode\\Wizard-Chess\\embeddings\\stockfish\\stockfish-windows-x86-64-avx2.exe\""; //This should be the stockfish path to your file
 
         King *kw = new King(3, 0, true);
         King *kb = new King(3, 7, false);

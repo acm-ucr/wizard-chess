@@ -68,7 +68,7 @@ rgb(0, 0, 0)
 }</string>
     </property>
     <property name="currentIndex">
-     <number>8</number>
+     <number>5</number>
     </property>
     <widget class="QWidget" name="Start">
      <property name="autoFillBackground">
@@ -3128,19 +3128,6 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
           <string>End Game</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="randomGeneratorButton">
-         <property name="geometry">
-          <rect>
-           <x>400</x>
-           <y>350</y>
-           <width>83</width>
-           <height>29</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Random</string>
-         </property>
-        </widget>
         <widget class="QTableWidget" name="RoundTurnTable">
          <property name="geometry">
           <rect>
@@ -3221,8 +3208,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">color: rgb(255, 0, 0);
-font: 15pt &quot;Snap ITC&quot;;
-</string>
+font: 15pt &quot;Times New Roman&quot;;</string>
       </property>
       <property name="title">
        <string>Command Buttons</string>
@@ -3238,7 +3224,7 @@ font: 15pt &quot;Snap ITC&quot;;
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(0, 0, 0);
-font: 12pt &quot;Showcard Gothic&quot;;
+font: 15pt &quot;Times New Roman&quot;;
 </string>
        </property>
        <property name="text">
@@ -3259,7 +3245,7 @@ font: 12pt &quot;Showcard Gothic&quot;;
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(0, 0, 0);
-font: 12pt &quot;Showcard Gothic&quot;;
+font: 15pt &quot;Times New Roman&quot;;
 </string>
        </property>
        <property name="text">
@@ -3278,7 +3264,7 @@ font: 12pt &quot;Showcard Gothic&quot;;
       </property>
       <property name="styleSheet">
        <string notr="true">color: rgb(255, 0, 0);
-font: 15pt &quot;Snap ITC&quot;;
+font: 15pt &quot;Times New Roman&quot;;
 </string>
       </property>
       <property name="title">
@@ -3295,7 +3281,7 @@ font: 15pt &quot;Snap ITC&quot;;
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(0, 0, 0);
-font: 12pt &quot;Showcard Gothic&quot;;
+font: 15pt &quot;Times New Roman&quot;;
 </string>
        </property>
        <property name="text">
@@ -3313,7 +3299,7 @@ font: 12pt &quot;Showcard Gothic&quot;;
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(0, 0, 0);
-font: 12pt &quot;Showcard Gothic&quot;;
+font: 15pt &quot;Times New Roman&quot;;
 </string>
        </property>
        <property name="text">
@@ -3334,8 +3320,7 @@ font: 12pt &quot;Showcard Gothic&quot;;
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(0, 0, 0);
-font: 12pt &quot;Showcard Gothic&quot;;
-</string>
+font: 15pt &quot;Times New Roman&quot;;</string>
        </property>
        <property name="text">
         <string>Hard Level</string>
@@ -3352,7 +3337,7 @@ font: 12pt &quot;Showcard Gothic&quot;;
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(0, 0, 0);
-font: 12pt &quot;Showcard Gothic&quot;;
+font: 15pt &quot;Times New Roman&quot;;
 </string>
        </property>
        <property name="text">

@@ -13,6 +13,8 @@
 #include "mainwindow.h"
 #include "home.h"
 
+// NEED TO CLEAR PREVIOUS GAME TRACE AFTER GAME ENDS //
+
 using namespace std;
 
 MainWindow::MainWindow(QWidget *parent)
@@ -43,82 +45,82 @@ MainWindow::~MainWindow()
 
 // x1 and x2 are characters like 'a', 'b' etc - therefore, {x1, y1} E {a, 3} && {x2, y2} E {b, 6} (as an example)
 // i = 0 means no move, i = 1 means just move and possible check, and i = 2 means move, kill and possible check
-// void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt)
-// {
-//     if ((size / 2) == capacity)
-//     {
-//         resize();
-//     }
-//     if (i == 0) {return;}
-//     int row = (size % (capacity * 2))/2;
-//     // std::cout << row << std::endl;
-//     int col = turnCnt % 2;
-//     string out;
-//     if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "pawn")
-//     {
-//         out += "";
-//     }
-//     else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "bishop")
-//     {
-//         out += "B";
-//     }
-//     else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "king")
-//     {
-//         out += "K";
-//     }
-//     else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "knight")
-//     {
-//         out += "N";
-//     }
-//     else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "rook")
-//     {
-//         out += "R";
-//     }
-//     else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "queen")
-//     {
-//         out += "Q";
-//     }
-//     else
-//     {
-//         out += "Invalid";
-//         tableWidget->setItem(row, col, new QTableWidgetItem(QString::fromStdString(out)));
-//         return;
-//     }
+void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt)
+{
+    if ((size / 2) == capacity)
+    {
+        resize();
+    }
+    if (i == 0) {return;}
+    int row = (size % (capacity * 2))/2;
+    // std::cout << row << std::endl;
+    int col = turnCnt % 2;
+    string out;
+    if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "pawn")
+    {
+        out += "";
+    }
+    else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "bishop")
+    {
+        out += "B";
+    }
+    else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "king")
+    {
+        out += "K";
+    }
+    else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "knight")
+    {
+        out += "N";
+    }
+    else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "rook")
+    {
+        out += "R";
+    }
+    else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "queen")
+    {
+        out += "Q";
+    }
+    else
+    {
+        out += "Invalid";
+        tableWidget->setItem(row, col, new QTableWidgetItem(QString::fromStdString(out)));
+        return;
+    }
 
-//     if (i == 1) {
-//         out += x2 + to_string(y2);
-//         if (col == 0) {
-//             bCheck = game.isBCheck();
-//             if (bCheck == 1) {
-//                 out += "+";
-//             }
-//         }
-//         else if (col == 1) {
-//             wCheck = game.isWCheck();
-//             if (wCheck == 1) {
-//                 out += "+";
-//             }
-//         }
-//     }
-//     else if (i == 2) {
-//         out += "x";
-//         out += x2 + to_string(y2);
-//         if (col == 0) {
-//             bCheck = game.isBCheck();
-//             if (bCheck == 1) {
-//                 out += "+";
-//             }
-//         }
-//         else if (col == 1) {
-//             wCheck = game.isWCheck();
-//             if (wCheck == 1) {
-//                 out += "+";
-//             }
-//         }
-//     }
-//     tableWidget->setItem(row, col, new QTableWidgetItem(QString::fromStdString(out)));
-//     ++size;
-// }
+    if (i == 1) {
+        out += x2 + to_string(y2);
+        if (col == 0) {
+            bCheck = game.isCheck();
+            if (bCheck == 1) {
+                out += "+";
+            }
+        }
+        else if (col == 1) {
+            wCheck = game.isCheck();
+            if (wCheck == 1) {
+                out += "+";
+            }
+        }
+    }
+    else if (i == 2) {
+        out += "x";
+        out += x2 + to_string(y2);
+        if (col == 0) {
+            bCheck = game.isCheck();
+            if (bCheck == 1) {
+                out += "+";
+            }
+        }
+        else if (col == 1) {
+            wCheck = game.isCheck();
+            if (wCheck == 1) {
+                out += "+";
+            }
+        }
+    }
+    tableWidget->setItem(row, col, new QTableWidgetItem(QString::fromStdString(out)));
+    ++size;
+}
 
 void MainWindow::clearTableWidget()
 {
@@ -135,6 +137,9 @@ void MainWindow::clearTableWidget()
 void MainWindow::on_pushButton_home_about_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
+    setupBoard();
+    setupInitialPositions();
+    clearTableWidget();
 }
 
 // Start Page
@@ -278,7 +283,6 @@ void MainWindow::setupInitialPositions()
     for (ChessPiece &piece : pieces) {
         placePieceOnTile(piece.position, piece.type, piece.color);
     }
-    // ui->stackedWidget->setCurrentIndex(0);
 }
 
 
@@ -340,7 +344,7 @@ void MainWindow::onTileClicked()
                 int extracted_y1 = previousPosition.right(1).toInt(&ok);
                 QString extracted_x2 = clickedPosition.left(1).toLower();
                 int extracted_y2 = clickedPosition.right(1).toInt(&ok);
-                // populateCells(extracted_x1.toLatin1().at(0), extracted_y1, extracted_x2.toLatin1().at(0), extracted_y2, 2, co);
+                populateCells(extracted_x1.toLatin1().at(0), extracted_y1, extracted_x2.toLatin1().at(0), extracted_y2, 2, co);
                 currTime = timer.elapsed();
                 updateTime(currTime - previousTime);
                 co++;
@@ -378,6 +382,7 @@ bool MainWindow::isValidMove(const QString& pieceType, const QString& from, cons
 void MainWindow::on_pushButton_home_end_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
+    setupInitialPositions();
 }
 
 // Tutorial
