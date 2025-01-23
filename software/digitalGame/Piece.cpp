@@ -120,6 +120,9 @@ string Piece::getCharPositionX(){
     else if(x == 7){
         return "a";
     }
+
+    //Placedholder return for unexpected behavior 
+    return "?";
 }
 
 /*string Piece::getID(){

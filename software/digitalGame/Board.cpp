@@ -8,6 +8,7 @@
 #include "Queen.h"
 #include "King.h"
 #include "Rook.h"
+#include <cstdlib>
 
 using namespace std;
 
@@ -194,7 +195,6 @@ void Board::printBoard() {
             else if(board[i][j]->getID() == "king"){
                 cout << board[i][j]->getID() << "    ";
             }
-            //cout << board[i][j]->getID();
         }
     }
     cout << endl << endl;
@@ -208,17 +208,8 @@ bool Board::takePiece(int oldX, int oldY, int newX, int newY){
 }
 
 void Board::swap(int oldX, int oldY, int newX, int newY){
-    // const char* stockfishPath = "STOCKFISH PATH HERE"; //This should be the stockfish path to your file
-    // Stockfish engine(stockfishPath);
-    // engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
-
-    
-    string position = "position startpos moves";
-    position += listMove;
     Piece p;
-    //bool playerTurn = true;
     
-
     if(!takePiece(oldX, oldY, newX, newY)){
         Piece *temp = board[oldY][oldX];
 
@@ -238,31 +229,6 @@ void Board::swap(int oldX, int oldY, int newX, int newY){
         board[newY][newX] = board[oldY][oldX];
         board[oldY][oldX] = new Empty(oldX, oldY);
     }
-
-    cout << "Your Move: ";
-
-    playerMove = board[oldY][oldX]->getPosition() + board[newY][newX]->getPosition();
-    position += " " + playerMove;
-    listMove += " " + playerMove;
-
-    cout << "List of current moves: " << listMove << endl; 
-    // cout << "Current Moves: " << position << endl;
-
-    // //Stockfish move
-    // // Send position and search commands
-    // engine.sendCommand(position);
-
-    // //Set depth to tell stockfish how far to search(the lower the depth, the lower the difficulty)
-    // engine.sendCommand("go depth 100");
-
-    // // Retrieve the best move
-    // bestMove = engine.getBestMove();
-    // cout << "Best Move: " << bestMove << endl;
-
-    // // Update position with the best move
-    // position += " " + bestMove;
-    // //a function to conver best move to be updated on your board
-    // engine.clearFiles();
 }
 
 bool Board::promote(Piece *p, char promoPiece){
@@ -1134,6 +1100,7 @@ bool Board::isBishopMoveValid(Piece *p, int xT, int yT){
         }
         return false;
     }
+    return false;
 }
 
 bool Board::isKnightMoveValid(Piece *p, int xT, int yT){
@@ -1560,12 +1527,14 @@ bool Board::isCheck(King *k){
 
 bool Board::isCheck(){
     if(isCheck(kw)){
+        blackWin = true;
         return true;
     }
     if(isCheck(kb)){
-        return true;
+        whiteWin = true;
+        return true; 
     }
-    return false;
+    return false; 
 }
 
 void Board::undoMove(int oldX, int oldY, int newX, int newY, Piece *oldPiece){
@@ -1574,12 +1543,12 @@ void Board::undoMove(int oldX, int oldY, int newX, int newY, Piece *oldPiece){
 }
 
 bool Board::checkmate(King *k){
-    // if(/*bestMove == "none"*/ isCheck()){
-    //     return true;
-    // }
+    if(bestMove == "(none)"){
+        return true;
+    }
     return false;
 }
- 
+
 int Board::convertToInt(char x){
     if(int(x) > 96){
         return 104 - int(x);
@@ -1610,11 +1579,178 @@ int Board::justinIm(char charOldX, int oldY, char charNewX, int newY){
 
     return 0;
 }
- 
-void Board::playGame(){
 
+void Board::playMenu() {
+    int gameType;   
+    char playerType;
+    cout << "VIRTUAL CHESS BOARD" << endl << endl;
+    cout <<" How would you like to play?: " << endl;
+    cout << "1. Player vs.Player" << endl;
+    cout << "2. Player vs. AI" << endl;
+    cout << "3. AI vs. AI?" << endl;
+    cin >> gameType;
+    cout << endl;
+
+    if(gameType == 1) {
+        cout << "PLAYER VS. PLAYER" << endl;
+        cout << "Decide who plays white and black." << endl;
+        playGamePVP();
+    }
+    else if(gameType == 2) {
+        cout << "PLAYER VS. AI" << endl;
+        cout <<"Does the player want to play white(w) or black(b)?" << endl;
+        cin >> playerType;
+        if(playerType == 'w') {
+            playGamePVAIWhitePlayer();
+        }
+        else if(playerType == 'b') {
+            playGamePVAIBlackPlayer();
+        }
+    }
+    else if(gameType == 3) {
+        cout << "AI VS. AI" << endl;
+        playGameAIVAI();
+    }
+}
+
+void Board::playGamePVP() {
+    printBoard();
+    listMove = "";
+    whiteMoves = 0;
+    blackMoves = 0;
+    while(!isCheck()){
+        char charOldX;
+        char charOldY;
+        char charNewX;
+        char charNewY;
+
+        int oldX;
+        int newX;
+        int oldY;
+        int newY;
+
+        bool madeMove = false;
+
+        if(whiteMoves == blackMoves){
+            cout << "White move: " << endl;
+            while(!madeMove){
+                cout << "Input Move(White): ";
+                cin >> playerMove;
+
+                charOldX = playerMove[0];
+                charOldY = playerMove[1];
+                charNewX = playerMove[2];
+                charNewY = playerMove[3];
+
+                oldX = convertToInt(charOldX);
+                newX = convertToInt(charNewX);
+                oldY = convertToInt(charOldY);
+                newY = convertToInt(charNewY);
+
+                if((board[oldY][oldX]->getID() != "empty") && (board[oldY][oldX]->white())){
+                    if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
+                        if(board[oldY][oldX]->getID() == "empty"){
+                            madeMove = true;
+                            whiteMoves++;
+                        }
+                        else{
+                            swap(oldX, oldY, newX, newY);
+                            if(isCheck(kw)){
+                                swap(newX, newY, oldX, oldY);
+                                cout << "King is still in check, try again" << endl;
+                            }
+                            else{
+                                if(board[newY][newX]->getID() == "pawn" && newY == 8){
+                                    promote(board[newY][newX]);
+                                }
+                                madeMove = true;
+                                whiteMoves++;
+                            }
+                        }
+                    }
+
+                    else{
+                        cout << "Invalid move, try again" << endl;
+                    }
+                }
+                else{
+                    cout << "Invalid move, try again" << endl;
+                }
+            }
+        }
+        else{
+            cout << "Black move: " << endl;
+            while(!madeMove){
+                cout << "Input Move(Black): ";
+                cin >> playerMove;
+
+                charOldX = playerMove[0];
+                charOldY = playerMove[1];
+                charNewX = playerMove[2];
+                charNewY = playerMove[3];
+
+                oldX = convertToInt(charOldX);
+                newX = convertToInt(charNewX);
+                oldY = convertToInt(charOldY);
+                newY = convertToInt(charNewY);
+
+                if((board[oldY][oldX]->getID() != "empty") && (!board[oldY][oldX]->white())){
+                    if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
+                        if(board[oldY][oldX]->getID() == "empty"){
+                            madeMove = true;
+                            whiteMoves++;
+                        }
+                        else{
+                            swap(oldX, oldY, newX, newY);
+                            if(isCheck(kb)){
+                                swap(newX, newY, oldX, oldY);
+                                cout << "King is in check, try again" << endl;
+                            }
+                            else{
+                                if(board[newY][newX]->getID() == "pawn" && newY == 1){
+                                    promote(board[newY][newX]);
+                                }
+                                madeMove = true;
+                                blackMoves++;
+                            }
+                        }
+                    }
+                    else{
+                        cout << "Invalid move, try again bruh" << endl;
+                    }
+                }
+                else{
+                    cout << "Invalid move, try again wtf" << endl;
+                }
+            }
+        }
+        cout << "Your Move: ";
+        cout << playerMove << endl;
+        listMove += " " + playerMove;
+        cout << "List of current moves: " << listMove << endl; 
+        printBoard();
+    }
+
+    if(whiteWin) {
+        cout << "WHITE WINS" << endl << endl;
+    }
+    else if(blackWin) {
+        cout << "BLACK WINS" << endl << endl;
+    }
+}
+ 
+
+void Board::playGamePVAIWhitePlayer(){
+    Stockfish engine(stockfishPath);
+    printBoard();
+    whiteMoves = 0;
+    blackMoves = 0;
+    listMove = "";
     while(!checkmate(kw) || !checkmate(kb)){
-        string move;
+        engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
+        
+        string position = "position startpos moves";
+        position += listMove;
 
         char charOldX;
         char charOldY;
@@ -1632,24 +1768,24 @@ void Board::playGame(){
         if(whiteMoves == blackMoves){
             cout << "White move: " << endl;
             while(!madeMove){
-                cin >> move;
+                cin >> playerMove;
                 // charOldX = bestMove[0];
                 // charOldY = bestMove[1];
                 // charNewX = bestMove[2];
                 // charNewY = bestMove[3];
-                if(move.size() == 4){
-                    charOldX = move[0];
-                    charOldY = move[1];
-                    charNewX = move[2];
-                    charNewY = move[3];
+                if(playerMove.size() == 4){
+                    charOldX = playerMove[0];
+                    charOldY = playerMove[1];
+                    charNewX = playerMove[2];
+                    charNewY = playerMove[3];
                     newPiece = ' ';
                 }
-                else if(move.size() == 5){
-                    charOldX = move[0];
-                    charOldY = move[1];
-                    charNewX = move[2];
-                    charNewY = move[3];
-                    newPiece = move[4];
+                else if(playerMove.size() == 5){
+                    charOldX = playerMove[0];
+                    charOldY = playerMove[1];
+                    charNewX = playerMove[2];
+                    charNewY = playerMove[3];
+                    newPiece = playerMove[4];
                 }
 
                 oldX = convertToInt(charOldX);
@@ -1689,6 +1825,7 @@ void Board::playGame(){
                             }
                         }
                     }
+
                     else{
                         cout << "Invalid move, try again, nani" << endl;
                     }
@@ -1701,25 +1838,22 @@ void Board::playGame(){
         else{
             cout << "Black move: " << endl;
             while(!madeMove){
-                cin >> move;
-                // charOldX = bestMove[0];
-                // charOldY = bestMove[1];
-                // charNewX = bestMove[2];
-                // charNewY = bestMove[3];
+                cout << "Input Move(Black): ";
+                cin >> playerMove;
 
                 if(move.size() == 4){
-                    charOldX = move[0];
-                    charOldY = move[1];
-                    charNewX = move[2];
-                    charNewY = move[3];
+                    charOldX = playerMove[0];
+                    charOldY = playerMove[1];
+                    charNewX = playerMove[2];
+                    charNewY = playerMove[3];
                     newPiece = ' ';
                 }
                 else if(move.size() == 5){
-                    charOldX = move[0];
-                    charOldY = move[1];
-                    charNewX = move[2];
-                    charNewY = move[3];
-                    newPiece = move[4];
+                    charOldX = playerMove[0];
+                    charOldY = playerMove[1];
+                    charNewX = playerMove[2];
+                    charNewY = playerMove[3];
+                    newPiece = playerMove[4];
                 }
 
                 oldX = convertToInt(charOldX);
@@ -1768,6 +1902,296 @@ void Board::playGame(){
                 }
             }
         }
+
+        cout << "Your Move: ";
+        cout << playerMove << endl;
+
+        position += " " + playerMove;
+        listMove += " " + playerMove;
+
+        cout << "List of current moves: " << listMove << endl; 
+
+        //Stockfish move
+        // Send position and search commands
+        engine.sendCommand(position);
+
+        //Set depth to tell stockfish how far to search(the lower the depth, the lower the difficulty) and/or give a certain time limit for it to search each depth
+        engine.sendCommand("go depth 30");
+        engine.sendCommand("go movetime 10000");
+
+        // Retrieve the best move
+        bestMove = engine.getBestMove();
+        cout << "Best Move: " << bestMove << endl;
+
+        // Update list of moves with the best move
+        listMove += " " + bestMove;
+        //a function to conver best move to be updated on your board
+        engine.clearFiles();
+
+
+        //Now update the board with stockfish move
+        charOldX = bestMove[0];
+        charOldY = bestMove[1];
+        charNewX = bestMove[2];
+        charNewY = bestMove[3];
+
+        oldX = convertToInt(charOldX);
+        newX = convertToInt(charNewX);
+        oldY = convertToInt(charOldY);
+        newY = convertToInt(charNewY);
+        if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
+            swap(oldX, oldY, newX, newY);
+        }
+        else { //Should never really output this, more for safe measure
+            cout << "Stockfish gave an invalid move????" << endl;
+        }
+        ++blackMoves;
+      
         printBoard();
+        cout << "Updated moves after stockfish: " << listMove << endl;
     }
- }
+
+    if(whiteWin) {
+        cout << "WHITE WINS" << endl << endl;
+    }
+    else if(blackWin) {
+        cout << "BLACK WINS" << endl << endl;
+    }
+}
+
+void Board::playGamePVAIBlackPlayer() {
+    Stockfish engine(stockfishPath);
+    printBoard();
+    whiteMoves = 0;
+    blackMoves = 0;
+    listMove = "";
+    while(!checkmate(kw) || !checkmate(kb)){
+        engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
+        
+        string position = "position startpos moves";
+        position += listMove;
+
+        char charOldX;
+        char charOldY;
+        char charNewX;
+        char charNewY;
+
+        int oldX;
+        int newX;
+        int oldY;
+        int newY;
+
+        bool madeMove = false;
+
+        //AI move first 
+        cout << "Your Move: ";
+        cout << playerMove << endl;
+
+        position += " " + playerMove;
+        listMove += " " + playerMove;
+
+        cout << "List of current moves: " << listMove << endl; 
+
+        //Stockfish move
+        // Send position and search commands
+        engine.sendCommand(position);
+
+        //Set depth to tell stockfish how far to search(the lower the depth, the lower the difficulty) and/or give a certain time limit for it to search each depth
+        engine.sendCommand("go depth 30");
+        engine.sendCommand("go movetime 10000");
+
+        // Retrieve the best move
+        bestMove = engine.getBestMove();
+        cout << "Best Move: " << bestMove << endl;
+
+        // Update list of moves with the best move
+        listMove += " " + bestMove;
+        //a function to conver best move to be updated on your board
+        engine.clearFiles();
+
+
+        //Now update the board with stockfish move
+        charOldX = bestMove[0];
+        charOldY = bestMove[1];
+        charNewX = bestMove[2];
+        charNewY = bestMove[3];
+
+        oldX = convertToInt(charOldX);
+        newX = convertToInt(charNewX);
+        oldY = convertToInt(charOldY);
+        newY = convertToInt(charNewY);
+        if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
+            swap(oldX, oldY, newX, newY);
+        }
+        else { //Should never really output this, more for safe measure
+            cout << "Stockfish gave an invalid move????" << endl;
+        }
+        ++whiteMoves;
+        printBoard();
+        cout << "Updated moves after stockfish: " << listMove << endl;
+
+        if(whiteMoves == blackMoves){
+            cout << "White move: " << endl;
+            while(!madeMove){
+                cout << "Input Move(White): ";
+                cin >> playerMove;
+
+                charOldX = playerMove[0];
+                charOldY = playerMove[1];
+                charNewX = playerMove[2];
+                charNewY = playerMove[3];
+
+                oldX = convertToInt(charOldX);
+                newX = convertToInt(charNewX);
+                oldY = convertToInt(charOldY);
+                newY = convertToInt(charNewY);
+
+                if((board[oldY][oldX]->getID() != "empty") && (board[oldY][oldX]->white())){
+                    if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
+                        if(board[oldY][oldX]->getID() == "empty"){
+                            madeMove = true;
+                            whiteMoves++;
+                        }
+                        else{
+                            swap(oldX, oldY, newX, newY);
+                            if(isCheck(kw)){
+                                swap(newX, newY, oldX, oldY);
+                                cout << "King is still in check, try again" << endl;
+                            }
+                            else{
+                                if(board[newY][newX]->getID() == "pawn" && newY == 8){
+                                    promote(board[newY][newX]);
+                                }
+                                madeMove = true;
+                                whiteMoves++;
+                            }
+                        }
+                    }
+
+                    else{
+                        cout << "Invalid move, try again" << endl;
+                    }
+                }
+                else{
+                    cout << "Invalid move, try again" << endl;
+                }
+            }
+        }
+        else{
+            cout << "Black move: " << endl;
+            while(!madeMove){
+                cout << "Input Move(Black): ";
+                cin >> playerMove;
+
+                charOldX = playerMove[0];
+                charOldY = playerMove[1];
+                charNewX = playerMove[2];
+                charNewY = playerMove[3];
+
+                oldX = convertToInt(charOldX);
+                newX = convertToInt(charNewX);
+                oldY = convertToInt(charOldY);
+                newY = convertToInt(charNewY);
+
+                if((board[oldY][oldX]->getID() != "empty") && (!board[oldY][oldX]->white())){
+                    if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
+                        if(board[oldY][oldX]->getID() == "empty"){
+                            madeMove = true;
+                            whiteMoves++;
+                        }
+                        else{
+                            swap(oldX, oldY, newX, newY);
+                            if(isCheck(kb)){
+                                swap(newX, newY, oldX, oldY);
+                                cout << "King is in check, try again" << endl;
+                            }
+                            else{
+                                if(board[newY][newX]->getID() == "pawn" && newY == 1){
+                                    promote(board[newY][newX]);
+                                }
+                                madeMove = true;
+                                blackMoves++;
+                            }
+                        }
+                    }
+                    else{
+                        cout << "Invalid move, try again bruh" << endl;
+                    }
+                }
+                else{
+                    cout << "Invalid move, try again wtf" << endl;
+                }
+            }
+        }
+    }
+
+    if(whiteWin) {
+        cout << "WHITE WINS" << endl << endl;
+    }
+    else if(blackWin) {
+        cout << "BLACK WINS" << endl << endl;
+    }
+}
+
+void Board::playGameAIVAI() {
+    Stockfish engine(stockfishPath);
+    string position = "position startpos moves"; 
+    printBoard();
+    char charOldX;
+    char charOldY;
+    char charNewX;
+    char charNewY;
+
+    int oldX;
+    int newX;
+    int oldY;
+    int newY;
+
+    while(1){
+        engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
+        // Send position and search commands
+        engine.sendCommand(position);
+
+        //Set depth to tell stockfish how far to search(the lower the depth, the lower the difficulty)
+        engine.sendCommand("go depth 20");
+        //engine.sendCommand("go movetime 200");
+
+        // Retrieve the best move
+        bestMove = engine.getBestMove();
+        cout << "Best Move: " << bestMove << endl;
+
+        // Update position with the best move
+        position += " " + bestMove;
+        listMove += " " + bestMove;
+        cout << "Current Moves: " << position << endl;
+        engine.clearFiles();
+        
+        //Now update the board with stockfish move
+        charOldX = bestMove[0];
+        charOldY = bestMove[1];
+        charNewX = bestMove[2];
+        charNewY = bestMove[3];
+
+        oldX = convertToInt(charOldX);
+        newX = convertToInt(charNewX);
+        oldY = convertToInt(charOldY);
+        newY = convertToInt(charNewY);
+
+        if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
+            swap(oldX, oldY, newX, newY);
+        }
+        else { //Should never really output this, more for safe measure
+            cout << "Stockfish gave an invalid move????" << endl;
+        }
+      
+        printBoard();
+        cout << "Updated moves after stockfish: " << listMove << endl;
+    }
+
+    if(whiteWin) {
+        cout << "WHITE WINS" << endl << endl;
+    }
+    else if(blackWin) {
+        cout << "BLACK WINS" << endl << endl;
+    }
+}
