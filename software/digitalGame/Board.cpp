@@ -231,45 +231,53 @@ void Board::swap(int oldX, int oldY, int newX, int newY){
     }
 }
 
-void Board::promote(Piece *p){
-    string piece;
+bool Board::promote(Piece *p, char promoPiece){
+    //string piece;
     Piece* newPiece;
     if(p->getPositionY() == 7){
-        cout << "What piece would you like to promote to?" << endl;
-        cin >> piece;
+        //cout << "What piece would you like to promote to?" << endl;
+        //cin >> piece;
 
-        if(piece == "queen"){
+        if(promoPiece == 'q'){
             newPiece = new Queen(p->getPositionX(), p->getPositionY(), true);
         }
-        else if(piece == "rook"){
+        else if(promoPiece == 'r'){
             newPiece = new Rook(p->getPositionX(), p->getPositionY(), true);
         }
-        else if(piece == "bishop"){
+        else if(promoPiece == 'b'){
             newPiece = new Bishop(p->getPositionX(), p->getPositionY(), true);
         }
-        else if(piece == "knight"){
+        else if(promoPiece == 'k'){
             newPiece = new Knight(p->getPositionX(), p->getPositionY(), true);
         }
-        board[p->getPositionY()][p->getPositionX()] = newPiece;
+        else{
+            cout << "Please put a valid promote piece" << endl;
+            return false;
+        }
     }
     else if(p->getPositionY() == 0){
-        cout << "What piece would you like to promote to?" << endl;
-        cin >> piece;
+        //cout << "What piece would you like to promote to?" << endl;
+        //cin >> piece;
 
-        if(piece == "queen"){
+        if(promoPiece == 'q'){
             newPiece = new Queen(p->getPositionX(), p->getPositionY(), false);
         }
-        else if(piece == "rook"){
+        else if(promoPiece == 'r'){
             newPiece = new Rook(p->getPositionX(), p->getPositionY(), false);
         }
-        else if(piece == "bishop"){
+        else if(promoPiece == 'b'){
             newPiece = new Bishop(p->getPositionX(), p->getPositionY(), false);
         }
-        else if(piece == "knight"){
+        else if(promoPiece == 'k'){
             newPiece = new Knight(p->getPositionX(), p->getPositionY(), false);
         }
-        board[p->getPositionY()][p->getPositionX()] = newPiece;
+        else{
+            cout << "Please put a valid promote piece" << endl;
+            return false;
+        }
     }
+    board[p->getPositionY()][p->getPositionX()] = newPiece;
+    return true;
 }
 
 bool Board::isOppositeColor(Piece *p1, Piece *p2){
@@ -1187,7 +1195,6 @@ bool Board::isKingMoveValid(Piece *p, int xT, int yT){
 bool Board::isPawnMoveValid(Piece *p, int xT, int yT){
     if(xT == 1){
         if(p->getPositionX() < 7){
-            
             if(takePiece(p->getPositionX(), p->getPositionY(), p->getPositionX() + 1, p->getPositionY() + 1)){
                 p->setMoveCounter(1);
                 return true;
@@ -1530,8 +1537,9 @@ bool Board::isCheck(){
     return false; 
 }
 
-void Board::undoMove(Piece *p, int x, int y){
-    swap(p->getPositionX(), p->getPositionY(), x, y);
+void Board::undoMove(int oldX, int oldY, int newX, int newY, Piece *oldPiece){
+    swap(newX, newY, oldX, oldY);
+    board[newY][newX] = oldPiece;
 }
 
 bool Board::checkmate(King *k){
@@ -1552,8 +1560,7 @@ int Board::convertToInt(char x){
     return -1;
 }
 
-int Board::justinLim(char charOldX, int oldY, char charNewX, int newY){
-
+int Board::justinIm(char charOldX, int oldY, char charNewX, int newY){
     int oldX = convertToInt(charOldX);
     int newX = convertToInt(charNewX);
     
@@ -1571,7 +1578,6 @@ int Board::justinLim(char charOldX, int oldY, char charNewX, int newY){
     }
 
     return 0;
-
 }
 
 void Board::playMenu() {
@@ -1750,6 +1756,7 @@ void Board::playGamePVAIWhitePlayer(){
         char charOldY;
         char charNewX;
         char charNewY;
+        char newPiece;
 
         int oldX;
         int newX;
@@ -1761,13 +1768,25 @@ void Board::playGamePVAIWhitePlayer(){
         if(whiteMoves == blackMoves){
             cout << "White move: " << endl;
             while(!madeMove){
-                cout << "Input Move(White): ";
                 cin >> playerMove;
-
-                charOldX = playerMove[0];
-                charOldY = playerMove[1];
-                charNewX = playerMove[2];
-                charNewY = playerMove[3];
+                // charOldX = bestMove[0];
+                // charOldY = bestMove[1];
+                // charNewX = bestMove[2];
+                // charNewY = bestMove[3];
+                if(playerMove.size() == 4){
+                    charOldX = playerMove[0];
+                    charOldY = playerMove[1];
+                    charNewX = playerMove[2];
+                    charNewY = playerMove[3];
+                    newPiece = ' ';
+                }
+                else if(playerMove.size() == 5){
+                    charOldX = playerMove[0];
+                    charOldY = playerMove[1];
+                    charNewX = playerMove[2];
+                    charNewY = playerMove[3];
+                    newPiece = playerMove[4];
+                }
 
                 oldX = convertToInt(charOldX);
                 newX = convertToInt(charNewX);
@@ -1781,27 +1800,38 @@ void Board::playGamePVAIWhitePlayer(){
                             whiteMoves++;
                         }
                         else{
+                            Piece *takenPiece = board[newY][newX];
                             swap(oldX, oldY, newX, newY);
                             if(isCheck(kw)){
-                                swap(newX, newY, oldX, oldY);
+                                undoMove(oldX, oldY, newX, newY, takenPiece);
+                                listMove = listMove.substr(0, listMove.size() - 10);
                                 cout << "King is still in check, try again" << endl;
                             }
                             else{
-                                if(board[newY][newX]->getID() == "pawn" && newY == 8){
-                                    promote(board[newY][newX]);
+                                if(board[newY][newX]->getID() == "pawn" && newY == 7){
+                                    if(!promote(board[newY][newX], newPiece)){
+                                        undoMove(oldX, oldY, newX, newY, takenPiece);
+                                        listMove = listMove.substr(0, listMove.size() - 10);
+                                    }
+                                    else{
+                                        madeMove = true;
+                                        whiteMoves++;
+                                    }
                                 }
-                                madeMove = true;
-                                whiteMoves++;
+                                else{
+                                    madeMove = true;
+                                    whiteMoves++;
+                                }
                             }
                         }
                     }
 
                     else{
-                        cout << "Invalid move, try again" << endl;
+                        cout << "Invalid move, try again, nani" << endl;
                     }
                 }
                 else{
-                    cout << "Invalid move, try again" << endl;
+                    cout << "Invalid move, try again, wtf" << endl;
                 }
             }
         }
@@ -1811,10 +1841,20 @@ void Board::playGamePVAIWhitePlayer(){
                 cout << "Input Move(Black): ";
                 cin >> playerMove;
 
-                charOldX = playerMove[0];
-                charOldY = playerMove[1];
-                charNewX = playerMove[2];
-                charNewY = playerMove[3];
+                if(move.size() == 4){
+                    charOldX = playerMove[0];
+                    charOldY = playerMove[1];
+                    charNewX = playerMove[2];
+                    charNewY = playerMove[3];
+                    newPiece = ' ';
+                }
+                else if(move.size() == 5){
+                    charOldX = playerMove[0];
+                    charOldY = playerMove[1];
+                    charNewX = playerMove[2];
+                    charNewY = playerMove[3];
+                    newPiece = playerMove[4];
+                }
 
                 oldX = convertToInt(charOldX);
                 newX = convertToInt(charNewX);
@@ -1828,17 +1868,28 @@ void Board::playGamePVAIWhitePlayer(){
                             whiteMoves++;
                         }
                         else{
+                            Piece *takenPiece = board[newY][newX];
                             swap(oldX, oldY, newX, newY);
                             if(isCheck(kb)){
-                                swap(newX, newY, oldX, oldY);
+                                undoMove(oldX, oldY, newX, newY, takenPiece);
+                                listMove = listMove.substr(0, listMove.size() - 10);
                                 cout << "King is in check, try again" << endl;
                             }
                             else{
                                 if(board[newY][newX]->getID() == "pawn" && newY == 1){
-                                    promote(board[newY][newX]);
+                                    if(!promote(board[newY][newX], newPiece)){
+                                        undoMove(oldX, oldY, newX, newY, takenPiece);
+                                        listMove = listMove.substr(0, listMove.size() - 10);
+                                    }
+                                    else{
+                                        madeMove = true;
+                                        whiteMoves++;
+                                    }
                                 }
-                                madeMove = true;
-                                blackMoves++;
+                                else{  
+                                    madeMove = true;
+                                    blackMoves++;
+                                }
                             }
                         }
                     }
@@ -1976,7 +2027,6 @@ void Board::playGamePVAIBlackPlayer() {
             cout << "Stockfish gave an invalid move????" << endl;
         }
         ++whiteMoves;
-      
         printBoard();
         cout << "Updated moves after stockfish: " << listMove << endl;
 

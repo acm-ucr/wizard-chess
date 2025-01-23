@@ -26,6 +26,13 @@ Piece::Piece(int xPos, int yPos){
     y = yPos;
 }
 
+Piece::Piece(Piece& cpyPiece){
+    x = cpyPiece.getPositionX();
+    y = cpyPiece.getPositionY();
+    counter = cpyPiece.getMoveCounter();
+    isWhite = cpyPiece.getIsWhite();
+}
+
 string Piece::getPosition(){
     string coordinate = getCharPositionX() + to_string(getPositionY() + 1);
     return coordinate;
