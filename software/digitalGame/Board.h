@@ -31,6 +31,8 @@ class Board {
 
         int whiteMoves = 0;
         int blackMoves = 0;
+        bool whiteWin = false;
+        bool blackWin = false; 
        
         int justinLim(char charOldX, int oldY, char charNewX, int newY);
 
@@ -60,10 +62,14 @@ class Board {
         void swap(int oldX, int oldY, int newX, int newY);
         bool takePiece(int oldX, int oldY, int newX, int newY);
         void printBoard();
-        void playGame();
-        bool checkmate(King *k);
+        void playMenu();
+        void playGamePVP();
+        void playGamePVAIWhitePlayer();
+        void playGamePVAIBlackPlayer();
+        void playGameAIVAI();
         bool convertBestMove(string bestMove);
         bool isCheck(King *k);
+        bool checkmate(King *k);
 
         bool isCheck();
 

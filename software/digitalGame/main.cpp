@@ -11,13 +11,6 @@ using namespace std;
 
 int main() {
     Board b;
-    b.printBoard();
-    b.playGame();
-    if(b.isCheck()){
-        cout << "success" << endl;
-    }
-    else {
-        cout << "failure" << endl;
-    }
+    b.playMenu();
     return 0;
 }
