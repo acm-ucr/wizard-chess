@@ -1527,11 +1527,9 @@ bool Board::isCheck(King *k){
 
 bool Board::isCheck(){
     if(isCheck(kw)){
-        blackWin = true;
         return true;
     }
     if(isCheck(kb)){
-        whiteWin = true;
         return true; 
     }
     return false; 
@@ -1542,9 +1540,31 @@ void Board::undoMove(int oldX, int oldY, int newX, int newY, Piece *oldPiece){
     board[newY][newX] = oldPiece;
 }
 
-bool Board::checkmate(King *k){
-    if(bestMove == "(none)"){
-        return true;
+bool Board::checkmate(string moveList){
+    //We are using stockfish to check if it is checkamte by having it return "(none)", but first check if any king is in check
+    if(isCheck()) {
+        //A King is in check
+        Stockfish engine(stockfishPath);
+        engine.clearFiles();
+
+        engine.sendCommand(moveList);
+        //Set depth to tell stockfish how far to search(the lower the depth, the lower the difficulty) and/or give a certain time limit for it to search each depth
+        engine.sendCommand("go depth 30");
+        engine.sendCommand("go movetime 10000");
+
+        string advisedMove = engine.getBestMove();
+        cout << "WARNING: KING IS IN CHECK" << endl;
+        cout << "Advised Move: " << advisedMove << endl;
+
+        if(advisedMove == "(none)") {
+            if(isCheck(kw)){
+                blackWin = true;
+            }
+            if(isCheck(kb)){
+                whiteWin = true;
+            }
+            return true;
+        }
     }
     return false;
 }
@@ -1611,6 +1631,14 @@ void Board::playMenu() {
         cout << "AI VS. AI" << endl;
         playGameAIVAI();
     }
+
+
+    if(whiteWin) {
+        cout << "WHITE WINS" << endl << endl;
+    }
+    else if(blackWin) {
+        cout << "BLACK WINS" << endl << endl;
+    }
 }
 
 void Board::playGamePVP() {
@@ -1618,20 +1646,21 @@ void Board::playGamePVP() {
     listMove = "";
     whiteMoves = 0;
     blackMoves = 0;
-    while(!isCheck()){
-        char charOldX;
-        char charOldY;
-        char charNewX;
-        char charNewY;
-        char newPiece;
+    char charOldX;
+    char charOldY;
+    char charNewX;
+    char charNewY;
+    char newPiece;
 
-        int oldX;
-        int newX;
-        int oldY;
-        int newY;
+    int oldX;
+    int newX;
+    int oldY;
+    int newY;
 
+    string position = "position startpos moves";
+
+    while(!checkmate(position)){
         bool madeMove = false;
-
         if(whiteMoves == blackMoves){
             cout << "White move: " << endl;
             while(!madeMove){
@@ -1688,6 +1717,8 @@ void Board::playGamePVP() {
                     cout << "Invalid move, try again" << endl;
                 }
             }
+            cout << "White Move: ";
+            cout << playerMove << endl;
         }
         else{
             cout << "Black move: " << endl;
@@ -1744,19 +1775,13 @@ void Board::playGamePVP() {
                     cout << "Invalid move, try again wtf" << endl;
                 }
             }
+            cout << "Black Move: ";
+            cout << playerMove << endl;
         }
-        cout << "Your Move: ";
-        cout << playerMove << endl;
         listMove += " " + playerMove;
         cout << "List of current moves: " << listMove << endl; 
+        position += " " + playerMove;
         printBoard();
-    }
-
-    if(whiteWin) {
-        cout << "WHITE WINS" << endl << endl;
-    }
-    else if(blackWin) {
-        cout << "BLACK WINS" << endl << endl;
     }
 }
  
@@ -1767,163 +1792,88 @@ void Board::playGamePVAIWhitePlayer(){
     whiteMoves = 0;
     blackMoves = 0;
     listMove = "";
-    while(!checkmate(kw) || !checkmate(kb)){
+    string position = "position startpos moves";
+    char charOldX;
+    char charOldY;
+    char charNewX;
+    char charNewY;
+    char newPiece;
+
+    int oldX;
+    int newX;
+    int oldY;
+    int newY;
+
+    while(!checkmate(position)){
         engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
-        
-        string position = "position startpos moves";
-        position += listMove;
-
-        char charOldX;
-        char charOldY;
-        char charNewX;
-        char charNewY;
-        char newPiece;
-
-        int oldX;
-        int newX;
-        int oldY;
-        int newY;
 
         bool madeMove = false;
 
-        if(whiteMoves == blackMoves){
-            cout << "White move: " << endl;
-            while(!madeMove){
-                cin >> playerMove;
-                // charOldX = bestMove[0];
-                // charOldY = bestMove[1];
-                // charNewX = bestMove[2];
-                // charNewY = bestMove[3];
-                if(playerMove.size() == 4){
-                    charOldX = playerMove[0];
-                    charOldY = playerMove[1];
-                    charNewX = playerMove[2];
-                    charNewY = playerMove[3];
-                    newPiece = ' ';
-                }
-                else if(playerMove.size() == 5){
-                    charOldX = playerMove[0];
-                    charOldY = playerMove[1];
-                    charNewX = playerMove[2];
-                    charNewY = playerMove[3];
-                    newPiece = playerMove[4];
-                }
+        //Player move
+        cout << "White move: " << endl;
+        while(!madeMove){
+            cin >> playerMove;
+            if(playerMove.size() == 4){
+                charOldX = playerMove[0];
+                charOldY = playerMove[1];
+                charNewX = playerMove[2];
+                charNewY = playerMove[3];
+                newPiece = ' ';
+            }
+            else if(playerMove.size() == 5){
+                charOldX = playerMove[0];
+                charOldY = playerMove[1];
+                charNewX = playerMove[2];
+                charNewY = playerMove[3];
+                newPiece = playerMove[4];
+            }
 
-                oldX = convertToInt(charOldX);
-                newX = convertToInt(charNewX);
-                oldY = convertToInt(charOldY);
-                newY = convertToInt(charNewY);
+            oldX = convertToInt(charOldX);
+            newX = convertToInt(charNewX);
+            oldY = convertToInt(charOldY);
+            newY = convertToInt(charNewY);
 
-                if((board[oldY][oldX]->getID() != "empty") && (board[oldY][oldX]->white())){
-                    if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
-                        if(board[oldY][oldX]->getID() == "empty"){
-                            madeMove = true;
-                            whiteMoves++;
+            if((board[oldY][oldX]->getID() != "empty") && (board[oldY][oldX]->white())){
+                if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
+                    if(board[oldY][oldX]->getID() == "empty"){
+                        madeMove = true;
+                        whiteMoves++;
+                    }
+                    else{
+                        Piece *takenPiece = board[newY][newX];
+                        swap(oldX, oldY, newX, newY);
+                        if(isCheck(kw)){
+                            undoMove(oldX, oldY, newX, newY, takenPiece);
+                            listMove = listMove.substr(0, listMove.size() - 10);
+                            cout << "King is still in check, try again" << endl;
                         }
                         else{
-                            Piece *takenPiece = board[newY][newX];
-                            swap(oldX, oldY, newX, newY);
-                            if(isCheck(kw)){
-                                undoMove(oldX, oldY, newX, newY, takenPiece);
-                                listMove = listMove.substr(0, listMove.size() - 10);
-                                cout << "King is still in check, try again" << endl;
-                            }
-                            else{
-                                if(board[newY][newX]->getID() == "pawn" && newY == 7){
-                                    if(!promote(board[newY][newX], newPiece)){
-                                        undoMove(oldX, oldY, newX, newY, takenPiece);
-                                        listMove = listMove.substr(0, listMove.size() - 10);
-                                    }
-                                    else{
-                                        madeMove = true;
-                                        whiteMoves++;
-                                    }
+                            if(board[newY][newX]->getID() == "pawn" && newY == 7){
+                                if(!promote(board[newY][newX], newPiece)){
+                                    undoMove(oldX, oldY, newX, newY, takenPiece);
+                                    listMove = listMove.substr(0, listMove.size() - 10);
                                 }
                                 else{
                                     madeMove = true;
                                     whiteMoves++;
                                 }
                             }
-                        }
-                    }
-
-                    else{
-                        cout << "Invalid move, try again, nani" << endl;
-                    }
-                }
-                else{
-                    cout << "Invalid move, try again, wtf" << endl;
-                }
-            }
-        }
-        else{
-            cout << "Black move: " << endl;
-            while(!madeMove){
-                cout << "Input Move(Black): ";
-                cin >> playerMove;
-
-                if(playerMove.size() == 4){
-                    charOldX = playerMove[0];
-                    charOldY = playerMove[1];
-                    charNewX = playerMove[2];
-                    charNewY = playerMove[3];
-                    newPiece = ' ';
-                }
-                else if(playerMove.size() == 5){
-                    charOldX = playerMove[0];
-                    charOldY = playerMove[1];
-                    charNewX = playerMove[2];
-                    charNewY = playerMove[3];
-                    newPiece = playerMove[4];
-                }
-
-                oldX = convertToInt(charOldX);
-                newX = convertToInt(charNewX);
-                oldY = convertToInt(charOldY);
-                newY = convertToInt(charNewY);
-
-                if((board[oldY][oldX]->getID() != "empty") && (!board[oldY][oldX]->white())){
-                    if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
-                        if(board[oldY][oldX]->getID() == "empty"){
-                            madeMove = true;
-                            whiteMoves++;
-                        }
-                        else{
-                            Piece *takenPiece = board[newY][newX];
-                            swap(oldX, oldY, newX, newY);
-                            if(isCheck(kb)){
-                                undoMove(oldX, oldY, newX, newY, takenPiece);
-                                listMove = listMove.substr(0, listMove.size() - 10);
-                                cout << "King is in check, try again" << endl;
-                            }
                             else{
-                                if(board[newY][newX]->getID() == "pawn" && newY == 1){
-                                    if(!promote(board[newY][newX], newPiece)){
-                                        undoMove(oldX, oldY, newX, newY, takenPiece);
-                                        listMove = listMove.substr(0, listMove.size() - 10);
-                                    }
-                                    else{
-                                        madeMove = true;
-                                        whiteMoves++;
-                                    }
-                                }
-                                else{  
-                                    madeMove = true;
-                                    blackMoves++;
-                                }
+                                madeMove = true;
+                                whiteMoves++;
                             }
                         }
                     }
-                    else{
-                        cout << "Invalid move, try again bruh" << endl;
-                    }
                 }
-                else{
-                    cout << "Invalid move, try again wtf" << endl;
+                else {
+                    cout << "Invalid move, try again, nani" << endl;
                 }
             }
+            else{
+                cout << "Invalid move, try again, wtf" << endl;
+            }
         }
-
+      
         cout << "Your Move: ";
         cout << playerMove << endl;
 
@@ -1945,16 +1895,27 @@ void Board::playGamePVAIWhitePlayer(){
         cout << "Best Move: " << bestMove << endl;
 
         // Update list of moves with the best move
+        position += " " + bestMove;
         listMove += " " + bestMove;
         //a function to conver best move to be updated on your board
         engine.clearFiles();
 
 
         //Now update the board with stockfish move
-        charOldX = bestMove[0];
-        charOldY = bestMove[1];
-        charNewX = bestMove[2];
-        charNewY = bestMove[3];
+        if(bestMove.size() == 4){
+            charOldX = bestMove[0];
+            charOldY = bestMove[1];
+            charNewX = bestMove[2];
+            charNewY = bestMove[3];
+            newPiece = ' ';
+        }
+        else if(bestMove.size() == 5){
+            charOldX = bestMove[0];
+            charOldY = bestMove[1];
+            charNewX = bestMove[2];
+            charNewY = bestMove[3];
+            newPiece = bestMove[4];
+        }
 
         oldX = convertToInt(charOldX);
         newX = convertToInt(charNewX);
@@ -1971,13 +1932,6 @@ void Board::playGamePVAIWhitePlayer(){
         printBoard();
         cout << "Updated moves after stockfish: " << listMove << endl;
     }
-
-    if(whiteWin) {
-        cout << "WHITE WINS" << endl << endl;
-    }
-    else if(blackWin) {
-        cout << "BLACK WINS" << endl << endl;
-    }
 }
 
 void Board::playGamePVAIBlackPlayer() {
@@ -1986,26 +1940,24 @@ void Board::playGamePVAIBlackPlayer() {
     whiteMoves = 0;
     blackMoves = 0;
     listMove = "";
-    while(!checkmate(kw) || !checkmate(kb)){
+    string position = "position startpos moves";
+    char charOldX;
+    char charOldY;
+    char charNewX;
+    char charNewY;
+    char newPiece;
+
+    int oldX;
+    int newX;
+    int oldY;
+    int newY;
+    
+    while(!checkmate(position)){
         engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
-        
-        string position = "position startpos moves";
-        position += listMove;
-
-        char charOldX;
-        char charOldY;
-        char charNewX;
-        char charNewY;
-        char newPiece;
-
-        int oldX;
-        int newX;
-        int oldY;
-        int newY;
 
         bool madeMove = false;
 
-        //AI move first 
+        //AI MOVE FIRST 
         cout << "Your Move: ";
         cout << playerMove << endl;
 
@@ -2027,31 +1979,32 @@ void Board::playGamePVAIBlackPlayer() {
         cout << "Best Move: " << bestMove << endl;
 
         // Update list of moves with the best move
+        position += " " + bestMove;
         listMove += " " + bestMove;
         //a function to conver best move to be updated on your board
         engine.clearFiles();
 
-
         //Now update the board with stockfish move
-        if(playerMove.size() == 4){
-            charOldX = playerMove[0];
-            charOldY = playerMove[1];
-            charNewX = playerMove[2];
-            charNewY = playerMove[3];
+        if(bestMove.size() == 4){
+            charOldX = bestMove[0];
+            charOldY = bestMove[1];
+            charNewX = bestMove[2];
+            charNewY = bestMove[3];
             newPiece = ' ';
         }
-        else if(playerMove.size() == 5){
-            charOldX = playerMove[0];
-            charOldY = playerMove[1];
-            charNewX = playerMove[2];
-            charNewY = playerMove[3];
-            newPiece = playerMove[4];
+        else if(bestMove.size() == 5){
+            charOldX = bestMove[0];
+            charOldY = bestMove[1];
+            charNewX = bestMove[2];
+            charNewY = bestMove[3];
+            newPiece = bestMove[4];
         }
 
         oldX = convertToInt(charOldX);
         newX = convertToInt(charNewX);
         oldY = convertToInt(charOldY);
         newY = convertToInt(charNewY);
+
         if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
             swap(oldX, oldY, newX, newY);
         }
@@ -2062,116 +2015,68 @@ void Board::playGamePVAIBlackPlayer() {
         printBoard();
         cout << "Updated moves after stockfish: " << listMove << endl;
 
-        if(whiteMoves == blackMoves){
-            cout << "White move: " << endl;
-            while(!madeMove){
-                cout << "Input Move(White): ";
-                cin >> playerMove;
 
+
+        //PLAYER MOVE
+        cout << "Black move: " << endl;
+        while(!madeMove){
+            cout << "Input Move(Black): ";
+            cin >> playerMove;
+
+            if(playerMove.size() == 4){
                 charOldX = playerMove[0];
                 charOldY = playerMove[1];
                 charNewX = playerMove[2];
                 charNewY = playerMove[3];
+                newPiece = ' ';
+            }
+            else if(playerMove.size() == 5){
+                charOldX = playerMove[0];
+                charOldY = playerMove[1];
+                charNewX = playerMove[2];
+                charNewY = playerMove[3];
+                newPiece = playerMove[4];
+            }
 
-                oldX = convertToInt(charOldX);
-                newX = convertToInt(charNewX);
-                oldY = convertToInt(charOldY);
-                newY = convertToInt(charNewY);
+            oldX = convertToInt(charOldX);
+            newX = convertToInt(charNewX);
+            oldY = convertToInt(charOldY);
+            newY = convertToInt(charNewY);
 
-                if((board[oldY][oldX]->getID() != "empty") && (board[oldY][oldX]->white())){
-                    if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
-                        if(board[oldY][oldX]->getID() == "empty"){
-                            madeMove = true;
-                            whiteMoves++;
+            if((board[oldY][oldX]->getID() != "empty") && (!board[oldY][oldX]->white())){
+                if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
+                    if(board[oldY][oldX]->getID() == "empty"){
+                        madeMove = true;
+                        whiteMoves++;
+                    }
+                    else{
+                        swap(oldX, oldY, newX, newY);
+                        if(isCheck(kb)){
+                            swap(newX, newY, oldX, oldY);
+                            cout << "King is in check, try again" << endl;
                         }
                         else{
-                            swap(oldX, oldY, newX, newY);
-                            if(isCheck(kw)){
-                                swap(newX, newY, oldX, oldY);
-                                cout << "King is still in check, try again" << endl;
+                            if(board[newY][newX]->getID() == "pawn" && newY == 1){
+                                promote(board[newY][newX], newPiece);
                             }
-                            else{
-                                if(board[newY][newX]->getID() == "pawn" && newY == 8){
-                                    promote(board[newY][newX], newPiece);
-                                }
-                                madeMove = true;
-                                whiteMoves++;
-                            }
+                            madeMove = true;
+                            blackMoves++;
                         }
-                    }
-
-                    else{
-                        cout << "Invalid move, try again" << endl;
                     }
                 }
                 else{
-                    cout << "Invalid move, try again" << endl;
+                    cout << "Invalid move, try again bruh" << endl;
                 }
             }
+            else{
+                cout << "Invalid move, try again wtf" << endl;
+            } 
         }
-        else{
-            cout << "Black move: " << endl;
-            while(!madeMove){
-                cout << "Input Move(Black): ";
-                cin >> playerMove;
-
-                if(playerMove.size() == 4){
-                    charOldX = playerMove[0];
-                    charOldY = playerMove[1];
-                    charNewX = playerMove[2];
-                    charNewY = playerMove[3];
-                    newPiece = ' ';
-                }
-                else if(playerMove.size() == 5){
-                    charOldX = playerMove[0];
-                    charOldY = playerMove[1];
-                    charNewX = playerMove[2];
-                    charNewY = playerMove[3];
-                    newPiece = playerMove[4];
-                }
-
-                oldX = convertToInt(charOldX);
-                newX = convertToInt(charNewX);
-                oldY = convertToInt(charOldY);
-                newY = convertToInt(charNewY);
-
-                if((board[oldY][oldX]->getID() != "empty") && (!board[oldY][oldX]->white())){
-                    if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
-                        if(board[oldY][oldX]->getID() == "empty"){
-                            madeMove = true;
-                            whiteMoves++;
-                        }
-                        else{
-                            swap(oldX, oldY, newX, newY);
-                            if(isCheck(kb)){
-                                swap(newX, newY, oldX, oldY);
-                                cout << "King is in check, try again" << endl;
-                            }
-                            else{
-                                if(board[newY][newX]->getID() == "pawn" && newY == 1){
-                                    promote(board[newY][newX], newPiece);
-                                }
-                                madeMove = true;
-                                blackMoves++;
-                            }
-                        }
-                    }
-                    else{
-                        cout << "Invalid move, try again bruh" << endl;
-                    }
-                }
-                else{
-                    cout << "Invalid move, try again wtf" << endl;
-                }
-            }
-        }
-    }
-
-    if(whiteWin) {
-        cout << "WHITE WINS" << endl << endl;
-    }
-    else if(blackWin) {
-        cout << "BLACK WINS" << endl << endl;
+        cout << "Your Move: ";
+        cout << playerMove << endl;
+        position += " " + playerMove;
+        listMove += " " + playerMove;
+        cout << "List of current moves: " << listMove << endl;
     }
 }
 
@@ -2196,8 +2101,8 @@ void Board::playGameAIVAI() {
         engine.sendCommand(position);
 
         //Set depth to tell stockfish how far to search(the lower the depth, the lower the difficulty)
-        engine.sendCommand("go depth 20");
-        //engine.sendCommand("go movetime 200");
+        engine.sendCommand("go depth 30");
+        engine.sendCommand("go movetime 10000");
 
         // Retrieve the best move
         bestMove = engine.getBestMove();
@@ -2208,21 +2113,25 @@ void Board::playGameAIVAI() {
         listMove += " " + bestMove;
         cout << "Current Moves: " << position << endl;
         engine.clearFiles();
+
+        if(bestMove == "(none)") {
+            break;
+        }
         
         //Now update the board with stockfish move
-        if(playerMove.size() == 4){
-            charOldX = playerMove[0];
-            charOldY = playerMove[1];
-            charNewX = playerMove[2];
-            charNewY = playerMove[3];
+        if(bestMove.size() == 4){
+            charOldX = bestMove[0];
+            charOldY = bestMove[1];
+            charNewX = bestMove[2];
+            charNewY = bestMove[3];
             newPiece = ' ';
         }
-        else if(playerMove.size() == 5){
-            charOldX = playerMove[0];
-            charOldY = playerMove[1];
-            charNewX = playerMove[2];
-            charNewY = playerMove[3];
-            newPiece = playerMove[4];
+        else if(bestMove.size() == 5){
+            charOldX = bestMove[0];
+            charOldY = bestMove[1];
+            charNewX = bestMove[2];
+            charNewY = bestMove[3];
+            newPiece = bestMove[4];
         }
 
         oldX = convertToInt(charOldX);
@@ -2239,12 +2148,5 @@ void Board::playGameAIVAI() {
       
         printBoard();
         cout << "Updated moves after stockfish: " << listMove << endl;
-    }
-
-    if(whiteWin) {
-        cout << "WHITE WINS" << endl << endl;
-    }
-    else if(blackWin) {
-        cout << "BLACK WINS" << endl << endl;
     }
 }
