@@ -14,6 +14,7 @@
 #include "inputs.h"
 #include "Board.h"
 #include <QTimer>
+#include <QStateMachine>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -48,33 +49,33 @@ private slots:
 
     void clearTableWidget();
 
-    void on_pushButton_home_about_clicked();
+    // void on_pushButton_home_about_clicked();
 
-    void on_pushButton_home_end_clicked();
+    // void on_pushButton_home_end_clicked();
 
-    void on_pushButton_start_clicked();
+    // void on_pushButton_start_clicked();
 
-    void on_pushButton_tutorial_clicked();
+    // void on_pushButton_tutorial_clicked();
 
-    void on_pushButton_settings_clicked();
+    // void on_pushButton_settings_clicked();
 
-    void on_pushButton_about_clicked();
+    // void on_pushButton_about_clicked();
 
-    void on_pushButton_home_settings_clicked();
+    // void on_pushButton_home_settings_clicked();
 
-    void on_pushButton_continue_tutorial_clicked();
+    // void on_pushButton_continue_tutorial_clicked();
 
-    void on_pushButton_home_tutorial_clicked();
+    // void on_pushButton_home_tutorial_clicked();
 
-    void on_pushButton_home_tutorial_end_clicked();
+    // void on_pushButton_home_tutorial_end_clicked();
 
-    void on_pushButton_previous_tutorial_clicked();
+    // void on_pushButton_previous_tutorial_clicked();
 
     void on_pushButton_home1_clicked();
 
-    void on_pushButton_home2_clicked();
+    // void on_pushButton_home2_clicked();
 
-    void on_pushButton_EndGame_clicked();
+    // void on_pushButton_EndGame_clicked();
 
     void on_easyLevel_clicked();
 
@@ -88,7 +89,7 @@ private slots:
 
     void on_touchCommand_clicked();
 
-    void on_pushButton_back_settings_clicked();
+    // void on_pushButton_back_settings_clicked();
 
     void on_randomGeneratorButton_clicked();
 
@@ -136,6 +137,7 @@ private:
     void placePieceOnTile(const QString& position, const QString& pieceType, const QString& color);
     bool isValidMove(const QString& pieceType, const QString& from, const QString& to);
 
+    QStateMachine *machine;
 };
 
 #endif // MAINWINDOW_H
