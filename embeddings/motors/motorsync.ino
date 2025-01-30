@@ -26,11 +26,11 @@ void step(int motorStep, int steps, int delayTime){
 
 void vertical_mvmt(int num_steps, bool direction) {
   digitalWrite(motorY, direction);
-  step(motorY, num_steps, 10);
+  step(motorY, num_steps, 100);
 }
 
 void horizontal_mvmt(int num_steps, bool direction) {
-  // might need to change motor direction depedning on setup
+  // might need to change motor direction depending on setup
   digitalWrite(motorX1, direction);
   digitalWrite(motorX2, !direction);
   for(int i = 0; i < num_steps; i++) {
@@ -39,6 +39,7 @@ void horizontal_mvmt(int num_steps, bool direction) {
   }
 }
 
+
 void diagonal_mvmt(int num_Xsteps, int num_Ysteps, bool x_direction, bool y_direction) {
   int half_box_steps = 50; // will need to change once we know actual dimensions of board
   digitalWrite(motorX1, x_direction);
@@ -46,11 +47,12 @@ void diagonal_mvmt(int num_Xsteps, int num_Ysteps, bool x_direction, bool y_dire
   digitalWrite(motorY, y_direction);
 
   horizontal_mvmt(half_box_steps, x_direction);
-  vertical_mvmt(num_Ysteps, y_direction);
+  vertical_mvmt(num_Ysteps - half_box_steps, y_direction);
   horizontal_mvmt(num_Xsteps - half_box_steps, x_direction);
+  vertical_mvmt(half_box_steps, y_direction);
 }
 
-// TO-DO: need to implement castle move 
+// TO-DO: need to implement castle move and captured piece mvmt
 
 int calc_num_steps(int start_pos, int end_pos) {
   return abs(end_pos - start_pos);
@@ -87,14 +89,14 @@ void move_piece(int start_x_pos, int start_y_pos, int end_x_pos, int end_y_pos) 
     diagonal_mvmt(x_steps, y_steps, x_dir, y_dir);
   }
 
-  // Serial.print("Piece moved from ");
-  // Serial.print(start_x_pos);
-  // Serial.print(",");
-  // Serial.print(start_y_pos);
-  // Serial.print(" to ");
-  // Serial.print(end_x_pos);
-  // Serial.print(",");
-  // Serial.println(end_y_pos);
+  Serial.print("Piece moved from ");
+  Serial.print(start_x_pos);
+  Serial.print(",");
+  Serial.print(start_y_pos);
+  Serial.print(" to ");
+  Serial.print(end_x_pos);
+  Serial.print(",");
+  Serial.println(end_y_pos);
 }
 
 void setup(){
@@ -157,8 +159,10 @@ void loop(){
     curr_x_pos = end_x_pos;
     curr_y_pos = end_y_pos;
 
-    //Serial.println("Movement done");
+    Serial.println("Movement done");
   }
+
+
 
   ///// TESTING MVMT FUNCTIONS ///// 
 
