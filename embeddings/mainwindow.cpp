@@ -13,8 +13,6 @@
 #include "mainwindow.h"
 #include "home.h"
 
-// NEED TO CLEAR PREVIOUS GAME TRACE AFTER GAME ENDS //
-
 using namespace std;
 
 MainWindow::MainWindow(QWidget *parent)
@@ -137,9 +135,6 @@ void MainWindow::clearTableWidget()
 void MainWindow::on_pushButton_home_about_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
-    setupBoard();
-    setupInitialPositions();
-    clearTableWidget();
 }
 
 // Start Page
@@ -220,8 +215,25 @@ void MainWindow::on_pushButton_EndGame_clicked()
     ui->stackedWidget->setCurrentIndex(8);
 }
 
+void MainWindow::clearButton(QPushButton *button, bool isWhiteTile) {
+    button->setIcon(QIcon());
+}
+
 void MainWindow::setupBoard()
 {
+    for (char col = 'A'; col <= 'H'; ++col) {
+        for (int row = 1; row <= 8; ++row) {
+            QString position = QString(col) + QString::number(row);
+            QString buttonName = "pushButton_" + position;
+            QPushButton* button = findChild<QPushButton*>(buttonName);
+            pieces.clear();
+            bool isWhiteTile = ((col - 'A') + row) % 2 == 0;
+            clearButton(button, isWhiteTile);
+        }
+    }
+    // Clear the internal map
+    boardMap.clear();
+
     // Map each push button to its chessboard position
     for (char col = 'A'; col <= 'H'; ++col) {
         for (int row = 1; row <= 8; ++row) {
@@ -239,23 +251,19 @@ void MainWindow::setupBoard()
                 button->setStyleSheet(QString(
                                           "QPushButton { background-color: %1; border: none; }"
                                           ).arg(backgroundColor));
-
-                connect(button, &QPushButton::clicked, this, &MainWindow::onTileClicked);
+                if (count == 0) {
+                    connect(button, &QPushButton::clicked, this, &MainWindow::onTileClicked);
+                }
             }
         }
     }
+    count = 1;
 }
 
 
 // Add chess pieces to their starting positions
 void MainWindow::setupInitialPositions()
 {
-    // ui->stackedWidget->setCurrentIndex(5);
-    // QLabel *background = new QLabel(this);
-    // background->setAlignment(Qt::AlignTop | Qt:: AlignRight);
-    // background->setGeometry(QRect(15, 20, 300, 320));
-    // background->setStyleSheet("background-image:/images/images/chessBoardBackground");
-    // Add white pieces
     pieces.append(ChessPiece("rook", "white", "A1"));
     pieces.append(ChessPiece("knight", "white", "B1"));
     pieces.append(ChessPiece("bishop", "white", "C1"));
@@ -382,7 +390,24 @@ bool MainWindow::isValidMove(const QString& pieceType, const QString& from, cons
 void MainWindow::on_pushButton_home_end_clicked()
 {
     ui->stackedWidget->setCurrentIndex(0);
+    game.resetBoard();
+    // clearBoard();
+    setupBoard();
+    size = 0;
+    capacity = 10;
+    mwSettings = new Settings();
+    whiteChoice = new Home();
+    blackChoice = new Home();
+    tableWidget = ui->RoundTurnTable;
+    srand(time(0));
+    wCheck = false;
+    bCheck = false;
+    co = 0;
+    end_status = 2;
+    timer_white = 0;
+    timer_black = 0;
     setupInitialPositions();
+    clearTableWidget();
 }
 
 // Tutorial

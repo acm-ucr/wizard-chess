@@ -145,11 +145,14 @@ private:
     int capacity = 10;
     int size = 0;
     int turn;
+    int count = 0;
 
     void setupBoard();
     void setupInitialPositions();
     void placePieceOnTile(const QString& position, const QString& pieceType, const QString& color);
     bool isValidMove(const QString& pieceType, const QString& from, const QString& to);
+    // void clearBoard();
+    void clearButton(QPushButton *button, bool isWhiteTile);
 
 
 };
