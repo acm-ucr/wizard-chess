@@ -3,7 +3,9 @@
 
 int counter = 0;
 
-Pawn::Pawn() : Piece(){}
+Pawn::Pawn() : Piece(){
+
+}
 
 Pawn::Pawn(int xPos, int yPos, bool color) : Piece(xPos, yPos, color){
   
@@ -18,11 +20,11 @@ bool Pawn::isEmpty(){
 }*/
 
 void Pawn::movePiece(int xM, int yM){
-    if(this->isValid(xM, yM)){
+    //if(this->isValid(xM, yM)){
         this->setPositionX(this->getPositionX() + xM);
-        this->setPositionY(this->getPositionX() + yM);
-        counter++;
-    }
+        this->setPositionY(this->getPositionY() + yM);
+        //pawnCounter++;
+    //}
 }
 
 bool Pawn::isValid(int xT, int yT){
@@ -33,7 +35,7 @@ bool Pawn::isValid(int xT, int yT){
                 return false;
             }
 
-            if(counter == 0){
+            if(pawnCounter == 0){
                if(yT == 1 || yT == 2){
                     return true;
                 }

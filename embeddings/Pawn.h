@@ -8,7 +8,6 @@ class Pawn : public Piece {
             void movePiece(int x, int y) override;
             bool isValid(int xT, int yT);
 
-
             string getID() const override {
                 return "pawn";
             }
@@ -17,4 +16,7 @@ class Pawn : public Piece {
             }
 
             bool isPromote(int y);
+        
+        private:
+            int pawnCounter;
 };
