@@ -117,6 +117,12 @@ private slots:
 
     void finalBlackTime(int timer_black);
 
+    void on_pvpButton_clicked();
+
+    void on_pvaButton_clicked();
+
+    void on_avaButton_clicked();
+
 private:
     Ui::MainWindow *ui;
     Settings *mwSettings;
@@ -151,7 +157,6 @@ private:
     void setupInitialPositions();
     void placePieceOnTile(const QString& position, const QString& pieceType, const QString& color);
     bool isValidMove(const QString& pieceType, const QString& from, const QString& to);
-    // void clearBoard();
     void clearButton(QPushButton *button, bool isWhiteTile);
 
 

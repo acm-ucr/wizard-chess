@@ -539,3 +539,18 @@ void MainWindow::finalBlackTime(int timer_black)
     result = strMinutes + ":" + strSeconds;
     ui->house_2_time->setText(result);
 }
+
+void MainWindow::on_pvpButton_clicked()
+{
+    mwSettings->commandType = true;
+}
+
+void MainWindow::on_pvaButton_clicked()
+{
+    mwSettings->commandType = false;
+}
+
+void MainWindow::on_avaButton_clicked()
+{
+    mwSettings->commandType = false;
+}

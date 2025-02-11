@@ -68,7 +68,7 @@ rgb(0, 0, 0)
 }</string>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>6</number>
     </property>
     <widget class="QWidget" name="Start">
      <property name="autoFillBackground">
@@ -3184,7 +3184,7 @@ font: 20pt &quot;Sitka&quot;;</string>
       <property name="geometry">
        <rect>
         <x>690</x>
-        <y>390</y>
+        <y>420</y>
         <width>83</width>
         <height>29</height>
        </rect>
@@ -3200,10 +3200,10 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
      <widget class="QGroupBox" name="groupBox">
       <property name="geometry">
        <rect>
-        <x>460</x>
-        <y>90</y>
+        <x>450</x>
+        <y>10</y>
         <width>311</width>
-        <height>281</height>
+        <height>161</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -3217,7 +3217,7 @@ font: 15pt &quot;Times New Roman&quot;;</string>
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>90</y>
+         <y>50</y>
          <width>301</width>
          <height>26</height>
         </rect>
@@ -3238,7 +3238,7 @@ font: 15pt &quot;Times New Roman&quot;;
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>180</y>
+         <y>120</y>
          <width>211</width>
          <height>26</height>
         </rect>
@@ -3348,8 +3348,8 @@ font: 15pt &quot;Times New Roman&quot;;
      <widget class="QPushButton" name="pushButton_back_settings">
       <property name="geometry">
        <rect>
-        <x>460</x>
-        <y>390</y>
+        <x>450</x>
+        <y>420</y>
         <width>83</width>
         <height>29</height>
        </rect>
@@ -3361,6 +3361,80 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
       <property name="text">
        <string>BACK</string>
       </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>180</y>
+        <width>311</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 0, 0);
+font: 15pt &quot;Times New Roman&quot;;</string>
+      </property>
+      <property name="title">
+       <string>Game Mode</string>
+      </property>
+      <widget class="QRadioButton" name="pvpButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>291</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 0, 0);
+font: 15pt &quot;Times New Roman&quot;;
+</string>
+       </property>
+       <property name="text">
+        <string>Player vs. Player (Default)</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="pvaButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>110</y>
+         <width>291</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 0, 0);
+font: 15pt &quot;Times New Roman&quot;;
+</string>
+       </property>
+       <property name="text">
+        <string>Player vs. AI</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="avaButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>180</y>
+         <width>291</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 0, 0);
+font: 15pt &quot;Times New Roman&quot;;
+</string>
+       </property>
+       <property name="text">
+        <string>AI vs. AI</string>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="About">
