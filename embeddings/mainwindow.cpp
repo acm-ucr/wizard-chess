@@ -13,57 +13,9 @@
 #include <QtStateMachine>
 #include "mainwindow.h"
 #include "home.h"
+#include "ConditionalTransition.h"
 
 using namespace std;
-
-// // Initializing states
-// QStateMachine machine;
-// QState *homeState = new QState();
-// QState *settingsState = new QState();
-// QState *tutorial1State = new QState();
-// QState *tutorial2State = new QState();
-// QState *houseState = new QState();
-// QState *gameState = new QState();
-// QState *endState = new QState();
-
-// // Defining state transitions
-// homeState->addTransition(pushButton_start, &QPushButton::clicked, houseState);
-// homeState->addTransition(pushButton_tutorial, &QPushButton::clicked, tutorialState);
-// homeState->addTransition(pushButton_settings, &QPushButton::clicked, settingsState);
-// homeState->addTransition(pushButton_about, &QPushButton::clicked, aboutState);
-
-// settingsState->addTransition(pushButton_home_settings, &QPushButton::clicked, homeState);
-
-// aboutState->addTransition(pushButton_home_about, &QPushButton::clicked, homeState);
-
-// tutorial1State->addTransition(pushButton_home_tutorial, &QPushButton::clicked, homeState);
-// tutorial1State->addTransition(pushButton_continue_tutorial, &QPushButton::clicked, tutorial2State);
-// tutorial2State->addTransition(pushButton_home_tutorial_end, &QPushButton::clicked, homeState);
-// tutorial2State->addTransition(pushButton_previous_tutorial, &QPushButton::clicked, tutorial2State);
-
-
-// // Defining state events
-// homeState->assignProperty(ui->stackedWidget, "currentIndex", 0);
-// settingsState->assignProperty(ui->stackedWidget, "currentIndex", 6);
-// tutorial1State->assignProperty(ui->stackedWidget, "currentIndex", 3);
-// tutorial2State->assignProperty(ui->stackedWidget, "currentIndex", 4);
-// houseState->assignProperty(ui->stackedWidget, "currentIndex", 1);
-// gameState->assignProperty(ui->stackedWidget, "currentIndex", 5);
-// endState->assignProperty(ui->stackedWidget, "currentIndex", 8);
-// aboutState->assignProperty(ui->stackedWidget, "currentIndex", 7);
-
-// // Add States to machine
-// machine->addState(homeState);
-// machine->addState(settingsState);
-// machine->addState(tutorial1State);
-// machine->addState(tutorial2State);
-// machine->addState(houseState);
-// machine->addState(gameState);
-// machine->addState(endState);
-// machine->addState(aboutState);
-
-// machine->setInitialState(homeState);
-
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -89,63 +41,74 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Initializing states
     machine = new QStateMachine(this);
-    QState *homeState = new QState();
+    QState *initState = new QState();
     QState *settingsState = new QState();
     QState *aboutState = new QState();
     QState *tutorial1State = new QState();
     QState *tutorial2State = new QState();
     QState *houseState = new QState();
-    QState *gameState = new QState();
+
+    QState *newTurn = new QState();
+    QState *checkInputType = new QState();
+    QState *touchInput = new QState();
+    QState *voiceInput = new QState();
+    QState *turnExecution = new QState();
+    QState *physicalUpdate = new QState();
+    QState *screenUpdate = new QState();
+    QState *checkEnd = new QState();
+
     QState *endState = new QState();
 
     // Defining state transitions
-    homeState->addTransition(ui->pushButton_start, &QPushButton::clicked, houseState);
-    homeState->addTransition(ui->pushButton_tutorial, &QPushButton::clicked, tutorial1State);
-    homeState->addTransition(ui->pushButton_settings, &QPushButton::clicked, settingsState);
-    homeState->addTransition(ui->pushButton_about, &QPushButton::clicked, aboutState);
+    initState->addTransition(ui->pushButton_start, &QPushButton::clicked, houseState);
+    initState->addTransition(ui->pushButton_tutorial, &QPushButton::clicked, tutorial1State);
+    initState->addTransition(ui->pushButton_settings, &QPushButton::clicked, settingsState);
+    initState->addTransition(ui->pushButton_about, &QPushButton::clicked, aboutState);
 
-    settingsState->addTransition(ui->pushButton_home_settings, &QPushButton::clicked, homeState);
+    settingsState->addTransition(ui->pushButton_home_settings, &QPushButton::clicked, initState);
 
-    aboutState->addTransition(ui->pushButton_home_about, &QPushButton::clicked, homeState);
+    aboutState->addTransition(ui->pushButton_home_about, &QPushButton::clicked, initState);
 
-    tutorial1State->addTransition(ui->pushButton_home_tutorial, &QPushButton::clicked, homeState);
+    tutorial1State->addTransition(ui->pushButton_home_tutorial, &QPushButton::clicked, initState);
     tutorial1State->addTransition(ui->pushButton_continue_tutorial, &QPushButton::clicked, tutorial2State);
-    tutorial2State->addTransition(ui->pushButton_home_tutorial_end, &QPushButton::clicked, homeState);
+    tutorial2State->addTransition(ui->pushButton_home_tutorial_end, &QPushButton::clicked, initState);
     tutorial2State->addTransition(ui->pushButton_previous_tutorial, &QPushButton::clicked, tutorial1State);
 
-    houseState->addTransition(ui->pushButton_home2, &QPushButton::clicked, gameState);
+    houseState->addTransition(ui->pushButton_home2, &QPushButton::clicked, newTurn);
+
+    // ConditionalTransition *takeBotTurn = new ConditionalTransition(this, SIGNAL(mySignal()), &co, 0,
 
 
-    QSignalTransition* endTransition = gameState->addTransition(ui->pushButton_EndGame, &QPushButton::clicked, endState);
+    QSignalTransition* endTransition = newTurn->addTransition(ui->pushButton_EndGame, &QPushButton::clicked, endState);
     connect(endTransition, &QAbstractTransition::triggered, this, [=](){
         change_endgame_status();
     });
 
-    endState->addTransition(ui->pushButton_home_end, &QPushButton::clicked, homeState);
+    endState->addTransition(ui->pushButton_home_end, &QPushButton::clicked, initState);
 
     // Defining state events
-    homeState->assignProperty(ui->stackedWidget, "currentIndex", 0);
+    initState->assignProperty(ui->stackedWidget, "currentIndex", 0);
     settingsState->assignProperty(ui->stackedWidget, "currentIndex", 6);
     aboutState->assignProperty(ui->stackedWidget, "currentIndex", 7);
     tutorial1State->assignProperty(ui->stackedWidget, "currentIndex", 3);
     tutorial2State->assignProperty(ui->stackedWidget, "currentIndex", 4);
     houseState->assignProperty(ui->stackedWidget, "currentIndex", 1);
-    gameState->assignProperty(ui->stackedWidget, "currentIndex", 5);
+    newTurnState->assignProperty(ui->stackedWidget, "currentIndex", 5);
     endState->assignProperty(ui->stackedWidget, "currentIndex", 8);
 
 
     // Add States to machine
-    machine->addState(homeState);
+    machine->addState(initState);
     machine->addState(settingsState);
     machine->addState(aboutState);
     machine->addState(tutorial1State);
     machine->addState(tutorial2State);
     machine->addState(houseState);
-    machine->addState(gameState);
+    machine->addState(newTurnState);
     machine->addState(endState);
 
 
-    machine->setInitialState(homeState);
+    machine->setInitialState(initState);
     machine->start();
 
 }
