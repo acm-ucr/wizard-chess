@@ -18,7 +18,8 @@ SOURCES += \
     King.cpp \
     Rook.cpp \
     Board.cpp \
-    EmptyPiece.cpp
+    EmptyPiece.cpp \
+    stockfish.cpp \
 
 HEADERS += \
     home.h \
@@ -33,7 +34,8 @@ HEADERS += \
     King.h \
     Rook.h \
     EmptyPiece.h \
-    Board.h
+    Board.h \
+    stockfish.h \
 
 FORMS += \
     mainwindow.ui

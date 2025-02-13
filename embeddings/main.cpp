@@ -16,9 +16,20 @@
 // }
 
 #include "Board.h"
+#include <QTextStream>
+#include <QCoreApplication>
 using namespace std;
 
 int main() {
+    // QApplication a(argc, argv);
+    // MainWindow w;
+    // w.show();
+
+    // inputs input;
+
+    // return a.exec();
+    QTextStream cout(stdout);
+    QTextStream cin(stdin);
     Board b;
     b.playMenu();
     if(b.isCheck()){
