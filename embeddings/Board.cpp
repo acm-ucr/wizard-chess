@@ -1,4 +1,8 @@
 #include <iostream>
+#include <fstream>
+#include <string>
+#include <algorithm>
+
 #include "Board.h"
 #include "Piece.h"
 #include "Piece.h"
@@ -1435,7 +1439,6 @@ bool Board::isCheck(King *k){
         if(k->getPositionX() > 0 && k->getPositionY() < 7){
             if(board[k->getPositionY() + 1][k->getPositionX() - 1]->getID() == "pawn"){
                 if(isOppositeColor(k, board[k->getPositionY() + 1][k->getPositionX() - 1])){
-                    //cout << 'j' << endl;
                     return true;
                 }
             }
@@ -1443,10 +1446,6 @@ bool Board::isCheck(King *k){
         if(k->getPositionX() < 7 && k->getPositionY() > 0){
             if(board[k->getPositionY() - 1][k->getPositionX() + 1]->getID() == "pawn"){
                 if(isOppositeColor(k, board[k->getPositionY() - 1][k->getPositionX() + 1])){
-                    // cout << 'k' << endl;
-                    // cout << k->white() << ", " << board[k->getPositionY() - 1][k->getPositionX() + 1]->white() << endl;
-                    // cout << k->getPositionX() << ", " << k->getPositionY() << endl;
-                    // cout << board[k->getPositionY() - 1][k->getPositionX() + 1]->getID() << endl;
                     return true;
                 }
             }
@@ -1454,7 +1453,6 @@ bool Board::isCheck(King *k){
         if(k->getPositionX() > 0 && k->getPositionY() > 0){
             if(board[k->getPositionY() - 1][k->getPositionX() - 1]->getID() == "pawn"){
                 if(isOppositeColor(k, board[k->getPositionY() - 1][k->getPositionX() - 1])){
-                    //cout << 'l' << endl;
                     return true;
                 }
             }
@@ -1642,6 +1640,12 @@ void Board::playMenu() {
 }
 
 void Board::playGamePVP() {
+    ifstream fin;
+
+    // if(!fin.is_open()){
+    //     throw runtime_error("bruh");
+    // }
+
     printBoard();
     listMove = "";
     whiteMoves = 0;
@@ -1651,6 +1655,8 @@ void Board::playGamePVP() {
     char charNewX;
     char charNewY;
     char newPiece;
+    char whitespace;
+    char piece;
 
     int oldX;
     int newX;
@@ -1660,26 +1666,53 @@ void Board::playGamePVP() {
     string position = "position startpos moves";
 
     while(!checkmate(position)){
+        string getLastInput;
         bool madeMove = false;
         if(whiteMoves == blackMoves){
+            bool newMove = false;
             cout << "White move: " << endl;
             while(!madeMove){
                 cout << "Input Move(White): ";
-                cin >> playerMove;
-
-                if(playerMove.size() == 4){
-                    charOldX = playerMove[0];
-                    charOldY = playerMove[1];
-                    charNewX = playerMove[2];
-                    charNewY = playerMove[3];
+                while(!newMove){
+                    fin.open("test.txt", ios::ate);
+                    if(!fin.is_open()){
+                        throw runtime_error("bruh");
+                    }
+                    for(streampos pos = fin.tellg() - 1; pos > 0; pos -= 1){
+                        fin.seekg(pos);
+                        charOldX = fin.get();
+                        if(charOldX == '$'){
+                            break;
+                        }
+                        //lastLine.push_back(charOldX);
+                    }
+                    //reverse(lastLine.begin(), lastLine.end());
+                    //fin.ignore();
+                    getline(fin, getLastInput);
+                    if(playerMove != getLastInput){
+                        playerMove = getLastInput;
+                        newMove = true;
+                    }
+                    fin.close();
+                }
+                cout << playerMove  << "lmaooooo" << endl;
+                if(playerMove.size() == 6){
+                    piece = playerMove[0];
+                    whitespace = playerMove[1];
+                    charOldX = playerMove[2];
+                    charOldY = playerMove[3];
+                    charNewX = playerMove[4];
+                    charNewY = playerMove[5];
                     newPiece = ' ';
                 }
-                else if(playerMove.size() == 5){
-                    charOldX = playerMove[0];
-                    charOldY = playerMove[1];
-                    charNewX = playerMove[2];
-                    charNewY = playerMove[3];
-                    newPiece = playerMove[4];
+                else if(playerMove.size() == 7){
+                    piece = playerMove[0];
+                    whitespace = playerMove[1];
+                    charOldX = playerMove[2];
+                    charOldY = playerMove[3];
+                    charNewX = playerMove[4];
+                    charNewY = playerMove[5];
+                    newPiece = playerMove[6];
                 }
 
                 oldX = convertToInt(charOldX);
@@ -1721,24 +1754,56 @@ void Board::playGamePVP() {
             cout << playerMove << endl;
         }
         else{
+            bool newMove = false;
             cout << "Black move: " << endl;
             while(!madeMove){
                 cout << "Input Move(Black): ";
-                cin >> playerMove;
+                while(!newMove){
+                    fin.open("test.txt", ios::ate);
+                    if(!fin.is_open()){
+                        throw runtime_error("bruh");
+                    }
+                    for(streampos pos = fin.tellg() - 1; pos > 0; pos -= 1){
+                        fin.seekg(pos);
+                        charOldX = fin.get();
+                        if(charOldX == '$'){
+                            break;
+                        }
+                        //lastLine.push_back(charOldX);
+                    }
+                    //reverse(lastLine.begin(), lastLine.end());
+                    //fin.ignore();
+                    getline(fin, getLastInput);
+                    if(playerMove != getLastInput){
+                        playerMove = getLastInput;
+                        newMove = true;
+                    }
+                    fin.close();
+                }
+                cout << playerMove << "lmaooooo" << endl;
+                // while(!newMove){
+                //     fin.open("test.txt");
+                    
+                //     fin.close();
+                // }
 
-                if(playerMove.size() == 4){
-                    charOldX = playerMove[0];
-                    charOldY = playerMove[1];
-                    charNewX = playerMove[2];
-                    charNewY = playerMove[3];
+                if(playerMove.size() == 6){
+                    piece = playerMove[0];
+                    whitespace = playerMove[1];
+                    charOldX = playerMove[2];
+                    charOldY = playerMove[3];
+                    charNewX = playerMove[4];
+                    charNewY = playerMove[5];
                     newPiece = ' ';
                 }
-                else if(playerMove.size() == 5){
-                    charOldX = playerMove[0];
-                    charOldY = playerMove[1];
-                    charNewX = playerMove[2];
-                    charNewY = playerMove[3];
-                    newPiece = playerMove[4];
+                else if(playerMove.size() == 7){
+                    piece = playerMove[0];
+                    whitespace = playerMove[1];
+                    charOldX = playerMove[2];
+                    charOldY = playerMove[3];
+                    charNewX = playerMove[4];
+                    charNewY = playerMove[5];
+                    newPiece = playerMove[6];
                 }
 
                 oldX = convertToInt(charOldX);
@@ -1772,7 +1837,8 @@ void Board::playGamePVP() {
                     }
                 }
                 else{
-                    cout << "Invalid move, try again wtf" << endl;
+                    //cout << "Invalid move, try again wtf" << endl;
+                    throw runtime_error("grrr");
                 }
             }
             cout << "Black Move: ";
@@ -1784,7 +1850,6 @@ void Board::playGamePVP() {
         printBoard();
     }
 }
- 
 
 void Board::playGamePVAIWhitePlayer(){
     Stockfish engine(stockfishPath);
