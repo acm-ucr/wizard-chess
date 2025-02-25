@@ -82,7 +82,7 @@ def parsedData(userInput):
       location = location.replace(" ", "") #remove spaces
       
       letter = convertToLetter(piece)
-      res = random_uuid + " " + current_time + "$" + letter + " " + location
+      res = random_uuid + " " + current_time + " " + letter + " " + location
 
       if letter == 'p' and (location[3] == '8' or location[3] == '1'): #checking if piece was pawn and location is at the end of board
          print("Your Pawn is up for promotion!\n")
