@@ -1,7 +1,7 @@
 import speech_recognition as sr
 import re
 import uuid
-from datetime import datetime
+import time
 
 recognizer = sr.Recognizer()
 def listen_for_commands():
@@ -72,9 +72,8 @@ def parsedData(userInput):
    if(len(chess_piece + locations) == 3):
       random_uuid = uuid.uuid4()
       random_uuid = str(random_uuid)
-      current_time = datetime.now()
-      current_time = current_time.strftime("%H:%M:%S")
-      current_time = str(current_time)
+      timestamp_seconds = time.time()
+      current_time = str(timestamp_seconds * 1000)
 
       piece = ' '.join(chess_piece)
       piece = piece.lower()
