@@ -1684,6 +1684,8 @@ void Board::playGamePVP() {
         string getWholeInput;
         string getLastInput;
         bool madeMove = false;
+        string VR_FILENAME = "test.txt";
+        string QT_FILENAME = "qt.txt";
         //bool isPieceTaken = false;
         if(whiteMoves == blackMoves){
             cout << "White move: " << endl;
@@ -1691,33 +1693,27 @@ void Board::playGamePVP() {
                 bool newMove = false;
                 cout << "Input Move(White): ";
                 while(!newMove){
-                    fin.open("test.txt", ios::ate);
+                    fin.open(VR_FILENAME, ios::ate);
                     if(!fin.is_open()){
                         throw runtime_error("bruh");
                     }
-                    for(streampos pos = fin.tellg() - 1; pos > 0; pos -= 1){
+                    for(streampos pos = fin.tellg() - static_cast<streamoff>(1); pos > 0; pos -= 1){
                         fin.seekg(pos);
                         charOldX = fin.get();
                         if(charOldX == ' '){
                             break;
                         }
-                        //lastLine.push_back(charOldX);
                     }
-                    //reverse(lastLine.begin(), lastLine.end());
-                    //fin.ignore();
                     getline(fin, getLastInput);
-                    if(playerMove != getLastInput){
+                    if(playerMove != getLastInput && getLastInput != ""){
                         playerMove = getLastInput;
                         cout << "lololol" << endl;
                         newMove = true;
                     }
                     fin.close();
                 }
-                //cin >> playerMove;
 
                 if(playerMove.size() == 4){
-                    //piece = playerMove[0];
-                    //whitespace = playerMove[1];
                     charOldX = playerMove[0];
                     charOldY = playerMove[1];
                     charNewX = playerMove[2];
@@ -1725,8 +1721,6 @@ void Board::playGamePVP() {
                     newPiece = ' ';
                 }
                 else if(playerMove.size() == 5){
-                    //piece = playerMove[0];
-                    //whitespace = playerMove[1];
                     charOldX = playerMove[0];
                     charOldY = playerMove[1];
                     charNewX = playerMove[2];
@@ -1742,57 +1736,45 @@ void Board::playGamePVP() {
                 if((board[oldY][oldX]->getID() != "empty") && (board[oldY][oldX]->white())){
                     // Checks for move validity
                     if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
-                        // if(board[oldY][oldX]->getID() == "empty"){
-                        //     madeMove = true;
-                        //     whiteMoves++;
-                        // }
-                        // else{
-                        
-                            // pointer to the piece in the new coordinates in case an undo move is needed
-                            // if(board[newY][newX]->getID() != "empty"){
-                            //     isPieceTaken = true;
-                            // }
+                        fin.open(VR_FILENAME);
+                        getline(fin, getWholeInput);
+                        fin.close();
 
-                            fin.open("test.txt");
-                            getline(fin, getWholeInput);
-                            fin.close();
+                        if(takePiece(oldX, oldY, newX, newY)){
+                            getWholeInput += " 1";
+                        }
 
-                            if(takePiece(oldX, oldY, newX, newY)){
-                                getWholeInput += " 1";
-                            }
-
-                            Piece* takenPiece = board[newY][newX];
-                            swap(oldX, oldY, newX, newY);
-                            if(isCheck(kw)){
-                                undoMove(oldX, oldY, newX, newY, takenPiece);
-                                listMove = listMove.substr(0, listMove.size() - 10);
-                                cout << "King is in check, try again" << endl;
-                            }
-                            else{
-                                if(board[newY][newX]->getID() == "pawn" && newY == 7){
-                                    if(!promote(board[newY][newX], newPiece)){
-                                        undoMove(oldX, oldY, newX, newY, takenPiece);
-                                        listMove = listMove.substr(0, listMove.size() - 10);
-                                    }
-                                    else{
-                                        madeMove = true;
-                                        whiteMoves++;
-
-                                        fout.open("qt.txt");
-                                        fout << getWholeInput;
-                                        fout.close();
-                                    }
+                        Piece* takenPiece = board[newY][newX];
+                        swap(oldX, oldY, newX, newY);
+                        if(isCheck(kw)){
+                            undoMove(oldX, oldY, newX, newY, takenPiece);
+                            listMove = listMove.substr(0, listMove.size() - 10);
+                            cout << "King is in check, try again" << endl;
+                        }
+                        else{
+                            if(board[newY][newX]->getID() == "pawn" && newY == 7){
+                                if(!promote(board[newY][newX], newPiece)){
+                                    undoMove(oldX, oldY, newX, newY, takenPiece);
+                                    listMove = listMove.substr(0, listMove.size() - 10);
                                 }
                                 else{
                                     madeMove = true;
                                     whiteMoves++;
 
-                                    fout.open("qt.txt");
-                                    fout << getWholeInput;
+                                    fout.open(QT_FILENAME, ios::app);
+                                    fout << "\n" << getWholeInput;
                                     fout.close();
                                 }
                             }
-                        //}
+                            else{
+                                madeMove = true;
+                                whiteMoves++;
+
+                                fout.open(QT_FILENAME, ios::app);
+                                fout << "\n" << getWholeInput;
+                                fout.close();
+                            }
+                        }
                     }
 
                     else{
@@ -1812,39 +1794,26 @@ void Board::playGamePVP() {
                 cout << "Input Move(Black): ";
                 bool newMove = false;
                 while(!newMove){
-                    fin.open("test.txt", ios::ate);
+                    fin.open(VR_FILENAME, ios::ate);
                     if(!fin.is_open()){
                         throw runtime_error("bruh");
                     }
-                    for(streampos pos = fin.tellg() - 1; pos > 0; pos -= 1){
+                    for(streampos pos = fin.tellg() - static_cast<streamoff>(1); pos > 0; pos -= 1){
                         fin.seekg(pos);
                         charOldX = fin.get();
                         if(charOldX == ' '){
                             break;
                         }
-                        //lastLine.push_back(charOldX);
                     }
-                    //reverse(lastLine.begin(), lastLine.end());
-                    //fin.ignore();
                     getline(fin, getLastInput);
-                    if(playerMove != getLastInput){
+                    if(playerMove != getLastInput && getLastInput != ""){
                         playerMove = getLastInput;
+                        cout << "lololol" << endl;
                         newMove = true;
-                        cout << "grrr" << endl;
                     }
                     fin.close();
                 }
-                //cin >> playerMove;
-                // while(!newMove){
-                //     fin.open("test.txt");
-                    
-                //     fin.close();
-                // }
-                cout << playerMove << "   lmaoooo" << endl;
-                cout << "haha" << endl;
                 if(playerMove.size() == 4){
-                    //piece = playerMove[0];
-                    //whitespace = playerMove[1];
                     charOldX = playerMove[0];
                     charOldY = playerMove[1];
                     charNewX = playerMove[2];
@@ -1852,8 +1821,6 @@ void Board::playGamePVP() {
                     newPiece = ' ';
                 }
                 else if(playerMove.size() == 5){
-                    //piece = playerMove[0];
-                    //whitespace = playerMove[1];
                     charOldX = playerMove[0];
                     charOldY = playerMove[1];
                     charNewX = playerMove[2];
@@ -1868,63 +1835,53 @@ void Board::playGamePVP() {
 
                 if((board[oldY][oldX]->getID() != "empty") && (!board[oldY][oldX]->white())){
                     if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
-                        // if(board[oldY][oldX]->getID() == "empty"){
-                        //     madeMove = true;
-                        //     whiteMoves++;
-                        // }
-                        // else{
+                        fin.open(VR_FILENAME);
+                        getline(fin, getWholeInput);
+                        fin.close();
 
-                            
+                        if(takePiece(oldX, oldY, newX, newY)){
+                            getWholeInput += " 1";
+                        }
 
-                            fin.open("test.txt");
-                            getline(fin, getWholeInput);
-                            fin.close();
-
-                            if(takePiece(oldX, oldY, newX, newY)){
-                                getWholeInput += " 1";
-                            }
-
-                            Piece* takenPiece = board[newY][newX];
-                            swap(oldX, oldY, newX, newY);
-                            if(isCheck(kb)){
-                                //swap(newX, newY, oldX, oldY);
-                                undoMove(oldX, oldY, newX, newY, takenPiece);
-                                listMove = listMove.substr(0, listMove.size() - 10);
-                                cout << "King is in check, try again" << endl;
-                            }
-                            else{
-                                if(board[newY][newX]->getID() == "pawn" && newY == 0){
-                                    if(!promote(board[newY][newX], newPiece)){
-                                        undoMove(oldX, oldY, newX, newY, takenPiece);
-                                        listMove = listMove.substr(0, listMove.size() - 10);
-                                    }
-                                    else{
-                                        madeMove = true;
-                                        whiteMoves++;
-
-                                        fout.open("qt.txt");
-                                        fout << getWholeInput;
-                                        fout.close();
-                                    }
+                        Piece* takenPiece = board[newY][newX];
+                        swap(oldX, oldY, newX, newY);
+                        if(isCheck(kb)){
+                            //swap(newX, newY, oldX, oldY);
+                            undoMove(oldX, oldY, newX, newY, takenPiece);
+                            listMove = listMove.substr(0, listMove.size() - 10);
+                            cout << "King is in check, try again" << endl;
+                        }
+                        else{
+                            if(board[newY][newX]->getID() == "pawn" && newY == 0){
+                                if(!promote(board[newY][newX], newPiece)){
+                                    undoMove(oldX, oldY, newX, newY, takenPiece);
+                                    listMove = listMove.substr(0, listMove.size() - 10);
                                 }
-                                else{  
+                                else{
                                     madeMove = true;
-                                    blackMoves++;
+                                    whiteMoves++;
 
-                                    fout.open("qt.txt");
-                                    fout << getWholeInput;
+                                    fout.open(QT_FILENAME, ios::app);
+                                    fout << "\n" << getWholeInput;
                                     fout.close();
                                 }
                             }
-                        //}
+                            else{  
+                                madeMove = true;
+                                blackMoves++;
+
+                                fout.open(QT_FILENAME, ios::app);
+                                fout << "\n" << getWholeInput;
+                                fout.close();
+                            }
+                        }
                     }
                     else{
                         cout << "Invalid move, try again bruh" << endl;
                     }
                 }
                 else{
-                    //cout << "Invalid move, try again wtf" << endl;
-                    throw runtime_error("grrr");
+                    cout << "Invalid move, try again wtf" << endl;
                 }
             }
             cout << "Black Move: ";
