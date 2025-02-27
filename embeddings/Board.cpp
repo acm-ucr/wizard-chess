@@ -1684,7 +1684,7 @@ void Board::playGamePVP() {
         string getWholeInput;
         string getLastInput;
         bool madeMove = false;
-        string VR_FILENAME = "test.txt";
+        string VR_FILENAME = "speech.txt";
         string QT_FILENAME = "qt.txt";
         //bool isPieceTaken = false;
         if(whiteMoves == blackMoves){
@@ -1705,8 +1705,9 @@ void Board::playGamePVP() {
                         }
                     }
                     getline(fin, getLastInput);
-                    if(playerMove != getLastInput && getLastInput != ""){
+                    if(playerMove != getLastInput && getLastInput != "" && getLastInput != "ROR" && getLastInput != "ERROR"){
                         playerMove = getLastInput;
+                        cout << getLastInput;
                         cout << "lololol" << endl;
                         newMove = true;
                     }
@@ -1796,7 +1797,7 @@ void Board::playGamePVP() {
                 while(!newMove){
                     fin.open(VR_FILENAME, ios::ate);
                     if(!fin.is_open()){
-                        throw runtime_error("bruh");
+                        throw runtime_error("bruh grrr");
                     }
                     for(streampos pos = fin.tellg() - static_cast<streamoff>(1); pos > 0; pos -= 1){
                         fin.seekg(pos);
@@ -1806,8 +1807,9 @@ void Board::playGamePVP() {
                         }
                     }
                     getline(fin, getLastInput);
-                    if(playerMove != getLastInput && getLastInput != ""){
+                    if(playerMove != getLastInput && getLastInput != "" && getLastInput != "ROR" && getLastInput != "ERROR"){
                         playerMove = getLastInput;
+                        cout << playerMove;
                         cout << "lololol" << endl;
                         newMove = true;
                     }
