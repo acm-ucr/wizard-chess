@@ -73,6 +73,7 @@ def parsedData(userInput):
       random_uuid = uuid.uuid4()
       random_uuid = str(random_uuid)
       timestamp_seconds = time.time()
+      timestamp_seconds = round(timestamp_seconds)
       current_time = str(timestamp_seconds * 1000)
 
       piece = ' '.join(chess_piece)
