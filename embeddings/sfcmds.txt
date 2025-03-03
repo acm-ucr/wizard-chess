@@ -1,0 +1,6 @@
+isready
+position startpos moves d2d4 g8f6 c2c4 e7e6 g1f3 d7d5 b1c3 f8b4 d1b3 c7c5 d4c5 b8c6 c1g5 d8a5 g5f6 d5c4 b3c4 g7f6 a1c1 b4c5 e2e3 c5e7 f1e2 a5b4 c4b4 e7b4 e1g1 e8e7 a2a3 b4c3 c1c3 h8d8 f1d1 d8d1 e2d1 c8d7 f3d2 b7b5 f2f4 b5b4 c3c5 f6f5 a3a4
+isready
+go depth 30
+isready
+go movetime 10000

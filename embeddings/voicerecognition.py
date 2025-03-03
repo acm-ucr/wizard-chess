@@ -93,6 +93,7 @@ def parsedData(userInput):
       print(res)
       file = open(file_path, 'w')
       file.write(res)
+      file.close()
       return res 
    else: #case of error
       error = {"piece" : "ERROR"}
@@ -101,15 +102,19 @@ def parsedData(userInput):
       return error
 
 # Main program
+open('speech.txt', 'w').close() #Open and clear any content within
 while (1):
     #userInput = input("Say \"hey wizard\" for me to listen. Say \"stop\" to stop giving me commands: ") # possibly displayed on LCD
     print("Say the magic command")
     userInput = listen_for_commands()
-    while userInput == "hey wizard": # a step of authentication to make sure that you are asking it to do something
-        print("Listening: \n") # this would be input from the microphone and possibly displayed on LCD
-        userInput = listen_for_commands()
-        print("Original Response: ")
-        print(userInput)
-        print("\n")
-        resultingData = parsedData(userInput) # stores a hashmap with key data
-        print(resultingData)
+    if userInput == "hey wizard":
+      while userInput == "hey wizard": # a step of authentication to make sure that you are asking it to do something
+         print("Listening: \n") # this would be input from the microphone and possibly displayed on LCD
+         userInput = listen_for_commands()
+         print("Original Response: ")
+         print(userInput)
+         print("\n")
+         resultingData = parsedData(userInput) # stores a hashmap with key data
+         print(resultingData)
+    else:
+      print("Those weren't the magic words! Try again: \n")
