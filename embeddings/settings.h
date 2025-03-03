@@ -6,7 +6,10 @@ class Settings
     public:
         Settings();
         unsigned int diffLevel = 4;
-        bool commandType = true;
+        unsigned int gameModeNum = 1;
+        bool commandType = false;
+        void setDifflevel(int d);
+        void setGamemodeNum(int n);
         ~Settings();
 };
 

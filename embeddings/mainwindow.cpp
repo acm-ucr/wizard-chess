@@ -10,8 +10,10 @@
 #include <string>
 #include <ctime>
 #include <cstdlib>
+#include <QtStateMachine>
 #include "mainwindow.h"
 #include "home.h"
+#include "ConditionalTransition.h"
 
 using namespace std;
 
@@ -27,7 +29,6 @@ MainWindow::MainWindow(QWidget *parent)
     whiteChoice = new Home();
     blackChoice = new Home();
     tableWidget = ui->RoundTurnTable;
-    timer = new QTimer(this);
     srand(time(0));
     wCheck = false;
     bCheck = false;
@@ -35,6 +36,150 @@ MainWindow::MainWindow(QWidget *parent)
     end_status = 2;
     timer_white = 0;
     timer_black = 0;
+    selectedMove = "";
+
+    // Initializing states
+    machine = new QStateMachine(this);
+    QState *initState = new QState();
+    QState *settingsState = new QState();
+    QState *aboutState = new QState();
+    QState *tutorial1State = new QState();
+    QState *tutorial2State = new QState();
+    QState *houseState = new QState();
+
+    QState *game = new QState();
+    QState *newTurn = new QState(game);
+    //QState *checkInputType = new QState();
+    //QState *touchInput = new QState();
+    //QState *voiceInput = new QState();
+    QState *botInput = new QState(game);
+    QState *playerInput = new QState(game);
+    //QState *botMoveExecution = new QState(game);
+    QState *playerMoveExecution = new QState(game);
+    //QState *physicalUpdate = new QState();
+    //QState *screenUpdate = new QState();
+    QState *checkEnd = new QState(game);
+
+    QState *endState = new QState();
+
+    // Defining state transitions
+    initState->addTransition(ui->pushButton_start, &QPushButton::clicked, houseState);
+    initState->addTransition(ui->pushButton_tutorial, &QPushButton::clicked, tutorial1State);
+    initState->addTransition(ui->pushButton_settings, &QPushButton::clicked, settingsState);
+    initState->addTransition(ui->pushButton_about, &QPushButton::clicked, aboutState);
+
+
+    settingsState->addTransition(ui->pushButton_home_settings, &QPushButton::clicked, initState);
+
+    aboutState->addTransition(ui->pushButton_home_about, &QPushButton::clicked, initState);
+
+    tutorial1State->addTransition(ui->pushButton_home_tutorial, &QPushButton::clicked, initState);
+    tutorial1State->addTransition(ui->pushButton_continue_tutorial, &QPushButton::clicked, tutorial2State);
+    tutorial2State->addTransition(ui->pushButton_home_tutorial_end, &QPushButton::clicked, initState);
+    tutorial2State->addTransition(ui->pushButton_previous_tutorial, &QPushButton::clicked, tutorial1State);
+
+    connect(houseState, &QState::entered, this, [=](){
+        resetGame();
+    });
+
+    QSignalTransition* enterGame = houseState->addTransition(ui->pushButton_home2, &QPushButton::clicked, game);
+
+    game->setInitialState(newTurn);
+    connect(enterGame, &QAbstractTransition::triggered, this, [=](){
+        disableTouchInput();
+        qDebug() << "game entered";
+    });
+
+    connect(newTurn, &QState::entered, this, [=](){
+        // if (co == 0) {
+        //     emit takeBotTurn();
+        // }
+        // else if (co == 1) {
+
+        // }
+
+        // always take player turn for now
+        emit takePlayerTurn();
+        qDebug() << "new turn";
+    });
+
+    newTurn->addTransition(this, &MainWindow::takeBotTurn, botInput);
+    newTurn->addTransition(this, &MainWindow::takePlayerTurn, playerInput);
+
+
+    //connect(playerInput, &QState::entered, this, &MainWindow::handlePlayerInput);
+    connect(playerInput, &QState::entered, this, [=](){
+        //check end status
+        qDebug() << "player input state entered";
+        handlePlayerInput();
+    });
+
+    playerInput->addTransition(this, &MainWindow::moveReady, playerMoveExecution);
+
+    connect(playerMoveExecution, &QState::entered, this, [=](){
+        //check end status
+        qDebug() << "player move execution state entered";
+        handleMoveExecution();
+    });
+
+    //connect(this, &MainWindow::moveReady, this, &MainWindow::handleMoveExecution);
+
+    playerMoveExecution->addTransition(this, &MainWindow::invalidMoveSelected, playerInput);
+
+
+    game->addTransition(ui->pushButton_EndGame, &QPushButton::clicked, endState);
+    endState->addTransition(ui->pushButton_home_end, &QPushButton::clicked, initState);
+    connect(endState, &QState::entered, this, [=](){
+        change_endgame_status();
+        finalWhiteTime(timer_white / 1000);
+        finalBlackTime(timer_black / 1000);
+        resetGame();
+        ui->stackedWidget->setCurrentIndex(8);
+    });
+
+
+    playerMoveExecution->addTransition(this, &MainWindow::moveExecutionDone, checkEnd);
+    connect(checkEnd, &QState::entered, this, [=](){
+        //check end status
+        qDebug() << "check end entered";
+        checkForEnd();
+    });
+
+    checkEnd->addTransition(this, &MainWindow::endReached, endState);
+    checkEnd->addTransition(this, &MainWindow::takeNewTurn, newTurn);
+
+
+    // Defining state events
+    initState->assignProperty(ui->stackedWidget, "currentIndex", 0);
+    settingsState->assignProperty(ui->stackedWidget, "currentIndex", 6);
+    aboutState->assignProperty(ui->stackedWidget, "currentIndex", 7);
+    tutorial1State->assignProperty(ui->stackedWidget, "currentIndex", 3);
+    tutorial2State->assignProperty(ui->stackedWidget, "currentIndex", 4);
+    houseState->assignProperty(ui->stackedWidget, "currentIndex", 1);
+    game->assignProperty(ui->stackedWidget, "currentIndex", 5);
+    endState->assignProperty(ui->stackedWidget, "currentIndex", 8);
+
+
+    // Add States to machine
+    machine->addState(initState);
+    machine->addState(settingsState);
+    machine->addState(aboutState);
+    machine->addState(tutorial1State);
+    machine->addState(tutorial2State);
+    machine->addState(houseState);
+    machine->addState(game);
+    machine->addState(newTurn);
+    machine->addState(botInput);
+    machine->addState(playerInput);
+    machine->addState(playerMoveExecution);
+    machine->addState(checkEnd);
+    machine->addState(endState);
+
+
+    // Start state machine
+    machine->setInitialState(initState);
+    machine->start();
+
 }
 
 MainWindow::~MainWindow()
@@ -46,13 +191,14 @@ MainWindow::~MainWindow()
 // i = 0 means no move, i = 1 means just move and possible check, and i = 2 means move, kill and possible check
 void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt)
 {
-    // performs action similar to a virtual list ~ after the table is full, the table resets
-    if (turnCnt % 20 == 0)
+    qDebug() << x1 << y1 << x2 << y2 << i;
+    if ((size / 2) == capacity)
     {
-        clearTableWidget();
+        resize();
     }
     if (i == 0) {return;}
-    int row = (turnCnt % 20)/2;
+    int row = (size % (capacity * 2))/2;
+    // std::cout << row << std::endl;
     int col = turnCnt % 2;
     string out;
     if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "pawn")
@@ -85,16 +231,17 @@ void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turn
         tableWidget->setItem(row, col, new QTableWidgetItem(QString::fromStdString(out)));
         return;
     }
+
     if (i == 1) {
         out += x2 + to_string(y2);
         if (col == 0) {
-            bCheck = game.isBCheck();
+            bCheck = game.isCheck();
             if (bCheck == 1) {
                 out += "+";
             }
         }
         else if (col == 1) {
-            wCheck = game.isWCheck();
+            wCheck = game.isCheck();
             if (wCheck == 1) {
                 out += "+";
             }
@@ -104,19 +251,20 @@ void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turn
         out += "x";
         out += x2 + to_string(y2);
         if (col == 0) {
-            bCheck = game.isBCheck();
+            bCheck = game.isCheck();
             if (bCheck == 1) {
                 out += "+";
             }
         }
         else if (col == 1) {
-            wCheck = game.isWCheck();
+            wCheck = game.isCheck();
             if (wCheck == 1) {
                 out += "+";
             }
         }
     }
     tableWidget->setItem(row, col, new QTableWidgetItem(QString::fromStdString(out)));
+    ++size;
 }
 
 void MainWindow::clearTableWidget()
@@ -130,38 +278,6 @@ void MainWindow::clearTableWidget()
     }
 }
 
-// About Page
-void MainWindow::on_pushButton_home_about_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-}
-
-// Start Page
-void MainWindow::on_pushButton_start_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(1);
-}
-
-void MainWindow::on_pushButton_tutorial_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(3);
-}
-
-void MainWindow::on_pushButton_settings_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(6);
-}
-
-void MainWindow::on_pushButton_about_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(7);
-}
-
-// Settings
-void MainWindow::on_pushButton_home_settings_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-}
 
 // {1000 = 8 in bits}
 void MainWindow::on_easyLevel_clicked()
@@ -199,21 +315,26 @@ void MainWindow::on_touchCommand_clicked()
     mwSettings->commandType = false;
 }
 
-// Goes Back to Home from Settings
-void MainWindow::on_pushButton_back_settings_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-}
 
-// Game
-void MainWindow::on_pushButton_EndGame_clicked()
-{
-    change_endgame_status();
-    ui->stackedWidget->setCurrentIndex(8);
+void MainWindow::clearButton(QPushButton *button, bool isWhiteTile) {
+    button->setIcon(QIcon());
 }
 
 void MainWindow::setupBoard()
 {
+    for (char col = 'A'; col <= 'H'; ++col) {
+        for (int row = 1; row <= 8; ++row) {
+            QString position = QString(col) + QString::number(row);
+            QString buttonName = "pushButton_" + position;
+            QPushButton* button = findChild<QPushButton*>(buttonName);
+            pieces.clear();
+            bool isWhiteTile = ((col - 'A') + row) % 2 == 0;
+            clearButton(button, isWhiteTile);
+        }
+    }
+    // Clear the internal map
+    boardMap.clear();
+
     // Map each push button to its chessboard position
     for (char col = 'A'; col <= 'H'; ++col) {
         for (int row = 1; row <= 8; ++row) {
@@ -229,25 +350,21 @@ void MainWindow::setupBoard()
                 bool isWhiteTile = ((col - 'A') + row) % 2 == 0;
                 QString backgroundColor = isWhiteTile ? "#ffffff" : "#4560AB"; // White and blue
                 button->setStyleSheet(QString(
-                    "QPushButton { background-color: %1; border: none; }"
-                ).arg(backgroundColor));
-
-                connect(button, &QPushButton::clicked, this, &MainWindow::onTileClicked);
+                                          "QPushButton { background-color: %1; border: none; }"
+                                          ).arg(backgroundColor));
+                if (count == 0) {
+                    connect(button, &QPushButton::clicked, this, &MainWindow::onTileClicked);
+                }
             }
         }
     }
+    count = 1;
 }
 
 
 // Add chess pieces to their starting positions
 void MainWindow::setupInitialPositions()
 {
-    // ui->stackedWidget->setCurrentIndex(5);
-    // QLabel *background = new QLabel(this);
-    // background->setAlignment(Qt::AlignTop | Qt:: AlignRight);
-    // background->setGeometry(QRect(15, 20, 300, 320));
-    // background->setStyleSheet("background-image:/images/images/chessBoardBackground");
-    // Add white pieces
     pieces.append(ChessPiece("rook", "white", "A1"));
     pieces.append(ChessPiece("knight", "white", "B1"));
     pieces.append(ChessPiece("bishop", "white", "C1"));
@@ -275,7 +392,6 @@ void MainWindow::setupInitialPositions()
     for (ChessPiece &piece : pieces) {
         placePieceOnTile(piece.position, piece.type, piece.color);
     }
-    // ui->stackedWidget->setCurrentIndex(0);
 }
 
 
@@ -294,14 +410,38 @@ void MainWindow::placePieceOnTile(const QString& position, const QString& pieceT
         bool isWhiteTile = ((position[0].toLatin1() - 'A') + position.mid(1).toInt()) % 2 == 0;
         QString backgroundColor = isWhiteTile ? "#ffffff" : "#4560AB"; // White and blue
         button->setStyleSheet(QString(
-            "QPushButton { background-color: %1; border: none; }"
-            "QPushButton::icon { margin: 0; padding: 0; }"
-        ).arg(backgroundColor));
+                                  "QPushButton { background-color: %1; border: none; }"
+                                  "QPushButton::icon { margin: 0; padding: 0; }"
+                                  ).arg(backgroundColor));
+    }
+}
+
+void MainWindow::handlePlayerInput() {
+    selectedMove = "";
+    qDebug() << "entered input handler";
+
+    if (mwSettings->commandType == false) {
+        enableTouchInput();
+        qDebug() << "touch!";
+    }
+    else if (mwSettings->commandType == true) {
+        getVoiceInput();
+    }
+}
+
+void MainWindow::enableTouchInput() {
+    for (auto it = boardMap.begin(); it != boardMap.end(); ++it) {
+        it.value()->setEnabled(true);  // Enable touch input for all tiles
+    }
+}
+
+void MainWindow::disableTouchInput() {
+    for (auto it = boardMap.begin(); it != boardMap.end(); ++it) {
+        it.value()->setEnabled(false);  // Enable touch input for all tiles
     }
 }
 
 
-// Handle tile clicks
 void MainWindow::onTileClicked()
 {
     QPushButton* clickedButton = qobject_cast<QPushButton*>(sender());
@@ -316,41 +456,10 @@ void MainWindow::onTileClicked()
     }
 
     if (selectedPiece) {
-        // Moving the selected piece
-        if (isValidMove(selectedPiece->type, selectedPiece->position, clickedPosition)) {
-            // Reset the previous tile and retain its background color
-            QPushButton* previousButton = boardMap[selectedPiece->position];
-            if (previousButton) {
-                previousButton->setIcon(QIcon()); // Clear the icon
-
-                // Calculate the background color based on tile position
-                QString previousPosition = selectedPiece->position;
-                bool isWhiteTile = ((previousPosition[0].toLatin1() - 'A') +
-                                    previousPosition.mid(1).toInt()) % 2 == 0;
-                QString backgroundColor = isWhiteTile ? "#ffffff" : "#4560AB"; // White or  blue
-                previousButton->setStyleSheet(QString(
-                    "QPushButton { background-color: %1; border: none; }"
-                ).arg(backgroundColor));
-                // [IMPLEMENTED POPULATECELL() FUNCTION HERE]
-                bool ok;
-                QString extracted_x1 = previousPosition.left(1).toLower();
-                int extracted_y1 = previousPosition.right(1).toInt(&ok);
-                QString extracted_x2 = clickedPosition.left(1).toLower();
-                int extracted_y2 = clickedPosition.right(1).toInt(&ok);
-                populateCells(extracted_x1.toLatin1().at(0), extracted_y1, extracted_x2.toLatin1().at(0), extracted_y2, 2, co);
-                co++;
-                // [END OF IMPLEMENTATION]
-            }
-
-            // Update the piece's position and place it on the new tile
-            placePieceOnTile(clickedPosition, selectedPiece->type, selectedPiece->color);
-            selectedPiece->position = clickedPosition;
-
-            // Deselect the piece
-            selectedPiece = nullptr;
-        } else {
-            qDebug() << "Invalid move!";
-        }
+        selectedMove = selectedPiece->position + clickedPosition;
+        disableTouchInput();
+        qDebug() << "Move ready";
+        emit moveReady();
     } else {
         // Selecting a piece
         for (ChessPiece &piece : pieces) {
@@ -363,7 +472,188 @@ void MainWindow::onTileClicked()
 }
 
 
+void MainWindow::getVoiceInput() {
+    // get voice input
+    // selectedMove = voice input
+    // emit moveSelected(selectedMove)
+}
 
+void MainWindow::handleBotInput() {
+    // get bot input
+    emit moveReady();
+}
+
+void MainWindow::handleMoveExecution() {
+    // if(!isValidMove()) {
+    //     emit invalidMoveSelected();
+    //     return;
+    // }
+
+    // motor mvmt:
+    // write selectedMove to file
+    // while (read file) != done { }
+
+    // extract coordinates from move string and assign selectedPiece/clickedPosition
+    qDebug() << "move handler entered";
+    QString initPosition = selectedMove.left(2);
+    QString destPosition = selectedMove.right(2);
+    qDebug() << "Position: " << initPosition << destPosition;
+
+    if (!selectedPiece) {
+        for (ChessPiece &piece : pieces) {
+            if (piece.position == initPosition) {
+                selectedPiece = &piece;
+                break;
+            }
+        }
+    }
+
+    if (selectedPiece) {
+        // Moving the selected piece
+        if (isValidMove(selectedPiece->type, selectedPiece->position, destPosition)) {
+            // Reset the previous tile and retain its background color
+            QPushButton* previousButton = boardMap[selectedPiece->position];
+            if (previousButton) {
+                previousButton->setIcon(QIcon()); // Clear the icon
+
+                // Calculate the background color based on tile position
+                QString previousPosition = selectedPiece->position;
+                bool isWhiteTile = ((previousPosition[0].toLatin1() - 'A') +
+                                    previousPosition.mid(1).toInt()) % 2 == 0;
+                QString backgroundColor = isWhiteTile ? "#ffffff" : "#4560AB"; // White or blue
+                previousButton->setStyleSheet(QString(
+                                                  "QPushButton { background-color: %1; border: none; }"
+                                                  ).arg(backgroundColor));
+                // [IMPLEMENTED POPULATECELL() FUNCTION HERE]
+                bool ok;
+                qDebug() << previousPosition;
+                QString extracted_x1 = previousPosition.left(1).toLower();
+                int extracted_y1 = previousPosition.right(1).toInt(&ok);
+                QString extracted_x2 = destPosition.left(1).toLower();
+                int extracted_y2 = destPosition.right(1).toInt(&ok);
+                qDebug() << extracted_x1 << extracted_y1 << extracted_x2 << extracted_y2;
+                populateCells(extracted_x1.toLatin1().at(0), extracted_y1, extracted_x2.toLatin1().at(0), extracted_y2, 2, co);
+
+                currTime = timer.elapsed();
+                updateTime(currTime - previousTime);
+                co++;
+                //emit turnUpdated();
+                previousTime = currTime;
+                // [END OF IMPLEMENTATION]
+            }
+
+            // Update the piece's position and place it on the new tile
+            placePieceOnTile(destPosition, selectedPiece->type, selectedPiece->color);
+            selectedPiece->position = destPosition;
+
+            // Deselect the piece
+            selectedPiece = nullptr;
+
+            qDebug() << "Move Executed";
+            emit moveExecutionDone();
+            return;
+
+        } else {
+            qDebug() << "Invalid move!";
+            emit invalidMoveSelected();
+        }
+    }
+    qDebug() << "???";
+}
+
+void MainWindow::checkForEnd() {
+    // if end: emit endReached
+    // if not end: emit takeNewTurn
+    qDebug() << "check end, going to new turn";
+    emit takeNewTurn();
+}
+
+void MainWindow::resetGame() {
+    game.resetBoard();
+    // clearBoard();
+    setupBoard();
+    size = 0;
+    capacity = 10;
+    mwSettings = new Settings();
+    whiteChoice = new Home();
+    blackChoice = new Home();
+    tableWidget = ui->RoundTurnTable;
+    srand(time(0));
+    wCheck = false;
+    bCheck = false;
+    co = 0;
+    end_status = 2;
+    timer_white = 0;
+    timer_black = 0;
+    setupInitialPositions();
+    clearTableWidget();
+}
+
+
+// Handle tile clicks
+// void MainWindow::onTileClicked()
+// {
+//     QPushButton* clickedButton = qobject_cast<QPushButton*>(sender());
+//     if (!clickedButton) return;
+
+//     QString clickedPosition;
+//     for (auto it = boardMap.begin(); it != boardMap.end(); ++it) {
+//         if (it.value() == clickedButton) {
+//             clickedPosition = it.key();
+//             break;
+//         }
+//     }
+
+//     if (selectedPiece) {
+//         // Moving the selected piece
+//         if (isValidMove(selectedPiece->type, selectedPiece->position, clickedPosition)) {
+//             // Reset the previous tile and retain its background color
+//             QPushButton* previousButton = boardMap[selectedPiece->position];
+//             if (previousButton) {
+//                 previousButton->setIcon(QIcon()); // Clear the icon
+
+//                 // Calculate the background color based on tile position
+//                 QString previousPosition = selectedPiece->position;
+//                 bool isWhiteTile = ((previousPosition[0].toLatin1() - 'A') +
+//                                     previousPosition.mid(1).toInt()) % 2 == 0;
+//                 QString backgroundColor = isWhiteTile ? "#ffffff" : "#4560AB"; // White or blue
+//                 previousButton->setStyleSheet(QString(
+//                                                   "QPushButton { background-color: %1; border: none; }"
+//                                                   ).arg(backgroundColor));
+//                 // [IMPLEMENTED POPULATECELL() FUNCTION HERE]
+//                 bool ok;
+//                 QString extracted_x1 = previousPosition.left(1).toLower();
+//                 int extracted_y1 = previousPosition.right(1).toInt(&ok);
+//                 QString extracted_x2 = clickedPosition.left(1).toLower();
+//                 int extracted_y2 = clickedPosition.right(1).toInt(&ok);
+//                 populateCells(extracted_x1.toLatin1().at(0), extracted_y1, extracted_x2.toLatin1().at(0), extracted_y2, 2, co);
+//                 currTime = timer.elapsed();
+//                 updateTime(currTime - previousTime);
+//                 co++;
+//                 emit turnUpdated();
+//                 previousTime = currTime;
+//                 // [END OF IMPLEMENTATION]
+//             }
+
+//             // Update the piece's position and place it on the new tile
+//             placePieceOnTile(clickedPosition, selectedPiece->type, selectedPiece->color);
+//             selectedPiece->position = clickedPosition;
+
+//             // Deselect the piece
+//             selectedPiece = nullptr;
+//         } else {
+//             qDebug() << "Invalid move!";
+//         }
+//     } else {
+//         // Selecting a piece
+//         for (ChessPiece &piece : pieces) {
+//             if (piece.position == clickedPosition) {
+//                 selectedPiece = &piece;
+//                 break;
+//             }
+//         }
+//     }
+// }
 
 bool MainWindow::isValidMove(const QString& pieceType, const QString& from, const QString& to)
 {
@@ -371,52 +661,10 @@ bool MainWindow::isValidMove(const QString& pieceType, const QString& from, cons
     return true; // Allow all moves for now
 }
 
-
-
-// End
-void MainWindow::on_pushButton_home_end_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-}
-
-// Tutorial
-void MainWindow::on_pushButton_continue_tutorial_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(4);
-}
-
-void MainWindow::on_pushButton_home_tutorial_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-}
-
-void MainWindow::on_pushButton_home_tutorial_end_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-}
-
-void MainWindow::on_pushButton_previous_tutorial_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(3);
-}
-
 // White House Selection
 void MainWindow::on_pushButton_home1_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
-}
-
-// Black House Selection
-void MainWindow::on_pushButton_home2_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(5);
-}
-
-// Random Button Simulates Cell Population [FOR TESTING PURPOSES ONLY]
-void MainWindow::on_randomGeneratorButton_clicked()
-{
-    // populateCells('a', 2, 'b', 5, 2, co);
-    // co++;
 }
 
 // Bits For White Home Click
@@ -476,4 +724,53 @@ void MainWindow::change_endgame_status()
     {
         ui->winner_label->setText("Game is Draw!");
     }
+}
+
+void MainWindow::resize()
+{
+    for(unsigned i = 0; i < 10; ++i)
+    {
+        tableWidget->insertRow(i + capacity);
+    }
+    capacity += 10;
+}
+
+void MainWindow::updateTime(int diff)
+{
+    (co % 2 == 0) ? this->timer_white+=diff : this->timer_black+=diff;
+}
+
+void MainWindow::finalWhiteTime(int timer_white)
+{
+    QString result;
+    QString strMinutes = QString::number(timer_white / 60);
+    QString strSeconds = QString::number(timer_white % 60);
+    if (strSeconds.size() == 1) { strSeconds = "0" + strSeconds; }
+    result = strMinutes + ":" + strSeconds;
+    ui->house_1_time->setText(result);
+}
+
+void MainWindow::finalBlackTime(int timer_black)
+{
+    QString result;
+    QString strMinutes = QString::number(timer_black / 60);
+    QString strSeconds = QString::number(timer_black % 60);
+    if (strSeconds.size() == 1) { strSeconds = "0" + strSeconds; }
+    result = strMinutes + ":" + strSeconds;
+    ui->house_2_time->setText(result);
+}
+
+void MainWindow::on_pvpButton_clicked()
+{
+    mwSettings->commandType = true;
+}
+
+void MainWindow::on_pvaButton_clicked()
+{
+    mwSettings->commandType = false;
+}
+
+void MainWindow::on_avaButton_clicked()
+{
+    mwSettings->commandType = false;
 }

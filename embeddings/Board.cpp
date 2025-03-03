@@ -13,6 +13,8 @@
 #include "King.h"
 #include "Rook.h"
 #include <cstdlib>
+#include <QCoreApplication>
+#include <QTextStream>
 
 using namespace std;
 
@@ -1600,14 +1602,15 @@ int Board::justinIm(char charOldX, int oldY, char charNewX, int newY){
 }
 
 void Board::playMenu() {
-    int gameType;   
+    int gameType;
+    QTextStream qtin(stdin);
+    QTextStream qtout(stdout);
     char playerType;
     cout << "VIRTUAL CHESS BOARD" << endl << endl;
     cout <<" How would you like to play?: " << endl;
     cout << "1. Player vs.Player" << endl;
     cout << "2. Player vs. AI" << endl;
     cout << "3. AI vs. AI?" << endl;
-    cin >> gameType;
     cout << endl;
 
     if(gameType == 1) {

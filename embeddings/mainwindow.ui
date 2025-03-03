@@ -60,7 +60,7 @@
      </font>
     </property>
     <property name="layoutDirection">
-     <enum>Qt::LeftToRight</enum>
+     <enum>Qt::LayoutDirection::LeftToRight</enum>
     </property>
     <property name="styleSheet">
      <string notr="true">QWidget #Application {
@@ -662,7 +662,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
      </property>
      <layout class="QGridLayout" name="gridLayout" columnstretch="0">
       <property name="sizeConstraint">
-       <enum>QLayout::SetNoConstraint</enum>
+       <enum>QLayout::SizeConstraint::SetNoConstraint</enum>
       </property>
       <property name="leftMargin">
        <number>10</number>
@@ -692,7 +692,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
           <property name="sizeConstraint">
-           <enum>QLayout::SetDefaultConstraint</enum>
+           <enum>QLayout::SizeConstraint::SetDefaultConstraint</enum>
           </property>
           <property name="spacing">
            <number>5</number>
@@ -3128,19 +3128,6 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
           <string>End Game</string>
          </property>
         </widget>
-        <widget class="QPushButton" name="randomGeneratorButton">
-         <property name="geometry">
-          <rect>
-           <x>400</x>
-           <y>350</y>
-           <width>83</width>
-           <height>29</height>
-          </rect>
-         </property>
-         <property name="text">
-          <string>Random</string>
-         </property>
-        </widget>
         <widget class="QTableWidget" name="RoundTurnTable">
          <property name="geometry">
           <rect>
@@ -3150,56 +3137,16 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
            <height>301</height>
           </rect>
          </property>
-         <row>
-          <property name="text">
-           <string>Round #1</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Round #2</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Round #3</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Round #4</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Round #5</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Round #6</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Round #7</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Round #8</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Round #9</string>
-          </property>
-         </row>
-         <row>
-          <property name="text">
-           <string>Round #10</string>
-          </property>
-         </row>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
+         <row/>
          <column>
           <property name="text">
            <string>White</string>
@@ -3237,7 +3184,7 @@ font: 20pt &quot;Sitka&quot;;</string>
       <property name="geometry">
        <rect>
         <x>690</x>
-        <y>390</y>
+        <y>420</y>
         <width>83</width>
         <height>29</height>
        </rect>
@@ -3253,16 +3200,15 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
      <widget class="QGroupBox" name="groupBox">
       <property name="geometry">
        <rect>
-        <x>460</x>
-        <y>90</y>
+        <x>450</x>
+        <y>10</y>
         <width>311</width>
-        <height>281</height>
+        <height>161</height>
        </rect>
       </property>
       <property name="styleSheet">
        <string notr="true">color: rgb(255, 0, 0);
-font: 15pt &quot;Snap ITC&quot;;
-</string>
+font: 15pt &quot;Times New Roman&quot;;</string>
       </property>
       <property name="title">
        <string>Command Buttons</string>
@@ -3271,14 +3217,14 @@ font: 15pt &quot;Snap ITC&quot;;
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>90</y>
+         <y>50</y>
          <width>301</width>
          <height>26</height>
         </rect>
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(0, 0, 0);
-font: 12pt &quot;Showcard Gothic&quot;;
+font: 15pt &quot;Times New Roman&quot;;
 </string>
        </property>
        <property name="text">
@@ -3292,14 +3238,14 @@ font: 12pt &quot;Showcard Gothic&quot;;
        <property name="geometry">
         <rect>
          <x>10</x>
-         <y>180</y>
+         <y>120</y>
          <width>211</width>
          <height>26</height>
         </rect>
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(0, 0, 0);
-font: 12pt &quot;Showcard Gothic&quot;;
+font: 15pt &quot;Times New Roman&quot;;
 </string>
        </property>
        <property name="text">
@@ -3318,7 +3264,7 @@ font: 12pt &quot;Showcard Gothic&quot;;
       </property>
       <property name="styleSheet">
        <string notr="true">color: rgb(255, 0, 0);
-font: 15pt &quot;Snap ITC&quot;;
+font: 15pt &quot;Times New Roman&quot;;
 </string>
       </property>
       <property name="title">
@@ -3335,7 +3281,7 @@ font: 15pt &quot;Snap ITC&quot;;
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(0, 0, 0);
-font: 12pt &quot;Showcard Gothic&quot;;
+font: 15pt &quot;Times New Roman&quot;;
 </string>
        </property>
        <property name="text">
@@ -3353,7 +3299,7 @@ font: 12pt &quot;Showcard Gothic&quot;;
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(0, 0, 0);
-font: 12pt &quot;Showcard Gothic&quot;;
+font: 15pt &quot;Times New Roman&quot;;
 </string>
        </property>
        <property name="text">
@@ -3374,8 +3320,7 @@ font: 12pt &quot;Showcard Gothic&quot;;
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(0, 0, 0);
-font: 12pt &quot;Showcard Gothic&quot;;
-</string>
+font: 15pt &quot;Times New Roman&quot;;</string>
        </property>
        <property name="text">
         <string>Hard Level</string>
@@ -3392,7 +3337,7 @@ font: 12pt &quot;Showcard Gothic&quot;;
        </property>
        <property name="styleSheet">
         <string notr="true">color: rgb(0, 0, 0);
-font: 12pt &quot;Showcard Gothic&quot;;
+font: 15pt &quot;Times New Roman&quot;;
 </string>
        </property>
        <property name="text">
@@ -3403,8 +3348,8 @@ font: 12pt &quot;Showcard Gothic&quot;;
      <widget class="QPushButton" name="pushButton_back_settings">
       <property name="geometry">
        <rect>
-        <x>460</x>
-        <y>390</y>
+        <x>450</x>
+        <y>420</y>
         <width>83</width>
         <height>29</height>
        </rect>
@@ -3416,6 +3361,80 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
       <property name="text">
        <string>BACK</string>
       </property>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>180</y>
+        <width>311</width>
+        <height>221</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 0, 0);
+font: 15pt &quot;Times New Roman&quot;;</string>
+      </property>
+      <property name="title">
+       <string>Game Mode</string>
+      </property>
+      <widget class="QRadioButton" name="pvpButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>40</y>
+         <width>291</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 0, 0);
+font: 15pt &quot;Times New Roman&quot;;
+</string>
+       </property>
+       <property name="text">
+        <string>Player vs. Player (Default)</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="pvaButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>110</y>
+         <width>291</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 0, 0);
+font: 15pt &quot;Times New Roman&quot;;
+</string>
+       </property>
+       <property name="text">
+        <string>Player vs. AI</string>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="avaButton">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>180</y>
+         <width>291</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 0, 0);
+font: 15pt &quot;Times New Roman&quot;;
+</string>
+       </property>
+       <property name="text">
+        <string>AI vs. AI</string>
+       </property>
+      </widget>
      </widget>
     </widget>
     <widget class="QWidget" name="About">
