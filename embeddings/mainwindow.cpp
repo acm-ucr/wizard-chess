@@ -278,38 +278,6 @@ void MainWindow::clearTableWidget()
     }
 }
 
-// // About Page
-// void MainWindow::on_pushButton_home_about_clicked()
-// {
-//     ui->stackedWidget->setCurrentIndex(0);
-// }
-
-// // Start Page
-// void MainWindow::on_pushButton_start_clicked()
-// {
-//     ui->stackedWidget->setCurrentIndex(1);
-// }
-
-// void MainWindow::on_pushButton_tutorial_clicked()
-// {
-//     ui->stackedWidget->setCurrentIndex(3);
-// }
-
-// void MainWindow::on_pushButton_settings_clicked()
-// {
-//     ui->stackedWidget->setCurrentIndex(6);
-// }
-
-// void MainWindow::on_pushButton_about_clicked()
-// {
-//     ui->stackedWidget->setCurrentIndex(7);
-// }
-
-// // Settings
-// void MainWindow::on_pushButton_home_settings_clicked()
-// {
-//     ui->stackedWidget->setCurrentIndex(0);
-// }
 
 // {1000 = 8 in bits}
 void MainWindow::on_easyLevel_clicked()
@@ -347,20 +315,6 @@ void MainWindow::on_touchCommand_clicked()
     mwSettings->commandType = false;
 }
 
-// // Goes Back to Home from Settings
-// void MainWindow::on_pushButton_back_settings_clicked()
-// {
-//     ui->stackedWidget->setCurrentIndex(0);
-// }
-
-// Game
-// void MainWindow::on_pushButton_EndGame_clicked()
-// {
-//     change_endgame_status();
-//     finalWhiteTime(timer_white / 1000);
-//     finalBlackTime(timer_black / 1000);
-//     ui->stackedWidget->setCurrentIndex(8);
-// }
 
 void MainWindow::clearButton(QPushButton *button, bool isWhiteTile) {
     button->setIcon(QIcon());
@@ -707,66 +661,11 @@ bool MainWindow::isValidMove(const QString& pieceType, const QString& from, cons
     return true; // Allow all moves for now
 }
 
-//End
-// void MainWindow::on_pushButton_home_end_clicked()
-// {
-//     ui->stackedWidget->setCurrentIndex(0);
-//     game.resetBoard();
-//     // clearBoard();
-//     setupBoard();
-//     size = 0;
-//     capacity = 10;
-//     mwSettings = new Settings();
-//     whiteChoice = new Home();
-//     blackChoice = new Home();
-//     tableWidget = ui->RoundTurnTable;
-//     srand(time(0));
-//     wCheck = false;
-//     bCheck = false;
-//     co = 0;
-//     end_status = 2;
-//     timer_white = 0;
-//     timer_black = 0;
-//     setupInitialPositions();
-//     clearTableWidget();
-// }
-
-// // Tutorial
-// void MainWindow::on_pushButton_continue_tutorial_clicked()
-// {
-//     ui->stackedWidget->setCurrentIndex(4);
-// }
-
-// void MainWindow::on_pushButton_home_tutorial_clicked()
-// {
-//     ui->stackedWidget->setCurrentIndex(0);
-// }
-
-// void MainWindow::on_pushButton_home_tutorial_end_clicked()
-// {
-//     ui->stackedWidget->setCurrentIndex(0);
-// }
-
-// void MainWindow::on_pushButton_previous_tutorial_clicked()
-// {
-//     ui->stackedWidget->setCurrentIndex(3);
-// }
-
 // White House Selection
 void MainWindow::on_pushButton_home1_clicked()
 {
     ui->stackedWidget->setCurrentIndex(2);
 }
-
-// Black House Selection
-// void MainWindow::on_pushButton_home2_clicked()
-// {
-//     ui->stackedWidget->setCurrentIndex(5);
-//     timer_white = 0;
-//     timer_black = 0;
-//     timer.start();
-//     previousTime = timer.elapsed();
-// }
 
 // Bits For White Home Click
 void MainWindow::on_pushButton_Gryffindor_clicked()
