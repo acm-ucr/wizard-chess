@@ -1709,7 +1709,7 @@ void Board::playGamePVP() {
                         && getLastInput.size() < 6){
                         playerMove = getLastInput;
                         cout << getLastInput;
-                        cout << "lololol" << endl;
+                        // cout << "lololol" << endl;
                         newMove = true;
                     }
                     fin.close();
@@ -1812,7 +1812,7 @@ void Board::playGamePVP() {
                         && getLastInput.size() < 6){
                         playerMove = getLastInput;
                         cout << playerMove;
-                        cout << "lololol" << endl;
+                        // cout << "lololol" << endl;
                         newMove = true;
                     }
                     fin.close();
@@ -1900,6 +1900,9 @@ void Board::playGamePVP() {
 
 void Board::playGamePVAIWhitePlayer(){
     Stockfish engine(stockfishPath);
+    ifstream fin;
+    ofstream fout;
+
     printBoard();
     whiteMoves = 0;
     blackMoves = 0;
@@ -1916,15 +1919,42 @@ void Board::playGamePVAIWhitePlayer(){
     int oldY;
     int newY;
 
+    string getWholeInput;
+    string getLastInput;
+    string VR_FILENAME = "speech.txt";
+    string QT_FILENAME = "qt.txt";
+
     while(!checkmate(position)){
         engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
-
         bool madeMove = false;
-
         //Player move
         cout << "White move: " << endl;
         while(!madeMove){
-            cin >> playerMove;
+            bool newMove = false;
+            cout << "Input Move(White): ";
+            while(!newMove){
+                fin.open(VR_FILENAME, ios::ate);
+                if(!fin.is_open()){
+                    throw runtime_error("bruh grrr");
+                }
+                for(streampos pos = fin.tellg() - static_cast<streamoff>(1); pos > 0; pos -= 1){
+                    fin.seekg(pos);
+                    charOldX = fin.get();
+                    if(charOldX == ' '){
+                        break;
+                    }
+                }
+                getline(fin, getLastInput);
+                if(playerMove != getLastInput && getLastInput != "" && getLastInput != "ROR" && getLastInput != "ERROR"){
+                    playerMove = getLastInput;
+                    cout << playerMove;
+                    // cout << "lololol" << endl;
+                    newMove = true;
+                }
+                fin.close();
+            }
+
+
             if(playerMove.size() == 4){
                 charOldX = playerMove[0];
                 charOldY = playerMove[1];
@@ -1945,53 +1975,67 @@ void Board::playGamePVAIWhitePlayer(){
             oldY = convertToInt(charOldY);
             newY = convertToInt(charNewY);
 
+
+
+            // Checks if the piece being moved isn't an empty piece, and is white
             if((board[oldY][oldX]->getID() != "empty") && (board[oldY][oldX]->white())){
+                // Checks for move validity
                 if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
-                    if(board[oldY][oldX]->getID() == "empty"){
-                        madeMove = true;
-                        whiteMoves++;
+                    fin.open(VR_FILENAME);
+                    getline(fin, getWholeInput);
+                    fin.close();
+
+                    if(takePiece(oldX, oldY, newX, newY)){
+                        getWholeInput += " 1";
+                    }
+
+                    Piece* takenPiece = board[newY][newX];
+                    swap(oldX, oldY, newX, newY);
+                    if(isCheck(kw)){
+                        undoMove(oldX, oldY, newX, newY, takenPiece);
+                        listMove = listMove.substr(0, listMove.size() - 10);
+                        cout << "King is in check, try again" << endl;
                     }
                     else{
-                        Piece *takenPiece = board[newY][newX];
-                        swap(oldX, oldY, newX, newY);
-                        if(isCheck(kw)){
-                            undoMove(oldX, oldY, newX, newY, takenPiece);
-                            listMove = listMove.substr(0, listMove.size() - 10);
-                            cout << "King is still in check, try again" << endl;
-                        }
-                        else{
-                            if(board[newY][newX]->getID() == "pawn" && newY == 7){
-                                if(!promote(board[newY][newX], newPiece)){
-                                    undoMove(oldX, oldY, newX, newY, takenPiece);
-                                    listMove = listMove.substr(0, listMove.size() - 10);
-                                }
-                                else{
-                                    madeMove = true;
-                                    whiteMoves++;
-                                }
+                        if(board[newY][newX]->getID() == "pawn" && newY == 7){
+                            if(!promote(board[newY][newX], newPiece)){
+                                undoMove(oldX, oldY, newX, newY, takenPiece);
+                                listMove = listMove.substr(0, listMove.size() - 10);
                             }
                             else{
                                 madeMove = true;
                                 whiteMoves++;
+
+                                fout.open(QT_FILENAME, ios::app);
+                                fout << "\n" << getWholeInput;
+                                fout.close();
                             }
+                        }
+                        else{
+                            madeMove = true;
+                            whiteMoves++;
+
+                            fout.open(QT_FILENAME, ios::app);
+                            fout << "\n" << getWholeInput;
+                            fout.close();
                         }
                     }
                 }
-                else {
-                    cout << "Invalid move, try again, nani" << endl;
+
+                else{
+                    cout << "Invalid move, try again" << endl;
                 }
             }
             else{
-                cout << "Invalid move, try again, wtf" << endl;
+                cout << "Invalid move, try again" << endl;
             }
         }
-      
+
+        printBoard();
         cout << "Your Move: ";
         cout << playerMove << endl;
-
         position += " " + playerMove;
         listMove += " " + playerMove;
-
         cout << "List of current moves: " << listMove << endl; 
 
         //Stockfish move
@@ -2048,6 +2092,10 @@ void Board::playGamePVAIWhitePlayer(){
 
 void Board::playGamePVAIBlackPlayer() {
     Stockfish engine(stockfishPath);
+    ifstream fin;
+    ofstream fout;
+
+
     printBoard();
     whiteMoves = 0;
     blackMoves = 0;
@@ -2063,6 +2111,11 @@ void Board::playGamePVAIBlackPlayer() {
     int newX;
     int oldY;
     int newY;
+
+    string getWholeInput;
+    string getLastInput;
+    string VR_FILENAME = "speech.txt";
+    string QT_FILENAME = "qt.txt";
     
     while(!checkmate(position)){
         engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
@@ -2133,8 +2186,28 @@ void Board::playGamePVAIBlackPlayer() {
         cout << "Black move: " << endl;
         while(!madeMove){
             cout << "Input Move(Black): ";
-            cin >> playerMove;
-
+            bool newMove = false;
+            while(!newMove){
+                fin.open(VR_FILENAME, ios::ate);
+                if(!fin.is_open()){
+                    throw runtime_error("bruh grrr");
+                }
+                for(streampos pos = fin.tellg() - static_cast<streamoff>(1); pos > 0; pos -= 1){
+                    fin.seekg(pos);
+                    charOldX = fin.get();
+                    if(charOldX == ' '){
+                        break;
+                    }
+                }
+                getline(fin, getLastInput);
+                if(playerMove != getLastInput && getLastInput != "" && getLastInput != "ROR" && getLastInput != "ERROR"){
+                    playerMove = getLastInput;
+                    cout << playerMove;
+                    // cout << "lololol" << endl;
+                    newMove = true;
+                }
+                fin.close();
+            }
             if(playerMove.size() == 4){
                 charOldX = playerMove[0];
                 charOldY = playerMove[1];
@@ -2157,22 +2230,44 @@ void Board::playGamePVAIBlackPlayer() {
 
             if((board[oldY][oldX]->getID() != "empty") && (!board[oldY][oldX]->white())){
                 if(isValidMove(board[oldY][oldX], newX - oldX, newY - oldY)){
-                    if(board[oldY][oldX]->getID() == "empty"){
-                        madeMove = true;
-                        whiteMoves++;
+                    fin.open(VR_FILENAME);
+                    getline(fin, getWholeInput);
+                    fin.close();
+
+                    if(takePiece(oldX, oldY, newX, newY)){
+                        getWholeInput += " 1";
+                    }
+
+                    Piece* takenPiece = board[newY][newX];
+                    swap(oldX, oldY, newX, newY);
+                    if(isCheck(kb)){
+                        //swap(newX, newY, oldX, oldY);
+                        undoMove(oldX, oldY, newX, newY, takenPiece);
+                        listMove = listMove.substr(0, listMove.size() - 10);
+                        cout << "King is in check, try again" << endl;
                     }
                     else{
-                        swap(oldX, oldY, newX, newY);
-                        if(isCheck(kb)){
-                            swap(newX, newY, oldX, oldY);
-                            cout << "King is in check, try again" << endl;
-                        }
-                        else{
-                            if(board[newY][newX]->getID() == "pawn" && newY == 1){
-                                promote(board[newY][newX], newPiece);
+                        if(board[newY][newX]->getID() == "pawn" && newY == 0){
+                            if(!promote(board[newY][newX], newPiece)){
+                                undoMove(oldX, oldY, newX, newY, takenPiece);
+                                listMove = listMove.substr(0, listMove.size() - 10);
                             }
+                            else{
+                                madeMove = true;
+                                whiteMoves++;
+
+                                fout.open(QT_FILENAME, ios::app);
+                                fout << "\n" << getWholeInput;
+                                fout.close();
+                            }
+                        }
+                        else{  
                             madeMove = true;
                             blackMoves++;
+
+                            fout.open(QT_FILENAME, ios::app);
+                            fout << "\n" << getWholeInput;
+                            fout.close();
                         }
                     }
                 }
@@ -2182,8 +2277,9 @@ void Board::playGamePVAIBlackPlayer() {
             }
             else{
                 cout << "Invalid move, try again wtf" << endl;
-            } 
+            }
         }
+        printBoard();
         cout << "Your Move: ";
         cout << playerMove << endl;
         position += " " + playerMove;
@@ -2207,7 +2303,17 @@ void Board::playGameAIVAI() {
     int oldY;
     int newY;
 
+    int moveCnt = 0;
+
     while(1){
+        if(moveCnt % 2 == 0) {
+            cout << "White Move: " << endl;
+        }
+        else {
+            cout << "Black Move: " << endl;
+        }
+        ++moveCnt; 
+        
         engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
         // Send position and search commands
         engine.sendCommand(position);
