@@ -6,6 +6,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += c++17
 
 SOURCES += \
+    ConditionalTransition.cpp \
     home.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -22,6 +23,7 @@ SOURCES += \
     stockfish.cpp \
 
 HEADERS += \
+    ConditionalTransition.h \
     home.h \
     inputs.h \
     mainwindow.h \

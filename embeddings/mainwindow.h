@@ -40,7 +40,15 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
-
+signals:
+    void enterGame();
+    void takeBotTurn();
+    void takePlayerTurn();
+    void moveReady();
+    void invalidMoveSelected();
+    void moveExecutionDone();
+    void takeNewTurn();
+    void endReached();
 
 private slots:
 
@@ -124,6 +132,24 @@ private slots:
 
     void on_avaButton_clicked();
 
+    void handlePlayerInput();
+
+    void enableTouchInput();
+
+    void disableTouchInput();
+
+    void getVoiceInput();
+
+    void handleBotInput();
+
+    void handleMoveExecution();
+
+    void checkForEnd();
+
+    void resetGame();
+
+
+
 private:
     Ui::MainWindow *ui;
     Settings *mwSettings;
@@ -153,6 +179,7 @@ private:
     int size = 0;
     int turn;
     int count = 0;
+    QString selectedMove = "";
 
     void setupBoard();
     void setupInitialPositions();
