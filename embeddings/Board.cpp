@@ -1705,7 +1705,8 @@ void Board::playGamePVP() {
                         }
                     }
                     getline(fin, getLastInput);
-                    if(playerMove != getLastInput && getLastInput != "" && getLastInput != "ROR" && getLastInput != "ERROR"){
+                    if(playerMove != getLastInput && getLastInput != "" && getLastInput != "ROR" && getLastInput != "ERROR"
+                        && getLastInput.size() < 6){
                         playerMove = getLastInput;
                         cout << getLastInput;
                         cout << "lololol" << endl;
@@ -1807,7 +1808,8 @@ void Board::playGamePVP() {
                         }
                     }
                     getline(fin, getLastInput);
-                    if(playerMove != getLastInput && getLastInput != "" && getLastInput != "ROR" && getLastInput != "ERROR"){
+                    if(playerMove != getLastInput && getLastInput != "" && getLastInput != "ROR" && getLastInput != "ERROR"
+                        && getLastInput.size() < 6){
                         playerMove = getLastInput;
                         cout << playerMove;
                         cout << "lololol" << endl;
