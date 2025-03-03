@@ -1945,7 +1945,8 @@ void Board::playGamePVAIWhitePlayer(){
                     }
                 }
                 getline(fin, getLastInput);
-                if(playerMove != getLastInput && getLastInput != "" && getLastInput != "ROR" && getLastInput != "ERROR"){
+                if(playerMove != getLastInput && getLastInput != "" && getLastInput != "ROR" && getLastInput != "ERROR"
+                    && getLastInput.size() < 6){
                     playerMove = getLastInput;
                     cout << playerMove;
                     // cout << "lololol" << endl;
@@ -2200,7 +2201,8 @@ void Board::playGamePVAIBlackPlayer() {
                     }
                 }
                 getline(fin, getLastInput);
-                if(playerMove != getLastInput && getLastInput != "" && getLastInput != "ROR" && getLastInput != "ERROR"){
+                if(playerMove != getLastInput && getLastInput != "" && getLastInput != "ROR" && getLastInput != "ERROR"
+                    && getLastInput.size() < 6){
                     playerMove = getLastInput;
                     cout << playerMove;
                     // cout << "lololol" << endl;
