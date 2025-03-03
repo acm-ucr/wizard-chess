@@ -1,18 +1,18 @@
+#include <QStateMachine>
+#include <QState>
+#include <QSignalTransition>
+#include <QDebug>
+
 #include "ConditionalTransition.h"
 
-class ConditionalTransition : public QSignalTransition {
-public:
-    int *variable;
-    int expectedValue;
+ConditionalTransition::ConditionalTransition(QObject *sender, const char *signal, int *var, int value, QState *target)
+    : QSignalTransition(sender, signal), variable(var), expectedValue(value) {
+    setTargetState(target);
+}
 
-    ConditionalTransition(QObject *sender, const char *signal, int *var, QState *target)
-        : QSignalTransition(sender, signal), variable(var), expectedValue(value) {
-        setTargetState(target);
-    }
+bool ConditionalTransition::eventTest(QEvent *event) {
+    return QSignalTransition::eventTest(event) && (*variable == expectedValue);
+}
 
-protected:
-    bool eventTest(QEvent *event) override {
-        return QSignalTransition::eventTest(event) && (*variable == expectedValue);
-    }
-};
+
 

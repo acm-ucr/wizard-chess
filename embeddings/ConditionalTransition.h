@@ -9,7 +9,7 @@ public:
     int *variable;
     int expectedValue;
 
-    ConditionalTransition(QObject *sender, const char *signal, int *var, QState *target);
+    ConditionalTransition(QObject *sender, const char *signal, int *var, int value, QState *target);
 
 protected:
     bool eventTest(QEvent *event) override;
