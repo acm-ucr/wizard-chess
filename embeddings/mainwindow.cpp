@@ -43,16 +43,15 @@ MainWindow::~MainWindow()
 
 // x1 and x2 are characters like 'a', 'b' etc - therefore, {x1, y1} E {a, 3} && {x2, y2} E {b, 6} (as an example)
 // i = 0 means no move, i = 1 means just move and possible check, and i = 2 means move, kill and possible check
-void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt)
+void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i)
 {
+    if (prevGlobalTurnCounter == globalTurnCounter) ++size;
     if ((size / 2) == capacity)
     {
         resize();
     }
     if (i == 0) {return;}
-    int row = (size % (capacity * 2))/2;
-    // std::cout << row << std::endl;
-    int col = turnCnt % 2;
+    int row = (size % (capacity * 2)) / 2;
     string out;
     if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "pawn")
     {
@@ -81,19 +80,25 @@ void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turn
     else
     {
         out += "Invalid";
-        tableWidget->setItem(row, col, new QTableWidgetItem(QString::fromStdString(out)));
+        if (globalTurnCounter == 0) {  // update white part of table
+            tableWidget->setItem(row, 0, new QTableWidgetItem(QString::fromStdString(out)));
+        }
+        else {  // update black part of table
+            tableWidget->setItem(row, 1, new QTableWidgetItem(QString::fromStdString(out)));
+        }
+        // if (prevGlobalTurnCounter == globalTurnCounter) size++;
         return;
     }
 
     if (i == 1) {
         out += x2 + to_string(y2);
-        if (col == 0) {
+        if (globalTurnCounter == 0) {
             bCheck = game.isCheck();
             if (bCheck == 1) {
                 out += "+";
             }
         }
-        else if (col == 1) {
+        else if (globalTurnCounter == 1) {
             wCheck = game.isCheck();
             if (wCheck == 1) {
                 out += "+";
@@ -103,20 +108,25 @@ void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turn
     else if (i == 2) {
         out += "x";
         out += x2 + to_string(y2);
-        if (col == 0) {
+        if (globalTurnCounter == 0) {
             bCheck = game.isCheck();
             if (bCheck == 1) {
                 out += "+";
             }
         }
-        else if (col == 1) {
+        else if (globalTurnCounter == 1) {
             wCheck = game.isCheck();
             if (wCheck == 1) {
                 out += "+";
             }
         }
     }
-    tableWidget->setItem(row, col, new QTableWidgetItem(QString::fromStdString(out)));
+    if (globalTurnCounter == 0) {  // update white part of table
+        tableWidget->setItem(row, 0, new QTableWidgetItem(QString::fromStdString(out)));
+    }
+    else {  // update black part of table
+        tableWidget->setItem(row, 1, new QTableWidgetItem(QString::fromStdString(out)));
+    }
     ++size;
 }
 
@@ -337,9 +347,14 @@ void MainWindow::onTileClicked()
             QPushButton* previousButton = boardMap[selectedPiece->position];
             if (previousButton) {
                 previousButton->setIcon(QIcon()); // Clear the icon
-
                 // Calculate the background color based on tile position
                 QString previousPosition = selectedPiece->position;
+                if (selectedPiece->color == "black") {
+                    globalTurnCounter = 1;
+                }
+                else {
+                    globalTurnCounter = 0;
+                }
                 bool isWhiteTile = ((previousPosition[0].toLatin1() - 'A') +
                                     previousPosition.mid(1).toInt()) % 2 == 0;
                 QString backgroundColor = isWhiteTile ? "#ffffff" : "#4560AB"; // White or blue
@@ -352,7 +367,8 @@ void MainWindow::onTileClicked()
                 int extracted_y1 = previousPosition.right(1).toInt(&ok);
                 QString extracted_x2 = clickedPosition.left(1).toLower();
                 int extracted_y2 = clickedPosition.right(1).toInt(&ok);
-                populateCells(extracted_x1.toLatin1().at(0), extracted_y1, extracted_x2.toLatin1().at(0), extracted_y2, 2, co);
+                populateCells(extracted_x1.toLatin1().at(0), extracted_y1, extracted_x2.toLatin1().at(0), extracted_y2, 2);
+                prevGlobalTurnCounter = globalTurnCounter;
                 currTime = timer.elapsed();
                 updateTime(currTime - previousTime);
                 co++;
@@ -406,6 +422,8 @@ void MainWindow::on_pushButton_home_end_clicked()
     end_status = 2;
     timer_white = 0;
     timer_black = 0;
+    globalTurnCounter = 0;
+    prevGlobalTurnCounter = 1;
     setupInitialPositions();
     clearTableWidget();
 }

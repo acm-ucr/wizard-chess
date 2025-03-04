@@ -45,7 +45,7 @@ private slots:
 
     void onTileClicked();
 
-    void populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt);
+    void populateCells(char x1, int y1, char x2, int y2, int i);
 
     void clearTableWidget();
 
@@ -152,6 +152,9 @@ private:
     int size = 0;
     int turn;
     int count = 0;
+    int globalTurnCounter = 0;  // 0 = white turn && 1 = black turn
+    int prevGlobalTurnCounter = 1;  // holds previous GTC
+    // int row = 0;  // to be used in populateCell
 
     void setupBoard();
     void setupInitialPositions();
