@@ -64,7 +64,7 @@ def parsedData(userInput):
       error = {"piece" : "ERROR"}
       return error
    chess_piece = re.findall(r"(pawn|queen|rook|bishop|knight|king|night|Pawn|Queen|Rook|Bishop|Knight|King|Night)", userInput)
-   locations = re.findall(r"[A-H][1-8]", userInput)
+   locations = re.findall(r"[A-Ha-h][1-8]", userInput)
 
    print("PARSED DATA: ", chess_piece, locations)
    file_path = 'speech.txt'
