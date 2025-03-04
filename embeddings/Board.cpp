@@ -13,8 +13,8 @@
 #include "King.h"
 #include "Rook.h"
 #include <cstdlib>
-#include <QCoreApplication>
-#include <QTextStream>
+//#include <QCoreApplication>
+//#include <QTextStream>
 
 using namespace std;
 
@@ -1309,6 +1309,8 @@ bool Board::castleKingSide(Piece *p){
                         return false;
                     }
                     else{
+                        printBoard();
+                        cout << board[p->getPositionY()][p->getPositionX() - 1]->getID() << ", " << board[p->getPositionY()][p->getPositionX() + 1]->getID() << endl;
                         swap(p->getPositionX() - 1, p->getPositionY(), p->getPositionX() + 1, p->getPositionY());
                         printBoard();
                         return true;
@@ -1603,8 +1605,8 @@ int Board::justinIm(char charOldX, int oldY, char charNewX, int newY){
 
 void Board::playMenu() {
     int gameType;
-    QTextStream qtin(stdin);
-    QTextStream qtout(stdout);
+    //QTextStream qtin(stdin);
+    //QTextStream qtout(stdout);
     char playerType;
     cout << "VIRTUAL CHESS BOARD" << endl << endl;
     cout <<" How would you like to play?: " << endl;
@@ -1612,6 +1614,8 @@ void Board::playMenu() {
     cout << "2. Player vs. AI" << endl;
     cout << "3. AI vs. AI?" << endl;
     cout << endl;
+
+    cin >> gameType;
 
     if(gameType == 1) {
         cout << "PLAYER VS. PLAYER" << endl;
@@ -1643,26 +1647,9 @@ void Board::playMenu() {
     }
 }
 
-// void Board::outputQTFile(bool isPieceTaken){
-//     ifstream fin;
-//     ofstream fout;
-
-//     fin.open("test.txt");
-//     getline(fin, getWholeInput);
-//     fin.close();
-
-//     fout.open("qt.txt");
-//     fout << getWholeInput;
-//     fout.close();
-// }
-
 void Board::playGamePVP() {
     ifstream fin;
     ofstream fout;
-
-    // if(!fin.is_open()){
-    //     throw runtime_error("bruh");
-    // }
 
     printBoard();
     listMove = "";
@@ -1717,6 +1704,7 @@ void Board::playGamePVP() {
                     }
                     fin.close();
                 }
+                cin >> playerMove;
 
                 if(playerMove.size() == 4){
                     charOldX = playerMove[0];
@@ -1744,23 +1732,37 @@ void Board::playGamePVP() {
                         fin.open(VR_FILENAME);
                         getline(fin, getWholeInput);
                         fin.close();
-
-                        if(takePiece(oldX, oldY, newX, newY)){
-                            getWholeInput += " 1";
-                        }
-
-                        Piece* takenPiece = board[newY][newX];
-                        swap(oldX, oldY, newX, newY);
-                        if(isCheck(kw)){
-                            undoMove(oldX, oldY, newX, newY, takenPiece);
-                            listMove = listMove.substr(0, listMove.size() - 10);
-                            cout << "King is in check, try again" << endl;
+                        
+                        if(board[oldY][oldX]->getID() == "empty"){
+                            madeMove = true;
+                            whiteMoves++;
                         }
                         else{
-                            if(board[newY][newX]->getID() == "pawn" && newY == 7){
-                                if(!promote(board[newY][newX], newPiece)){
-                                    undoMove(oldX, oldY, newX, newY, takenPiece);
-                                    listMove = listMove.substr(0, listMove.size() - 10);
+                            if(takePiece(oldX, oldY, newX, newY)){
+                                getWholeInput += " 1";
+                            }
+
+                            Piece* takenPiece = board[newY][newX];
+                            swap(oldX, oldY, newX, newY);
+                            if(isCheck(kw)){
+                                undoMove(oldX, oldY, newX, newY, takenPiece);
+                                listMove = listMove.substr(0, listMove.size() - 10);
+                                cout << "King is in check, try again" << endl;
+                            }
+                            else{
+                                if(board[newY][newX]->getID() == "pawn" && newY == 7){
+                                    if(!promote(board[newY][newX], newPiece)){
+                                        undoMove(oldX, oldY, newX, newY, takenPiece);
+                                        listMove = listMove.substr(0, listMove.size() - 10);
+                                    }
+                                    else{
+                                        madeMove = true;
+                                        whiteMoves++;
+
+                                        fout.open(QT_FILENAME, ios::app);
+                                        fout << "\n" << getWholeInput;
+                                        fout.close();
+                                    }
                                 }
                                 else{
                                     madeMove = true;
@@ -1770,14 +1772,6 @@ void Board::playGamePVP() {
                                     fout << "\n" << getWholeInput;
                                     fout.close();
                                 }
-                            }
-                            else{
-                                madeMove = true;
-                                whiteMoves++;
-
-                                fout.open(QT_FILENAME, ios::app);
-                                fout << "\n" << getWholeInput;
-                                fout.close();
                             }
                         }
                     }
@@ -1820,6 +1814,7 @@ void Board::playGamePVP() {
                     }
                     fin.close();
                 }
+
                 if(playerMove.size() == 4){
                     charOldX = playerMove[0];
                     charOldY = playerMove[1];
@@ -1846,40 +1841,46 @@ void Board::playGamePVP() {
                         getline(fin, getWholeInput);
                         fin.close();
 
-                        if(takePiece(oldX, oldY, newX, newY)){
-                            getWholeInput += " 1";
-                        }
-
-                        Piece* takenPiece = board[newY][newX];
-                        swap(oldX, oldY, newX, newY);
-                        if(isCheck(kb)){
-                            //swap(newX, newY, oldX, oldY);
-                            undoMove(oldX, oldY, newX, newY, takenPiece);
-                            listMove = listMove.substr(0, listMove.size() - 10);
-                            cout << "King is in check, try again" << endl;
+                        if(board[oldY][oldX]->getID() == "empty"){
+                            madeMove = true;
+                            whiteMoves++;
                         }
                         else{
-                            if(board[newY][newX]->getID() == "pawn" && newY == 0){
-                                if(!promote(board[newY][newX], newPiece)){
-                                    undoMove(oldX, oldY, newX, newY, takenPiece);
-                                    listMove = listMove.substr(0, listMove.size() - 10);
+                            if(takePiece(oldX, oldY, newX, newY)){
+                                getWholeInput += " 1";
+                            }
+
+                            Piece* takenPiece = board[newY][newX];
+                            swap(oldX, oldY, newX, newY);
+                            if(isCheck(kb)){
+                                //swap(newX, newY, oldX, oldY);
+                                undoMove(oldX, oldY, newX, newY, takenPiece);
+                                listMove = listMove.substr(0, listMove.size() - 10);
+                                cout << "King is in check, try again" << endl;
+                            }
+                            else{
+                                if(board[newY][newX]->getID() == "pawn" && newY == 0){
+                                    if(!promote(board[newY][newX], newPiece)){
+                                        undoMove(oldX, oldY, newX, newY, takenPiece);
+                                        listMove = listMove.substr(0, listMove.size() - 10);
+                                    }
+                                    else{
+                                        madeMove = true;
+                                        whiteMoves++;
+
+                                        fout.open(QT_FILENAME, ios::app);
+                                        fout << "\n" << getWholeInput;
+                                        fout.close();
+                                    }
                                 }
-                                else{
+                                else{  
                                     madeMove = true;
-                                    whiteMoves++;
+                                    blackMoves++;
 
                                     fout.open(QT_FILENAME, ios::app);
                                     fout << "\n" << getWholeInput;
                                     fout.close();
                                 }
-                            }
-                            else{  
-                                madeMove = true;
-                                blackMoves++;
-
-                                fout.open(QT_FILENAME, ios::app);
-                                fout << "\n" << getWholeInput;
-                                fout.close();
                             }
                         }
                     }
