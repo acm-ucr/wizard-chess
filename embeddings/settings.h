@@ -7,7 +7,7 @@ class Settings
         Settings();
         unsigned int diffLevel = 4;
         unsigned int gameModeNum = 1;
-        bool commandType = true;
+        bool commandType = false;
         void setDifflevel(int d);
         void setGamemodeNum(int n);
         ~Settings();

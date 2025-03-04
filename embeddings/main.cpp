@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "settings.h"
+#include "Board.h"
 #include <QApplication>
 #include "inputs.h"
 
@@ -10,9 +11,11 @@ int main(int argc, char *argv[])
     MainWindow w;
     w.show();
 
-    // inputs input;
+    inputs input;
 
     return a.exec();
+    //Board b;
+    //b.playMenu();
 }
 
 // #include "Board.h"
@@ -32,11 +35,11 @@ int main(int argc, char *argv[])
 //     QTextStream cin(stdin);
 //     Board b;
 //     b.playMenu();
-//     if(b.isCheck()){
-//         cout << "success" << endl;
-//     }
-//     else {
-//         cout << "failure" << endl;
-//     }
+//     // if(b.isCheck()){
+//     //     cout << "success" << endl;
+//     // }
+//     // else {
+//     //     cout << "failure" << endl;
+//     // }
 //     return 0;
 // }

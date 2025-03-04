@@ -70,6 +70,8 @@ class Board {
         bool isCheck(King *k);
         bool checkmate(string moveList);
 
+        void outputQTFile(bool isPieceTaken);
+
         bool isCheck();
 
         bool promote(Piece *p, char promoPiece);
