@@ -49,41 +49,43 @@ MainWindow::MainWindow(QWidget *parent)
 
     QState *game = new QState();
     QState *newTurn = new QState(game);
-    //QState *checkInputType = new QState();
-    //QState *touchInput = new QState();
-    //QState *voiceInput = new QState();
     QState *botInput = new QState(game);
     QState *playerInput = new QState(game);
     //QState *botMoveExecution = new QState(game);
     QState *playerMoveExecution = new QState(game);
-    //QState *physicalUpdate = new QState();
-    //QState *screenUpdate = new QState();
+
     QState *checkEnd = new QState(game);
 
     QState *endState = new QState();
 
-    // Defining state transitions
+    // DEFINING STATE TRANSITIONS AND EVENTS
+
+    // init state
     initState->addTransition(ui->pushButton_start, &QPushButton::clicked, houseState);
     initState->addTransition(ui->pushButton_tutorial, &QPushButton::clicked, tutorial1State);
     initState->addTransition(ui->pushButton_settings, &QPushButton::clicked, settingsState);
     initState->addTransition(ui->pushButton_about, &QPushButton::clicked, aboutState);
 
-
+    // setting state
     settingsState->addTransition(ui->pushButton_home_settings, &QPushButton::clicked, initState);
 
+    // about state
     aboutState->addTransition(ui->pushButton_home_about, &QPushButton::clicked, initState);
 
+    // tutorial state
     tutorial1State->addTransition(ui->pushButton_home_tutorial, &QPushButton::clicked, initState);
     tutorial1State->addTransition(ui->pushButton_continue_tutorial, &QPushButton::clicked, tutorial2State);
     tutorial2State->addTransition(ui->pushButton_home_tutorial_end, &QPushButton::clicked, initState);
     tutorial2State->addTransition(ui->pushButton_previous_tutorial, &QPushButton::clicked, tutorial1State);
 
+    // house state
     connect(houseState, &QState::entered, this, [=](){
         resetGame();
     });
 
     QSignalTransition* enterGame = houseState->addTransition(ui->pushButton_home2, &QPushButton::clicked, game);
 
+    // game state
     game->setInitialState(newTurn);
     connect(enterGame, &QAbstractTransition::triggered, this, [=](){
         disableTouchInput();
@@ -122,8 +124,6 @@ MainWindow::MainWindow(QWidget *parent)
         handleMoveExecution();
     });
 
-    //connect(this, &MainWindow::moveReady, this, &MainWindow::handleMoveExecution);
-
     playerMoveExecution->addTransition(this, &MainWindow::invalidMoveSelected, playerInput);
 
 
@@ -149,7 +149,7 @@ MainWindow::MainWindow(QWidget *parent)
     checkEnd->addTransition(this, &MainWindow::takeNewTurn, newTurn);
 
 
-    // Defining state events
+    // Defining state screen index
     initState->assignProperty(ui->stackedWidget, "currentIndex", 0);
     settingsState->assignProperty(ui->stackedWidget, "currentIndex", 6);
     aboutState->assignProperty(ui->stackedWidget, "currentIndex", 7);
@@ -484,7 +484,7 @@ void MainWindow::handleBotInput() {
 }
 
 void MainWindow::handleMoveExecution() {
-    // if(!isValidMove()) {
+    // if(!isValidMove(selectedMove)) {
     //     emit invalidMoveSelected();
     //     return;
     // }
@@ -494,6 +494,7 @@ void MainWindow::handleMoveExecution() {
     // while (read file) != done { }
 
     // extract coordinates from move string and assign selectedPiece/clickedPosition
+    // should be changed
     qDebug() << "move handler entered";
     QString initPosition = selectedMove.left(2);
     QString destPosition = selectedMove.right(2);

@@ -4,7 +4,7 @@
 class inputs
 {
     public:
-        inputs();
+        inputs() {}
         // Use these functions to get values to feed into the chess game.
         int getX1() {return x1;}
         int getY1() {return y1;}
