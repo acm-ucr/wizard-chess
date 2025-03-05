@@ -53,7 +53,6 @@ MainWindow::MainWindow(QWidget *parent)
     QState *playerInput = new QState(game);
     //QState *botMoveExecution = new QState(game);
     QState *playerMoveExecution = new QState(game);
-
     QState *checkEnd = new QState(game);
 
     QState *endState = new QState();
@@ -92,6 +91,8 @@ MainWindow::MainWindow(QWidget *parent)
         qDebug() << "game entered";
     });
 
+    // new turn state
+    // TO DO: update how we determine if it's a bot turn or player turn
     connect(newTurn, &QState::entered, this, [=](){
         // if (co == 0) {
         //     emit takeBotTurn();
@@ -108,25 +109,33 @@ MainWindow::MainWindow(QWidget *parent)
     newTurn->addTransition(this, &MainWindow::takeBotTurn, botInput);
     newTurn->addTransition(this, &MainWindow::takePlayerTurn, playerInput);
 
-
-    //connect(playerInput, &QState::entered, this, &MainWindow::handlePlayerInput);
+    // playerInput state
     connect(playerInput, &QState::entered, this, [=](){
-        //check end status
         qDebug() << "player input state entered";
         handlePlayerInput();
     });
 
     playerInput->addTransition(this, &MainWindow::moveReady, playerMoveExecution);
 
+    // playerMoveExecution state
     connect(playerMoveExecution, &QState::entered, this, [=](){
-        //check end status
         qDebug() << "player move execution state entered";
         handleMoveExecution();
     });
 
     playerMoveExecution->addTransition(this, &MainWindow::invalidMoveSelected, playerInput);
 
+    // check end state
+    playerMoveExecution->addTransition(this, &MainWindow::moveExecutionDone, checkEnd);
+    connect(checkEnd, &QState::entered, this, [=](){
+        qDebug() << "check end entered";
+        checkForEnd();
+    });
 
+    checkEnd->addTransition(this, &MainWindow::endReached, endState);
+    checkEnd->addTransition(this, &MainWindow::takeNewTurn, newTurn);
+
+    // end state
     game->addTransition(ui->pushButton_EndGame, &QPushButton::clicked, endState);
     endState->addTransition(ui->pushButton_home_end, &QPushButton::clicked, initState);
     connect(endState, &QState::entered, this, [=](){
@@ -137,16 +146,6 @@ MainWindow::MainWindow(QWidget *parent)
         ui->stackedWidget->setCurrentIndex(8);
     });
 
-
-    playerMoveExecution->addTransition(this, &MainWindow::moveExecutionDone, checkEnd);
-    connect(checkEnd, &QState::entered, this, [=](){
-        //check end status
-        qDebug() << "check end entered";
-        checkForEnd();
-    });
-
-    checkEnd->addTransition(this, &MainWindow::endReached, endState);
-    checkEnd->addTransition(this, &MainWindow::takeNewTurn, newTurn);
 
 
     // Defining state screen index
@@ -303,6 +302,8 @@ void MainWindow::on_expertLevel_clicked()
     mwSettings->diffLevel = 1;
 }
 
+
+// TO DO: update settings variables for input and game type
 // {true = voice}
 void MainWindow::on_voiceCommand_clicked()
 {
@@ -422,7 +423,7 @@ void MainWindow::handlePlayerInput() {
 
     if (mwSettings->commandType == false) {
         enableTouchInput();
-        qDebug() << "touch!";
+        qDebug() << "getting touch input";
     }
     else if (mwSettings->commandType == true) {
         getVoiceInput();
@@ -437,9 +438,10 @@ void MainWindow::enableTouchInput() {
 
 void MainWindow::disableTouchInput() {
     for (auto it = boardMap.begin(); it != boardMap.end(); ++it) {
-        it.value()->setEnabled(false);  // Enable touch input for all tiles
+        it.value()->setEnabled(false);  // Disable touch input for all tiles
     }
 }
+
 
 
 void MainWindow::onTileClicked()
@@ -473,13 +475,14 @@ void MainWindow::onTileClicked()
 
 
 void MainWindow::getVoiceInput() {
-    // get voice input
-    // selectedMove = voice input
-    // emit moveSelected(selectedMove)
+    // TO DO: get voice input
+    QString voice_input = "";
+    selectedMove = voice_input;
+    emit moveReady();
 }
 
 void MainWindow::handleBotInput() {
-    // get bot input
+    // TO DO: get bot input
     emit moveReady();
 }
 
@@ -489,12 +492,11 @@ void MainWindow::handleMoveExecution() {
     //     return;
     // }
 
-    // motor mvmt:
+    // TO DO: motor mvmt
     // write selectedMove to file
     // while (read file) != done { }
 
-    // extract coordinates from move string and assign selectedPiece/clickedPosition
-    // should be changed
+    // TO DO: update method of extracting coordinates from moveReady string and assign selectedPiece/clickedPosition
     qDebug() << "move handler entered";
     QString initPosition = selectedMove.left(2);
     QString destPosition = selectedMove.right(2);
@@ -509,6 +511,7 @@ void MainWindow::handleMoveExecution() {
         }
     }
 
+    // updates board UI with move
     if (selectedPiece) {
         // Moving the selected piece
         if (isValidMove(selectedPiece->type, selectedPiece->position, destPosition)) {
@@ -535,10 +538,10 @@ void MainWindow::handleMoveExecution() {
                 qDebug() << extracted_x1 << extracted_y1 << extracted_x2 << extracted_y2;
                 populateCells(extracted_x1.toLatin1().at(0), extracted_y1, extracted_x2.toLatin1().at(0), extracted_y2, 2, co);
 
+                // TO DO: fix timer calculations
                 currTime = timer.elapsed();
                 updateTime(currTime - previousTime);
                 co++;
-                //emit turnUpdated();
                 previousTime = currTime;
                 // [END OF IMPLEMENTATION]
             }
@@ -559,10 +562,10 @@ void MainWindow::handleMoveExecution() {
             emit invalidMoveSelected();
         }
     }
-    qDebug() << "???";
 }
 
 void MainWindow::checkForEnd() {
+    // TO DO: implement check for end
     // if end: emit endReached
     // if not end: emit takeNewTurn
     qDebug() << "check end, going to new turn";
