@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <algorithm>
+#include <ctime>
 
 #include "Board.h"
 #include "Piece.h"
@@ -1669,13 +1670,16 @@ void Board::playGamePVP() {
     int newY;
 
     string position = "position startpos moves";
+    string VR_FILENAME = "speech.txt";
+    string QT_FILENAME = "qt.txt";
+    //Clear QT file before beginning 
+    fout.open(QT_FILENAME, ios::trunc);
+    fout.close();
 
     while(!checkmate(position)){
         string getWholeInput;
         string getLastInput;
         bool madeMove = false;
-        string VR_FILENAME = "speech.txt";
-        string QT_FILENAME = "qt.txt";
         //bool isPieceTaken = false;
         if(whiteMoves == blackMoves){
             cout << "White move: " << endl;
@@ -1928,6 +1932,14 @@ void Board::playGamePVAIWhitePlayer(){
     string VR_FILENAME = "speech.txt";
     string QT_FILENAME = "qt.txt";
 
+    //Clear QT file before beginning 
+    fout.open(QT_FILENAME, ios::trunc);
+    fout.close();
+
+    string stockfishMove;
+
+    int moveCnt = 0;
+
     while(!checkmate(position)){
         engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
         bool madeMove = false;
@@ -2041,6 +2053,7 @@ void Board::playGamePVAIWhitePlayer(){
                 cout << "Invalid move, try again" << endl;
             }
         }
+        ++moveCnt;
 
         printBoard();
         cout << "Your Move: ";
@@ -2051,6 +2064,7 @@ void Board::playGamePVAIWhitePlayer(){
 
         //Stockfish move
         // Send position and search commands
+        cout << "AI Move: " << endl;
         engine.sendCommand(position);
 
         //Set depth to tell stockfish how far to search(the lower the depth, the lower the difficulty) and/or give a certain time limit for it to search each depth
@@ -2095,9 +2109,15 @@ void Board::playGamePVAIWhitePlayer(){
             cout << "Stockfish gave an invalid move????" << endl;
         }
         ++blackMoves;
-      
+        
+        time_t epochTime = time(nullptr);
+        fout.open(QT_FILENAME, ios::app);
+        fout << "\n" << moveCnt << " " << epochTime << " " << bestMove;
+        fout.close();
+
         printBoard();
         cout << "Updated moves after stockfish: " << listMove << endl;
+        ++moveCnt;
     }
 }
 
@@ -2123,10 +2143,15 @@ void Board::playGamePVAIBlackPlayer() {
     int oldY;
     int newY;
 
+    int moveCnt = 0;
     string getWholeInput;
     string getLastInput;
     string VR_FILENAME = "speech.txt";
     string QT_FILENAME = "qt.txt";
+
+    //Clear QT file before beginning 
+    fout.open(QT_FILENAME, ios::trunc);
+    fout.close();
     
     while(!checkmate(position)){
         engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
@@ -2134,14 +2159,8 @@ void Board::playGamePVAIBlackPlayer() {
         bool madeMove = false;
 
         //AI MOVE FIRST 
-        cout << "Your Move: ";
-        cout << playerMove << endl;
-
-        position += " " + playerMove;
-        listMove += " " + playerMove;
-
-        cout << "List of current moves: " << listMove << endl; 
-
+        cout << "AI Move: " << endl;
+        cout << "List of current moves: " << listMove << endl;
         //Stockfish move
         // Send position and search commands
         engine.sendCommand(position);
@@ -2192,6 +2211,12 @@ void Board::playGamePVAIBlackPlayer() {
         cout << "Updated moves after stockfish: " << listMove << endl;
 
 
+        time_t epochTime = time(nullptr);
+        fout.open(QT_FILENAME, ios::app);
+        fout << "\n" << moveCnt << " " << epochTime << " " << bestMove;
+        fout.close();
+
+        ++moveCnt;
 
         //PLAYER MOVE
         cout << "Black move: " << endl;
@@ -2302,10 +2327,13 @@ void Board::playGamePVAIBlackPlayer() {
         position += " " + playerMove;
         listMove += " " + playerMove;
         cout << "List of current moves: " << listMove << endl;
+        ++moveCnt;
     }
 }
 
 void Board::playGameAIVAI() {
+    ofstream fout;
+    string QT_FILENAME = "qt.txt";
     Stockfish engine(stockfishPath);
     string position = "position startpos moves"; 
     printBoard();
@@ -2321,6 +2349,10 @@ void Board::playGameAIVAI() {
     int newY;
 
     int moveCnt = 0;
+
+    //Clear QT file before beginning 
+    fout.open(QT_FILENAME, ios::trunc);
+    fout.close();
 
     while(1){
         if(moveCnt % 2 == 0) {
@@ -2380,6 +2412,10 @@ void Board::playGameAIVAI() {
         else { //Should never really output this, more for safe measure
             cout << "Stockfish gave an invalid move????" << endl;
         }
+        time_t epochTime = time(nullptr);
+        fout.open(QT_FILENAME, ios::app);
+        fout << "\n" << moveCnt << " " << epochTime << " " << bestMove;
+        fout.close();
       
         printBoard();
         cout << "Updated moves after stockfish: " << listMove << endl;

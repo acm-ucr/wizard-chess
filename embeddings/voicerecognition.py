@@ -46,7 +46,7 @@ def promotionPawn():
 def convertToLetter(piece):
    if "night" in piece:
       letter = "n"
-   elif "awn" in piece: 
+   elif "awn" in piece or "on" in piece: 
       letter = "p"
    elif "ishop" in piece:
       letter = "b"
@@ -63,7 +63,7 @@ def parsedData(userInput):
    if (userInput == None):
       error = {"piece" : "ERROR"}
       return error
-   chess_piece = re.findall(r"(pawn|queen|rook|bishop|knight|king|night|Pawn|Queen|Rook|Bishop|Knight|King|Night)", userInput)
+   chess_piece = re.findall(r"(pawn|on|queen|rook|bishop|knight|king|night|Pawn|Queen|Rook|Bishop|Knight|King|Night)", userInput)
    locations = re.findall(r"[A-Ha-h][1-8]", userInput)
 
    print("PARSED DATA: ", chess_piece, locations)
