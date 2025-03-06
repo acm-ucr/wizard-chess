@@ -1745,6 +1745,9 @@ void Board::playGamePVP() {
                             if(takePiece(oldX, oldY, newX, newY)){
                                 getWholeInput += " 1";
                             }
+                            else{
+                                getWholeInput += " 0";
+                            }
 
                             Piece* takenPiece = board[newY][newX];
                             swap(oldX, oldY, newX, newY);
@@ -2009,6 +2012,9 @@ void Board::playGamePVAIWhitePlayer(){
                     else{
                         if(takePiece(oldX, oldY, newX, newY)){
                             getWholeInput += " 1";
+                        }
+                        else{
+                            getWholeInput += " 0";
                         }
 
                         Piece* takenPiece = board[newY][newX];
@@ -2278,6 +2284,9 @@ void Board::playGamePVAIBlackPlayer() {
                     else{
                         if(takePiece(oldX, oldY, newX, newY)){
                             getWholeInput += " 1";
+                        }
+                        else{
+                            getWholeInput += " 0";
                         }
 
                         Piece* takenPiece = board[newY][newX];
