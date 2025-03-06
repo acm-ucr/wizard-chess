@@ -1,87 +1,139 @@
+
 class chessPiece{
   public:
-  chessPiece(String, String);
+  chessPiece();
+  chessPiece(String original_coords, String timeStamp, String captureCheck, String idChain);
+  void dataReadAndConfigure();
   void ChangeCoords(String);
-  
+  String coordsGet();
+  int timeGet();
+  bool flagGet();
+  String idGet();
+
   private:
   String coords;
-  String pieceNum;
+  int time_Stamp;
+  bool is_Captured;
+  String id_String;
 };
 
-String newCoords;
-String inputString = "";
-bool stringComplete = false;
+String inputLine;
 
 void setup() {
   Serial.begin(9600);
-  inputString.reserve(200);
+
 }
 
 void loop() {
-  int firstComma;
-  int secondComma;
-  if (stringComplete)
+  
+  while (!Serial.available()) // doesn't spam through the loop so less load and less random assignments
   {
-    firstComma = inputString.indexOf(',');
-    secondComma = inputString.indexOf(',', firstComma + 1);
+    delay(1000);  
   }
 
-  if (firstComma > 0 && secondComma > firstComma)
+  chessPiece* coordChange = new chessPiece();
+  inputLine = Serial.readString(); // takes in the message
+  inputLine.trim();
+
+  coordChange->dataReadAndConfigure();
+
+  delete coordChange;
+}
+
+chessPiece::chessPiece()
+{
+  coords = "";
+  time_Stamp = 0;
+  is_Captured = false;
+  id_String = "";
+}
+
+chessPiece::chessPiece(String original_coords, String timeStamp, String captureCheck, String idChain)
+{
+  coords = original_coords;
+  time_Stamp = timeStamp.toInt();
+
+  if (captureCheck == "True")
   {
-    String startCoord = inputString.substring(0, firstComma);
-    newCoords = inputString.substring(firstComma + 1, secondComma);
-    String chessType = inputString.substring(secondComma + 1);
-
-    chessPiece *testPiece = new chessPiece(startCoord, chessType);
-
-    testPiece->ChangeCoords(newCoords);
+    is_Captured = true;
   }
   else
   {
-    Serial.println("Error: Invalid command format!");
+    is_Captured = false;
   }
-  inputString = "";
-  stringComplete = false;
-  // if (Serial.available())
-  // {
-  //   char data = Serial.read();
-  //   Serial.print("Arduino Recieved:\n");
-  //   Serial.println(data);
-  //   delay(500);
-  // }
+
+  id_String = idChain;
 }
 
-void serialEvent()
+void chessPiece::dataReadAndConfigure()
 {
-  while (Serial.available())
+  int firstHash = inputLine.indexOf('#'); //finds the split for each value we want
+  int secondHash = inputLine.indexOf('#', firstHash + 1); 
+  int thirdHash = inputLine.indexOf('#', secondHash + 1);
+  int fourthHash = inputLine.indexOf('#', thirdHash + 1);
+
+  if (firstHash == -1 || secondHash == -1 || thirdHash == -1 || fourthHash == -1) { // error for testing
+    Serial.println("Error: Invalid input format! Expected 4 hashes.");
+    return;
+  }
+
+  String idNumber = inputLine.substring(0, firstHash); // assigning based on placement
+  String time_stamp = inputLine.substring(firstHash + 1, secondHash);
+  String origCoords = inputLine.substring(secondHash + 1, thirdHash);
+  String newCoords = inputLine.substring(thirdHash + 1, fourthHash);
+  String captureFlag = inputLine.substring(fourthHash + 1);
+
+  idNumber.trim();
+  time_stamp.trim();
+  origCoords.trim(); // for cleaning up
+  newCoords.trim();
+  captureFlag.trim();
+
+  if (origCoords == "" || time_stamp == 0 || idNumber == "") // final error testing, im paranoid
   {
-    char inChar = (char)Serial.read();
-    if (inChar == '\n')
-    {
-      stringComplete = true;
-    }
-    else
-    {
-      inputString += inChar;
-    }
+    Serial.println("Didnt get information correctly this read");
+    return;
   }
+
+  chessPiece* changedPiece = new chessPiece(origCoords, time_stamp, captureFlag, idNumber); // makes a chesspiece object to change the coordinates of the given instructions
+  changedPiece->ChangeCoords(newCoords);
+
+  String finishCom = changedPiece->idGet();
+  finishCom += " ";
+  finishCom += String(changedPiece->timeGet());
+  finishCom += " Done";
+
+  Serial.println(finishCom); // writes back to the python
+
+  delay(1000);
+
+  delete changedPiece; // temporary line, clears up memory so the arduino doesnt die on us (hopefully :p)
 }
 
-chessPiece::chessPiece(String initCoords, String pieceNumber)
+void chessPiece::ChangeCoords(String nC)
 {
-  coords = initCoords;
-  pieceNum = pieceNumber;
+  coords = nC;
 }
 
-void chessPiece::ChangeCoords(String endCoords)
+String chessPiece::coordsGet()
 {
-  Serial.println("Old Coordinates: ");
-  Serial.println(coords);
-  Serial.println("\n");
-  coords = endCoords;
-  Serial.println("New Coordinates: ");
-  Serial.println(coords);
-  Serial.println("\n");
+  return coords;
+}
+
+int chessPiece::timeGet()
+{
+  return time_Stamp;
+}
+
+bool chessPiece::flagGet()
+{
+  return is_Captured;
+}
+
+String chessPiece::idGet()
+{
+  return id_String;
+}
 
   Serial.println("done\n");
 }
