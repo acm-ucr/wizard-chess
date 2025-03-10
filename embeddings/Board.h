@@ -13,6 +13,7 @@
 #include "Rook.h"
 #include "EmptyPiece.h"
 #include "stockfish.h"
+#include "CapturedSide.h"
 
 using namespace std;
 
@@ -20,6 +21,10 @@ using namespace std;
 class Board {
     private:
         int gameMode = 0;
+        CapturedSide graveyard;
+        Piece* promotePiece;
+        bool kingCastle = false;
+        bool queenCastle = false;
     protected:
         vector<Piece> emptyPieces;
     public:
