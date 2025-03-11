@@ -18,6 +18,8 @@ class chessPiece{
 };
 
 String inputLine;
+String castleCheck;
+String promotion;
 
 void setup() {
   Serial.begin(9600);
@@ -71,8 +73,10 @@ void chessPiece::dataReadAndConfigure()
   int secondHash = inputLine.indexOf('#', firstHash + 1); 
   int thirdHash = inputLine.indexOf('#', secondHash + 1);
   int fourthHash = inputLine.indexOf('#', thirdHash + 1);
+  int fifthHash = inputLine.indexOf('#', fourthHash + 1);
+  int sixthHash = inputLine.indexOf('#', fifthHash + 1);
 
-  if (firstHash == -1 || secondHash == -1 || thirdHash == -1 || fourthHash == -1) { // error for testing
+  if (firstHash == -1 || secondHash == -1 || thirdHash == -1 || fourthHash == -1 || fifthHash == -1 || sixthHash == -1) { // error for testing
     Serial.println("Error: Invalid input format! Expected 4 hashes.");
     return;
   }
@@ -81,13 +85,17 @@ void chessPiece::dataReadAndConfigure()
   String time_stamp = inputLine.substring(firstHash + 1, secondHash);
   String origCoords = inputLine.substring(secondHash + 1, thirdHash);
   String newCoords = inputLine.substring(thirdHash + 1, fourthHash);
-  String captureFlag = inputLine.substring(fourthHash + 1);
+  String captureFlag = inputLine.substring(fourthHash + 1, fifthHash);
+  castleCheck = inputLine.substring(fifthHash + 1, sixthHash);
+  promotion = inputLine.substring(sixthHash + 1);
 
   idNumber.trim();
   time_stamp.trim();
   origCoords.trim(); // for cleaning up
   newCoords.trim();
   captureFlag.trim();
+  castleCheck.trim();
+  promotion.trim();
 
   if (origCoords == "" || time_stamp == 0 || idNumber == "") // final error testing, im paranoid
   {
@@ -133,7 +141,4 @@ bool chessPiece::flagGet()
 String chessPiece::idGet()
 {
   return id_String;
-}
-
-  Serial.println("done\n");
 }
