@@ -24,6 +24,10 @@ time_stamp = 0
 origCoord = ""
 newCoord = ""
 is_capture = False
+castle_check = ""
+promotion_check = ""
+
+
 file = open("qt.txt")
 
 # reading the content in "qt.txt" file 
@@ -31,7 +35,10 @@ sendLine = id_num + '#'
 sendLine += time_stamp + '#'
 sendLine += origCoord + '#'
 sendLine += newCoord + '#'
-sendLine += is_capture
+sendLine += is_capture + '#'
+sendLine += castle_check + '#'
+sendLine += promotion_check
+
 ser.write((str(sendLine) + '\n').encode('utf-8'))
 
 # personal confirmation (to be deleted)
