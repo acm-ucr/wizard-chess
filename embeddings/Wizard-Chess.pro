@@ -1,4 +1,4 @@
-QT       += core gui
+QT += core gui
 QT += statemachine
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -21,6 +21,7 @@ SOURCES += \
     Board.cpp \
     EmptyPiece.cpp \
     stockfish.cpp \
+    CapturedSide.cpp \
 
 HEADERS += \
     ConditionalTransition.h \
@@ -38,6 +39,7 @@ HEADERS += \
     EmptyPiece.h \
     Board.h \
     stockfish.h \
+    CapturedSide.h \
 
 FORMS += \
     mainwindow.ui

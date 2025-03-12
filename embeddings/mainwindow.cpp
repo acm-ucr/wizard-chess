@@ -544,6 +544,17 @@ void MainWindow::handleMoveExecution() {
         }
     }
 
+    QPushButton* clickedButton = qobject_cast<QPushButton*>(sender());
+    if (!clickedButton) return;
+
+    QString clickedPosition;
+    for (auto it = boardMap.begin(); it != boardMap.end(); ++it) {
+        if (it.value() == clickedButton) {
+            clickedPosition = it.key();
+            break;
+        }
+    }
+
     // updates board UI with move
     if (selectedPiece) {
         // Moving the selected piece
@@ -572,8 +583,8 @@ void MainWindow::handleMoveExecution() {
                 // ERROR OVER HERE
                 QString extracted_x1 = previousPosition.left(1).toLower();
                 int extracted_y1 = previousPosition.right(1).toInt(&ok);
-                QString extracted_x2 = destPosition.left(1).toLower();
-                int extracted_y2 = destPosition.right(1).toInt(&ok);
+                QString extracted_x2 = clickedPosition.left(1).toLower();
+                int extracted_y2 = clickedPosition.right(1).toInt(&ok);
                 populateCells(extracted_x1.toLatin1().at(0), extracted_y1, extracted_x2.toLatin1().at(0), extracted_y2, 2);
                 prevGlobalTurnCounter = globalTurnCounter;
                 qDebug() << extracted_x1 << extracted_y1 << extracted_x2 << extracted_y2;

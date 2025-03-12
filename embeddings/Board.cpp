@@ -3,12 +3,11 @@
 #include <string>
 #include <algorithm>
 #include <ctime>
-
+#include "CapturedSide.h"
 #include "Board.h"
-
 #include <cstdlib>
-//#include <QCoreApplication>
-//#include <QTextStream>
+// #include <QCoreApplication>
+// #include <QTextStream>
 
 using namespace std;
 
@@ -18,7 +17,6 @@ using namespace std;
 
  - make a string function that returns getPosition, so that
    it returns a string with both x and y position.
-
  - 
 */
 

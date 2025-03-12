@@ -1,6 +1,3 @@
-//#include "mainwindow.h"
-#include "settings.h"
-#include "Board.h"
 #include <QMainWindow>
 #include <QApplication>
 #include "inputs.h"
@@ -23,7 +20,7 @@ int main(int argc, char *argv[])
         "   background-color: gray; "  // Even darker when pressed
         "} "
     );
-
+    inputs input;
     w.show();
     // QApplication a(argc, argv);
     // MainWindow w;
@@ -33,4 +30,5 @@ int main(int argc, char *argv[])
     // return a.exec();
     // Board b;
     // b.playMenu();
+    return 0;
 }
