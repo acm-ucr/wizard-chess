@@ -2,16 +2,10 @@
 #include <fstream>
 #include <string>
 #include <algorithm>
+#include <ctime>
 
 #include "Board.h"
-#include "Piece.h"
-#include "Piece.h"
-#include "Pawn.h"
-#include "Bishop.h"
-#include "Knight.h"
-#include "Queen.h"
-#include "King.h"
-#include "Rook.h"
+
 #include <cstdlib>
 //#include <QCoreApplication>
 //#include <QTextStream>
@@ -240,22 +234,21 @@ void Board::swap(int oldX, int oldY, int newX, int newY){
 
 bool Board::promote(Piece *p, char promoPiece){
     //string piece;
-    Piece* newPiece;
     if(p->getPositionY() == 7){
         //cout << "What piece would you like to promote to?" << endl;
         //cin >> piece;
 
         if(promoPiece == 'q'){
-            newPiece = new Queen(p->getPositionX(), p->getPositionY(), true);
+            promotePiece = new Queen(p->getPositionX(), p->getPositionY(), true);
         }
         else if(promoPiece == 'r'){
-            newPiece = new Rook(p->getPositionX(), p->getPositionY(), true);
+            promotePiece = new Rook(p->getPositionX(), p->getPositionY(), true);
         }
         else if(promoPiece == 'b'){
-            newPiece = new Bishop(p->getPositionX(), p->getPositionY(), true);
+            promotePiece = new Bishop(p->getPositionX(), p->getPositionY(), true);
         }
         else if(promoPiece == 'k'){
-            newPiece = new Knight(p->getPositionX(), p->getPositionY(), true);
+            promotePiece = new Knight(p->getPositionX(), p->getPositionY(), true);
         }
         else{
             cout << "Please put a valid promote piece" << endl;
@@ -267,23 +260,23 @@ bool Board::promote(Piece *p, char promoPiece){
         //cin >> piece;
 
         if(promoPiece == 'q'){
-            newPiece = new Queen(p->getPositionX(), p->getPositionY(), false);
+            promotePiece = new Queen(p->getPositionX(), p->getPositionY(), false);
         }
         else if(promoPiece == 'r'){
-            newPiece = new Rook(p->getPositionX(), p->getPositionY(), false);
+            promotePiece = new Rook(p->getPositionX(), p->getPositionY(), false);
         }
         else if(promoPiece == 'b'){
-            newPiece = new Bishop(p->getPositionX(), p->getPositionY(), false);
+            promotePiece = new Bishop(p->getPositionX(), p->getPositionY(), false);
         }
         else if(promoPiece == 'k'){
-            newPiece = new Knight(p->getPositionX(), p->getPositionY(), false);
+            promotePiece = new Knight(p->getPositionX(), p->getPositionY(), false);
         }
         else{
             cout << "Please put a valid promote piece" << endl;
             return false;
         }
     }
-    board[p->getPositionY()][p->getPositionX()] = newPiece;
+    board[p->getPositionY()][p->getPositionX()] = promotePiece;
     return true;
 }
 
@@ -1313,6 +1306,7 @@ bool Board::castleKingSide(Piece *p){
                         cout << board[p->getPositionY()][p->getPositionX() - 1]->getID() << ", " << board[p->getPositionY()][p->getPositionX() + 1]->getID() << endl;
                         swap(p->getPositionX() - 1, p->getPositionY(), p->getPositionX() + 1, p->getPositionY());
                         printBoard();
+                        kingCastle = true;
                         return true;
                     }
                 }
@@ -1349,6 +1343,7 @@ bool Board::castleQueenSide(Piece *p){
                     }
                     else{
                         swap(p->getPositionX() + 2, p->getPositionY(), p->getPositionX() - 1, p->getPositionY());
+                        queenCastle = true;
                         return true;
                     }
                 }
@@ -1669,41 +1664,44 @@ void Board::playGamePVP() {
     int newY;
 
     string position = "position startpos moves";
+    string VR_FILENAME = "speech.txt";
+    string QT_FILENAME = "qt.txt";
+    //Clear QT file before beginning 
+    fout.open(QT_FILENAME, ios::trunc);
+    fout.close();
 
     while(!checkmate(position)){
         string getWholeInput;
         string getLastInput;
         bool madeMove = false;
-        string VR_FILENAME = "speech.txt";
-        string QT_FILENAME = "qt.txt";
         //bool isPieceTaken = false;
         if(whiteMoves == blackMoves){
             cout << "White move: " << endl;
             while(!madeMove){
                 bool newMove = false;
                 cout << "Input Move(White): ";
-                while(!newMove){
-                    fin.open(VR_FILENAME, ios::ate);
-                    if(!fin.is_open()){
-                        throw runtime_error("bruh");
-                    }
-                    for(streampos pos = fin.tellg() - static_cast<streamoff>(1); pos > 0; pos -= 1){
-                        fin.seekg(pos);
-                        charOldX = fin.get();
-                        if(charOldX == ' '){
-                            break;
-                        }
-                    }
-                    getline(fin, getLastInput);
-                    if(playerMove != getLastInput && getLastInput != "" && getLastInput != "ROR" && getLastInput != "ERROR"
-                        && getLastInput.size() < 6){
-                        playerMove = getLastInput;
-                        cout << getLastInput;
-                        // cout << "lololol" << endl;
-                        newMove = true;
-                    }
-                    fin.close();
-                }
+                // while(!newMove){
+                //     fin.open(VR_FILENAME, ios::ate);
+                //     if(!fin.is_open()){
+                //         throw runtime_error("bruh");
+                //     }
+                //     for(streampos pos = fin.tellg() - static_cast<streamoff>(1); pos > 0; pos -= 1){
+                //         fin.seekg(pos);
+                //         charOldX = fin.get();
+                //         if(charOldX == ' '){
+                //             break;
+                //         }
+                //     }
+                //     getline(fin, getLastInput);
+                //     if(playerMove != getLastInput && getLastInput != "" && getLastInput != "ROR" && getLastInput != "ERROR"
+                //         && getLastInput.size() < 6){
+                //         playerMove = getLastInput;
+                //         cout << getLastInput;
+                //         // cout << "lololol" << endl;
+                //         newMove = true;
+                //     }
+                //     fin.close();
+                // }
                 cin >> playerMove;
 
                 if(playerMove.size() == 4){
@@ -1736,10 +1734,22 @@ void Board::playGamePVP() {
                         if(board[oldY][oldX]->getID() == "empty"){
                             madeMove = true;
                             whiteMoves++;
+                            if(kingCastle){
+                                getWholeInput += " 2 -1";
+                            }
+                            else if(queenCastle){
+                                getWholeInput += " 3 -1";
+                            }
+
+                            kingCastle = false;
+                            queenCastle = false;
                         }
                         else{
                             if(takePiece(oldX, oldY, newX, newY)){
                                 getWholeInput += " 1";
+                            }
+                            else{
+                                getWholeInput += " 0";
                             }
 
                             Piece* takenPiece = board[newY][newX];
@@ -1759,6 +1769,11 @@ void Board::playGamePVP() {
                                         madeMove = true;
                                         whiteMoves++;
 
+                                        graveyard.capture(takenPiece);
+                                        graveyard.print();
+
+                                        getWholeInput += " " + to_string(graveyard.retrievePiece(promotePiece));
+
                                         fout.open(QT_FILENAME, ios::app);
                                         fout << "\n" << getWholeInput;
                                         fout.close();
@@ -1767,6 +1782,11 @@ void Board::playGamePVP() {
                                 else{
                                     madeMove = true;
                                     whiteMoves++;
+
+                                    graveyard.capture(takenPiece);
+                                    graveyard.print();
+
+                                    getWholeInput += " -1";
 
                                     fout.open(QT_FILENAME, ios::app);
                                     fout << "\n" << getWholeInput;
@@ -1792,28 +1812,30 @@ void Board::playGamePVP() {
             while(!madeMove){
                 cout << "Input Move(Black): ";
                 bool newMove = false;
-                while(!newMove){
-                    fin.open(VR_FILENAME, ios::ate);
-                    if(!fin.is_open()){
-                        throw runtime_error("bruh grrr");
-                    }
-                    for(streampos pos = fin.tellg() - static_cast<streamoff>(1); pos > 0; pos -= 1){
-                        fin.seekg(pos);
-                        charOldX = fin.get();
-                        if(charOldX == ' '){
-                            break;
-                        }
-                    }
-                    getline(fin, getLastInput);
-                    if(playerMove != getLastInput && getLastInput != "" && getLastInput != "ROR" && getLastInput != "ERROR"
-                        && getLastInput.size() < 6){
-                        playerMove = getLastInput;
-                        cout << playerMove;
-                        // cout << "lololol" << endl;
-                        newMove = true;
-                    }
-                    fin.close();
-                }
+                // while(!newMove){
+                //     fin.open(VR_FILENAME, ios::ate);
+                //     if(!fin.is_open()){
+                //         throw runtime_error("bruh grrr");
+                //     }
+                //     for(streampos pos = fin.tellg() - static_cast<streamoff>(1); pos > 0; pos -= 1){
+                //         fin.seekg(pos);
+                //         charOldX = fin.get();
+                //         if(charOldX == ' '){
+                //             break;
+                //         }
+                //     }
+                //     getline(fin, getLastInput);
+                //     if(playerMove != getLastInput && getLastInput != "" && getLastInput != "ROR" && getLastInput != "ERROR"
+                //         && getLastInput.size() < 6){
+                //         playerMove = getLastInput;
+                //         cout << playerMove;
+                //         // cout << "lololol" << endl;
+                //         newMove = true;
+                //     }
+                //     fin.close();
+                // }
+
+                cin >> playerMove;
 
                 if(playerMove.size() == 4){
                     charOldX = playerMove[0];
@@ -1844,10 +1866,23 @@ void Board::playGamePVP() {
                         if(board[oldY][oldX]->getID() == "empty"){
                             madeMove = true;
                             whiteMoves++;
+
+                            if(kingCastle){
+                                getWholeInput += " 2 -1";
+                            }
+                            else if(queenCastle){
+                                getWholeInput += " 3 -1";
+                            }
+
+                            kingCastle = false;
+                            queenCastle = false;
                         }
                         else{
                             if(takePiece(oldX, oldY, newX, newY)){
                                 getWholeInput += " 1";
+                            }
+                            else{
+                                getWholeInput += " 0";
                             }
 
                             Piece* takenPiece = board[newY][newX];
@@ -1868,6 +1903,11 @@ void Board::playGamePVP() {
                                         madeMove = true;
                                         whiteMoves++;
 
+                                        graveyard.capture(takenPiece);
+                                        graveyard.print();
+
+                                        getWholeInput += " " + to_string(graveyard.retrievePiece(promotePiece));
+
                                         fout.open(QT_FILENAME, ios::app);
                                         fout << "\n" << getWholeInput;
                                         fout.close();
@@ -1876,6 +1916,11 @@ void Board::playGamePVP() {
                                 else{  
                                     madeMove = true;
                                     blackMoves++;
+
+                                    graveyard.capture(takenPiece);
+                                    graveyard.print();
+
+                                    getWholeInput += " -1";
 
                                     fout.open(QT_FILENAME, ios::app);
                                     fout << "\n" << getWholeInput;
@@ -1927,6 +1972,14 @@ void Board::playGamePVAIWhitePlayer(){
     string getLastInput;
     string VR_FILENAME = "speech.txt";
     string QT_FILENAME = "qt.txt";
+
+    //Clear QT file before beginning 
+    fout.open(QT_FILENAME, ios::trunc);
+    fout.close();
+
+    string stockfishMove;
+
+    int moveCnt = 0;
 
     while(!checkmate(position)){
         engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
@@ -1998,6 +2051,9 @@ void Board::playGamePVAIWhitePlayer(){
                         if(takePiece(oldX, oldY, newX, newY)){
                             getWholeInput += " 1";
                         }
+                        else{
+                            getWholeInput += " 0";
+                        }
 
                         Piece* takenPiece = board[newY][newX];
                         swap(oldX, oldY, newX, newY);
@@ -2041,6 +2097,7 @@ void Board::playGamePVAIWhitePlayer(){
                 cout << "Invalid move, try again" << endl;
             }
         }
+        ++moveCnt;
 
         printBoard();
         cout << "Your Move: ";
@@ -2051,6 +2108,7 @@ void Board::playGamePVAIWhitePlayer(){
 
         //Stockfish move
         // Send position and search commands
+        cout << "AI Move: " << endl;
         engine.sendCommand(position);
 
         //Set depth to tell stockfish how far to search(the lower the depth, the lower the difficulty) and/or give a certain time limit for it to search each depth
@@ -2095,9 +2153,15 @@ void Board::playGamePVAIWhitePlayer(){
             cout << "Stockfish gave an invalid move????" << endl;
         }
         ++blackMoves;
-      
+        
+        time_t epochTime = time(nullptr);
+        fout.open(QT_FILENAME, ios::app);
+        fout << "\n" << moveCnt << " " << epochTime << " " << bestMove;
+        fout.close();
+
         printBoard();
         cout << "Updated moves after stockfish: " << listMove << endl;
+        ++moveCnt;
     }
 }
 
@@ -2123,10 +2187,15 @@ void Board::playGamePVAIBlackPlayer() {
     int oldY;
     int newY;
 
+    int moveCnt = 0;
     string getWholeInput;
     string getLastInput;
     string VR_FILENAME = "speech.txt";
     string QT_FILENAME = "qt.txt";
+
+    //Clear QT file before beginning 
+    fout.open(QT_FILENAME, ios::trunc);
+    fout.close();
     
     while(!checkmate(position)){
         engine.clearFiles(); //Clears files to make it easier to process info, program runs extremely slow if info is constantly being put into files
@@ -2134,14 +2203,8 @@ void Board::playGamePVAIBlackPlayer() {
         bool madeMove = false;
 
         //AI MOVE FIRST 
-        cout << "Your Move: ";
-        cout << playerMove << endl;
-
-        position += " " + playerMove;
-        listMove += " " + playerMove;
-
-        cout << "List of current moves: " << listMove << endl; 
-
+        cout << "AI Move: " << endl;
+        cout << "List of current moves: " << listMove << endl;
         //Stockfish move
         // Send position and search commands
         engine.sendCommand(position);
@@ -2192,6 +2255,12 @@ void Board::playGamePVAIBlackPlayer() {
         cout << "Updated moves after stockfish: " << listMove << endl;
 
 
+        time_t epochTime = time(nullptr);
+        fout.open(QT_FILENAME, ios::app);
+        fout << "\n" << moveCnt << " " << epochTime << " " << bestMove;
+        fout.close();
+
+        ++moveCnt;
 
         //PLAYER MOVE
         cout << "Black move: " << endl;
@@ -2254,6 +2323,9 @@ void Board::playGamePVAIBlackPlayer() {
                         if(takePiece(oldX, oldY, newX, newY)){
                             getWholeInput += " 1";
                         }
+                        else{
+                            getWholeInput += " 0";
+                        }
 
                         Piece* takenPiece = board[newY][newX];
                         swap(oldX, oldY, newX, newY);
@@ -2302,10 +2374,13 @@ void Board::playGamePVAIBlackPlayer() {
         position += " " + playerMove;
         listMove += " " + playerMove;
         cout << "List of current moves: " << listMove << endl;
+        ++moveCnt;
     }
 }
 
 void Board::playGameAIVAI() {
+    ofstream fout;
+    string QT_FILENAME = "qt.txt";
     Stockfish engine(stockfishPath);
     string position = "position startpos moves"; 
     printBoard();
@@ -2321,6 +2396,10 @@ void Board::playGameAIVAI() {
     int newY;
 
     int moveCnt = 0;
+
+    //Clear QT file before beginning 
+    fout.open(QT_FILENAME, ios::trunc);
+    fout.close();
 
     while(1){
         if(moveCnt % 2 == 0) {
@@ -2380,6 +2459,10 @@ void Board::playGameAIVAI() {
         else { //Should never really output this, more for safe measure
             cout << "Stockfish gave an invalid move????" << endl;
         }
+        time_t epochTime = time(nullptr);
+        fout.open(QT_FILENAME, ios::app);
+        fout << "\n" << moveCnt << " " << epochTime << " " << bestMove;
+        fout.close();
       
         printBoard();
         cout << "Updated moves after stockfish: " << listMove << endl;
