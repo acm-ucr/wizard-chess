@@ -1,3 +1,7 @@
+// THINGS NEEDED TO BE IMPLEMENTED:
+// -> not allow players to play twice their turn
+// -> fix settings things: add pop up for when player is selecting wrong options
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "settings.h"
@@ -312,18 +316,27 @@ void MainWindow::on_expertLevel_clicked()
     mwSettings->diffLevel = 1;
 }
 
-// {true = voice}
-void MainWindow::on_voiceCommand_clicked()
+// {false = voice} & {true = touch}
+void MainWindow::on_WvoiceCommand_clicked()
 {
-    mwSettings->commandType = true;
+    mwSettings->whitePlayer_commandType = false;
 }
 
-// {false = touch}
-void MainWindow::on_touchCommand_clicked()
+void MainWindow::on_WtouchCommand_clicked()
 {
-    mwSettings->commandType = false;
+    mwSettings->whitePlayer_commandType = true;
 }
 
+// {false = voice} & {true = touch}
+void MainWindow::on_BvoiceCommand_5_clicked()
+{
+    mwSettings->blackPlayer_commandType = false;
+}
+
+void MainWindow::on_BtouchCommand_clicked()
+{
+    mwSettings->blackPlayer_commandType = true;
+}
 
 void MainWindow::clearButton(QPushButton *button, bool isWhiteTile) {
     button->setIcon(QIcon());
@@ -429,12 +442,24 @@ void MainWindow::handlePlayerInput() {
     selectedMove = "";
     qDebug() << "entered input handler";
 
-    if (mwSettings->commandType == false) {
+    // White
+    if (mwSettings->whitePlayer_commandType == true) {
         enableTouchInput();
-        qDebug() << "touch!";
+        qDebug() << "white is playing touch";
     }
-    else if (mwSettings->commandType == true) {
+    else {
         getVoiceInput();
+        qDebug() << "white is playing voice";
+    }
+
+    // Black
+    if (mwSettings->blackPlayer_commandType == true) {
+        enableTouchInput();
+        qDebug() << "black is playing touch";
+    }
+    else {
+        getVoiceInput();
+        qDebug() << "black is playing voice";
     }
 }
 
@@ -479,7 +504,6 @@ void MainWindow::onTileClicked()
         }
     }
 }
-
 
 void MainWindow::getVoiceInput() {
     // get voice input
@@ -541,16 +565,16 @@ void MainWindow::handleMoveExecution() {
                 // [IMPLEMENTED POPULATECELL() FUNCTION HERE]
                 bool ok;
                 qDebug() << previousPosition;
+                // ERROR OVER HERE
                 QString extracted_x1 = previousPosition.left(1).toLower();
                 int extracted_y1 = previousPosition.right(1).toInt(&ok);
-                QString extracted_x2 = clickedPosition.left(1).toLower();
-                int extracted_y2 = clickedPosition.right(1).toInt(&ok);
+                QString extracted_x2 = destPosition.left(1).toLower();
+                int extracted_y2 = destPosition.right(1).toInt(&ok);
                 populateCells(extracted_x1.toLatin1().at(0), extracted_y1, extracted_x2.toLatin1().at(0), extracted_y2, 2);
                 prevGlobalTurnCounter = globalTurnCounter;
                 currTime = timer.elapsed();
                 updateTime(currTime - previousTime);
                 co++;
-                //emit turnUpdated();
                 previousTime = currTime;
                 // [END OF IMPLEMENTATION]
             }
@@ -777,15 +801,15 @@ void MainWindow::finalBlackTime(int timer_black)
 
 void MainWindow::on_pvpButton_clicked()
 {
-    mwSettings->commandType = true;
+    mwSettings->gameModeNum = 1;
 }
 
 void MainWindow::on_pvaButton_clicked()
 {
-    mwSettings->commandType = false;
+    mwSettings->gameModeNum = 4;
 }
 
 void MainWindow::on_avaButton_clicked()
 {
-    mwSettings->commandType = false;
+    mwSettings->gameModeNum = 8;
 }

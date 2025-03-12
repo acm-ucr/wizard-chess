@@ -94,9 +94,9 @@ private slots:
 
     void on_expertLevel_clicked();
 
-    void on_voiceCommand_clicked();
+    // void on_voiceCommand_clicked();
 
-    void on_touchCommand_clicked();
+    // void on_touchCommand_clicked();
 
     // void on_pushButton_back_settings_clicked();
 
@@ -149,6 +149,14 @@ private slots:
     void resetGame();
 
 
+
+    void on_WvoiceCommand_clicked();
+
+    void on_WtouchCommand_clicked();
+
+    void on_BvoiceCommand_5_clicked();
+
+    void on_BtouchCommand_clicked();
 
 private:
     Ui::MainWindow *ui;
