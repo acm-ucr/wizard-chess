@@ -154,7 +154,7 @@ private slots:
 
     void on_WtouchCommand_clicked();
 
-    void on_BvoiceCommand_5_clicked();
+    void on_BvoiceCommand_clicked();
 
     void on_BtouchCommand_clicked();
 

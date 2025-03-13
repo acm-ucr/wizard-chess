@@ -68,7 +68,7 @@ rgb(0, 0, 0)
 }</string>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>6</number>
     </property>
     <widget class="QWidget" name="Start">
      <property name="autoFillBackground">
@@ -3452,7 +3452,7 @@ font: 15pt &quot;Times New Roman&quot;;</string>
       <property name="title">
        <string>BLACK</string>
       </property>
-      <widget class="QRadioButton" name="BvoiceCommand_5">
+      <widget class="QRadioButton" name="BvoiceCommand">
        <property name="geometry">
         <rect>
          <x>10</x>
