@@ -166,8 +166,8 @@ private:
     QTableWidget *tableWidget;
 
     QElapsedTimer timer;
-    int previousTime;
-    int currTime;
+    qint64 previousTime;
+    qint64 currTime;
 
     bool bCheck;
     bool wCheck;

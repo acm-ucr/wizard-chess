@@ -24,7 +24,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>0</y>
+      <y>10</y>
       <width>800</width>
       <height>480</height>
      </rect>
@@ -68,7 +68,7 @@ rgb(0, 0, 0)
 }</string>
     </property>
     <property name="currentIndex">
-     <number>6</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="Start">
      <property name="autoFillBackground">
@@ -79,7 +79,7 @@ rgb(0, 0, 0)
        <rect>
         <x>120</x>
         <y>110</y>
-        <width>601</width>
+        <width>581</width>
         <height>121</height>
        </rect>
       </property>
@@ -3514,7 +3514,7 @@ font: 20pt &quot;Sitka&quot;;</string>
      <widget class="QLabel" name="label_4">
       <property name="geometry">
        <rect>
-        <x>70</x>
+        <x>60</x>
         <y>70</y>
         <width>681</width>
         <height>111</height>
@@ -3524,25 +3524,12 @@ font: 20pt &quot;Sitka&quot;;</string>
        <string notr="true">color: rgb(255, 0, 4);
 font: 900 18pt &quot;Segoe UI Black&quot;;</string>
       </property>
-      <property name="text">
-       <string>Credits: The ACM Forge Team at UC Riverside</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_5">
-      <property name="geometry">
-       <rect>
-        <x>330</x>
-        <y>160</y>
-        <width>111</width>
-        <height>61</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(255, 0, 4);
-font: 900 18pt &quot;Segoe UI Black&quot;;</string>
+      <property name="frameShape">
+       <enum>QFrame::Shape::NoFrame</enum>
       </property>
       <property name="text">
-       <string>About: </string>
+       <string>Credits: The ACM Forge Team at UC Riverside
+                                    About:</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_6">
