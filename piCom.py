@@ -31,6 +31,15 @@ promotion_check = ""
 file = open("qt.txt")
 
 # reading the content in "qt.txt" file 
+with open("qt.txt", "r") as file:
+    id_num = read.until(file, " ");
+    time_stamp = read.until(file, " ");
+    origCoord = read.until(file, " ");
+    newCoord = read.until(file, " ");
+    is_capture = read.until(file, " ");
+    castle_check = read.until(file, " ");
+    promotion_check = read.until(file, " ");
+    
 sendLine = id_num + '#'
 sendLine += time_stamp + '#'
 sendLine += origCoord + '#'
