@@ -49,6 +49,7 @@ signals:
     void moveExecutionDone();
     void takeNewTurn();
     void endReached();
+    void checkEndLoop();
 
 private slots:
 

@@ -3,7 +3,6 @@
 // -> fix settings things: add pop up for when player is selecting wrong options
 
 // PROBLEM
-// -> timer is displaying negative numbers
 // -> visit LINE ~482, touchinput stops after two turns
 
 #include "mainwindow.h"
@@ -138,8 +137,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(checkEnd, &QState::entered, this, [=](){
         qDebug() << "check end entered";
         checkForEnd();
+        emit checkEndLoop();
     });
 
+    checkEnd->addTransition(this, &MainWindow::checkEndLoop, checkEnd);
     checkEnd->addTransition(this, &MainWindow::endReached, endState);
     checkEnd->addTransition(this, &MainWindow::takeNewTurn, newTurn);
 
@@ -149,8 +150,8 @@ MainWindow::MainWindow(QWidget *parent)
     connect(endState, &QState::entered, this, [=](){
         change_endgame_status();
         std::cout << "reached the end" << std::endl;
-        finalWhiteTime(timer_white / 1000);
-        finalBlackTime(timer_black / 1000);
+        finalWhiteTime(static_cast<double>(timer_white) / 1000.0);
+        finalBlackTime(static_cast<double>(timer_black) / 1000.0);
         resetGame();
         ui->stackedWidget->setCurrentIndex(8);
     });
@@ -547,6 +548,12 @@ void MainWindow::handleMoveExecution() {
     if (selectedPiece) {
         // Moving the selected piece
         if (isValidMove(selectedPiece->type, selectedPiece->position, destPosition)) {
+            // TO DO: fix timer calculations
+            if (!timer.isValid()) {
+                timer.start();
+                previousTime = 0;
+            }
+            currTime = timer.elapsed();
             // Reset the previous tile and retain its background color
             QPushButton* previousButton = boardMap[selectedPiece->position];
             if (previousButton) {
@@ -575,15 +582,9 @@ void MainWindow::handleMoveExecution() {
                 populateCells(extracted_x1.toLatin1().at(0), extracted_y1, extracted_x2.toLatin1().at(0), extracted_y2, 2);
                 prevGlobalTurnCounter = globalTurnCounter;
                 qDebug() << extracted_x1 << extracted_y1 << extracted_x2 << extracted_y2;
-
-                // TO DO: fix timer calculations
-                if (!timer.isValid()) {
-                    timer.start();
-                }
-                currTime = timer.elapsed();
                 std::cout << "currTime: " << currTime << ", previousTime: " << previousTime << std::endl;
-                updateTime(currTime - previousTime);
                 co++;
+                updateTime(currTime - previousTime);
                 previousTime = currTime;
             }
 
@@ -612,12 +613,16 @@ void MainWindow::checkForEnd() {
     // if end: emit endReached
     // if not end: emit takeNewTurn
     qDebug() << "check end, going to new turn";
-    emit takeNewTurn();
+    if (bCheck || wCheck) {
+        emit endReached();
+    }
+    else {
+        emit takeNewTurn();
+    }
 }
 
 void MainWindow::resetGame() {
     game.resetBoard();
-    // clearBoard();
     setupBoard();
     size = 0;
     capacity = 10;
@@ -723,7 +728,7 @@ void MainWindow::resize()
 
 void MainWindow::updateTime(int diff)
 {
-    (co % 2 == 0) ? this->timer_white+=diff : this->timer_black+=diff;
+    (globalTurnCounter == 0) ? this->timer_white+=diff : this->timer_black+=diff;
 }
 
 void MainWindow::finalWhiteTime(int timer_white)
