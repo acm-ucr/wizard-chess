@@ -188,15 +188,14 @@ private:
     int size = 0;
     int turn;
     int count = 0;
-    int globalTurnCounter = 0;  // 0 = white turn && 1 = black turn
-    int prevGlobalTurnCounter = 1;  // holds previous GTC
+    int globalTurn = 0;  // 0 = white turn && 1 = black turn
     // int row = 0;  // to be used in populateCell
     QString selectedMove = "";
 
     void setupBoard();
     void setupInitialPositions();
     void placePieceOnTile(const QString& position, const QString& pieceType, const QString& color);
-    bool isValidMove(const QString& pieceType, const QString& from, const QString& to);
+    bool isValidMove(const QString& pieceColor, const QString& from, const QString& to);
     void clearButton(QPushButton *button, bool isWhiteTile);
 
 
