@@ -1,5 +1,10 @@
-// THINGS NEEDED TO BE IMPLEMENTED:
-// -> fix settings things: add pop up for when player is selecting wrong options
+// TO DO:
+// -> Finish Implementing isValidMove()
+// -> Finish Implementing change_endgame_status()
+// -> Finish Implementing newState connect()
+// -> Finish Implementing adding 'x' in populateCell()
+// -> Refine handlePlayerInput()
+// -> Refine handleMoveExecution()
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -98,7 +103,8 @@ MainWindow::MainWindow(QWidget *parent)
     //     qDebug() << "game entered";
     // });
 
-    // new turn state [LOGIC ERROR PRONE]
+    // new turn state
+    // for now, this will be Player vs. Player
     connect(newTurn, &QState::entered, this, [=](){
         // UNCOMMENT OUT WHEN takeBotTurn() WORKS
         // if (co % 2 == 0) {
@@ -255,7 +261,8 @@ void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i)
         }
     }
     else if (i == 2) {
-        out += "x";
+        // 'x' only if the piece moved AND killed an opponent ~ STILL NEED TO IMPLEMENT
+        // out += "x";
         out += x2 + to_string(y2);
         if (globalTurn == 0) {
             bCheck = game.isCheck();
@@ -530,7 +537,7 @@ void MainWindow::handleMoveExecution() {
     QString destPosition = selectedMove.right(2);
     qDebug() << "Position: " << initPosition << destPosition;
 
-    if (isValidMove(selectedPiece->color, initPosition, destPosition)) {
+    if (isValidMove(selectedPiece->type, selectedPiece->color, initPosition, destPosition)) {
         if (!selectedPiece) {
             for (ChessPiece &piece : pieces) {
                 if (piece.position == initPosition) {
@@ -539,17 +546,16 @@ void MainWindow::handleMoveExecution() {
                 }
             }
         }
-
     }
     else {
         qDebug() << "Invalid move!";
-        QMessageBox::warning(this, "Illegal Move", "Your move is invalid", QMessageBox::Ok);
+        QMessageBox::warning(this, "Illegal Move", "Your move is invalid.", QMessageBox::Ok);
         emit invalidMoveSelected();
         return;
     }
 
     // updates board UI with move
-    if (selectedPiece && isValidMove(selectedPiece->color, initPosition, destPosition)) {
+    if (selectedPiece && isValidMove(selectedPiece->type, selectedPiece->color, initPosition, destPosition)) {
 
         if (globalTurn == 0) {
             globalTurn = 1;
@@ -604,15 +610,22 @@ void MainWindow::handleMoveExecution() {
     }
 }
 
+// FINISH NOW
 void MainWindow::checkForEnd() {
     // TO DO: implement check for end
     // if end: emit endReached
     // if not end: emit takeNewTurn
     qDebug() << "check end, going to new turn";
-    if (bCheck || wCheck) {
+    if (wCheck) {
+        end_status = 0;
+        emit endReached();
+    }
+    else if (bCheck) {
+        end_status = 1;
         emit endReached();
     }
     else {
+        end_status = 2;
         emit takeNewTurn();
     }
 }
@@ -639,20 +652,28 @@ void MainWindow::resetGame() {
     clearTableWidget();
 }
 
-// STILL NEED THIS TO BE COMPLETED AND IMPLEMENTED
-bool MainWindow::isValidMove(const QString& pieceColor, const QString& from, const QString& to)
+// STILL NEED THIS TO BE COMPLETED
+bool MainWindow::isValidMove(const QString& pieceType, const QString& pieceColor, const QString& from, const QString& to)
 {
-    // Placeholder for move validation logic
+    // not allowing players to play twice their turn
     qDebug() << "color: " << pieceColor << ", turn: " << globalTurn;
     if (pieceColor == "white" && globalTurn != 0) {
-        selectedPiece = nullptr;
+        selectedPiece = nullptr;  // unselect the piece
         return false;
     }
     if (pieceColor == "black" && globalTurn != 1) {
-        selectedPiece = nullptr;
+        selectedPiece = nullptr;  // unselect the piece
         return false;
     }
-    return true; // Allow all moves for now
+
+    // not allowing players to place the piece in the same place
+    if (from == to) {
+        selectedPiece = nullptr;  // unselect the piece
+        return false;
+    }
+
+    // chess game piece moving logics - TO BE IMPLEMENTED
+    return true;
 }
 
 // White House Selection
@@ -709,15 +730,15 @@ void MainWindow::change_endgame_status()
     // once software implements a function to check who won, end_status would be altered accordingly
     if (end_status == 0)
     {
-        ui->winner_label->setText("House 1 Wins!");
+        ui->winner_label->setText("House 1 Wins!");  // white team won
     }
     else if (end_status == 1)
     {
-        ui->winner_label->setText("House 2 Wins!");
+        ui->winner_label->setText("House 2 Wins!");  // black team won
     }
     else if (end_status == 2)
     {
-        ui->winner_label->setText("Game is Draw!");
+        ui->winner_label->setText("Game is Draw!");  // neither won
     }
 }
 
@@ -763,9 +784,11 @@ void MainWindow::on_pvpButton_clicked()
 void MainWindow::on_pvaButton_clicked()
 {
     mwSettings->setGamemodeNum(2);
+    QMessageBox::warning(this, "Option Conflict Warning", "Selecting Player vs. AI will override your black input choice (voice/touch).", QMessageBox::Ok);
 }
 
 void MainWindow::on_avaButton_clicked()
 {
     mwSettings->setGamemodeNum(4);
+    QMessageBox::warning(this, "Option Conflict Warning", "Selecting AI vs. AI will override all input choice (voice/touch).", QMessageBox::Ok);
 }
