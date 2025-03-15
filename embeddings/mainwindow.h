@@ -195,7 +195,7 @@ private:
     void setupBoard();
     void setupInitialPositions();
     void placePieceOnTile(const QString& position, const QString& pieceType, const QString& color);
-    bool isValidMove(const QString& pieceType, const QString& pieceColor, const QString& from, const QString& to);
+    bool isValidMove(ChessPiece* piece, QString& from, QString& to);
     void clearButton(QPushButton *button, bool isWhiteTile);
 
 
