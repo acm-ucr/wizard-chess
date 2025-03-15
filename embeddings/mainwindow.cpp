@@ -1,3 +1,6 @@
+// THINGS NEEDED TO BE IMPLEMENTED:
+// -> fix settings things: add pop up for when player is selecting wrong options
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "settings.h"
@@ -14,6 +17,7 @@
 #include "mainwindow.h"
 #include "home.h"
 #include "ConditionalTransition.h"
+#include <QMessageBox>
 
 using namespace std;
 
@@ -51,14 +55,13 @@ MainWindow::MainWindow(QWidget *parent)
     QState *newTurn = new QState(game);
     QState *botInput = new QState(game);
     QState *playerInput = new QState(game);
-    //QState *botMoveExecution = new QState(game);
     QState *playerMoveExecution = new QState(game);
     QState *checkEnd = new QState(game);
+    // QState *botMoveExecution = new QState(game);
 
     QState *endState = new QState();
 
     // DEFINING STATE TRANSITIONS AND EVENTS
-
     // init state
     initState->addTransition(ui->pushButton_start, &QPushButton::clicked, houseState);
     initState->addTransition(ui->pushButton_tutorial, &QPushButton::clicked, tutorial1State);
@@ -67,6 +70,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // setting state
     settingsState->addTransition(ui->pushButton_home_settings, &QPushButton::clicked, initState);
+    settingsState->addTransition(ui->pushButton_back_settings, &QPushButton::clicked, initState);
 
     // about state
     aboutState->addTransition(ui->pushButton_home_about, &QPushButton::clicked, initState);
@@ -77,31 +81,32 @@ MainWindow::MainWindow(QWidget *parent)
     tutorial2State->addTransition(ui->pushButton_home_tutorial_end, &QPushButton::clicked, initState);
     tutorial2State->addTransition(ui->pushButton_previous_tutorial, &QPushButton::clicked, tutorial1State);
 
-    // house state
-    connect(houseState, &QState::entered, this, [=](){
+    // reset the game when endState is left
+    connect(endState, &QState::exited, this, [=](){
         resetGame();
     });
 
-    QSignalTransition* enterGame = houseState->addTransition(ui->pushButton_home2, &QPushButton::clicked, game);
+    // input change will apply to playerInput
+    houseState->addTransition(ui->pushButton_home2, &QPushButton::clicked, playerInput);
 
     // game state
     game->setInitialState(newTurn);
-    connect(enterGame, &QAbstractTransition::triggered, this, [=](){
-        disableTouchInput();
-        qDebug() << "game entered";
-    });
 
-    // new turn state
-    // TO DO: update how we determine if it's a bot turn or player turn
+    // COMMENTED OUT, NOT SURE WHY WE NEED THIS...
+    // connect(enterGame, &QAbstractTransition::triggered, this, [=](){
+    //     disableTouchInput();
+    //     qDebug() << "game entered";
+    // });
+
+    // new turn state [LOGIC ERROR PRONE]
     connect(newTurn, &QState::entered, this, [=](){
-        // if (co == 0) {
+        // UNCOMMENT OUT WHEN takeBotTurn() WORKS
+        // if (co % 2 == 0) {
+        //     emit takePlayerTurn();
+        // }
+        // else {
         //     emit takeBotTurn();
         // }
-        // else if (co == 1) {
-
-        // }
-
-        // always take player turn for now
         emit takePlayerTurn();
         qDebug() << "new turn";
     });
@@ -130,8 +135,10 @@ MainWindow::MainWindow(QWidget *parent)
     connect(checkEnd, &QState::entered, this, [=](){
         qDebug() << "check end entered";
         checkForEnd();
+        emit checkEndLoop();
     });
 
+    checkEnd->addTransition(this, &MainWindow::checkEndLoop, checkEnd);
     checkEnd->addTransition(this, &MainWindow::endReached, endState);
     checkEnd->addTransition(this, &MainWindow::takeNewTurn, newTurn);
 
@@ -140,13 +147,12 @@ MainWindow::MainWindow(QWidget *parent)
     endState->addTransition(ui->pushButton_home_end, &QPushButton::clicked, initState);
     connect(endState, &QState::entered, this, [=](){
         change_endgame_status();
-        finalWhiteTime(timer_white / 1000);
-        finalBlackTime(timer_black / 1000);
+        std::cout << "reached the end" << std::endl;
+        finalWhiteTime(static_cast<double>(timer_white) / 1000.0);
+        finalBlackTime(static_cast<double>(timer_black) / 1000.0);
         resetGame();
         ui->stackedWidget->setCurrentIndex(8);
     });
-
-
 
     // Defining state screen index
     initState->assignProperty(ui->stackedWidget, "currentIndex", 0);
@@ -188,17 +194,14 @@ MainWindow::~MainWindow()
 
 // x1 and x2 are characters like 'a', 'b' etc - therefore, {x1, y1} E {a, 3} && {x2, y2} E {b, 6} (as an example)
 // i = 0 means no move, i = 1 means just move and possible check, and i = 2 means move, kill and possible check
-void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt)
+void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i)
 {
-    qDebug() << x1 << y1 << x2 << y2 << i;
     if ((size / 2) == capacity)
     {
         resize();
     }
     if (i == 0) {return;}
-    int row = (size % (capacity * 2))/2;
-    // std::cout << row << std::endl;
-    int col = turnCnt % 2;
+    int row = (size % (capacity * 2)) / 2;
     string out;
     if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "pawn")
     {
@@ -227,19 +230,24 @@ void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turn
     else
     {
         out += "Invalid";
-        tableWidget->setItem(row, col, new QTableWidgetItem(QString::fromStdString(out)));
+        if (globalTurn == 0) {  // update white part of table
+            tableWidget->setItem(row, 0, new QTableWidgetItem(QString::fromStdString(out)));
+        }
+        else {  // update black part of table
+            tableWidget->setItem(row, 1, new QTableWidgetItem(QString::fromStdString(out)));
+        }
         return;
     }
 
     if (i == 1) {
         out += x2 + to_string(y2);
-        if (col == 0) {
+        if (globalTurn == 0) {
             bCheck = game.isCheck();
             if (bCheck == 1) {
                 out += "+";
             }
         }
-        else if (col == 1) {
+        else if (globalTurn == 1) {
             wCheck = game.isCheck();
             if (wCheck == 1) {
                 out += "+";
@@ -249,20 +257,25 @@ void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turn
     else if (i == 2) {
         out += "x";
         out += x2 + to_string(y2);
-        if (col == 0) {
+        if (globalTurn == 0) {
             bCheck = game.isCheck();
             if (bCheck == 1) {
                 out += "+";
             }
         }
-        else if (col == 1) {
+        else if (globalTurn == 1) {
             wCheck = game.isCheck();
             if (wCheck == 1) {
                 out += "+";
             }
         }
     }
-    tableWidget->setItem(row, col, new QTableWidgetItem(QString::fromStdString(out)));
+    if (globalTurn == 1) {  // update white part of table
+        tableWidget->setItem(row, 0, new QTableWidgetItem(QString::fromStdString(out)));
+    }
+    else {  // update black part of table
+        tableWidget->setItem(row, 1, new QTableWidgetItem(QString::fromStdString(out)));
+    }
     ++size;
 }
 
@@ -277,45 +290,52 @@ void MainWindow::clearTableWidget()
     }
 }
 
-
 // {1000 = 8 in bits}
 void MainWindow::on_easyLevel_clicked()
 {
-    mwSettings->diffLevel = 8;
+    mwSettings->setDifflevel(8);
 }
 
 // {0100 = 4 in bits}
 void MainWindow::on_intermediateLevel_clicked()
 {
-    mwSettings->diffLevel = 4;
+    mwSettings->setDifflevel(4);
 }
 
 // {0010 = 2 in bits}
 void MainWindow::on_hardLevel_clicked()
 {
-    mwSettings->diffLevel = 2;
+    mwSettings->setDifflevel(2);
 }
 
 // {0001 = 1 in bits}
 void MainWindow::on_expertLevel_clicked()
 {
-    mwSettings->diffLevel = 1;
+    mwSettings->setDifflevel(1);
 }
-
 
 // TO DO: update settings variables for input and game type
-// {true = voice}
-void MainWindow::on_voiceCommand_clicked()
+// {false = voice} & {true = touch}
+void MainWindow::on_WvoiceCommand_clicked()
 {
-    mwSettings->commandType = true;
+    mwSettings->setWhiteCommand(false);
 }
 
-// {false = touch}
-void MainWindow::on_touchCommand_clicked()
+void MainWindow::on_WtouchCommand_clicked()
 {
-    mwSettings->commandType = false;
+    mwSettings->setWhiteCommand(true);
 }
 
+// {false = voice} & {true = touch}
+void MainWindow::on_BvoiceCommand_clicked()
+{
+    mwSettings->setBlackCommand(false);
+}
+
+void MainWindow::on_BtouchCommand_clicked()
+{
+    mwSettings->setBlackCommand(true);
+}
 
 void MainWindow::clearButton(QPushButton *button, bool isWhiteTile) {
     button->setIcon(QIcon());
@@ -361,7 +381,6 @@ void MainWindow::setupBoard()
     }
     count = 1;
 }
-
 
 // Add chess pieces to their starting positions
 void MainWindow::setupInitialPositions()
@@ -421,13 +440,30 @@ void MainWindow::handlePlayerInput() {
     selectedMove = "";
     qDebug() << "entered input handler";
 
-    if (mwSettings->commandType == false) {
+    // general option (if one player touch, then all will play touch) for now
+    if (mwSettings->getWhiteCommand() || mwSettings->getBlackCommand()) {
         enableTouchInput();
+        qDebug() << "everyone will play with touch input (test temporary)";
         qDebug() << "getting touch input";
     }
-    else if (mwSettings->commandType == true) {
+    else {
+        disableTouchInput();
         getVoiceInput();
+        qDebug() << "everyone will play with voice input (test temporary)";
     }
+
+    // COMMENTED OUT, MIGHT IMPLEMENT LATER
+    // Black
+    // if (mwSettings->getBlackCommand()) {
+    //     enableTouchInput();
+    //     qDebug() << "black is playing touch";
+    //     qDebug() << "getting touch input";
+    // }
+    // else {
+    //     disableTouchInput();
+    //     getVoiceInput();
+    //     qDebug() << "black is playing voice";
+    // }
 }
 
 void MainWindow::enableTouchInput() {
@@ -441,8 +477,6 @@ void MainWindow::disableTouchInput() {
         it.value()->setEnabled(false);  // Disable touch input for all tiles
     }
 }
-
-
 
 void MainWindow::onTileClicked()
 {
@@ -473,7 +507,6 @@ void MainWindow::onTileClicked()
     }
 }
 
-
 void MainWindow::getVoiceInput() {
     // TO DO: get voice input
     QString voice_input = "";
@@ -487,14 +520,9 @@ void MainWindow::handleBotInput() {
 }
 
 void MainWindow::handleMoveExecution() {
-    // if(!isValidMove(selectedMove)) {
-    //     emit invalidMoveSelected();
-    //     return;
-    // }
-
     // TO DO: motor mvmt
     // write selectedMove to file
-    // while (read file) != done { }
+    // while (read file) != done {}
 
     // TO DO: update method of extracting coordinates from moveReady string and assign selectedPiece/clickedPosition
     qDebug() << "move handler entered";
@@ -502,65 +530,77 @@ void MainWindow::handleMoveExecution() {
     QString destPosition = selectedMove.right(2);
     qDebug() << "Position: " << initPosition << destPosition;
 
-    if (!selectedPiece) {
-        for (ChessPiece &piece : pieces) {
-            if (piece.position == initPosition) {
-                selectedPiece = &piece;
-                break;
+    if (isValidMove(selectedPiece->color, initPosition, destPosition)) {
+        if (!selectedPiece) {
+            for (ChessPiece &piece : pieces) {
+                if (piece.position == initPosition) {
+                    selectedPiece = &piece;
+                    break;
+                }
             }
         }
+
+    }
+    else {
+        qDebug() << "Invalid move!";
+        QMessageBox::warning(this, "Illegal Move", "Your move is invalid", QMessageBox::Ok);
+        emit invalidMoveSelected();
+        return;
     }
 
     // updates board UI with move
-    if (selectedPiece) {
-        // Moving the selected piece
-        if (isValidMove(selectedPiece->type, selectedPiece->position, destPosition)) {
-            // Reset the previous tile and retain its background color
-            QPushButton* previousButton = boardMap[selectedPiece->position];
-            if (previousButton) {
-                previousButton->setIcon(QIcon()); // Clear the icon
+    if (selectedPiece && isValidMove(selectedPiece->color, initPosition, destPosition)) {
 
-                // Calculate the background color based on tile position
-                QString previousPosition = selectedPiece->position;
-                bool isWhiteTile = ((previousPosition[0].toLatin1() - 'A') +
-                                    previousPosition.mid(1).toInt()) % 2 == 0;
-                QString backgroundColor = isWhiteTile ? "#ffffff" : "#4560AB"; // White or blue
-                previousButton->setStyleSheet(QString(
-                                                  "QPushButton { background-color: %1; border: none; }"
-                                                  ).arg(backgroundColor));
-                // [IMPLEMENTED POPULATECELL() FUNCTION HERE]
-                bool ok;
-                qDebug() << previousPosition;
-                QString extracted_x1 = previousPosition.left(1).toLower();
-                int extracted_y1 = previousPosition.right(1).toInt(&ok);
-                QString extracted_x2 = destPosition.left(1).toLower();
-                int extracted_y2 = destPosition.right(1).toInt(&ok);
-                qDebug() << extracted_x1 << extracted_y1 << extracted_x2 << extracted_y2;
-                populateCells(extracted_x1.toLatin1().at(0), extracted_y1, extracted_x2.toLatin1().at(0), extracted_y2, 2, co);
-
-                // TO DO: fix timer calculations
-                currTime = timer.elapsed();
-                updateTime(currTime - previousTime);
-                co++;
-                previousTime = currTime;
-                // [END OF IMPLEMENTATION]
-            }
-
-            // Update the piece's position and place it on the new tile
-            placePieceOnTile(destPosition, selectedPiece->type, selectedPiece->color);
-            selectedPiece->position = destPosition;
-
-            // Deselect the piece
-            selectedPiece = nullptr;
-
-            qDebug() << "Move Executed";
-            emit moveExecutionDone();
-            return;
-
-        } else {
-            qDebug() << "Invalid move!";
-            emit invalidMoveSelected();
+        if (globalTurn == 0) {
+            globalTurn = 1;
         }
+        else {
+            globalTurn = 0;
+        }
+        // Moving the selected piece
+        // TO DO: fix timer calculations
+        if (!timer.isValid()) {
+            timer.start();
+            previousTime = 0;
+        }
+        currTime = timer.elapsed();
+        // Reset the previous tile and retain its background color
+        QPushButton* previousButton = boardMap[selectedPiece->position];
+        if (previousButton) {
+            previousButton->setIcon(QIcon()); // Clear the icon
+            // Calculate the background color based on tile position
+            QString previousPosition = selectedPiece->position;
+            bool isWhiteTile = ((previousPosition[0].toLatin1() - 'A') +
+                                previousPosition.mid(1).toInt()) % 2 == 0;
+            QString backgroundColor = isWhiteTile ? "#ffffff" : "#4560AB"; // White or blue
+            previousButton->setStyleSheet(QString(
+                                              "QPushButton { background-color: %1; border: none; }"
+                                              ).arg(backgroundColor));
+            bool ok;
+            qDebug() << previousPosition;
+            // gather intel to pass as parameter for populateCell()
+            QString extracted_x1 = previousPosition.left(1).toLower();
+            int extracted_y1 = previousPosition.right(1).toInt(&ok);
+            QString extracted_x2 = destPosition.left(1).toLower();
+            int extracted_y2 = destPosition.right(1).toInt(&ok);
+            populateCells(extracted_x1.toLatin1().at(0), extracted_y1, extracted_x2.toLatin1().at(0), extracted_y2, 2);
+            qDebug() << extracted_x1 << extracted_y1 << extracted_x2 << extracted_y2;
+            std::cout << "currTime: " << currTime << ", previousTime: " << previousTime << std::endl;
+            co++;
+            updateTime(currTime - previousTime);
+            previousTime = currTime;
+        }
+
+        // Update the piece's position and place it on the new tile
+        placePieceOnTile(destPosition, selectedPiece->type, selectedPiece->color);
+        selectedPiece->position = destPosition;
+
+        // Deselect the piece
+        selectedPiece = nullptr;
+
+        qDebug() << "Move Executed";
+        emit moveExecutionDone();
+        return;
     }
 }
 
@@ -569,12 +609,16 @@ void MainWindow::checkForEnd() {
     // if end: emit endReached
     // if not end: emit takeNewTurn
     qDebug() << "check end, going to new turn";
-    emit takeNewTurn();
+    if (bCheck || wCheck) {
+        emit endReached();
+    }
+    else {
+        emit takeNewTurn();
+    }
 }
 
 void MainWindow::resetGame() {
     game.resetBoard();
-    // clearBoard();
     setupBoard();
     size = 0;
     capacity = 10;
@@ -589,79 +633,25 @@ void MainWindow::resetGame() {
     end_status = 2;
     timer_white = 0;
     timer_black = 0;
+    timer.restart();
+    globalTurn = 0;
     setupInitialPositions();
     clearTableWidget();
 }
 
-
-// Handle tile clicks
-// void MainWindow::onTileClicked()
-// {
-//     QPushButton* clickedButton = qobject_cast<QPushButton*>(sender());
-//     if (!clickedButton) return;
-
-//     QString clickedPosition;
-//     for (auto it = boardMap.begin(); it != boardMap.end(); ++it) {
-//         if (it.value() == clickedButton) {
-//             clickedPosition = it.key();
-//             break;
-//         }
-//     }
-
-//     if (selectedPiece) {
-//         // Moving the selected piece
-//         if (isValidMove(selectedPiece->type, selectedPiece->position, clickedPosition)) {
-//             // Reset the previous tile and retain its background color
-//             QPushButton* previousButton = boardMap[selectedPiece->position];
-//             if (previousButton) {
-//                 previousButton->setIcon(QIcon()); // Clear the icon
-
-//                 // Calculate the background color based on tile position
-//                 QString previousPosition = selectedPiece->position;
-//                 bool isWhiteTile = ((previousPosition[0].toLatin1() - 'A') +
-//                                     previousPosition.mid(1).toInt()) % 2 == 0;
-//                 QString backgroundColor = isWhiteTile ? "#ffffff" : "#4560AB"; // White or blue
-//                 previousButton->setStyleSheet(QString(
-//                                                   "QPushButton { background-color: %1; border: none; }"
-//                                                   ).arg(backgroundColor));
-//                 // [IMPLEMENTED POPULATECELL() FUNCTION HERE]
-//                 bool ok;
-//                 QString extracted_x1 = previousPosition.left(1).toLower();
-//                 int extracted_y1 = previousPosition.right(1).toInt(&ok);
-//                 QString extracted_x2 = clickedPosition.left(1).toLower();
-//                 int extracted_y2 = clickedPosition.right(1).toInt(&ok);
-//                 populateCells(extracted_x1.toLatin1().at(0), extracted_y1, extracted_x2.toLatin1().at(0), extracted_y2, 2, co);
-//                 currTime = timer.elapsed();
-//                 updateTime(currTime - previousTime);
-//                 co++;
-//                 emit turnUpdated();
-//                 previousTime = currTime;
-//                 // [END OF IMPLEMENTATION]
-//             }
-
-//             // Update the piece's position and place it on the new tile
-//             placePieceOnTile(clickedPosition, selectedPiece->type, selectedPiece->color);
-//             selectedPiece->position = clickedPosition;
-
-//             // Deselect the piece
-//             selectedPiece = nullptr;
-//         } else {
-//             qDebug() << "Invalid move!";
-//         }
-//     } else {
-//         // Selecting a piece
-//         for (ChessPiece &piece : pieces) {
-//             if (piece.position == clickedPosition) {
-//                 selectedPiece = &piece;
-//                 break;
-//             }
-//         }
-//     }
-// }
-
-bool MainWindow::isValidMove(const QString& pieceType, const QString& from, const QString& to)
+// STILL NEED THIS TO BE COMPLETED AND IMPLEMENTED
+bool MainWindow::isValidMove(const QString& pieceColor, const QString& from, const QString& to)
 {
     // Placeholder for move validation logic
+    qDebug() << "color: " << pieceColor << ", turn: " << globalTurn;
+    if (pieceColor == "white" && globalTurn != 0) {
+        selectedPiece = nullptr;
+        return false;
+    }
+    if (pieceColor == "black" && globalTurn != 1) {
+        selectedPiece = nullptr;
+        return false;
+    }
     return true; // Allow all moves for now
 }
 
@@ -713,6 +703,7 @@ void MainWindow::on_pushButton_Ravenclaw_2_clicked()
     blackChoice->userChoice = 8;
 }
 
+// STILL NEED THIS TO BE COMPLETED AND IMPLEMENTED
 void MainWindow::change_endgame_status()
 {
     // once software implements a function to check who won, end_status would be altered accordingly
@@ -741,7 +732,7 @@ void MainWindow::resize()
 
 void MainWindow::updateTime(int diff)
 {
-    (co % 2 == 0) ? this->timer_white+=diff : this->timer_black+=diff;
+    (globalTurn == 0) ? this->timer_white+=diff : this->timer_black+=diff;
 }
 
 void MainWindow::finalWhiteTime(int timer_white)
@@ -766,15 +757,15 @@ void MainWindow::finalBlackTime(int timer_black)
 
 void MainWindow::on_pvpButton_clicked()
 {
-    mwSettings->commandType = true;
+    mwSettings->setGamemodeNum(1);
 }
 
 void MainWindow::on_pvaButton_clicked()
 {
-    mwSettings->commandType = false;
+    mwSettings->setGamemodeNum(2);
 }
 
 void MainWindow::on_avaButton_clicked()
 {
-    mwSettings->commandType = false;
+    mwSettings->setGamemodeNum(4);
 }

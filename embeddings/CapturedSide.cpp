@@ -2,7 +2,7 @@
 
 using namespace std;
 
-CapturedSide::CapturedSide(){
+CapturedSide::CapturedSide() {
     capturedColumn["queen1"] = new Queen(9, 0, true);
     capturedColumn["queen0"] = new Queen(9, 1, false);
     counter = 2;

@@ -49,12 +49,13 @@ signals:
     void moveExecutionDone();
     void takeNewTurn();
     void endReached();
+    void checkEndLoop();
 
 private slots:
 
     void onTileClicked();
 
-    void populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt);
+    void populateCells(char x1, int y1, char x2, int y2, int i);
 
     void clearTableWidget();
 
@@ -94,9 +95,9 @@ private slots:
 
     void on_expertLevel_clicked();
 
-    void on_voiceCommand_clicked();
+    // void on_voiceCommand_clicked();
 
-    void on_touchCommand_clicked();
+    // void on_touchCommand_clicked();
 
     // void on_pushButton_back_settings_clicked();
 
@@ -150,6 +151,14 @@ private slots:
 
 
 
+    void on_WvoiceCommand_clicked();
+
+    void on_WtouchCommand_clicked();
+
+    void on_BvoiceCommand_clicked();
+
+    void on_BtouchCommand_clicked();
+
 private:
     Ui::MainWindow *ui;
     Settings *mwSettings;
@@ -158,8 +167,8 @@ private:
     QTableWidget *tableWidget;
 
     QElapsedTimer timer;
-    int previousTime;
-    int currTime;
+    qint64 previousTime;
+    qint64 currTime;
 
     bool bCheck;
     bool wCheck;
@@ -179,12 +188,14 @@ private:
     int size = 0;
     int turn;
     int count = 0;
+    int globalTurn = 0;  // 0 = white turn && 1 = black turn
+    // int row = 0;  // to be used in populateCell
     QString selectedMove = "";
 
     void setupBoard();
     void setupInitialPositions();
     void placePieceOnTile(const QString& position, const QString& pieceType, const QString& color);
-    bool isValidMove(const QString& pieceType, const QString& from, const QString& to);
+    bool isValidMove(const QString& pieceColor, const QString& from, const QString& to);
     void clearButton(QPushButton *button, bool isWhiteTile);
 
 

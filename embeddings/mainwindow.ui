@@ -24,7 +24,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>0</y>
+      <y>10</y>
       <width>800</width>
       <height>480</height>
      </rect>
@@ -68,7 +68,7 @@ rgb(0, 0, 0)
 }</string>
     </property>
     <property name="currentIndex">
-     <number>5</number>
+     <number>8</number>
     </property>
     <widget class="QWidget" name="Start">
      <property name="autoFillBackground">
@@ -79,7 +79,7 @@ rgb(0, 0, 0)
        <rect>
         <x>120</x>
         <y>110</y>
-        <width>601</width>
+        <width>581</width>
         <height>121</height>
        </rect>
       </property>
@@ -218,9 +218,9 @@ rgb(0, 0, 0)
       <property name="geometry">
        <rect>
         <x>710</x>
-        <y>430</y>
+        <y>417</y>
         <width>80</width>
-        <height>18</height>
+        <height>31</height>
        </rect>
       </property>
       <property name="text">
@@ -441,9 +441,9 @@ color: rgb(255, 255, 255);</string>
       <property name="geometry">
        <rect>
         <x>710</x>
-        <y>430</y>
+        <y>417</y>
         <width>80</width>
-        <height>18</height>
+        <height>31</height>
        </rect>
       </property>
       <property name="text">
@@ -473,9 +473,9 @@ font: 20pt &quot;Sitka&quot;;</string>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>70</y>
+        <y>60</y>
         <width>741</width>
-        <height>51</height>
+        <height>81</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -491,7 +491,7 @@ king and not make it escape</string>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>110</y>
+        <y>120</y>
         <width>771</width>
         <height>281</height>
        </rect>
@@ -3197,12 +3197,12 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
        <string>SAVE</string>
       </property>
      </widget>
-     <widget class="QGroupBox" name="groupBox">
+     <widget class="QGroupBox" name="groupBox_5">
       <property name="geometry">
        <rect>
-        <x>450</x>
+        <x>390</x>
         <y>10</y>
-        <width>311</width>
+        <width>151</width>
         <height>161</height>
        </rect>
       </property>
@@ -3211,14 +3211,14 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
 font: 15pt &quot;Times New Roman&quot;;</string>
       </property>
       <property name="title">
-       <string>Command Buttons</string>
+       <string>WHITE</string>
       </property>
-      <widget class="QRadioButton" name="voiceCommand">
+      <widget class="QRadioButton" name="WvoiceCommand">
        <property name="geometry">
         <rect>
          <x>10</x>
          <y>50</y>
-         <width>301</width>
+         <width>141</width>
          <height>26</height>
         </rect>
        </property>
@@ -3228,18 +3228,18 @@ font: 15pt &quot;Times New Roman&quot;;
 </string>
        </property>
        <property name="text">
-        <string>Voice Command (Default)</string>
+        <string>VOICE (D)</string>
        </property>
        <property name="checked">
         <bool>true</bool>
        </property>
       </widget>
-      <widget class="QRadioButton" name="touchCommand">
+      <widget class="QRadioButton" name="WtouchCommand">
        <property name="geometry">
         <rect>
          <x>10</x>
          <y>120</y>
-         <width>211</width>
+         <width>121</width>
          <height>26</height>
         </rect>
        </property>
@@ -3249,7 +3249,7 @@ font: 15pt &quot;Times New Roman&quot;;
 </string>
        </property>
        <property name="text">
-        <string>Touch Command</string>
+        <string>TOUCH</string>
        </property>
       </widget>
      </widget>
@@ -3436,6 +3436,62 @@ font: 15pt &quot;Times New Roman&quot;;
        </property>
       </widget>
      </widget>
+     <widget class="QGroupBox" name="groupBox_6">
+      <property name="geometry">
+       <rect>
+        <x>590</x>
+        <y>10</y>
+        <width>151</width>
+        <height>161</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">color: rgb(255, 0, 0);
+font: 15pt &quot;Times New Roman&quot;;</string>
+      </property>
+      <property name="title">
+       <string>BLACK</string>
+      </property>
+      <widget class="QRadioButton" name="BvoiceCommand">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>50</y>
+         <width>141</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 0, 0);
+font: 15pt &quot;Times New Roman&quot;;
+</string>
+       </property>
+       <property name="text">
+        <string>VOICE (D)</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QRadioButton" name="BtouchCommand">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>120</y>
+         <width>121</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color: rgb(0, 0, 0);
+font: 15pt &quot;Times New Roman&quot;;
+</string>
+       </property>
+       <property name="text">
+        <string>TOUCH</string>
+       </property>
+      </widget>
+     </widget>
     </widget>
     <widget class="QWidget" name="About">
      <widget class="QLabel" name="label_25">
@@ -3458,7 +3514,7 @@ font: 20pt &quot;Sitka&quot;;</string>
      <widget class="QLabel" name="label_4">
       <property name="geometry">
        <rect>
-        <x>70</x>
+        <x>60</x>
         <y>70</y>
         <width>681</width>
         <height>111</height>
@@ -3468,34 +3524,21 @@ font: 20pt &quot;Sitka&quot;;</string>
        <string notr="true">color: rgb(255, 0, 4);
 font: 900 18pt &quot;Segoe UI Black&quot;;</string>
       </property>
-      <property name="text">
-       <string>Credits: The ACM Forge Team at UC Riverside</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_5">
-      <property name="geometry">
-       <rect>
-        <x>340</x>
-        <y>170</y>
-        <width>111</width>
-        <height>61</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(255, 0, 4);
-font: 900 18pt &quot;Segoe UI Black&quot;;</string>
+      <property name="frameShape">
+       <enum>QFrame::Shape::NoFrame</enum>
       </property>
       <property name="text">
-       <string>About: </string>
+       <string>Credits: The ACM Forge Team at UC Riverside
+                                    About:</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_6">
       <property name="geometry">
        <rect>
         <x>90</x>
-        <y>220</y>
+        <y>240</y>
         <width>641</width>
-        <height>111</height>
+        <height>61</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -3523,9 +3566,9 @@ color: rgb(0, 0, 255);</string>
       <property name="geometry">
        <rect>
         <x>90</x>
-        <y>260</y>
+        <y>300</y>
         <width>641</width>
-        <height>111</height>
+        <height>61</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -3540,7 +3583,7 @@ color: rgb(0, 0, 255);</string>
       <property name="geometry">
        <rect>
         <x>330</x>
-        <y>360</y>
+        <y>390</y>
         <width>131</width>
         <height>29</height>
        </rect>
