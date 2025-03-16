@@ -540,6 +540,7 @@ void MainWindow::handleMoveExecution() {
     // if playing via voice input, selectedMove is empty string for now
     QString initPosition = selectedMove.left(2);
     QString destPosition = selectedMove.right(2);
+    int move_result = 1;
     qDebug() << "Position: " << initPosition << destPosition;
 
     if (!selectedPiece) {
@@ -586,7 +587,7 @@ void MainWindow::handleMoveExecution() {
                     int extracted_y1 = previousPosition.right(1).toInt(&ok);
                     QString extracted_x2 = destPosition.left(1).toLower();
                     int extracted_y2 = destPosition.right(1).toInt(&ok);
-                    populateCells(extracted_x1.toLatin1().at(0), extracted_y1, extracted_x2.toLatin1().at(0), extracted_y2, 2);
+                    populateCells(extracted_x1.toLatin1().at(0), extracted_y1, extracted_x2.toLatin1().at(0), extracted_y2, move_result);
                     qDebug() << extracted_x1 << extracted_y1 << extracted_x2 << extracted_y2;
                     std::cout << "currTime: " << currTime << ", previousTime: " << previousTime << std::endl;
                     co++;
@@ -676,9 +677,16 @@ bool MainWindow::isValidMove(ChessPiece* piece, QString& from, QString& to)
         selectedPiece = nullptr;  // unselect the piece
         return false;
     }
-
+    // UNCOMMENT OUT WHEN BOARD.CPP IS FIXED!!!!!
     // chess game piece moving logics - TO BE IMPLEMENTED
-
+    // bool pieceColor = false;
+    // (piece->color == "white") ? pieceColor = true : pieceColor = false;
+    // int from_int = from.toInt();
+    // int to_int = to.toInt();
+    // Piece* chessPiece = new Piece(from_int, to_int, pieceColor);
+    // if (!game.isValidMove(chessPiece, from_int, to_int)) {
+    //     return false;
+    // }
     return true;
 }
 

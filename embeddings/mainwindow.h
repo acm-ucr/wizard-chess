@@ -14,6 +14,7 @@
 #include <iostream>
 #include <QElapsedTimer>
 #include "Board.h"
+#include <Piece.h>
 #include <QTimer>
 #include <QStateMachine>
 
