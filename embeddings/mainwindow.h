@@ -14,6 +14,7 @@
 #include <iostream>
 #include <QElapsedTimer>
 #include "Board.h"
+#include <Piece.h>
 #include <QTimer>
 #include <QStateMachine>
 
@@ -135,7 +136,7 @@ private slots:
 
     void handlePlayerInput();
 
-    void enableTouchInput();
+    void determineGameInput();
 
     void disableTouchInput();
 
@@ -195,7 +196,7 @@ private:
     void setupBoard();
     void setupInitialPositions();
     void placePieceOnTile(const QString& position, const QString& pieceType, const QString& color);
-    bool isValidMove(const QString& pieceColor, const QString& from, const QString& to);
+    bool isValidMove(ChessPiece* piece, QString& from, QString& to);
     void clearButton(QPushButton *button, bool isWhiteTile);
 
 
