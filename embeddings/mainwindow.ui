@@ -68,7 +68,7 @@ rgb(0, 0, 0)
 }</string>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="Start">
      <property name="autoFillBackground">
@@ -550,21 +550,21 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>40</y>
-        <width>781</width>
-        <height>181</height>
+        <y>60</y>
+        <width>791</width>
+        <height>161</height>
        </rect>
       </property>
       <property name="styleSheet">
        <string notr="true">color: rgb(255, 0, 0);
-font: 900 12pt &quot;Segoe UI Black&quot;;</string>
+font: 900 14pt &quot;Segoe UI Black&quot;;</string>
       </property>
       <property name="text">
        <string>Special Moves:
 Castling: King and rook move simultaneously for safety.
 En Passant: Special pawn capture.
-Promotion: Pawn reaching the opposite side can become a queen, rook,
-bishop, or knight.</string>
+Promotion: Pawn reaching the opposite side can become a queen,
+rook, bishop, or knight.</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_27">
@@ -612,7 +612,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">color: rgb(255, 0, 0);
-font: 900 12pt &quot;Segoe UI Black&quot;;</string>
+font: 900 14pt &quot;Segoe UI Black&quot;;</string>
       </property>
       <property name="text">
        <string>Check: King is threatened.

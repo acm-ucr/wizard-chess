@@ -136,7 +136,7 @@ private slots:
 
     void handlePlayerInput();
 
-    void enableTouchInput();
+    void determineGameInput();
 
     void disableTouchInput();
 

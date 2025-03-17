@@ -1,9 +1,9 @@
+// PROBLEM: Need to communicate with software as Board.cpp's functions are messed up and not usable here (specifically isValidMove)!
+
 // TO DO:
 // -> Finish Implementing isValidMove()
 // -> Finish Implementing newState connect()
-// -> Refine handlePlayerInput()
 // -> Refine handleMoveExecution()
-
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "settings.h"
@@ -235,7 +235,7 @@ void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i)
     else
     {
         out += "Invalid";
-        if (globalTurn == 0) {  // update white part of table
+        if (globalTurn == 1) {  // update white part of table
             tableWidget->setItem(row, 0, new QTableWidgetItem(QString::fromStdString(out)));
         }
         else {  // update black part of table
@@ -300,28 +300,32 @@ void MainWindow::clearTableWidget()
 void MainWindow::on_easyLevel_clicked()
 {
     mwSettings->setDifflevel(8);
-    QMessageBox::warning(this, "Option Conflict Warning", "Only applicable if AI is playing (either AI vs. AI or Player vs. AI)", QMessageBox::Ok);
+    QMessageBox::warning(this, "Option Conflict Warning", "Only applicable if AI is playing (either AI vs. AI or Player vs. AI). "
+                                                          "These settings would be disregarded otherwise.", QMessageBox::Ok);
 }
 
 // {0100 = 4 in bits}
 void MainWindow::on_intermediateLevel_clicked()
 {
     mwSettings->setDifflevel(4);
-    QMessageBox::warning(this, "Option Conflict Warning", "Only applicable if AI is playing (either AI vs. AI or Player vs. AI)", QMessageBox::Ok);
+    QMessageBox::warning(this, "Option Conflict Warning", "Only applicable if AI is playing (either AI vs. AI or Player vs. AI). "
+                                                          "These settings would be disregarded otherwise.", QMessageBox::Ok);
 }
 
 // {0010 = 2 in bits}
 void MainWindow::on_hardLevel_clicked()
 {
     mwSettings->setDifflevel(2);
-    QMessageBox::warning(this, "Option Conflict Warning", "Only applicable if AI is playing (either AI vs. AI or Player vs. AI)", QMessageBox::Ok);
+    QMessageBox::warning(this, "Option Conflict Warning", "Only applicable if AI is playing (either AI vs. AI or Player vs. AI). "
+                                                          "These settings would be disregarded otherwise.", QMessageBox::Ok);
 }
 
 // {0001 = 1 in bits}
 void MainWindow::on_expertLevel_clicked()
 {
     mwSettings->setDifflevel(1);
-    QMessageBox::warning(this, "Option Conflict Warning", "Only applicable if AI is playing (either AI vs. AI or Player vs. AI)", QMessageBox::Ok);
+    QMessageBox::warning(this, "Option Conflict Warning", "Only applicable if AI is playing (either AI vs. AI or Player vs. AI). "
+                                                          "These settings would be disregarded otherwise.", QMessageBox::Ok);
 }
 
 // TO DO: update settings variables for input and game type
@@ -449,36 +453,52 @@ void MainWindow::placePieceOnTile(const QString& position, const QString& pieceT
 void MainWindow::handlePlayerInput() {
     selectedMove = "";
     qDebug() << "entered input handler";
-
-    // general option (if one player touch, then all will play touch) for now
-    if (mwSettings->getWhiteCommand() || mwSettings->getBlackCommand()) {
-        enableTouchInput();
-        qDebug() << "everyone will play with touch input (test temporary)";
-        qDebug() << "getting touch input";
-    }
-    else {
-        disableTouchInput();
-        getVoiceInput();
-        qDebug() << "everyone will play with voice input (test temporary)";
-    }
-
-    // COMMENTED OUT, MIGHT IMPLEMENT LATER
-    // Black
-    // if (mwSettings->getBlackCommand()) {
-    //     enableTouchInput();
-    //     qDebug() << "black is playing touch";
-    //     qDebug() << "getting touch input";
-    // }
-    // else {
-    //     disableTouchInput();
-    //     getVoiceInput();
-    //     qDebug() << "black is playing voice";
-    // }
+    determineGameInput();  // this should handle all input (uses disableTouchInput())
 }
 
-void MainWindow::enableTouchInput() {
-    for (auto it = boardMap.begin(); it != boardMap.end(); ++it) {
-        it.value()->setEnabled(true);  // Enable touch input for all tiles
+void MainWindow::determineGameInput() {
+    if (mwSettings->getBlackCommand() && mwSettings->getWhiteCommand()) {
+        qDebug() << "everyone will play with touch input";
+        qDebug() << "getting touch input";
+        for (auto it = boardMap.begin(); it != boardMap.end(); ++it) {
+            it.value()->setEnabled(true);  // Enable touch input for all tiles
+        }
+    }
+    else if (mwSettings->getBlackCommand()) {
+        if (globalTurn == 1) {
+            qDebug() << "black is playing touch";
+            qDebug() << "getting touch input";
+            for (auto it = boardMap.begin(); it != boardMap.end(); ++it) {
+                it.value()->setEnabled(true);  // Enable touch input for all tiles
+            }
+        }
+        else {
+            qDebug() << "white is playing voice";
+            qDebug() << "getting voice input";
+            disableTouchInput();
+            getVoiceInput();
+        }
+    }
+    else if (mwSettings->getWhiteCommand()) {
+        if (globalTurn == 0) {
+            qDebug() << "white is playing touch";
+            qDebug() << "getting touch input";
+            for (auto it = boardMap.begin(); it != boardMap.end(); ++it) {
+                it.value()->setEnabled(true);  // Enable touch input for all tiles
+            }
+        }
+        else {
+            qDebug() << "black is playing voice";
+            qDebug() << "getting voice input";
+            disableTouchInput();
+            getVoiceInput();
+        }
+    }
+    else {
+        qDebug() << "everyone will play with voice input";
+        qDebug() << "getting voice input";
+        disableTouchInput();
+        getVoiceInput();
     }
 }
 
@@ -555,7 +575,6 @@ void MainWindow::handleMoveExecution() {
     if (selectedPiece) {
         if (isValidMove(selectedPiece, initPosition, destPosition)) {
             if (selectedPiece) {
-
                 if (globalTurn == 0) {
                     globalTurn = 1;
                 }
@@ -618,9 +637,6 @@ void MainWindow::handleMoveExecution() {
 }
 
 void MainWindow::checkForEnd() {
-    // TO DO: implement check for end
-    // if end: emit endReached
-    // if not end: emit takeNewTurn
     qDebug() << "check end, going to new turn";
     if (game.whiteWin) {
         end_status = 0;
