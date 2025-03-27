@@ -4,8 +4,9 @@ using namespace std;
 
 CapturedSide::CapturedSide() {
     capturedColumn["queen1"] = new Queen(9, 0, true);
-    capturedColumn["queen0"] = new Queen(9, 1, false);
-    counter = 2;
+    capturedColumn["queen0"] = new Queen(9, 31, false);
+    counterWhite = 1;
+    counterBlack = 30;
     pawnCounter = 0;
 }
 
@@ -21,49 +22,54 @@ void CapturedSide::capture(Piece* capturedPiece){
 
     if(capturedPiece->getID() == "queen"){
         if(capturedPiece->getIsWhite()){
-            capturedColumn[key] = new Queen(9, counter, true);
+            capturedColumn[key] = new Queen(9, counterWhite, true);
+            counterWhite++;
         }
         else{
-            capturedColumn[key] = new Queen(9, counter, false);
+            capturedColumn[key] = new Queen(9, counterBlack, false);
+            counterBlack--;
         }
     }
     else if(capturedPiece->getID() == "rook"){
         if(capturedPiece->getIsWhite()){
-            capturedColumn[key] = new Rook(9, counter, true);
+            capturedColumn[key] = new Rook(9, counterWhite, true);
+            counterWhite++;
         }
         else{
-            capturedColumn[key] = new Rook(9, counter, false);
+            capturedColumn[key] = new Rook(9, counterBlack, false);
+            counterBlack--;
         }
     }
     else if(capturedPiece->getID() == "knight"){
         if(capturedPiece->getIsWhite()){
-            capturedColumn[key] = new Knight(9, counter, true);
+            capturedColumn[key] = new Knight(9, counterWhite, true);
+            counterWhite++;
         }
         else{
-            capturedColumn[key] = new Knight(9, counter, false);
+            capturedColumn[key] = new Knight(9, counterBlack, false);
+            counterBlack--;
         }
     }
     else if(capturedPiece->getID() == "bishop"){
         if(capturedPiece->getIsWhite()){
-            capturedColumn[key] = new Bishop(9, counter, true);
+            capturedColumn[key] = new Bishop(9, counterWhite, true);
+            counterWhite++;
         }
         else{
-            capturedColumn[key] = new Bishop(9, counter, false);
+            capturedColumn[key] = new Bishop(9, counterBlack, false);
+            counterBlack--;
         }
     }
     else if(capturedPiece->getID() == "pawn"){
         if(capturedPiece->getIsWhite()){
-            capturedColumn[key] = new Pawn(9, counter, true);
+            capturedColumn[key] = new Pawn(9, counterWhite, true);
+            counterWhite++;
         }
         else{
-            capturedColumn[key] = new Pawn(9, counter, false);
+            capturedColumn[key] = new Pawn(9, counterBlack, false);
+            counterBlack--;
         }
     }
-    else{
-        return;
-    }
-
-    counter++;
 }
 
 int CapturedSide::retrievePiece(Piece* p){
