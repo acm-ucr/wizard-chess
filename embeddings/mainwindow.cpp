@@ -1,7 +1,4 @@
-// PROBLEM: Need to communicate with software as Board.cpp's functions are messed up and not usable here (specifically isValidMove)!
-
 // TO DO:
-// -> Finish Implementing isValidMove()
 // -> Finish Implementing newState connect()
 // -> Refine handleMoveExecution()
 // -> Start Implementing Bots
@@ -678,8 +675,7 @@ void MainWindow::resetGame() {
     clearTableWidget();
 }
 
-
-// STILL NEED THIS TO BE COMPLETED
+// checks all possible invalid moves to see if current movement violates it
 bool MainWindow::isValidMove(ChessPiece* piece, QString& from, QString& to)
 {
     // not allowing players to play twice their turn
