@@ -678,6 +678,7 @@ void MainWindow::resetGame() {
     clearTableWidget();
 }
 
+
 // STILL NEED THIS TO BE COMPLETED
 bool MainWindow::isValidMove(ChessPiece* piece, QString& from, QString& to)
 {
@@ -691,22 +692,45 @@ bool MainWindow::isValidMove(ChessPiece* piece, QString& from, QString& to)
         selectedPiece = nullptr;  // unselect the piece
         return false;
     }
-
     // not allowing players to place the piece in the same place
     if (from == to) {
         selectedPiece = nullptr;  // unselect the piece
         return false;
     }
-    // UNCOMMENT OUT WHEN BOARD.CPP IS FIXED!!!!!
-    // chess game piece moving logics - TO BE IMPLEMENTED
-    // bool pieceColor = false;
-    // (piece->color == "white") ? pieceColor = true : pieceColor = false;
-    // int from_int = from.toInt();
-    // int to_int = to.toInt();
-    // Piece* chessPiece = new Piece(from_int, to_int, pieceColor);
-    // if (!game.isValidMove(chessPiece, from_int, to_int)) {
-    //     return false;
-    // }
+    bool pieceColor = false;
+    (piece->color == "white") ? pieceColor = true : pieceColor = false;
+    int oldX = game.convertToInt(tolower(from[0].toLatin1()));
+    int oldY = game.convertToInt(tolower(from[1].toLatin1()));
+    int newX = game.convertToInt(tolower(to[0].toLatin1()));
+    int newY = game.convertToInt(tolower(to[1].toLatin1()));
+    Piece* chessPiece;
+    if(game.board[oldY][oldX]->getID() == "queen") {
+        chessPiece = new Queen(oldX, oldY, pieceColor);
+    }
+    else if(game.board[oldY][oldX]->getID() == "rook") {
+        chessPiece = new Rook(oldX, oldY, pieceColor);
+    }
+    else if(game.board[oldY][oldX]->getID() == "king") {
+        chessPiece = new King(oldX, oldY, pieceColor);
+    }
+    else if(game.board[oldY][oldX]->getID() == "knight") {
+        chessPiece = new Knight(oldX, oldY, pieceColor);
+    }
+    else if(game.board[oldY][oldX]->getID() == "bishop") {
+        chessPiece = new Bishop(oldX, oldY, pieceColor);
+    }
+    else if(game.board[oldY][oldX]->getID() == "pawn") {
+        chessPiece = new Pawn(oldX, oldY, pieceColor);
+    }
+    else {
+        selectedPiece = nullptr;
+        qDebug() << "else statement";
+        return false;
+    }
+    if (!game.isValidMove(chessPiece, (newX - oldX), (newY - oldY))) {
+        selectedPiece = nullptr;
+        return false;
+    }
     return true;
 }
 
