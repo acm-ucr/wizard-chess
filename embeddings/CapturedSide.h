@@ -15,7 +15,8 @@ using namespace std;
 class CapturedSide{
     private:
         unordered_map<string, Piece*> capturedColumn;
-        int counter;
+        int counterWhite;
+        int counterBlack;
         int pawnCounter;
 
     public:
