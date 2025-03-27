@@ -2,7 +2,7 @@
 *.out
 build/
 .qtc_clangd/
-.DS_STORE
+.DS_Store
 release/
 
 # C++ objects and libs
