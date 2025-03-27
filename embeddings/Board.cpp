@@ -1219,7 +1219,7 @@ bool Board::isPawnMoveValid(Piece *p, int xT, int yT){
     }
     if(p->getMoveCounter() == 0){
         if(!p->white()){
-            if((yT >= rangeUp(p))){
+            if((yT >= rangeUp(p)) && xT == 0){
                 p->setMoveCounter(1);
                 return true;
             }
@@ -1228,7 +1228,7 @@ bool Board::isPawnMoveValid(Piece *p, int xT, int yT){
             }
         } 
         else{
-            if((yT <= rangeDown(p))){
+            if((yT <= rangeDown(p)) && xT == 0){
                 p->setMoveCounter(1);
                 return true;
             }
@@ -1239,10 +1239,10 @@ bool Board::isPawnMoveValid(Piece *p, int xT, int yT){
     }
     else{
         cout << rangeUp(p) << endl;
-        if(yT == rangeUp(p)){
+        if(yT == rangeUp(p) && xT == 0){
             return true;
         }
-        else if(yT == rangeDown(p)){
+        else if(yT == rangeDown(p) && xT == 0){
             return true;
         }
         else{
