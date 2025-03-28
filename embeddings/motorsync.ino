@@ -146,7 +146,7 @@ void setup(){
 	pinMode(motorYDir, OUTPUT);
 
   //Enables the motors
-	digitalWrite(8, LOW);
+	digitalWrite(enableMotors, LOW);
 
   limitSwitch1.setDebounceTime(50); // set debounce time to 50 milliseconds
   limitSwitch2.setDebounceTime(50);
@@ -185,6 +185,9 @@ void loop(){
   int space2;
   int space3;
 
+  int captured_x = 400;
+  int captured_y = 0;
+
 
   if (Serial.available() > 0) {
     input_coords = Serial.readStringUntil('\n');
@@ -192,12 +195,23 @@ void loop(){
     space1 = input_coords.indexOf(' ');
     space2 = input_coords.indexOf(' ', space1 + 1);
     space3 = input_coords.indexOf(' ', space2 + 1);
+    space4 = input_coords.indexOf(' ', space3 + 1);
 
     start_x_pos = input_coords.substring(0, space1).toInt();
     start_y_pos = input_coords.substring(space1 + 1, space2).toInt();
     end_x_pos = input_coords.substring(space2 + 1, space3).toInt();
-    end_y_pos = input_coords.substring(space3 + 1).toInt();
+    end_y_pos = input_coords.substring(space3 + 1, space4).toInt();
+    move_type = input_coords.substring(space4 + 1).toInt();
 
+    if (move_type == 1) {
+      move_piece(end_x_pos, end_y_pos, captured_x, captured_y)
+    }
+    else if (move_type == 2) {
+
+    }
+    else if (move_type == 3) {
+      
+    }
     // move to magnet to start position, magnet off
     move_piece(curr_x_pos, curr_y_pos, start_x_pos, start_y_pos);
 
