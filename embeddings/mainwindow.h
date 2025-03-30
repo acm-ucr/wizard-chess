@@ -14,6 +14,7 @@
 #include <iostream>
 #include <QElapsedTimer>
 #include "Board.h"
+#include <Piece.h>
 #include <QTimer>
 #include <QStateMachine>
 #include <vector>
@@ -24,6 +25,7 @@ class MainWindow;
 }
 QT_END_NAMESPACE
 
+// creates objects of type ChessPiece to be used in MainWindow functions
 class ChessPiece {
 public:
     QString type;  // "pawn", "rook", etc.
@@ -51,6 +53,7 @@ signals:
     void moveExecutionDone();
     void takeNewTurn();
     void endReached();
+    void checkEndLoop();
 
 private slots:
 
@@ -60,33 +63,7 @@ private slots:
 
     void clearTableWidget();
 
-    // void on_pushButton_home_about_clicked();
-
-    // void on_pushButton_home_end_clicked();
-
-    // void on_pushButton_start_clicked();
-
-    // void on_pushButton_tutorial_clicked();
-
-    // void on_pushButton_settings_clicked();
-
-    // void on_pushButton_about_clicked();
-
-    // void on_pushButton_home_settings_clicked();
-
-    // void on_pushButton_continue_tutorial_clicked();
-
-    // void on_pushButton_home_tutorial_clicked();
-
-    // void on_pushButton_home_tutorial_end_clicked();
-
-    // void on_pushButton_previous_tutorial_clicked();
-
     void on_pushButton_home1_clicked();
-
-    // void on_pushButton_home2_clicked();
-
-    // void on_pushButton_EndGame_clicked();
 
     void on_easyLevel_clicked();
 
@@ -95,12 +72,6 @@ private slots:
     void on_hardLevel_clicked();
 
     void on_expertLevel_clicked();
-
-    // void on_voiceCommand_clicked();
-
-    // void on_touchCommand_clicked();
-
-    // void on_pushButton_back_settings_clicked();
 
     void on_pushButton_Gryffindor_clicked();
 
@@ -136,7 +107,7 @@ private slots:
 
     void handlePlayerInput();
 
-    void enableTouchInput();
+    void determineGameInput();
 
     void disableTouchInput();
 
@@ -150,7 +121,13 @@ private slots:
 
     void resetGame();
 
+    void on_WvoiceCommand_clicked();
 
+    void on_WtouchCommand_clicked();
+
+    void on_BvoiceCommand_clicked();
+
+    void on_BtouchCommand_clicked();
 
     void on_WvoiceCommand_clicked();
 
@@ -168,8 +145,8 @@ private:
     QTableWidget *tableWidget;
 
     QElapsedTimer timer;
-    int previousTime;
-    int currTime;
+    qint64 previousTime;
+    qint64 currTime;
 
     bool bCheck;
     bool wCheck;
@@ -189,16 +166,14 @@ private:
     int size = 0;
     int turn;
     int count = 0;
-    int globalTurnCounter = 0;  // 0 = white turn && 1 = black turn
-    int prevGlobalTurnCounter = 1;  // holds previous GTC
-    // int row = 0;  // to be used in populateCell
+    int globalTurn = 0;  // 0 = white turn && 1 = black turn
     QString selectedMove = "";
 
     void setupBoard();
     void setupInitialPositions();
     void placePieceOnTile(const QString& position, const QString& pieceType, const QString& color);
-    bool isValidMove(const QString& pieceType, const QString& from, const QString& to);
-    void clearButton(QPushButton *button, bool isWhiteTile);
+    bool isValidMove(ChessPiece* piece, QString& from, QString& to);
+    void clearButton(QPushButton *button);
 
 
     QStateMachine *machine;

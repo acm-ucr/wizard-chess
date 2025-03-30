@@ -1,7 +1,8 @@
+#ifndef CAPTUREDSIDE_H
+#define CAPTUREDSIDE_H
 #include <iostream>
 #include <unordered_map>
 #include <string>
-
 #include "Piece.h"
 #include "Pawn.h"
 #include "Bishop.h"
@@ -9,13 +10,13 @@
 #include "Queen.h"
 #include "King.h"
 #include "Rook.h"
-
 using namespace std;
 
 class CapturedSide{
     private:
         unordered_map<string, Piece*> capturedColumn;
-        int counter;
+        int counterWhite;
+        int counterBlack;
         int pawnCounter;
 
     public:
@@ -25,3 +26,4 @@ class CapturedSide{
         void print();
 };
 
+#endif

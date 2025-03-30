@@ -3,12 +3,11 @@
 #include <string>
 #include <algorithm>
 #include <ctime>
-
+#include "CapturedSide.h"
 #include "Board.h"
-
 #include <cstdlib>
-//#include <QCoreApplication>
-//#include <QTextStream>
+// #include <QCoreApplication>
+// #include <QTextStream>
 
 using namespace std;
 
@@ -18,7 +17,6 @@ using namespace std;
 
  - make a string function that returns getPosition, so that
    it returns a string with both x and y position.
-
  - 
 */
 
@@ -1221,7 +1219,7 @@ bool Board::isPawnMoveValid(Piece *p, int xT, int yT){
     }
     if(p->getMoveCounter() == 0){
         if(!p->white()){
-            if((yT >= rangeUp(p))){
+            if((yT >= rangeUp(p)) && xT == 0){
                 p->setMoveCounter(1);
                 return true;
             }
@@ -1230,7 +1228,7 @@ bool Board::isPawnMoveValid(Piece *p, int xT, int yT){
             }
         } 
         else{
-            if((yT <= rangeDown(p))){
+            if((yT <= rangeDown(p)) && xT == 0){
                 p->setMoveCounter(1);
                 return true;
             }
@@ -1241,10 +1239,10 @@ bool Board::isPawnMoveValid(Piece *p, int xT, int yT){
     }
     else{
         cout << rangeUp(p) << endl;
-        if(yT == rangeUp(p)){
+        if(yT == rangeUp(p) && xT == 0){
             return true;
         }
-        else if(yT == rangeDown(p)){
+        else if(yT == rangeDown(p) && xT == 0){
             return true;
         }
         else{

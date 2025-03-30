@@ -24,7 +24,7 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>0</y>
+      <y>10</y>
       <width>800</width>
       <height>480</height>
      </rect>
@@ -68,7 +68,7 @@ rgb(0, 0, 0)
 }</string>
     </property>
     <property name="currentIndex">
-     <number>6</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="Start">
      <property name="autoFillBackground">
@@ -77,9 +77,9 @@ rgb(0, 0, 0)
      <widget class="QLabel" name="label">
       <property name="geometry">
        <rect>
-        <x>120</x>
+        <x>170</x>
         <y>110</y>
-        <width>601</width>
+        <width>581</width>
         <height>121</height>
        </rect>
       </property>
@@ -201,7 +201,7 @@ rgb(0, 0, 0)
      <widget class="QLabel" name="label_20">
       <property name="geometry">
        <rect>
-        <x>140</x>
+        <x>190</x>
         <y>20</y>
         <width>531</width>
         <height>50</height>
@@ -328,7 +328,7 @@ color: rgb(255, 255, 255);</string>
      <widget class="QLabel" name="label_22">
       <property name="geometry">
        <rect>
-        <x>140</x>
+        <x>190</x>
         <y>20</y>
         <width>511</width>
         <height>51</height>
@@ -479,7 +479,7 @@ font: 20pt &quot;Sitka&quot;;</string>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">color: rgb(0, 0, 255);
+       <string notr="true">color: rgb(255, 255, 255);
 font: 900 13pt &quot;Segoe UI Black&quot;;</string>
       </property>
       <property name="text">
@@ -550,21 +550,21 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>40</y>
-        <width>781</width>
-        <height>181</height>
+        <y>60</y>
+        <width>791</width>
+        <height>161</height>
        </rect>
       </property>
       <property name="styleSheet">
        <string notr="true">color: rgb(255, 0, 0);
-font: 900 12pt &quot;Segoe UI Black&quot;;</string>
+font: 900 14pt &quot;Segoe UI Black&quot;;</string>
       </property>
       <property name="text">
        <string>Special Moves:
 Castling: King and rook move simultaneously for safety.
 En Passant: Special pawn capture.
-Promotion: Pawn reaching the opposite side can become a queen, rook,
-bishop, or knight.</string>
+Promotion: Pawn reaching the opposite side can become a queen,
+rook, bishop, or knight.</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_27">
@@ -612,7 +612,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">color: rgb(255, 0, 0);
-font: 900 12pt &quot;Segoe UI Black&quot;;</string>
+font: 900 14pt &quot;Segoe UI Black&quot;;</string>
       </property>
       <property name="text">
        <string>Check: King is threatened.
@@ -3202,7 +3202,7 @@ font: 900 12pt &quot;Segoe UI Black&quot;;</string>
        <rect>
         <x>390</x>
         <y>10</y>
-        <width>151</width>
+        <width>161</width>
         <height>161</height>
        </rect>
       </property>
@@ -3223,7 +3223,7 @@ font: 15pt &quot;Times New Roman&quot;;</string>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(0, 0, 0);
+        <string notr="true">color:rgb(255, 255, 255);
 font: 15pt &quot;Times New Roman&quot;;
 </string>
        </property>
@@ -3244,7 +3244,7 @@ font: 15pt &quot;Times New Roman&quot;;
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(0, 0, 0);
+        <string notr="true">color:rgb(255, 255, 255);
 font: 15pt &quot;Times New Roman&quot;;
 </string>
        </property>
@@ -3280,7 +3280,7 @@ font: 15pt &quot;Times New Roman&quot;;
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(0, 0, 0);
+        <string notr="true">color:rgb(255, 255, 255);
 font: 15pt &quot;Times New Roman&quot;;
 </string>
        </property>
@@ -3298,7 +3298,7 @@ font: 15pt &quot;Times New Roman&quot;;
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(0, 0, 0);
+        <string notr="true">color:rgb(255, 255, 255);
 font: 15pt &quot;Times New Roman&quot;;
 </string>
        </property>
@@ -3319,7 +3319,7 @@ font: 15pt &quot;Times New Roman&quot;;
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(0, 0, 0);
+        <string notr="true">color:rgb(255, 255, 255);
 font: 15pt &quot;Times New Roman&quot;;</string>
        </property>
        <property name="text">
@@ -3336,7 +3336,7 @@ font: 15pt &quot;Times New Roman&quot;;</string>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(0, 0, 0);
+        <string notr="true">color:rgb(255, 255, 255);
 font: 15pt &quot;Times New Roman&quot;;
 </string>
        </property>
@@ -3388,7 +3388,7 @@ font: 15pt &quot;Times New Roman&quot;;</string>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(0, 0, 0);
+        <string notr="true">color:rgb(255, 255, 255);
 font: 15pt &quot;Times New Roman&quot;;
 </string>
        </property>
@@ -3409,7 +3409,7 @@ font: 15pt &quot;Times New Roman&quot;;
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(0, 0, 0);
+        <string notr="true">color:rgb(255, 255, 255);
 font: 15pt &quot;Times New Roman&quot;;
 </string>
        </property>
@@ -3427,7 +3427,7 @@ font: 15pt &quot;Times New Roman&quot;;
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(0, 0, 0);
+        <string notr="true">color:rgb(255, 255, 255);
 font: 15pt &quot;Times New Roman&quot;;
 </string>
        </property>
@@ -3441,7 +3441,7 @@ font: 15pt &quot;Times New Roman&quot;;
        <rect>
         <x>590</x>
         <y>10</y>
-        <width>151</width>
+        <width>161</width>
         <height>161</height>
        </rect>
       </property>
@@ -3452,7 +3452,7 @@ font: 15pt &quot;Times New Roman&quot;;</string>
       <property name="title">
        <string>BLACK</string>
       </property>
-      <widget class="QRadioButton" name="BvoiceCommand_5">
+      <widget class="QRadioButton" name="BvoiceCommand">
        <property name="geometry">
         <rect>
          <x>10</x>
@@ -3462,7 +3462,7 @@ font: 15pt &quot;Times New Roman&quot;;</string>
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(0, 0, 0);
+        <string notr="true">color:rgb(255, 255, 255);
 font: 15pt &quot;Times New Roman&quot;;
 </string>
        </property>
@@ -3483,7 +3483,7 @@ font: 15pt &quot;Times New Roman&quot;;
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">color: rgb(0, 0, 0);
+        <string notr="true">color:rgb(255, 255, 255);
 font: 15pt &quot;Times New Roman&quot;;
 </string>
        </property>
@@ -3514,7 +3514,7 @@ font: 20pt &quot;Sitka&quot;;</string>
      <widget class="QLabel" name="label_4">
       <property name="geometry">
        <rect>
-        <x>70</x>
+        <x>130</x>
         <y>70</y>
         <width>681</width>
         <height>111</height>
@@ -3524,25 +3524,12 @@ font: 20pt &quot;Sitka&quot;;</string>
        <string notr="true">color: rgb(255, 0, 4);
 font: 900 18pt &quot;Segoe UI Black&quot;;</string>
       </property>
-      <property name="text">
-       <string>Credits: The ACM Forge Team at UC Riverside</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_5">
-      <property name="geometry">
-       <rect>
-        <x>330</x>
-        <y>160</y>
-        <width>111</width>
-        <height>61</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">color: rgb(255, 0, 4);
-font: 900 18pt &quot;Segoe UI Black&quot;;</string>
+      <property name="frameShape">
+       <enum>QFrame::Shape::NoFrame</enum>
       </property>
       <property name="text">
-       <string>About: </string>
+       <string>Credits: The ACM Forge Team at UC Riverside
+                                    About:</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_6">
@@ -3556,7 +3543,7 @@ font: 900 18pt &quot;Segoe UI Black&quot;;</string>
       </property>
       <property name="styleSheet">
        <string notr="true">font: 9pt &quot;8514oem&quot;;
-color: rgb(0, 0, 255);</string>
+color:rgb(255, 255, 255);</string>
       </property>
       <property name="text">
        <string>The Wizard Chess, inspired by Harry Potter, is a chess game with</string>
@@ -3586,7 +3573,7 @@ color: rgb(0, 0, 255);</string>
       </property>
       <property name="styleSheet">
        <string notr="true">font: 9pt &quot;8514oem&quot;;
-color: rgb(0, 0, 255);</string>
+color:rgb(255, 255, 255);</string>
       </property>
       <property name="text">
        <string>the ability to move the pieces with voice/touch command.</string>
@@ -3648,8 +3635,8 @@ font: 900 20pt &quot;Segoe UI Black&quot;;</string>
      <widget class="QLabel" name="winner_label">
       <property name="geometry">
        <rect>
-        <x>280</x>
-        <y>60</y>
+        <x>290</x>
+        <y>70</y>
         <width>231</width>
         <height>81</height>
        </rect>
@@ -3672,7 +3659,7 @@ font: 20pt &quot;Sitka&quot;;</string>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">color: rgb(0, 0, 0);
+       <string notr="true">color:rgb(255, 0, 0);
 font: 900 16pt &quot;Segoe UI Black&quot;;</string>
       </property>
       <property name="title">
@@ -3681,11 +3668,14 @@ font: 900 16pt &quot;Segoe UI Black&quot;;</string>
       <widget class="QLabel" name="house_1_time">
        <property name="geometry">
         <rect>
-         <x>70</x>
+         <x>60</x>
          <y>70</y>
          <width>61</width>
          <height>51</height>
         </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color:rgb(255, 255, 255)</string>
        </property>
        <property name="text">
         <string>4:32</string>
@@ -3702,7 +3692,7 @@ font: 900 16pt &quot;Segoe UI Black&quot;;</string>
        </rect>
       </property>
       <property name="styleSheet">
-       <string notr="true">color: rgb(0, 0, 0);
+       <string notr="true">color:rgb(255, 0, 0);
 font: 900 16pt &quot;Segoe UI Black&quot;;</string>
       </property>
       <property name="title">
@@ -3711,11 +3701,14 @@ font: 900 16pt &quot;Segoe UI Black&quot;;</string>
       <widget class="QLabel" name="house_2_time">
        <property name="geometry">
         <rect>
-         <x>70</x>
+         <x>60</x>
          <y>60</y>
          <width>71</width>
          <height>61</height>
         </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">color:rgb(255, 255, 255)</string>
        </property>
        <property name="text">
         <string>10:30</string>
