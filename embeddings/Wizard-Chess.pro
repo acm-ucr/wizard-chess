@@ -21,6 +21,7 @@ SOURCES += \
     Board.cpp \
     EmptyPiece.cpp \
     stockfish.cpp \
+    CapturedSide.cpp \
 
 HEADERS += \
     ConditionalTransition.h \
@@ -38,12 +39,17 @@ HEADERS += \
     EmptyPiece.h \
     Board.h \
     stockfish.h \
+    CapturedSide.h \
 
 FORMS += \
     mainwindow.ui
 
 OTHER_FILES += \
-    black_bishop.png
+    black_bishop.png \
+    sfcmds.txt \
+    sfoutput.txt \
+    qt.txt \
+    speech.txt \
 
 RESOURCES += \
     resources.qrc

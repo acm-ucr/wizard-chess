@@ -16,6 +16,7 @@
 #include "Board.h"
 #include <QTimer>
 #include <QStateMachine>
+#include <vector>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -38,6 +39,7 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+    void getVoiceInput(); //TEMP PUBLIC
     ~MainWindow();
 
 signals:
@@ -54,7 +56,7 @@ private slots:
 
     void onTileClicked();
 
-    void populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt);
+    void populateCells(char x1, int y1, char x2, int y2, int i);
 
     void clearTableWidget();
 
@@ -94,9 +96,9 @@ private slots:
 
     void on_expertLevel_clicked();
 
-    void on_voiceCommand_clicked();
+    // void on_voiceCommand_clicked();
 
-    void on_touchCommand_clicked();
+    // void on_touchCommand_clicked();
 
     // void on_pushButton_back_settings_clicked();
 
@@ -138,7 +140,7 @@ private slots:
 
     void disableTouchInput();
 
-    void getVoiceInput();
+    // void getVoiceInput();
 
     void handleBotInput();
 
@@ -149,6 +151,14 @@ private slots:
     void resetGame();
 
 
+
+    void on_WvoiceCommand_clicked();
+
+    void on_WtouchCommand_clicked();
+
+    void on_BvoiceCommand_5_clicked();
+
+    void on_BtouchCommand_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -179,6 +189,9 @@ private:
     int size = 0;
     int turn;
     int count = 0;
+    int globalTurnCounter = 0;  // 0 = white turn && 1 = black turn
+    int prevGlobalTurnCounter = 1;  // holds previous GTC
+    // int row = 0;  // to be used in populateCell
     QString selectedMove = "";
 
     void setupBoard();
@@ -189,6 +202,15 @@ private:
 
 
     QStateMachine *machine;
+
+
+
+    //Vocie input from files
+    vector<string> uuidList;
+    vector<string> timeList;
+    vector<string> pieceList;
+    vector<string> moveList;
+    vector<string> confirmList;
 };
 
 #endif // MAINWINDOW_H

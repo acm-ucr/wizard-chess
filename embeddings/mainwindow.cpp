@@ -1,3 +1,7 @@
+// THINGS NEEDED TO BE IMPLEMENTED:
+// -> not allow players to play twice their turn
+// -> fix settings things: add pop up for when player is selecting wrong options
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "settings.h"
@@ -14,6 +18,12 @@
 #include "mainwindow.h"
 #include "home.h"
 #include "ConditionalTransition.h"
+#include <QCoreApplication>
+#include <fstream>
+#include <QDir>
+#include <QDebug>
+#include <QCoreApplication>
+
 
 using namespace std;
 
@@ -188,17 +198,15 @@ MainWindow::~MainWindow()
 
 // x1 and x2 are characters like 'a', 'b' etc - therefore, {x1, y1} E {a, 3} && {x2, y2} E {b, 6} (as an example)
 // i = 0 means no move, i = 1 means just move and possible check, and i = 2 means move, kill and possible check
-void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turnCnt)
+void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i)
 {
-    qDebug() << x1 << y1 << x2 << y2 << i;
+    if (prevGlobalTurnCounter == globalTurnCounter) ++size;
     if ((size / 2) == capacity)
     {
         resize();
     }
     if (i == 0) {return;}
-    int row = (size % (capacity * 2))/2;
-    // std::cout << row << std::endl;
-    int col = turnCnt % 2;
+    int row = (size % (capacity * 2)) / 2;
     string out;
     if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "pawn")
     {
@@ -227,19 +235,25 @@ void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turn
     else
     {
         out += "Invalid";
-        tableWidget->setItem(row, col, new QTableWidgetItem(QString::fromStdString(out)));
+        if (globalTurnCounter == 0) {  // update white part of table
+            tableWidget->setItem(row, 0, new QTableWidgetItem(QString::fromStdString(out)));
+        }
+        else {  // update black part of table
+            tableWidget->setItem(row, 1, new QTableWidgetItem(QString::fromStdString(out)));
+        }
+        // if (prevGlobalTurnCounter == globalTurnCounter) size++;
         return;
     }
 
     if (i == 1) {
         out += x2 + to_string(y2);
-        if (col == 0) {
+        if (globalTurnCounter == 0) {
             bCheck = game.isCheck();
             if (bCheck == 1) {
                 out += "+";
             }
         }
-        else if (col == 1) {
+        else if (globalTurnCounter == 1) {
             wCheck = game.isCheck();
             if (wCheck == 1) {
                 out += "+";
@@ -249,20 +263,25 @@ void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i, int turn
     else if (i == 2) {
         out += "x";
         out += x2 + to_string(y2);
-        if (col == 0) {
+        if (globalTurnCounter == 0) {
             bCheck = game.isCheck();
             if (bCheck == 1) {
                 out += "+";
             }
         }
-        else if (col == 1) {
+        else if (globalTurnCounter == 1) {
             wCheck = game.isCheck();
             if (wCheck == 1) {
                 out += "+";
             }
         }
     }
-    tableWidget->setItem(row, col, new QTableWidgetItem(QString::fromStdString(out)));
+    if (globalTurnCounter == 0) {  // update white part of table
+        tableWidget->setItem(row, 0, new QTableWidgetItem(QString::fromStdString(out)));
+    }
+    else {  // update black part of table
+        tableWidget->setItem(row, 1, new QTableWidgetItem(QString::fromStdString(out)));
+    }
     ++size;
 }
 
@@ -302,20 +321,27 @@ void MainWindow::on_expertLevel_clicked()
     mwSettings->diffLevel = 1;
 }
 
-
-// TO DO: update settings variables for input and game type
-// {true = voice}
-void MainWindow::on_voiceCommand_clicked()
+// {false = voice} & {true = touch}
+void MainWindow::on_WvoiceCommand_clicked()
 {
-    mwSettings->commandType = true;
+    mwSettings->whitePlayer_commandType = false;
 }
 
-// {false = touch}
-void MainWindow::on_touchCommand_clicked()
+void MainWindow::on_WtouchCommand_clicked()
 {
-    mwSettings->commandType = false;
+    mwSettings->whitePlayer_commandType = true;
 }
 
+// {false = voice} & {true = touch}
+void MainWindow::on_BvoiceCommand_5_clicked()
+{
+    mwSettings->blackPlayer_commandType = false;
+}
+
+void MainWindow::on_BtouchCommand_clicked()
+{
+    mwSettings->blackPlayer_commandType = true;
+}
 
 void MainWindow::clearButton(QPushButton *button, bool isWhiteTile) {
     button->setIcon(QIcon());
@@ -421,12 +447,24 @@ void MainWindow::handlePlayerInput() {
     selectedMove = "";
     qDebug() << "entered input handler";
 
-    if (mwSettings->commandType == false) {
+    // White
+    if (mwSettings->whitePlayer_commandType == true) {
         enableTouchInput();
-        qDebug() << "getting touch input";
+        qDebug() << "white is playing touch";
     }
-    else if (mwSettings->commandType == true) {
+    else {
         getVoiceInput();
+        qDebug() << "white is playing voice";
+    }
+
+    // Black
+    if (mwSettings->blackPlayer_commandType == true) {
+        enableTouchInput();
+        qDebug() << "black is playing touch";
+    }
+    else {
+        getVoiceInput();
+        qDebug() << "black is playing voice";
     }
 }
 
@@ -473,11 +511,43 @@ void MainWindow::onTileClicked()
     }
 }
 
-
 void MainWindow::getVoiceInput() {
     // TO DO: get voice input
-    QString voice_input = "";
-    selectedMove = voice_input;
+    ifstream fin;
+    // string QT_FILENAME = "C:\\Users\\leaus\\OneDrive\\Important DOcs\\Wizard-Chess\\Wizard-Chess\\embeddings\\qt.txt";
+    string QT_FILENAME= "../../qt.txt";
+    string wholeLine[5];
+    string getLastInput;
+
+
+    // Ex: 141414141414 3925829582958 p e2e4 1
+    //Confirm: 0 = Move, 1  = Captured, 2 = Promote, 3 =
+
+    fin.open(QT_FILENAME);
+    if(!fin.is_open()){
+        throw runtime_error("Can't open QT file");
+    }
+
+    int i = 0;
+    string s;
+    while(getline(fin, s, ' ' )) { //Parses through whole input given and adds to array
+        wholeLine[i] = s;
+        ++i;
+    }
+
+    // Push onto vectors
+    uuidList.push_back(wholeLine[0]);
+    timeList.push_back(wholeLine[1]);
+    pieceList.push_back(wholeLine[2]);
+    moveList.push_back(wholeLine[3]);
+    confirmList.push_back(wholeLine[4]);
+    cout << uuidList.back() << endl;
+    cout << timeList.back() << endl;
+    cout << pieceList.back() << endl;
+    cout << moveList.back() << endl;
+    cout << confirmList.back() << endl;
+
+    fin.close();
     emit moveReady();
 }
 
@@ -519,9 +589,14 @@ void MainWindow::handleMoveExecution() {
             QPushButton* previousButton = boardMap[selectedPiece->position];
             if (previousButton) {
                 previousButton->setIcon(QIcon()); // Clear the icon
-
                 // Calculate the background color based on tile position
                 QString previousPosition = selectedPiece->position;
+                if (selectedPiece->color == "black") {
+                    globalTurnCounter = 1;
+                }
+                else {
+                    globalTurnCounter = 0;
+                }
                 bool isWhiteTile = ((previousPosition[0].toLatin1() - 'A') +
                                     previousPosition.mid(1).toInt()) % 2 == 0;
                 QString backgroundColor = isWhiteTile ? "#ffffff" : "#4560AB"; // White or blue
@@ -531,14 +606,13 @@ void MainWindow::handleMoveExecution() {
                 // [IMPLEMENTED POPULATECELL() FUNCTION HERE]
                 bool ok;
                 qDebug() << previousPosition;
+                // ERROR OVER HERE
                 QString extracted_x1 = previousPosition.left(1).toLower();
                 int extracted_y1 = previousPosition.right(1).toInt(&ok);
                 QString extracted_x2 = destPosition.left(1).toLower();
                 int extracted_y2 = destPosition.right(1).toInt(&ok);
-                qDebug() << extracted_x1 << extracted_y1 << extracted_x2 << extracted_y2;
-                populateCells(extracted_x1.toLatin1().at(0), extracted_y1, extracted_x2.toLatin1().at(0), extracted_y2, 2, co);
-
-                // TO DO: fix timer calculations
+                populateCells(extracted_x1.toLatin1().at(0), extracted_y1, extracted_x2.toLatin1().at(0), extracted_y2, 2);
+                prevGlobalTurnCounter = globalTurnCounter;
                 currTime = timer.elapsed();
                 updateTime(currTime - previousTime);
                 co++;
@@ -589,6 +663,8 @@ void MainWindow::resetGame() {
     end_status = 2;
     timer_white = 0;
     timer_black = 0;
+    globalTurnCounter = 0;
+    prevGlobalTurnCounter = 1;
     setupInitialPositions();
     clearTableWidget();
 }
@@ -766,15 +842,15 @@ void MainWindow::finalBlackTime(int timer_black)
 
 void MainWindow::on_pvpButton_clicked()
 {
-    mwSettings->commandType = true;
+    mwSettings->gameModeNum = 1;
 }
 
 void MainWindow::on_pvaButton_clicked()
 {
-    mwSettings->commandType = false;
+    mwSettings->gameModeNum = 4;
 }
 
 void MainWindow::on_avaButton_clicked()
 {
-    mwSettings->commandType = false;
+    mwSettings->gameModeNum = 8;
 }
