@@ -45,7 +45,11 @@ FORMS += \
     mainwindow.ui
 
 OTHER_FILES += \
-    black_bishop.png
+    black_bishop.png \
+    sfcmds.txt \
+    sfoutput.txt \
+    qt.txt \
+    speech.txt \
 
 RESOURCES += \
     resources.qrc
