@@ -2,7 +2,8 @@
 // -> Finish Implementing newState connect()
 // -> Refine handleMoveExecution()
 // -> Start Implementing Bots
-
+// PROBLEMS:
+// -> Corner Pawns incorrectly being registered (when playing second time)
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "settings.h"
@@ -722,11 +723,14 @@ bool MainWindow::isValidMove(ChessPiece* piece, QString& from, QString& to)
         selectedPiece = nullptr;  // unselect the piece
         return false;
     }
+
     // not allowing players to place the piece in the same place
     if (from == to) {
         selectedPiece = nullptr;  // unselect the piece
         return false;
     }
+
+    // not allowing players to move pieces illegally
     bool pieceColor = false;
     (piece->color == "white") ? pieceColor = true : pieceColor = false;
     int oldX = game.convertToInt(tolower(from[0].toLatin1()));
