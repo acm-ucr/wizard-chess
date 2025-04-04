@@ -2,9 +2,6 @@
 // -> Finish Implementing newState connect()
 // -> Refine handleMoveExecution()
 // -> Start Implementing Bots
-
-// PROBLEMS:
-// -> Corner Pawns incorrectly being registered (when playing second time)
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "settings.h"
@@ -88,6 +85,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // reset the game when endState is left
     connect(endState, &QState::exited, this, [=](){
+        qDebug() << "Game EndState Reached!";
         resetGame();
     });
 
@@ -657,7 +655,6 @@ void MainWindow::checkForEnd() {
 
 // function called inside endState to reset variables after every game
 void MainWindow::resetGame() {
-    game.resetBoard();
     setupBoard();
     size = 0;
     capacity = 10;
