@@ -6,7 +6,10 @@
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
     MainWindow w;
+
+    w.getVoiceInput();
     // a.setStyleSheet(
     //     "QWidget { background-color: white; color: black; }"
     //     "QPushButton { "
@@ -21,8 +24,8 @@ int main(int argc, char *argv[])
     //     "   background-color: gray; "  // Even darker when pressed
     //     "} "
     // );
-    inputs input;
-    w.show();
+    // inputs input;
+    // w.show();
     // QApplication a(argc, argv);
     // MainWindow w;
     // w.show();

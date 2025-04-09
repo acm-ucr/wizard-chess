@@ -129,14 +129,6 @@ private slots:
 
     void on_BtouchCommand_clicked();
 
-    void on_WvoiceCommand_clicked();
-
-    void on_WtouchCommand_clicked();
-
-    void on_BvoiceCommand_5_clicked();
-
-    void on_BtouchCommand_clicked();
-
 private:
     Ui::MainWindow *ui;
     Settings *mwSettings;
