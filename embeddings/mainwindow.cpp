@@ -17,10 +17,11 @@
 #include <ctime>
 #include <cstdlib>
 #include <QtStateMachine>
-#include "mainwindow.h"
 #include "home.h"
 #include "ConditionalTransition.h"
 #include <QMessageBox>
+#include <QDir>
+#include <QFile>
 
 using namespace std;
 
@@ -540,14 +541,16 @@ void MainWindow::onTileClicked()
 void MainWindow::getVoiceInput() {
     // TO DO: get voice input
     ifstream fin;
-    // string QT_FILENAME = "C:\\Users\\leaus\\OneDrive\\Important DOcs\\Wizard-Chess\\Wizard-Chess\\embeddings\\qt.txt";
-    string QT_FILENAME= "../../qt.txt";
+
+    // string QT_FILENAME= "../../qt.txt"; // For Windows
+    string QT_FILENAME = "../../../../../qt.txt"; //For Mac
     string wholeLine[5];
     string getLastInput;
 
-
     // Ex: 141414141414 3925829582958 p e2e4 1
-    //Confirm: 0 = Move, 1  = Captured, 2 = Promote, 3 =
+    //Confirm: 0 = Move, 1  = Captured, 2 = Promote, 3 = ...
+
+    qDebug() << "Current working directory:" << QDir::currentPath();
 
     fin.open(QT_FILENAME);
     if(!fin.is_open()){
@@ -579,6 +582,7 @@ void MainWindow::getVoiceInput() {
 
 // STILL NEED TO IMPLEMENT -> get bot input
 void MainWindow::handleBotInput() {
+    //Bot input
     emit moveReady();
 }
 
