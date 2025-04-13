@@ -678,54 +678,33 @@ void MainWindow::resetGame() {
 // checks all possible invalid moves to see if current movement violates it
 bool MainWindow::isValidMove(ChessPiece* piece, QString& from, QString& to)
 {
-    // not allowing players to play twice their turn
+    // Not allowing players to play twice on their turn
     qDebug() << "color: " << piece->color << ", turn: " << globalTurn;
     if (piece->color == "white" && globalTurn != 0) {
-        selectedPiece = nullptr;  // unselect the piece
+        selectedPiece = nullptr;  // Unselect the piece
         return false;
     }
     if (piece->color == "black" && globalTurn != 1) {
-        selectedPiece = nullptr;  // unselect the piece
+        selectedPiece = nullptr;  // Unselect the piece
         return false;
     }
 
-    // not allowing players to place the piece in the same place
+    // Not allowing players to place the piece in the same place
     if (from == to) {
-        selectedPiece = nullptr;  // unselect the piece
+        selectedPiece = nullptr;  // Unselect the piece
         return false;
     }
 
-    // not allowing players to move pieces illegally
-    bool pieceColor = false;
-    (piece->color == "white") ? pieceColor = true : pieceColor = false;
+    // Convert board notation characters to board indices.
     int oldX = game.convertToInt(tolower(from[0].toLatin1()));
     int oldY = game.convertToInt(tolower(from[1].toLatin1()));
     int newX = game.convertToInt(tolower(to[0].toLatin1()));
     int newY = game.convertToInt(tolower(to[1].toLatin1()));
-    Piece* chessPiece;
-    if(game.board[oldY][oldX]->getID() == "queen") {
-        chessPiece = new Queen(oldX, oldY, pieceColor);
-    }
-    else if(game.board[oldY][oldX]->getID() == "rook") {
-        chessPiece = new Rook(oldX, oldY, pieceColor);
-    }
-    else if(game.board[oldY][oldX]->getID() == "king") {
-        chessPiece = new King(oldX, oldY, pieceColor);
-    }
-    else if(game.board[oldY][oldX]->getID() == "knight") {
-        chessPiece = new Knight(oldX, oldY, pieceColor);
-    }
-    else if(game.board[oldY][oldX]->getID() == "bishop") {
-        chessPiece = new Bishop(oldX, oldY, pieceColor);
-    }
-    else if(game.board[oldY][oldX]->getID() == "pawn") {
-        chessPiece = new Pawn(oldX, oldY, pieceColor);
-    }
-    else {
-        selectedPiece = nullptr;
-        qDebug() << "else statement";
-        return false;
-    }
+
+    // Instead of creating a new piece, use the piece from the board.
+    Piece* chessPiece = game.board[oldY][oldX];
+
+    // Check if the move delta is valid using the board logic.
     if (!game.isValidMove(chessPiece, (newX - oldX), (newY - oldY))) {
         selectedPiece = nullptr;
         return false;
