@@ -15,10 +15,11 @@
 #include <ctime>
 #include <cstdlib>
 #include <QtStateMachine>
-#include "mainwindow.h"
 #include "home.h"
 #include "ConditionalTransition.h"
 #include <QMessageBox>
+#include <QDir>
+#include <QFile>
 
 using namespace std;
 
@@ -536,15 +537,51 @@ void MainWindow::onTileClicked()
     }
 }
 
-// STILL NEED TO IMPLEMENT
 void MainWindow::getVoiceInput() {
-    QString voice_input = "";
-    selectedMove = voice_input;
+    // TO DO: get voice input
+    ifstream fin;
+
+    // string QT_FILENAME= "../../qt.txt"; // For Windows
+    string QT_FILENAME = "../../../../../qt.txt"; //For Mac
+    string wholeLine[5];
+    string getLastInput;
+
+    // Ex: 141414141414 3925829582958 p e2e4 1
+    //Confirm: 0 = Move, 1  = Captured, 2 = Promote, 3 = ...
+
+    qDebug() << "Current working directory:" << QDir::currentPath();
+
+    fin.open(QT_FILENAME);
+    if(!fin.is_open()){
+        throw runtime_error("Can't open QT file");
+    }
+
+    int i = 0;
+    string s;
+    while(getline(fin, s, ' ' )) { //Parses through whole input given and adds to array
+        wholeLine[i] = s;
+        ++i;
+    }
+
+    // Push onto vectors
+    uuidList.push_back(wholeLine[0]);
+    timeList.push_back(wholeLine[1]);
+    pieceList.push_back(wholeLine[2]);
+    moveList.push_back(wholeLine[3]);
+    confirmList.push_back(wholeLine[4]);
+    cout << uuidList.back() << endl;
+    cout << timeList.back() << endl;
+    cout << pieceList.back() << endl;
+    cout << moveList.back() << endl;
+    cout << confirmList.back() << endl;
+
+    fin.close();
     emit moveReady();
 }
 
 // STILL NEED TO IMPLEMENT -> get bot input
 void MainWindow::handleBotInput() {
+    //Bot input
     emit moveReady();
 }
 
