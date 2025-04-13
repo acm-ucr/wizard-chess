@@ -17,6 +17,7 @@
 #include <Piece.h>
 #include <QTimer>
 #include <QStateMachine>
+#include <vector>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -40,6 +41,7 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+    void getVoiceInput(); //TEMP PUBLIC
     ~MainWindow();
 
 signals:
@@ -109,7 +111,7 @@ private slots:
 
     void disableTouchInput();
 
-    void getVoiceInput();
+    // void getVoiceInput();
 
     void handleBotInput();
 
@@ -167,6 +169,15 @@ private:
 
 
     QStateMachine *machine;
+
+
+
+    //Vocie input from files
+    vector<string> uuidList;
+    vector<string> timeList;
+    vector<string> pieceList;
+    vector<string> moveList;
+    vector<string> confirmList;
 };
 
 #endif // MAINWINDOW_H
