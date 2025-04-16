@@ -10,10 +10,60 @@
 #include <string>
 #include <ctime>
 #include <cstdlib>
+#include <QtStateMachine>
 #include "mainwindow.h"
 #include "home.h"
 
 using namespace std;
+
+// // Initializing states
+// QStateMachine machine;
+// QState *homeState = new QState();
+// QState *settingsState = new QState();
+// QState *tutorial1State = new QState();
+// QState *tutorial2State = new QState();
+// QState *houseState = new QState();
+// QState *gameState = new QState();
+// QState *endState = new QState();
+
+// // Defining state transitions
+// homeState->addTransition(pushButton_start, &QPushButton::clicked, houseState);
+// homeState->addTransition(pushButton_tutorial, &QPushButton::clicked, tutorialState);
+// homeState->addTransition(pushButton_settings, &QPushButton::clicked, settingsState);
+// homeState->addTransition(pushButton_about, &QPushButton::clicked, aboutState);
+
+// settingsState->addTransition(pushButton_home_settings, &QPushButton::clicked, homeState);
+
+// aboutState->addTransition(pushButton_home_about, &QPushButton::clicked, homeState);
+
+// tutorial1State->addTransition(pushButton_home_tutorial, &QPushButton::clicked, homeState);
+// tutorial1State->addTransition(pushButton_continue_tutorial, &QPushButton::clicked, tutorial2State);
+// tutorial2State->addTransition(pushButton_home_tutorial_end, &QPushButton::clicked, homeState);
+// tutorial2State->addTransition(pushButton_previous_tutorial, &QPushButton::clicked, tutorial2State);
+
+
+// // Defining state events
+// homeState->assignProperty(ui->stackedWidget, "currentIndex", 0);
+// settingsState->assignProperty(ui->stackedWidget, "currentIndex", 6);
+// tutorial1State->assignProperty(ui->stackedWidget, "currentIndex", 3);
+// tutorial2State->assignProperty(ui->stackedWidget, "currentIndex", 4);
+// houseState->assignProperty(ui->stackedWidget, "currentIndex", 1);
+// gameState->assignProperty(ui->stackedWidget, "currentIndex", 5);
+// endState->assignProperty(ui->stackedWidget, "currentIndex", 8);
+// aboutState->assignProperty(ui->stackedWidget, "currentIndex", 7);
+
+// // Add States to machine
+// machine->addState(homeState);
+// machine->addState(settingsState);
+// machine->addState(tutorial1State);
+// machine->addState(tutorial2State);
+// machine->addState(houseState);
+// machine->addState(gameState);
+// machine->addState(endState);
+// machine->addState(aboutState);
+
+// machine->setInitialState(homeState);
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -35,6 +85,69 @@ MainWindow::MainWindow(QWidget *parent)
     end_status = 2;
     timer_white = 0;
     timer_black = 0;
+
+
+    // Initializing states
+    machine = new QStateMachine(this);
+    QState *homeState = new QState();
+    QState *settingsState = new QState();
+    QState *aboutState = new QState();
+    QState *tutorial1State = new QState();
+    QState *tutorial2State = new QState();
+    QState *houseState = new QState();
+    QState *gameState = new QState();
+    QState *endState = new QState();
+
+    // Defining state transitions
+    homeState->addTransition(ui->pushButton_start, &QPushButton::clicked, houseState);
+    homeState->addTransition(ui->pushButton_tutorial, &QPushButton::clicked, tutorial1State);
+    homeState->addTransition(ui->pushButton_settings, &QPushButton::clicked, settingsState);
+    homeState->addTransition(ui->pushButton_about, &QPushButton::clicked, aboutState);
+
+    settingsState->addTransition(ui->pushButton_home_settings, &QPushButton::clicked, homeState);
+
+    aboutState->addTransition(ui->pushButton_home_about, &QPushButton::clicked, homeState);
+
+    tutorial1State->addTransition(ui->pushButton_home_tutorial, &QPushButton::clicked, homeState);
+    tutorial1State->addTransition(ui->pushButton_continue_tutorial, &QPushButton::clicked, tutorial2State);
+    tutorial2State->addTransition(ui->pushButton_home_tutorial_end, &QPushButton::clicked, homeState);
+    tutorial2State->addTransition(ui->pushButton_previous_tutorial, &QPushButton::clicked, tutorial1State);
+
+    houseState->addTransition(ui->pushButton_home2, &QPushButton::clicked, gameState);
+
+
+    QSignalTransition* endTransition = gameState->addTransition(ui->pushButton_EndGame, &QPushButton::clicked, endState);
+    connect(endTransition, &QAbstractTransition::triggered, this, [=](){
+        change_endgame_status();
+    });
+
+    endState->addTransition(ui->pushButton_home_end, &QPushButton::clicked, homeState);
+
+    // Defining state events
+    homeState->assignProperty(ui->stackedWidget, "currentIndex", 0);
+    settingsState->assignProperty(ui->stackedWidget, "currentIndex", 6);
+    aboutState->assignProperty(ui->stackedWidget, "currentIndex", 7);
+    tutorial1State->assignProperty(ui->stackedWidget, "currentIndex", 3);
+    tutorial2State->assignProperty(ui->stackedWidget, "currentIndex", 4);
+    houseState->assignProperty(ui->stackedWidget, "currentIndex", 1);
+    gameState->assignProperty(ui->stackedWidget, "currentIndex", 5);
+    endState->assignProperty(ui->stackedWidget, "currentIndex", 8);
+
+
+    // Add States to machine
+    machine->addState(homeState);
+    machine->addState(settingsState);
+    machine->addState(aboutState);
+    machine->addState(tutorial1State);
+    machine->addState(tutorial2State);
+    machine->addState(houseState);
+    machine->addState(gameState);
+    machine->addState(endState);
+
+
+    machine->setInitialState(homeState);
+    machine->start();
+
 }
 
 MainWindow::~MainWindow()
@@ -130,38 +243,38 @@ void MainWindow::clearTableWidget()
     }
 }
 
-// About Page
-void MainWindow::on_pushButton_home_about_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-}
+// // About Page
+// void MainWindow::on_pushButton_home_about_clicked()
+// {
+//     ui->stackedWidget->setCurrentIndex(0);
+// }
 
-// Start Page
-void MainWindow::on_pushButton_start_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(1);
-}
+// // Start Page
+// void MainWindow::on_pushButton_start_clicked()
+// {
+//     ui->stackedWidget->setCurrentIndex(1);
+// }
 
-void MainWindow::on_pushButton_tutorial_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(3);
-}
+// void MainWindow::on_pushButton_tutorial_clicked()
+// {
+//     ui->stackedWidget->setCurrentIndex(3);
+// }
 
-void MainWindow::on_pushButton_settings_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(6);
-}
+// void MainWindow::on_pushButton_settings_clicked()
+// {
+//     ui->stackedWidget->setCurrentIndex(6);
+// }
 
-void MainWindow::on_pushButton_about_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(7);
-}
+// void MainWindow::on_pushButton_about_clicked()
+// {
+//     ui->stackedWidget->setCurrentIndex(7);
+// }
 
-// Settings
-void MainWindow::on_pushButton_home_settings_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-}
+// // Settings
+// void MainWindow::on_pushButton_home_settings_clicked()
+// {
+//     ui->stackedWidget->setCurrentIndex(0);
+// }
 
 // {1000 = 8 in bits}
 void MainWindow::on_easyLevel_clicked()
@@ -199,18 +312,18 @@ void MainWindow::on_touchCommand_clicked()
     mwSettings->commandType = false;
 }
 
-// Goes Back to Home from Settings
-void MainWindow::on_pushButton_back_settings_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-}
+// // Goes Back to Home from Settings
+// void MainWindow::on_pushButton_back_settings_clicked()
+// {
+//     ui->stackedWidget->setCurrentIndex(0);
+// }
 
-// Game
-void MainWindow::on_pushButton_EndGame_clicked()
-{
-    change_endgame_status();
-    ui->stackedWidget->setCurrentIndex(8);
-}
+// // Game
+// void MainWindow::on_pushButton_EndGame_clicked()
+// {
+//     change_endgame_status();
+//     ui->stackedWidget->setCurrentIndex(8);
+// }
 
 void MainWindow::setupBoard()
 {
@@ -373,32 +486,32 @@ bool MainWindow::isValidMove(const QString& pieceType, const QString& from, cons
 
 
 
-// End
-void MainWindow::on_pushButton_home_end_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-}
+// // End
+// void MainWindow::on_pushButton_home_end_clicked()
+// {
+//     ui->stackedWidget->setCurrentIndex(0);
+// }
 
-// Tutorial
-void MainWindow::on_pushButton_continue_tutorial_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(4);
-}
+// // Tutorial
+// void MainWindow::on_pushButton_continue_tutorial_clicked()
+// {
+//     ui->stackedWidget->setCurrentIndex(4);
+// }
 
-void MainWindow::on_pushButton_home_tutorial_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-}
+// void MainWindow::on_pushButton_home_tutorial_clicked()
+// {
+//     ui->stackedWidget->setCurrentIndex(0);
+// }
 
-void MainWindow::on_pushButton_home_tutorial_end_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(0);
-}
+// void MainWindow::on_pushButton_home_tutorial_end_clicked()
+// {
+//     ui->stackedWidget->setCurrentIndex(0);
+// }
 
-void MainWindow::on_pushButton_previous_tutorial_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(3);
-}
+// void MainWindow::on_pushButton_previous_tutorial_clicked()
+// {
+//     ui->stackedWidget->setCurrentIndex(3);
+// }
 
 // White House Selection
 void MainWindow::on_pushButton_home1_clicked()
@@ -406,11 +519,11 @@ void MainWindow::on_pushButton_home1_clicked()
     ui->stackedWidget->setCurrentIndex(2);
 }
 
-// Black House Selection
-void MainWindow::on_pushButton_home2_clicked()
-{
-    ui->stackedWidget->setCurrentIndex(5);
-}
+// // Black House Selection
+// void MainWindow::on_pushButton_home2_clicked()
+// {
+//     ui->stackedWidget->setCurrentIndex(5);
+// }
 
 // Random Button Simulates Cell Population [FOR TESTING PURPOSES ONLY]
 void MainWindow::on_randomGeneratorButton_clicked()
