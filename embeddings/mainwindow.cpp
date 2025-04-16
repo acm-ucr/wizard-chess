@@ -582,6 +582,7 @@ void MainWindow::getVoiceInput() {
 // STILL NEED TO IMPLEMENT -> get bot input
 void MainWindow::handleBotInput() {
     //Bot input
+
     emit moveReady();
 }
 
