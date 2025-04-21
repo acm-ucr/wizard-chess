@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
 
     MainWindow w;
 
-    w.getVoiceInput();
+    // w.getVoiceInput();
     // a.setStyleSheet(
     //     "QWidget { background-color: white; color: black; }"
     //     "QPushButton { "
@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     // w.show();
     // QApplication a(argc, argv);
     // MainWindow w;
-    // w.show();
+    w.show();
     // inputs input;
 
     // return a.exec();
