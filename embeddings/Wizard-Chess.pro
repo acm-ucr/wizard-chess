@@ -1,4 +1,4 @@
-QT       += core gui
+QT += core gui
 QT += statemachine
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
@@ -6,6 +6,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 CONFIG += c++17
 
 SOURCES += \
+    ConditionalTransition.cpp \
     home.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -18,9 +19,12 @@ SOURCES += \
     King.cpp \
     Rook.cpp \
     Board.cpp \
-    EmptyPiece.cpp
+    EmptyPiece.cpp \
+    stockfish.cpp \
+    CapturedSide.cpp \
 
 HEADERS += \
+    ConditionalTransition.h \
     home.h \
     inputs.h \
     mainwindow.h \
@@ -33,13 +37,19 @@ HEADERS += \
     King.h \
     Rook.h \
     EmptyPiece.h \
-    Board.h
+    Board.h \
+    stockfish.h \
+    CapturedSide.h \
 
 FORMS += \
     mainwindow.ui
 
 OTHER_FILES += \
-    black_bishop.png
+    black_bishop.png \
+    sfcmds.txt \
+    sfoutput.txt \
+    qt.txt \
+    speech.txt \
 
 RESOURCES += \
     resources.qrc

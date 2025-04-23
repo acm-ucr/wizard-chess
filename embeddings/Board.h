@@ -1,8 +1,7 @@
 #ifndef BOARD_H
 #define BOARD_H
+
 //header guards
-
-
 #include <vector>
 #include <iostream>
 #include "Piece.h"
@@ -14,21 +13,25 @@
 #include "Rook.h"
 #include "EmptyPiece.h"
 #include "stockfish.h"
+#include "CapturedSide.h"
 
 using namespace std;
 
 
 class Board {
     private:
-
+        int gameMode = 0;
+        CapturedSide graveyard;
+        Piece* promotePiece;
+        bool kingCastle = false;
+        bool queenCastle = false;
     protected:
         vector<Piece> emptyPieces;
-
     public:
-        Board(); //Default COnstructor
+        Board(); //Default Constructor
         ~Board();
         void resetBoard();
-
+        void setGamemode(int num) {gameMode = num;}
         int whiteMoves = 0;
         int blackMoves = 0;
         bool whiteWin = false;
@@ -42,12 +45,13 @@ class Board {
         //FOR STOCKFISH 
         //To use it, every person has a specific path they must input into the stockfishPath variable
         //Ex: \"C:\\Users\\leaus\\OneDrive\\Important DOcs\\Wizard-Chess\\Wizard-Chess\\software\\stockfish\\stockfish-windows-x86-64-avx2.exe\"
-        //All of them have the same end of \\stockfish\\stockfish-windows-x86-64-avx2.exe\ , but each person has a different beginnign of the path
-        //If you look at your terminal, the beginning of the path is listed as with C: and the everything after is listed under which files path you are in for the project
+        //All of them have the same end of \\stockfish\\stockfish-windows-x86-64-avx2.exe\ , but each person has a different beginning of the path
+        //If you look at your terminal, the beginning of the path is listed as with C: and then everything after is listed under which file path you are in for the project
         //Its called hardcoded absolute path and I'm sorry if its a litte confusing :(
         string playerMove = ""; 
         string bestMove = "";
         string listMove = "";
+        //const char* stockfishPath = "\"C:\\Users\\vigne\\.vscode\\Wizard-Chess\\embeddings\\stockfish\\stockfish-windows-x86-64-avx2.exe\""; //This should be the stockfish path to your file
         const char* stockfishPath = "\"C:\\Users\\leaus\\OneDrive\\Important DOcs\\Wizard-Chess\\Wizard-Chess\\embeddings\\stockfish\\stockfish-windows-x86-64-avx2.exe\""; //This should be the stockfish path to your file
 
         King *kw = new King(3, 0, true);
@@ -70,6 +74,8 @@ class Board {
         bool convertBestMove(string bestMove);
         bool isCheck(King *k);
         bool checkmate(string moveList);
+
+        void outputQTFile(bool isPieceTaken);
 
         bool isCheck();
 
