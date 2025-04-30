@@ -56,7 +56,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QState *game = new QState();
     QState *newTurn = new QState(game);
-    QState *botInput = new QState(game);
+    QState *voicebotInput = new QState(game);
     QState *playerInput = new QState(game);
     QState *playerMoveExecution = new QState(game);
     QState *checkEnd = new QState(game);
@@ -100,17 +100,23 @@ MainWindow::MainWindow(QWidget *parent)
     // for now, this will be Player vs. Player
     connect(newTurn, &QState::entered, this, [=](){
         // UNCOMMENT OUT WHEN takeBotTurn() WORKS
-        // if (co % 2 == 0) {
-        //     emit takePlayerTurn();
-        // }
-        // else {
-        //     emit takeBotTurn();
-        // }
+        if (co % 2 == 0) {
+            emit takePlayerTurn();
+        }
+        else {
+            emit takeBotTurn();
+        }
         emit takePlayerTurn();
         qDebug() << "new turn";
     });
 
-    newTurn->addTransition(this, &MainWindow::takeBotTurn, botInput);
+    newTurn->addTransition(this, &MainWindow::takeBotTurn, voicebotInput);
+    //voice and bot input state
+    connect(voicebotInput, &QState::entered, this, [=](){
+        qDebug() << "voice/bot input state entered";
+        handleVoiceBotInput();
+    });
+
     newTurn->addTransition(this, &MainWindow::takePlayerTurn, playerInput);
 
     // playerInput state
@@ -173,7 +179,7 @@ MainWindow::MainWindow(QWidget *parent)
     machine->addState(houseState);
     machine->addState(game);
     machine->addState(newTurn);
-    machine->addState(botInput);
+    machine->addState(voicebotInput);
     machine->addState(playerInput);
     machine->addState(playerMoveExecution);
     machine->addState(checkEnd);
@@ -580,9 +586,74 @@ void MainWindow::getVoiceInput() {
 }
 
 // STILL NEED TO IMPLEMENT -> get bot input
-void MainWindow::handleBotInput() {
+void MainWindow::handleVoiceBotInput() {
     //Bot input
+    // string recent_move = moveList.back();
+    string recent_move = "a2a3";
+    QString initPosition = QString::fromStdString((recent_move.substr(0, 2)));
+    QString destPosition = QString::fromStdString((recent_move.substr(2, 3)));
+    int move_result = 1;
+    qDebug() << "Position: " << initPosition << destPosition;
 
+
+    if (isValidMove(selectedPiece, initPosition, destPosition)) {  // checks if move is valid or not
+        if (selectedPiece) {
+            if (globalTurn == 0) {
+                globalTurn = 1;
+            }
+            else {
+                globalTurn = 0;
+            }
+            // Moving the selected piece
+            if (!timer.isValid()) {
+                timer.start();
+                previousTime = 0;
+            }
+            currTime = timer.elapsed();
+            // Reset the previous tile and retain its background color
+            QPushButton* previousButton = boardMap[selectedPiece->position];
+            if (previousButton) {
+                previousButton->setIcon(QIcon()); // Clear the icon
+                // Calculate the background color based on tile position
+                QString previousPosition = selectedPiece->position;
+                bool isWhiteTile = ((previousPosition[0].toLatin1() - 'A') +
+                                    previousPosition.mid(1).toInt()) % 2 == 0;
+                QString backgroundColor = isWhiteTile ? "#ffffff" : "#4560AB"; // White or blue
+                previousButton->setStyleSheet(QString(
+                                                  "QPushButton { background-color: %1; border: none; }"
+                                                  ).arg(backgroundColor));
+                bool ok;
+                // gather intel to pass as parameter for populateCell()
+                QString extracted_x1 = previousPosition.left(1).toLower();
+                int extracted_y1 = previousPosition.right(1).toInt(&ok);
+                QString extracted_x2 = destPosition.left(1).toLower();
+                int extracted_y2 = destPosition.right(1).toInt(&ok);
+                populateCells(extracted_x1.toLatin1().at(0), extracted_y1, extracted_x2.toLatin1().at(0), extracted_y2, move_result);
+                qDebug() << extracted_x1 << extracted_y1 << extracted_x2 << extracted_y2;
+                // finalize timer for output
+                co++;
+                updateTime(currTime - previousTime);
+                previousTime = currTime;
+            }
+
+            // Update the piece's position and place it on the new tile
+            placePieceOnTile(destPosition, selectedPiece->type, selectedPiece->color);
+            selectedPiece->position = destPosition;
+
+            // Deselect the piece
+            selectedPiece = nullptr;
+
+            qDebug() << "Move Executed";
+            // updates board UI with move
+            emit moveExecutionDone();
+            return;
+        }
+    }
+    else {
+        QMessageBox::warning(this, "Illegal Move", "Your move is invalid.", QMessageBox::Ok);
+        emit invalidMoveSelected();
+        return;
+    }
     emit moveReady();
 }
 

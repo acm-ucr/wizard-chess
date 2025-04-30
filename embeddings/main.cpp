@@ -8,8 +8,7 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     MainWindow w;
-
-    //w.getVoiceInput();
+    w.handleVoiceBotInput();
     // a.setStyleSheet(
     //     "QWidget { background-color: white; color: black; }"
     //     "QPushButton { "
