@@ -49,7 +49,7 @@ OTHER_FILES += \
     sfcmds.txt \
     sfoutput.txt \
     qt.txt \
-    speech.txt \
+    speech.txt
 
 RESOURCES += \
     resources.qrc
