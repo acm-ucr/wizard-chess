@@ -132,6 +132,8 @@ class Board {
 
         int legalMoves();
 
+        bool MoveInstance(int oldX, int oldY, int newX, int newY);
+
 };
 
 

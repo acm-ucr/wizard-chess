@@ -100,25 +100,24 @@ MainWindow::MainWindow(QWidget *parent)
     // for now, this will be Player vs. Player
     connect(newTurn, &QState::entered, this, [=](){
         // UNCOMMENT OUT WHEN takeBotTurn() WORKS
-        if (co % 2 == 0) {
-            emit takePlayerTurn();
-        }
-        else {
-            emit takeBotTurn();
-        }
+        // if (co % 2 == 0) {
+        //     emit takePlayerTurn();
+        // }
+        // else {
+        //     emit takeBotTurn();
+        // }
         emit takePlayerTurn();
         qDebug() << "new turn";
     });
 
-    newTurn->addTransition(this, &MainWindow::takeBotTurn, voicebotInput);
-    //voice and bot input state
-    connect(voicebotInput, &QState::entered, this, [=](){
-        qDebug() << "voice/bot input state entered";
-        handleVoiceBotInput();
-    });
+    // newTurn->addTransition(this, &MainWindow::takeBotTurn, voicebotInput);
+    // //voice and bot input state
+    // connect(voicebotInput, &QState::entered, this, [=](){
+    //     qDebug() << "voice/bot input state entered";
+    //     handleVoiceBotInput();
+    // });
 
     newTurn->addTransition(this, &MainWindow::takePlayerTurn, playerInput);
-
     // playerInput state
     connect(playerInput, &QState::entered, this, [=](){
         qDebug() << "player input state entered";
@@ -202,6 +201,7 @@ MainWindow::~MainWindow()
 // i = 0 means no move, i = 1 means just move and possible check, and i = 2 means move, kill and possible check
 void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i)
 {
+    qDebug() << x1 << " " << y1 << " " << x2 << " " << y2 << " " << i;
     if ((size / 2) == capacity)
     {
         resize();
@@ -209,27 +209,27 @@ void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i)
     if (i == 0) {return;}
     int row = (size % (capacity * 2)) / 2;
     string out;
-    if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "pawn")
+    if (game.board[y2 - 1][game.convertToInt(x2)]->getID() == "pawn")
     {
         out += "";
     }
-    else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "bishop")
+    else if (game.board[y2 - 1][game.convertToInt(x2)]->getID() == "bishop")
     {
         out += "B";
     }
-    else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "king")
+    else if (game.board[y2 - 1][game.convertToInt(x2)]->getID() == "king")
     {
         out += "K";
     }
-    else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "knight")
+    else if (game.board[y2 - 1][game.convertToInt(x2)]->getID() == "knight")
     {
         out += "N";
     }
-    else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "rook")
+    else if (game.board[y2 - 1][game.convertToInt(x2)]->getID() == "rook")
     {
         out += "R";
     }
-    else if (game.board[y1 - 1][game.convertToInt(x1)]->getID() == "queen")
+    else if (game.board[y2 - 1][game.convertToInt(x2)]->getID() == "queen")
     {
         out += "Q";
     }
@@ -810,11 +810,11 @@ bool MainWindow::isValidMove(ChessPiece* piece, QString& from, QString& to)
     int newX = game.convertToInt(tolower(to[0].toLatin1()));
     int newY = game.convertToInt(tolower(to[1].toLatin1()));
 
-    // Instead of creating a new piece, use the piece from the board.
-    Piece* chessPiece = game.board[oldY][oldX];
+    //Instead of creating a new piece, use the piece from the board.
+    //Piece* chessPiece = game.board[oldY][oldX];
 
     // Check if the move delta is valid using the board logic.
-    if (!game.isValidMove(chessPiece, (newX - oldX), (newY - oldY))) {
+    if (!game.MoveInstance(oldX, oldY, newX, newY)) {
         selectedPiece = nullptr;
         return false;
     }
