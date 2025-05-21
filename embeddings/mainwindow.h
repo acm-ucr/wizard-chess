@@ -41,6 +41,7 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
+    void handleVoiceBotInput(); // TEMP PUBLIC
     void getVoiceInput(); //TEMP PUBLIC
     ~MainWindow();
 
@@ -113,7 +114,6 @@ private slots:
 
     // void getVoiceInput();
 
-    void handleBotInput();
 
     void handleMoveExecution();
 
