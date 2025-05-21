@@ -1640,6 +1640,59 @@ void Board::playMenu() {
     }
 }
 
+bool Board::MoveInstance(int oldX, int oldY, int newX, int newY) {
+    string getWholeInput;
+    char newPiece = 'q'; //Tempporary piece for promotion
+    //Use this function for instances of moving/capturing a piece
+    if ((board[oldY][oldX]->getID() != "empty") && (isValidMove(board[oldY][oldX], newX - oldX, newY - oldY))) {
+        if(takePiece(oldX, oldY, newX, newY)){
+            getWholeInput += " 1";
+        }
+        else{
+            getWholeInput += " 0";
+        }
+
+        Piece* takenPiece = board[newY][newX];
+        swap(oldX, oldY, newX, newY);
+        if(isCheck(kw)){
+            undoMove(oldX, oldY, newX, newY, takenPiece);
+            listMove = listMove.substr(0, listMove.size() - 10);
+            cout << "King is in check, try again" << endl;
+        }
+        else{
+            if(board[newY][newX]->getID() == "pawn" && newY == 7){
+                if(!promote(board[newY][newX], newPiece)){
+                    undoMove(oldX, oldY, newX, newY, takenPiece);
+                    listMove = listMove.substr(0, listMove.size() - 10);
+                }
+                else{
+                    graveyard.capture(takenPiece);
+                    graveyard.print();
+
+                    getWholeInput += " " + to_string(graveyard.retrievePiece(promotePiece));
+                }
+            }
+            else{
+                graveyard.capture(takenPiece);
+                graveyard.print();
+
+                getWholeInput += " -1";
+            }
+        }
+    }
+    else { //Invalid move
+        cout << "Invalid move, try again" << endl;
+        return false;
+    }
+    listMove += " " + playerMove;
+    cout << "List of current moves: " << listMove << endl;
+    //position += " " + playerMove;
+
+    //Move was made
+    return true;
+
+}
+
 void Board::playGamePVP() {
     ifstream fin;
     ofstream fout;
