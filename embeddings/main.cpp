@@ -1,13 +1,14 @@
-#include <QMainWindow>
-#include <QApplication>
-#include "inputs.h"
-#include "mainwindow.h"
+//#include <QMainWindow>
+//#include <QApplication>
+//#include "inputs.h"
+//#include "mainwindow.h"
+#include "Board.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-
-    MainWindow w;
+    //QApplication a(argc, argv);
+//
+    //MainWindow w;
     // a.setStyleSheet(
     //     "QWidget { background-color: white; color: black; }"
     //     "QPushButton { "
@@ -26,10 +27,10 @@ int main(int argc, char *argv[])
     // w.show();
     // QApplication a(argc, argv);
     // MainWindow w;
-    w.show();
+    //w.show();
     // inputs input;
     // return a.exec();
-    // Board b;
-    // b.playMenu();
-    return a.exec();
+     Board b;
+     b.playMenu();
+    //return a.exec();
 }
