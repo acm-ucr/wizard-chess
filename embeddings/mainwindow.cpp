@@ -669,6 +669,38 @@ void MainWindow::handleMoveExecution() {
     // if playing via voice input, selectedMove is empty string for now
     QString initPosition = selectedMove.left(2);
     QString destPosition = selectedMove.right(2);
+
+    // initPosition = initPosition[0].toLower() + initPosition[1];
+    // destPosition = destPosition[0].toLower() + destPosition[1];
+
+    QString getWholeInput; // = initPosition + destPosition;
+
+    getWholeInput.append(initPosition[0].toLower());
+    getWholeInput.append(initPosition[1]);
+    getWholeInput.append(destPosition[0].toLower());
+    getWholeInput.append(destPosition[1]);
+
+
+    qDebug() << "GRRRERR " << getWholeInput;
+
+    // QString filename = "speech.txt";
+    // QFile file(filename);
+    // if(file.open(QIODevice::Append | QIODevice::WriteOnly)){
+    //     QTextStream stream(&file);
+    //     stream << "ninjas";
+    //     qDebug() << "NI wrote " << getWholeInput << " to speech.txt";
+    //     file.close();
+    // }
+    // else{
+    //     qDebug() << "lol";
+    // }
+
+
+
+    string stringInput = getWholeInput.toStdString();
+
+    game.writeToFile(stringInput);
+
     int move_result = 1;
     qDebug() << "Position: " << initPosition << destPosition;
 
@@ -930,6 +962,7 @@ void MainWindow::on_pvpButton_clicked()
 {
     mwSettings->setGamemodeNum(1);
     game.setGamemode(1);
+    game.playGamePVP();
 }
 
 // handles click for Player vs. AI button in settings

@@ -49,10 +49,11 @@ OTHER_FILES += \
     sfcmds.txt \
     sfoutput.txt \
     qt.txt \
-    speech.txt \
+    speech.txt
 
 RESOURCES += \
-    resources.qrc
+    resources.qrc \
+    speech.txt
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

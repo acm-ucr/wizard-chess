@@ -1596,6 +1596,40 @@ int Board::justinIm(char charOldX, int oldY, char charNewX, int newY){
     return 0;
 }
 
+void Board::writeToFile(string move){
+    ofstream fout;
+    fout.open("../../speech.txt", ios::app);
+    if(!fout.is_open()){
+        throw runtime_error("can't open speech.txt");
+    }
+    cout << "LMAOOOOOOOOOOOOOOOOOOOOOOOOO" << endl;
+    // fout << "pp" << move;
+    fout << "\n " << move;
+    fout.close();
+
+    // ifstream fin;
+    // int num;
+    // fin.open("test.txt");
+    // if(fin.is_open()){
+    //     throw runtime_error("can't open speech.txt");
+    // }
+    // fin >> num;
+    // if(num == 1){
+    //     cout << "j" << endl;
+    // }
+    // else{
+    //     cout << "ger" << endl;
+    // }
+    // QFile file("test2.txt");
+    // if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+    //     QTextStream stream(&file);
+    //     stream << "pp" << Qt::endl;
+    //     file.close();
+    // } else {
+    //     qDebug() << "Failed to open file for writing:" << file.errorString();
+    // }
+}
+
 void Board::playMenu() {
     int gameType;
     //QTextStream qtin(stdin);
@@ -1694,6 +1728,7 @@ bool Board::MoveInstance(int oldX, int oldY, int newX, int newY) {
 }
 
 void Board::playGamePVP() {
+    cout << "AHHHHHHHHHHHHHHHHHHHAHAHAHAHAHAHAHAHA" << endl;
     ifstream fin;
     ofstream fout;
 
@@ -1731,29 +1766,30 @@ void Board::playGamePVP() {
             while(!madeMove){
                 bool newMove = false;
                 cout << "Input Move(White): ";
-                // while(!newMove){
-                //     fin.open(VR_FILENAME, ios::ate);
-                //     if(!fin.is_open()){
-                //         throw runtime_error("bruh");
-                //     }
-                //     for(streampos pos = fin.tellg() - static_cast<streamoff>(1); pos > 0; pos -= 1){
-                //         fin.seekg(pos);
-                //         charOldX = fin.get();
-                //         if(charOldX == ' '){
-                //             break;
-                //         }
-                //     }
-                //     getline(fin, getLastInput);
-                //     if(playerMove != getLastInput && getLastInput != "" && getLastInput != "ROR" && getLastInput != "ERROR"
-                //         && getLastInput.size() < 6){
-                //         playerMove = getLastInput;
-                //         cout << getLastInput;
-                //         // cout << "lololol" << endl;
-                //         newMove = true;
-                //     }
-                //     fin.close();
-                // }
-                cin >> playerMove;
+                while(!newMove){
+                    fin.open("speech.txt", ios::ate);
+                    if(!fin.is_open()){
+                        throw runtime_error("bruh");
+                    }
+                    cout << "WEOIFJEOWIFJOEWIJFOIWEJFOIWEJFOIWEJFOIEWJFOIEWJFIOWEJFOIWJ" << endl;
+                    for(streampos pos = fin.tellg() - static_cast<streamoff>(1); pos > 0; pos -= 1){
+                        fin.seekg(pos);
+                        charOldX = fin.get();
+                        if(charOldX == ' '){
+                            break;
+                        }
+                    }
+                    getline(fin, getLastInput);
+                    if(playerMove != getLastInput && getLastInput != "" && getLastInput != "ROR" && getLastInput != "ERROR"
+                        && getLastInput.size() < 6){
+                        playerMove = getLastInput;
+                        cout << getLastInput;
+                        // cout << "lololol" << endl;
+                        newMove = true;
+                    }
+                    fin.close();
+                }
+                //cin >> playerMove;
 
                 if(playerMove.size() == 4){
                     charOldX = playerMove[0];
@@ -1786,10 +1822,10 @@ void Board::playGamePVP() {
                             madeMove = true;
                             whiteMoves++;
                             if(kingCastle){
-                                getWholeInput += " 2 -1";
+                                getWholeInput += " 2 -1 -1";
                             }
                             else if(queenCastle){
-                                getWholeInput += " 3 -1";
+                                getWholeInput += " 3 -1 -1";
                             }
 
                             kingCastle = false;
@@ -1863,30 +1899,30 @@ void Board::playGamePVP() {
             while(!madeMove){
                 cout << "Input Move(Black): ";
                 bool newMove = false;
-                // while(!newMove){
-                //     fin.open(VR_FILENAME, ios::ate);
-                //     if(!fin.is_open()){
-                //         throw runtime_error("bruh grrr");
-                //     }
-                //     for(streampos pos = fin.tellg() - static_cast<streamoff>(1); pos > 0; pos -= 1){
-                //         fin.seekg(pos);
-                //         charOldX = fin.get();
-                //         if(charOldX == ' '){
-                //             break;
-                //         }
-                //     }
-                //     getline(fin, getLastInput);
-                //     if(playerMove != getLastInput && getLastInput != "" && getLastInput != "ROR" && getLastInput != "ERROR"
-                //         && getLastInput.size() < 6){
-                //         playerMove = getLastInput;
-                //         cout << playerMove;
-                //         // cout << "lololol" << endl;
-                //         newMove = true;
-                //     }
-                //     fin.close();
-                // }
+                while(!newMove){
+                    fin.open(VR_FILENAME, ios::ate);
+                    if(!fin.is_open()){
+                        throw runtime_error("bruh grrr");
+                    }
+                    for(streampos pos = fin.tellg() - static_cast<streamoff>(1); pos > 0; pos -= 1){
+                        fin.seekg(pos);
+                        charOldX = fin.get();
+                        if(charOldX == ' '){
+                            break;
+                        }
+                    }
+                    getline(fin, getLastInput);
+                    if(playerMove != getLastInput && getLastInput != "" && getLastInput != "ROR" && getLastInput != "ERROR"
+                        && getLastInput.size() < 6){
+                        playerMove = getLastInput;
+                        cout << playerMove;
+                        // cout << "lololol" << endl;
+                        newMove = true;
+                    }
+                    fin.close();
+                }
 
-                cin >> playerMove;
+                //cin >> playerMove;
 
                 if(playerMove.size() == 4){
                     charOldX = playerMove[0];
@@ -2100,10 +2136,10 @@ void Board::playGamePVAIWhitePlayer(){
                     }
                     else{
                         if(takePiece(oldX, oldY, newX, newY)){
-                            getWholeInput += " 1";
+                            getWholeInput += " 1 1";
                         }
                         else{
-                            getWholeInput += " 0";
+                            getWholeInput += " 0 -1";
                         }
 
                         Piece* takenPiece = board[newY][newX];
@@ -2372,10 +2408,10 @@ void Board::playGamePVAIBlackPlayer() {
                     }
                     else{
                         if(takePiece(oldX, oldY, newX, newY)){
-                            getWholeInput += " 1";
+                            getWholeInput += " 1 0";
                         }
                         else{
-                            getWholeInput += " 0";
+                            getWholeInput += " 0 -1";
                         }
 
                         Piece* takenPiece = board[newY][newX];

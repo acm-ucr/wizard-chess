@@ -14,6 +14,9 @@
 #include "EmptyPiece.h"
 #include "stockfish.h"
 #include "CapturedSide.h"
+#include <QFile>
+#include <QTextStream>
+#include <QDebug>
 
 using namespace std;
 
@@ -74,6 +77,8 @@ class Board {
         bool convertBestMove(string bestMove);
         bool isCheck(King *k);
         bool checkmate(string moveList);
+
+        void writeToFile(string move);
 
         void outputQTFile(bool isPieceTaken);
 
