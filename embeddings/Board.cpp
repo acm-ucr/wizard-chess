@@ -1596,16 +1596,16 @@ int Board::justinIm(char charOldX, int oldY, char charNewX, int newY){
     return 0;
 }
 
-void Board::writeToFile(QString move){
-    // ofstream fout;
-    // fout.open("test2.txt");
-    // if(!fout.is_open()){
-    //     throw runtime_error("can't open test2.txt");
-    // }
-    // cout << "LMAOOOOOOOOOOOOOOOOOOOOOOOOO" << endl;
-    // // fout << "pp" << move;
-    // fout << "pp";
-    // fout.close();
+void Board::writeToFile(string move){
+    ofstream fout;
+    fout.open("../../speech.txt", ios::app);
+    if(!fout.is_open()){
+        throw runtime_error("can't open speech.txt");
+    }
+    cout << "LMAOOOOOOOOOOOOOOOOOOOOOOOOO" << endl;
+    // fout << "pp" << move;
+    fout << "\n " << move;
+    fout.close();
 
     // ifstream fin;
     // int num;
@@ -1620,14 +1620,14 @@ void Board::writeToFile(QString move){
     // else{
     //     cout << "ger" << endl;
     // }
-    QFile file("test2.txt");
-    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
-        QTextStream stream(&file);
-        stream << "pp" << Qt::endl;
-        file.close();
-    } else {
-        qDebug() << "Failed to open file for writing:" << file.errorString();
-    }
+    // QFile file("test2.txt");
+    // if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+    //     QTextStream stream(&file);
+    //     stream << "pp" << Qt::endl;
+    //     file.close();
+    // } else {
+    //     qDebug() << "Failed to open file for writing:" << file.errorString();
+    // }
 }
 
 void Board::playMenu() {

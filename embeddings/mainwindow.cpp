@@ -685,15 +685,21 @@ void MainWindow::handleMoveExecution() {
 
     // QString filename = "speech.txt";
     // QFile file(filename);
-    // if(file.open(QIODevice::Append | QIODevice::Text)){
+    // if(file.open(QIODevice::Append | QIODevice::WriteOnly)){
     //     QTextStream stream(&file);
-    //     stream << "\n" << getWholeInput;
+    //     stream << "ninjas";
     //     qDebug() << "NI wrote " << getWholeInput << " to speech.txt";
+    //     file.close();
+    // }
+    // else{
+    //     qDebug() << "lol";
     // }
 
-    //string stringInput = getWholeInput.;
 
-    game.writeToFile(getWholeInput);
+
+    string stringInput = getWholeInput.toStdString();
+
+    game.writeToFile(stringInput);
 
     int move_result = 1;
     qDebug() << "Position: " << initPosition << destPosition;

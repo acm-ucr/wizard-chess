@@ -52,7 +52,8 @@ OTHER_FILES += \
     speech.txt
 
 RESOURCES += \
-    resources.qrc
+    resources.qrc \
+    speech.txt
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

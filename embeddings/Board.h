@@ -78,7 +78,7 @@ class Board {
         bool isCheck(King *k);
         bool checkmate(string moveList);
 
-        void writeToFile(QString move);
+        void writeToFile(string move);
 
         void outputQTFile(bool isPieceTaken);
 
