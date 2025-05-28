@@ -211,7 +211,7 @@ void MainWindow::populateCells(char x1, int y1, char x2, int y2, int i)
     string out;
     if (game.board[y2 - 1][game.convertToInt(x2)]->getID() == "pawn")
     {
-        out += "";
+        out += "p";
     }
     else if (game.board[y2 - 1][game.convertToInt(x2)]->getID() == "bishop")
     {
@@ -818,6 +818,7 @@ bool MainWindow::isValidMove(ChessPiece* piece, QString& from, QString& to)
         selectedPiece = nullptr;
         return false;
     }
+
     return true;
 }
 

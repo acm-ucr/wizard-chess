@@ -1658,6 +1658,7 @@ bool Board::MoveInstance(int oldX, int oldY, int newX, int newY) {
             undoMove(oldX, oldY, newX, newY, takenPiece);
             listMove = listMove.substr(0, listMove.size() - 10);
             cout << "King is in check, try again" << endl;
+            return false;
         }
         else{
             if(board[newY][newX]->getID() == "pawn" && newY == 7){
