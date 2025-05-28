@@ -1797,10 +1797,10 @@ void Board::playGamePVP() {
                         }
                         else{
                             if(takePiece(oldX, oldY, newX, newY)){
-                                getWholeInput += " 1";
+                                getWholeInput += " 1 1";
                             }
                             else{
-                                getWholeInput += " 0";
+                                getWholeInput += " 0 -1";
                             }
 
                             Piece* takenPiece = board[newY][newX];
@@ -1930,10 +1930,10 @@ void Board::playGamePVP() {
                         }
                         else{
                             if(takePiece(oldX, oldY, newX, newY)){
-                                getWholeInput += " 1";
+                                getWholeInput += " 1 0";
                             }
                             else{
-                                getWholeInput += " 0";
+                                getWholeInput += " 0 -1";
                             }
 
                             Piece* takenPiece = board[newY][newX];
